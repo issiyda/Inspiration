@@ -1,0 +1,29 @@
+@import "../../Foundation/variables";
+
+.register{
+
+  margin: 10% auto 15%;
+  width:60%;
+
+
+  &-container{
+    background: $color_sub;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    &-input{
+    label{
+      display:block;
+      font-size: $font-size_xl;
+      margin:3%;
+    }
+    }
+  }
+
+
+
+
+
+
+}

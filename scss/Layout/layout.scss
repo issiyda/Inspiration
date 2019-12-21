@@ -1,0 +1,84 @@
+@import "../Foundation/foundation";
+
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+//ヘッダー
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+
+.l-header{
+  background:$color_base;
+  display: flex;
+  height:100px;
+  justify-content: space-around;
+  &-left{
+    align-items: center;
+    font-weight:bold;
+    font-size: 30px;
+    display:flex;
+    padding-right:30%;
+  }
+
+  &-right{
+    flex-direction: row;
+
+  }
+
+
+}
+
+
+
+
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+//フッター
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+.l-footer{
+  background:#FFBEDA;
+  color:#fff;
+  flex-direction: row;
+  height:300px;
+  justify-content: space-around;
+  position:relative;
+
+  &-container{
+    display:flex;
+    justify-content: space-around;
+    margin:0 auto;
+    width:70%;
+  }
+
+  &-content{
+    margin-top:10%;
+
+    h3{
+      color:$color_accent;
+      font-weight: bolder;
+      font-size: $font-size_l;
+    }
+
+    p{
+      margin-left: $space_l;
+    }
+
+    a{
+      color:#fff;
+      text-decoration: none;
+
+    }
+  }
+
+  &-bottom{
+    text-align: center;
+  }
+
+  &-copyRight{
+    bottom:$space_l;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    right:0;
+
+  }
+}
