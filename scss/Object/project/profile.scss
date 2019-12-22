@@ -2,8 +2,8 @@
 
 .profile{
 
-  margin: 10% auto 15%;
-  width:60%;
+  margin: 8% auto 12%;
+  width:50%;
 
 
   &-container{
@@ -14,7 +14,7 @@
     text-align: center;
 
     &-input{
-      label{
+      &-label{
         display:block;
         font-size: $font-size_xl;
         margin:3%;

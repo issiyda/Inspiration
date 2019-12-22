@@ -40,7 +40,7 @@ main {
   font-weight: bold;
   padding-bottom: 1%; }
 
-.c-button, .c-mini-button {
+.c-button, .c-mini-button, .c-radio {
   background: #FFBEDA;
   border-color: #FFBEDA;
   border-radius: 5px;
@@ -51,24 +51,57 @@ main {
   font-weight: bolder;
   margin: 0 0 5% 60%;
   padding: 2%;
-  -webkit-transition: 0.9s;
-  transition: 0.9s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
   width: 30%; }
-  .c-button:hover, .c-mini-button:hover {
-    color: black;
+  .c-button:hover, .c-mini-button:hover, .c-radio:hover {
+    color: #A16EFF;
+    opacity: 0.7;
+    outline: none;
     -webkit-transition: 0.4s;
     transition: 0.4s; }
 
-.c-mini-button {
+.c-mini-button, .c-radio {
   font-size: 14px;
   text-align: center;
   margin: 0 2%;
   padding: 4%;
   width: 40%; }
-  .c-mini-button:hover {
+  .c-mini-button:hover, .c-radio:hover {
     color: #A16EFF;
     -webkit-transition: 0.4s;
     transition: 0.4s; }
+
+.c-radio {
+  background: lightgray;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 3% auto;
+  padding: 3%;
+  width: 20%; }
+  .c-radio:hover {
+    color: #A16EFF;
+    opacity: .7; }
+
+.c-radio-container {
+  background: #fff;
+  border-radius: 2%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 0 auto;
+  padding: 1%;
+  text-align: center;
+  width: 80%; }
+
+input[type="radio"] {
+  display: none; }
+  input[type="radio"]:checked + .c-radio {
+    background: #FFBEDA; }
 
 .c-label {
   display: block;
@@ -79,10 +112,11 @@ main {
   background: #fff;
   box-shadow: 2px 3px 5px gray;
   display: block;
-  font-size: 24px;
-  height: 40px;
+  font-size: 18px;
+  height: 24px;
   margin: 5% auto;
-  width: 80%; }
+  padding: 1%;
+  width: 55%; }
 
 .c-textarea {
   height: 20%; }

@@ -37,5 +37,5 @@ gulp.task("mincss", function () {
 
 gulp.task("default", function () {
     // scssフォルダを監視し、変更があったらコンパイルする
-    gulp.watch('./scss/**/app.scss', gulp.series('css', 'mincss'));
+    gulp.watch('./scss/**/**.scss', gulp.series('css', 'mincss'));
 });

@@ -1,0 +1,99 @@
+@import "../../Foundation/variables";
+
+
+/**
+confirm detailの共通部分　
+ */
+.confirm{
+
+  margin: 8% auto 12%;
+  width:60%;
+
+  &-text{
+    background: $color_w;
+    font-size:$font-size_l;
+    margin:0 auto;
+    padding: 1%;
+    width:55%;
+
+  }
+
+  &-container{
+    background: $color_sub;
+    border-radius:1%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    &-input{
+      &-label{
+        display:block;
+        font-size: $font-size_xl;
+        margin:3%;
+      }
+    }
+
+    &-img{
+      display: flex;
+      justify-content: center;
+      margin: 5% auto;
+      width:100%;
+
+
+
+
+
+        img{
+          width:100%;
+        }
+      }
+
+
+      &-none{
+        display:none;
+      }
+    }
+
+
+
+
+
+
+
+  &-post{
+    margin:5% auto;
+  }
+
+  &-attention{
+    color:$color_accent;
+    font-size:$font-size_xl;
+    font-weight: bolder;
+    margin:10% auto 5%;
+  }
+
+
+  .arrow{
+    margin: 0 auto;
+    width: 200px;
+  }
+  .arrow::before{
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+    height: 70px;
+    background: $color_base;
+  }
+  .arrow::after{
+    content: "";
+    display:block;
+    border-top: 100px solid $color_base;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    transform-origin: left top;
+    transform: scaleY(.5);
+  }
+
+
+
+}

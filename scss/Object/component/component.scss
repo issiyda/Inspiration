@@ -14,11 +14,13 @@
   font-weight:bolder;
   margin:0 0 5% 60%;
   padding:2%;
-  transition: 0.9s;
+  transition: 0.4s;
   width:30%;
 
   &:hover{
-    color:$color_default;
+    color:$color_accent;
+    opacity:0.7;
+    outline:none;
     transition: 0.4s;
   }
 }
@@ -44,6 +46,53 @@
 
 
 //==========================
+//ラジオボタン
+//==========================
+
+.c-radio{
+  @extend .c-mini-button;
+  background: lightgray;
+  border-radius: 4px;
+  cursor: pointer;
+  margin:3% auto;
+  padding: 3%;
+  width:20%;
+
+  &:hover{
+    color: $color_accent;
+    opacity: .7;
+  }
+}
+
+.c-radio-container{
+  background: $color_w;
+  border-radius:2%;
+  display : flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  justify-content: space-around;
+  margin:0 auto;
+  padding:1%;
+  text-align: center;
+  width:80%;
+}
+
+input[type="radio"] {
+  display:none;
+
+  &:checked + .c-radio {
+      background: $color_base;
+  }
+
+  &:disabled + .c-radio{
+  }
+}
+
+
+
+
+
+//==========================
 //説明用ラベル部品
 //==========================
 
@@ -62,10 +111,11 @@
   background:#fff;
   box-shadow: 2px 3px 5px gray;
   display:block;
-  font-size: $font-size_xl;
-  height:$font-size_3l;
+  font-size: $font-size_l;
+  height:$font-size_xl;
   margin:5% auto;
-  width:80%;
+  padding:1%;
+  width:55%;
 }
 
 //==========================

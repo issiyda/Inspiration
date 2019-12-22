@@ -41,8 +41,8 @@ main {
   padding-bottom: 1%; }
 
 .profile {
-  margin: 10% auto 15%;
-  width: 60%; }
+  margin: 8% auto 12%;
+  width: 50%; }
   .profile-container {
     background: #F5F5F5;
     border-radius: 1%;
@@ -52,7 +52,7 @@ main {
     -webkit-box-direction: normal;
             flex-direction: column;
     text-align: center; }
-    .profile-container-input label {
+    .profile-container-input-label {
       display: block;
       font-size: 24px;
       margin: 3%; }

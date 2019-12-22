@@ -226,7 +226,7 @@ main {
   font-weight: bold;
   padding-bottom: 1%; }
 
-.c-button, .c-mini-button {
+.c-button, .c-mini-button, .c-radio {
   background: #FFBEDA;
   border-color: #FFBEDA;
   border-radius: 5px;
@@ -237,24 +237,57 @@ main {
   font-weight: bolder;
   margin: 0 0 5% 60%;
   padding: 2%;
-  -webkit-transition: 0.9s;
-  transition: 0.9s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
   width: 30%; }
-  .c-button:hover, .c-mini-button:hover {
-    color: black;
+  .c-button:hover, .c-mini-button:hover, .c-radio:hover {
+    color: #A16EFF;
+    opacity: 0.7;
+    outline: none;
     -webkit-transition: 0.4s;
     transition: 0.4s; }
 
-.c-mini-button {
+.c-mini-button, .c-radio {
   font-size: 14px;
   text-align: center;
   margin: 0 2%;
   padding: 4%;
   width: 40%; }
-  .c-mini-button:hover {
+  .c-mini-button:hover, .c-radio:hover {
     color: #A16EFF;
     -webkit-transition: 0.4s;
     transition: 0.4s; }
+
+.c-radio {
+  background: lightgray;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 3% auto;
+  padding: 3%;
+  width: 20%; }
+  .c-radio:hover {
+    color: #A16EFF;
+    opacity: .7; }
+
+.c-radio-container {
+  background: #fff;
+  border-radius: 2%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 0 auto;
+  padding: 1%;
+  text-align: center;
+  width: 80%; }
+
+input[type="radio"] {
+  display: none; }
+  input[type="radio"]:checked + .c-radio {
+    background: #FFBEDA; }
 
 .c-label {
   display: block;
@@ -265,10 +298,11 @@ main {
   background: #fff;
   box-shadow: 2px 3px 5px gray;
   display: block;
-  font-size: 24px;
-  height: 40px;
+  font-size: 18px;
+  height: 24px;
   margin: 5% auto;
-  width: 80%; }
+  padding: 1%;
+  width: 55%; }
 
 .c-textarea {
   height: 20%; }
@@ -441,7 +475,7 @@ main {
     -webkit-transition: 0.9s;
     transition: 0.9s;
     width: 30%; }
-  .login c-submit:hover {
+  .login .c-submit:hover {
     color: black;
     -webkit-transition: 0.4s;
     transition: 0.4s; }
@@ -586,8 +620,8 @@ main {
   padding-bottom: 1%; }
 
 .profile {
-  margin: 10% auto 15%;
-  width: 60%; }
+  margin: 8% auto 12%;
+  width: 50%; }
   .profile-container {
     background: #F5F5F5;
     border-radius: 1%;
@@ -597,7 +631,7 @@ main {
     -webkit-box-direction: normal;
             flex-direction: column;
     text-align: center; }
-    .profile-container-input label {
+    .profile-container-input-label {
       display: block;
       font-size: 24px;
       margin: 3%; }
@@ -622,6 +656,111 @@ main {
           width: 100%; }
       .profile-container-img-none {
         display: none; }
+
+html, body {
+  width: 100%;
+  color: black;
+  font-size: 16px;
+  line-height: 1.6;
+  font-family: Quicksand, 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  -webkit-text-size-adjust: 100%;
+     -moz-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+  letter-spacing: 0.1em; }
+
+main {
+  width: 94%;
+  margin: 0 auto; }
+
+.f-h2 {
+  color: #A16EFF;
+  font-size: 30px;
+  margin: 3%;
+  text-align: center; }
+
+.f-h3 {
+  color: black;
+  font-size: 24px;
+  position: relative;
+  padding: 0.25em 0; }
+
+.f-h3:after {
+  content: "";
+  display: block;
+  height: 4px;
+  background: -webkit-gradient(linear, left top, right top, from(#A16EFF), to(transparent));
+  background: linear-gradient(to right, #A16EFF, transparent); }
+
+.f-h4 {
+  color: #FFBEDA;
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 1%; }
+
+/**
+confirm detailの共通部分　
+ */
+.confirm {
+  margin: 8% auto 12%;
+  width: 60%; }
+  .confirm-text {
+    background: #fff;
+    font-size: 18px;
+    margin: 0 auto;
+    padding: 1%;
+    width: 55%; }
+  .confirm-container {
+    background: #F5F5F5;
+    border-radius: 1%;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+            flex-direction: column;
+    text-align: center; }
+    .confirm-container-input-label {
+      display: block;
+      font-size: 24px;
+      margin: 3%; }
+    .confirm-container-img {
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-pack: center;
+              justify-content: center;
+      margin: 5% auto;
+      width: 100%; }
+      .confirm-container-img img {
+        width: 100%; }
+    .confirm-container-none {
+      display: none; }
+  .confirm-post {
+    margin: 5% auto; }
+  .confirm-attention {
+    color: #A16EFF;
+    font-size: 24px;
+    font-weight: bolder;
+    margin: 10% auto 5%; }
+  .confirm .arrow {
+    margin: 0 auto;
+    width: 200px; }
+  .confirm .arrow::before {
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+    height: 70px;
+    background: #FFBEDA; }
+  .confirm .arrow::after {
+    content: "";
+    display: block;
+    border-top: 100px solid #FFBEDA;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    -webkit-transform-origin: left top;
+            transform-origin: left top;
+    -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5); }
 
 /*
 html5doctor.com Reset Stylesheet
