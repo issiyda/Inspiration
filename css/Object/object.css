@@ -40,6 +40,9 @@ main {
   font-weight: bold;
   padding-bottom: 1%; }
 
+.c-heading {
+  margin: 5% auto; }
+
 .c-button, .c-mini-button, .c-radio {
   background: #FFBEDA;
   border-color: #FFBEDA;
@@ -107,6 +110,18 @@ input[type="radio"] {
   display: block;
   font-size: 24px;
   margin: 3%; }
+
+.c-form {
+  background: #f6f5f4;
+  margin: 3% auto 5%;
+  text-align: center;
+  width: 60%; }
+  .c-form-container {
+    font-weight: bold;
+    padding: 3%; }
+  .c-form-text-attention {
+    color: mediumvioletred;
+    margin: 5%; }
 
 .c-input, .c-textarea {
   background: #fff;
@@ -520,9 +535,8 @@ confirm detailの共通部分　
   width: 60%; }
   .confirm-text {
     background: #fff;
-    font-size: 18px;
     margin: 0 auto;
-    padding: 1%;
+    padding: 2%;
     width: 55%; }
   .confirm-container {
     background: #F5F5F5;
@@ -575,3 +589,160 @@ confirm detailの共通部分　
             transform-origin: left top;
     -webkit-transform: scaleY(0.5);
             transform: scaleY(0.5); }
+
+html, body {
+  width: 100%;
+  color: black;
+  font-size: 16px;
+  line-height: 1.6;
+  font-family: Quicksand, 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  -webkit-text-size-adjust: 100%;
+     -moz-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+  letter-spacing: 0.1em; }
+
+main {
+  width: 94%;
+  margin: 0 auto; }
+
+.f-h2 {
+  color: #A16EFF;
+  font-size: 30px;
+  margin: 3%;
+  text-align: center; }
+
+.f-h3 {
+  color: black;
+  font-size: 24px;
+  position: relative;
+  padding: 0.25em 0; }
+
+.f-h3:after {
+  content: "";
+  display: block;
+  height: 4px;
+  background: -webkit-gradient(linear, left top, right top, from(#A16EFF), to(transparent));
+  background: linear-gradient(to right, #A16EFF, transparent); }
+
+.f-h4 {
+  color: #FFBEDA;
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 1%; }
+
+.review, .review-comment {
+  margin: 5% auto; }
+  .review-posted {
+    background: #f6f5f4;
+    display: -webkit-box;
+    display: flex;
+    padding: 3%; }
+    .review-posted-name, .review-comment label {
+      text-align: center;
+      width: 20%; }
+    .review-posted-comment, .review-comment textarea {
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+              flex-direction: column;
+      width: 80%; }
+      .review-posted-comment-label {
+        font-weight: bold; }
+      .review-posted-comment-content {
+        background: #fff;
+        padding: 3%; }
+      .review-posted-comment-star {
+        display: -webkit-box;
+        display: flex;
+        justify-content: space-around;
+        margin: 0 auto;
+        width: 70%; }
+  .review-img {
+    height: 100%;
+    margin: 0;
+    width: 100%; }
+    .review-img img {
+      border-radius: 100%;
+      height: 100px;
+      width: 80px; }
+    .review-img-name {
+      color: #FFBEDA;
+      font-weight: bold;
+      margin: 0 auto;
+      width: 80%; }
+  .review-comment {
+    background: #f6f5f4;
+    padding: 5%; }
+    .review-comment textarea {
+      margin: auto 3%;
+      width: 74%; }
+    .review-comment-container {
+      -webkit-box-align: center;
+              align-items: center;
+      display: -webkit-box;
+      display: flex;
+      width: 100%; }
+    .review-comment-input {
+      font-size: 14px;
+      height: 20px;
+      margin: 0; }
+  .review-button {
+    margin: 5% 0 0 84%;
+    padding: 1%;
+    width: 10%; }
+
+html, body {
+  width: 100%;
+  color: black;
+  font-size: 16px;
+  line-height: 1.6;
+  font-family: Quicksand, 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  -webkit-text-size-adjust: 100%;
+     -moz-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+  letter-spacing: 0.1em; }
+
+main {
+  width: 94%;
+  margin: 0 auto; }
+
+.f-h2 {
+  color: #A16EFF;
+  font-size: 30px;
+  margin: 3%;
+  text-align: center; }
+
+.f-h3 {
+  color: black;
+  font-size: 24px;
+  position: relative;
+  padding: 0.25em 0; }
+
+.f-h3:after {
+  content: "";
+  display: block;
+  height: 4px;
+  background: -webkit-gradient(linear, left top, right top, from(#A16EFF), to(transparent));
+  background: linear-gradient(to right, #A16EFF, transparent); }
+
+.f-h4 {
+  color: #FFBEDA;
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 1%; }
+
+.c-form-container ul {
+  margin: 5%; }
+
+.c-form-container li {
+  font-size: 24px;
+  font-weight: bolder;
+  list-style: none; }
+
+.c-form-submit {
+  padding: 3%; }
+  .c-form-submit-button {
+    margin: 3% auto; }

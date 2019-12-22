@@ -1,10 +1,266 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>アイデア詳細</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!--style css-->
+    <link rel="stylesheet" href="../css/app.css" media="all">
+    <!--font-awesome-->
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!--jquery-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+    <!-- wow -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet"
+          type="text/css" media="all">
+
 </head>
+
 <body>
+<div class="l-header">
+    <div class="l-header-left">
+        <a href="mypage.html">
+            Inspiration
+        </a>
+    </div>
+
+    <div class="l-header-right">
+        <div>profile</div>
+        <div>Login</div>
+    </div>
+
+</div>
+
+<main>
+
+    <div class="profile">
+        <h2 class="f-h2">アイデア詳細</h2>
+
+        <div class="c-heading">
+        <h3 class ="f-h3">アイデア</h3>
+        </div>
+
+        <form class="profile-container">
+
+            <label for="ideaName" class="c-label">アイデア名</label>
+            <div id="ideaName" class="confirm-text">みんなで早起き</div>
+
+
+            <div class="profile-container-input">
+
+
+
+                <div class="profile-container-img">
+                    <div class="profile-container-img-right">
+                        <label>
+                            <img src="../images/staff6.jpg" alt="">
+                            <input id="img" class ="c-input profile-container-img-none" type="file" />
+                            <!-- hoverしたら画像をアップロードの文字が浮き上がって画像が薄暗く -->
+                        </label>
+                    </div>
+                    <div class="profile-container-img-left">
+                        <label class ="c-label" for="img">平均評価</label>
+                        ★3.3
+                    </div>
+
+                </div>
+
+                平均の評価を計算するロジック記入
+
+
+
+                <label for="category" class="c-label">カテゴリー</label>
+                <div id="category" class="confirm-text">掲示板</div>
+
+                <label for="description" class="c-label">概要</label>
+                <div id="description" class="confirm-text">
+                    みんなで早起きをするためのグループメンバーを今回募集します。
+                </div>
+
+
+                <label for="contents" class="c-label">内容</label>
+                <div id="contents" class="confirm-text">
+                    みんなで早起きをするためのグループメンバーを今回募集します。
+
+                    チームメンバーは10人募集します。
+                    朝6時から勤務時間前までみんなで勉強します。
+                    非常にストイックなメンバーが集まると予想されるため
+                    一日でも参加報告が遅れた場合強制退会となります。
+                    ご了承くださいませ。
+                    aaaaaaaaaaaaaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaa
+                </div>
+
+                未購入の場合は購入後に表示されますの表記
+
+            </div>
+        </form>
+
+
+
+        <div class="c-heading">
+            <h3 class ="f-h3">皆さんの声</h3>
+        </div>
+
+
+        <div class ="review review-container">
+
+            <div class="review-posted">
+                <div class ="review-posted-name">
+                    <div class="review-img">
+                    <img src="../images/staff2.jpeg" alt="">
+                        <div id="userName" class ="review-img-name">
+                            だーいし
+                            <p>さん</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class ="review-posted-comment">
+
+                    <label for="reviewComment" class ="review-posted-comment-label">評価</label>
+                    <div id="reviewComment" class ="review-posted-comment-star">
+                        <i class="fas fa-star ic-star fa-2x"></i>
+                        <i class="fas fa-star ic-star fa-2x"></i>
+                        <i class="fas fa-star ic-star fa-2x"></i>
+                        <i class="fas fa-star ic-star fa-2x"></i>
+                        <i class="fas fa-star ic-star fa-2x"></i>
+
+                    </div>
+
+
+                    <label for="reviewComment" class ="review-posted-comment-label">コメント</label>
+                    <div id="reviewComment" class ="review-posted-comment-content">
+                        このアイデアは非常に素敵でしたね。
+                        日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
+                        日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
+                        日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
+                        日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
+                        日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
+                        日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
+                        日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
+                        日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
+                        日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="review-posted">
+                <div class ="review-posted-name">
+                    <div class="review-img">
+                        <img src="../images/staff2.jpeg" alt="">
+                        <div id="userName" class ="review-img-name">
+                            だーいし
+                            <p>さん</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class ="review-posted-comment">
+
+                    <label for="reviewComment" class ="review-posted-comment-label">評価</label>
+                    <div id="reviewComment" class ="review-posted-comment-star">
+                        <i class="fas fa-star ic-star fa-2x"></i>
+                        <i class="fas fa-star ic-star fa-2x"></i>
+                        <i class="fas fa-star ic-star fa-2x"></i>
+                        <i class="fas fa-star ic-star fa-2x"></i>
+                        <i class="fas fa-star ic-star fa-2x"></i>
+
+                    </div>
+
+                    <label for="reviewComment" class ="review-posted-comment-label">コメント</label>
+                    <div id="reviewComment" class ="review-posted-comment-content">
+                        このアイデアは非常に素敵でしたね。
+                        日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
+                        日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
+                        日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
+                        日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
+                        日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
+                        日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
+                        日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
+                        日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
+                        日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="c-heading">
+                <h3 class ="f-h3">コメント</h3>
+            </div>
+
+            <div class="review-comment">
+                <form action="">
+                    <div class ="review-comment-container" >
+                        <label for="review-comment">コメント</label>
+                        <textarea class ="c-input review-comment-input" name="" id="review-comment" cols="30" rows="10" placeholder="コメントを記入"></textarea>
+                    </div>
+                    <input type="text" class="c-mini-button review-button" value="送信">
+                </form>
+            </div>
+        </div>
+
+
+        </div>
+
+</main>
+
+
+<footer>
+
+    <div class="l-footer">
+        <div class="l-footer-container">
+
+            <div class="l-footer-content">
+                <h3>Inspiration</h3>
+                <p><a href="">Top</a></p>
+                <p><a href="">Mypage</a></p>
+                <p><a href="">Idea一覧</a></p>
+            </div>
+            <div class="l-footer-content">
+                <h3>Inspiration</h3>
+                <p><a href="">Top</a></p>
+                <p><a href="">Mypage</a></p>
+                <p><a href="">Idea一覧</a></p>
+            </div>
+            <div class="l-footer-content">
+                <h3>Inspiration</h3>
+                <p><a href="">Top</a></p>
+                <p><a href="">Mypage</a></p>
+                <p><a href="">Idea一覧</a></p>
+            </div>
+
+        </div>
+
+        <div class="l-footer-bootm">
+            <div class="l-footer-copyRight">
+                Copyright © 2019 Inspiration. All rights reserved.
+            </div>
+        </div>
+
+    </div>
+
+</footer>
+
+<!-- script js-->
+<script src="js/script.js"></script>
+<!-- wow -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+
+
 
 </body>
 </html>

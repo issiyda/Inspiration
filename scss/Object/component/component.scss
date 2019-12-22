@@ -1,6 +1,14 @@
 @import "../../Foundation/variables";
 
 //==========================
+//heading部分の共通パーツ
+//==========================
+.c-heading{
+  margin:5% auto;
+}
+
+
+//==========================
 //投稿ボタン
 //==========================
 .c-button{
@@ -100,6 +108,28 @@ input[type="radio"] {
   display:block;
   font-size: $font-size_xl;
   margin:3%;
+}
+
+//==========================
+//インプットフォーム
+//==========================
+
+.c-form{
+  background: $color_bg;
+  margin:3% auto 5%;
+  text-align: center;
+  width:60%;
+
+  &-container{
+    font-weight:bold;
+    padding:3%;
+  }
+
+  &-text-attention{
+    color:mediumvioletred;
+    margin:5%;
+
+  }
 }
 
 

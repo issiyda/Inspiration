@@ -48,9 +48,8 @@ confirm detailの共通部分　
   width: 60%; }
   .confirm-text {
     background: #fff;
-    font-size: 18px;
     margin: 0 auto;
-    padding: 1%;
+    padding: 2%;
     width: 55%; }
   .confirm-container {
     background: #F5F5F5;

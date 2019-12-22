@@ -1,0 +1,31 @@
+@import "../../Foundation/variables";
+
+.c-form{
+
+  &-container{
+
+
+    ul{
+      margin:5%;
+
+    }
+
+    li{
+      font-size:$font-size_xl;
+      font-weight: bolder;
+      list-style: none;
+    }
+
+
+  }
+  &-text{
+  }
+
+  &-submit{
+    padding:3%;
+
+    &-button{
+      margin:3% auto;
+    }
+  }
+}

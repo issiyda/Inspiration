@@ -40,6 +40,9 @@ main {
   font-weight: bold;
   padding-bottom: 1%; }
 
+.c-heading {
+  margin: 5% auto; }
+
 .c-button, .c-mini-button, .c-radio {
   background: #FFBEDA;
   border-color: #FFBEDA;
@@ -107,6 +110,18 @@ input[type="radio"] {
   display: block;
   font-size: 24px;
   margin: 3%; }
+
+.c-form {
+  background: #f6f5f4;
+  margin: 3% auto 5%;
+  text-align: center;
+  width: 60%; }
+  .c-form-container {
+    font-weight: bold;
+    padding: 3%; }
+  .c-form-text-attention {
+    color: mediumvioletred;
+    margin: 5%; }
 
 .c-input, .c-textarea {
   background: #fff;
