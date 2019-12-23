@@ -18,7 +18,7 @@ main {
 .f-h2 {
   color: #A16EFF;
   font-size: 30px;
-  margin: 3%;
+  padding: 5%;
   text-align: center; }
 
 .f-h3 {
@@ -40,18 +40,15 @@ main {
   font-weight: bold;
   padding-bottom: 1%; }
 
-.register {
-  margin: 10% auto 15%;
-  width: 60%; }
-  .register-container {
-    background: #F5F5F5;
-    display: -webkit-box;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-            flex-direction: column;
-    text-align: center; }
-    .register-container-input label {
-      display: block;
-      font-size: 24px;
-      margin: 3%; }
+.c-form-container {
+  background: #F5F5F5;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+  text-align: center; }
+  .c-form-container-input label {
+    display: block;
+    font-size: 24px;
+    margin: 3%; }

@@ -1,4 +1,4 @@
-@import "../Foundation/foundation";
+@import "../Object/component/component";
 
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 //ヘッダー
@@ -19,7 +19,20 @@
   }
 
   &-right{
+    display:flex;
     flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+    width:30%;
+
+  }
+  &-button{
+    @extend .c-button;
+    background: $color_w!important;
+    color:black!important;
+    margin:0 0 0 0 !important;
+    width:30% !important;
 
   }
 
@@ -82,3 +95,78 @@
 
   }
 }
+
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+//フッター
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+.sidebar{
+  align-items: center;
+  display:flex;
+  height:100%;
+  margin:0 0% 0  75%;
+  position:fixed;
+  width:20%;
+
+  &-container{
+    background:$color_base;
+    border-radius:1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height:60%;
+    padding:5%;
+    width:100%;
+
+    a {
+      color:$color_default;
+      position: relative;
+      text-decoration: none;
+    }
+    a::after {
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      content: '';
+      width: 80%;
+      height: 2px;
+      background: $color_w;
+      margin-left: 10%;
+      transform: scale(0, 1);
+      transform-origin: right top;
+      transition: transform .3s;
+
+    }
+    a:hover::after {
+      transform-origin: left top;
+      transform: scale(1, 1);
+    }
+
+  }
+
+  &-item{
+    display:flex;
+    margin:10% auto;
+    transition:0.8s;
+    width:100%;
+
+
+
+
+    &:hover{
+      opacity: 0.8;
+      transition:0.8s;
+  }
+
+    &-logo{
+      width:40%;
+      text-align: center;
+    }
+
+    &-text{
+      font-size:$font-size_l;
+      font-weight:bolder;
+      width:60%;
+
+    }
+  }
+  }

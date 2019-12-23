@@ -18,7 +18,7 @@ main {
 .f-h2 {
   color: #A16EFF;
   font-size: 30px;
-  margin: 3%;
+  padding: 5%;
   text-align: center; }
 
 .f-h3 {
@@ -113,9 +113,9 @@ input[type="radio"] {
 
 .c-form {
   background: #f6f5f4;
-  margin: 3% auto 5%;
+  margin: 0 auto 5%;
   text-align: center;
-  width: 60%; }
+  width: 50%; }
   .c-form-container {
     font-weight: bold;
     padding: 3%; }
