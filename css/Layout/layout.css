@@ -11,8 +11,8 @@ html, body {
           text-size-adjust: 100%;
   letter-spacing: 0.1em; }
 
-main {
-  width: 94%;
+.main {
+  width: 90%;
   margin: 0 auto; }
 
 .f-h2 {
@@ -339,6 +339,7 @@ input[type="radio"] {
       -webkit-transform: scale(1, 1);
               transform: scale(1, 1); }
   .sidebar-item {
+    color: gray;
     display: -webkit-box;
     display: flex;
     margin: 10% auto;
@@ -350,6 +351,7 @@ input[type="radio"] {
       -webkit-transition: 0.8s;
       transition: 0.8s; }
     .sidebar-item-logo {
+      color: gray;
       width: 40%;
       text-align: center; }
     .sidebar-item-text {

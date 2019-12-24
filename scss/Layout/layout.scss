@@ -97,7 +97,7 @@
 }
 
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-//フッター
+//サイドバー
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 .sidebar{
   align-items: center;
@@ -144,6 +144,7 @@
   }
 
   &-item{
+    color:gray;
     display:flex;
     margin:10% auto;
     transition:0.8s;
@@ -158,6 +159,7 @@
   }
 
     &-logo{
+      color:gray;
       width:40%;
       text-align: center;
     }

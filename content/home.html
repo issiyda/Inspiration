@@ -1,193 +1,172 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ウェブカツ!!レスポンシブデザインページ</title>
-  <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
-  <link type="text/css" rel="stylesheet" href="./reset.css"> <!-- 順番を間違えないこと -->
-  <link type="text/css" rel="stylesheet" href="./css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <title>Home</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <!--style css-->
+  <link rel="stylesheet" href="../css/app.css" media="all">
+  <!--font-awesome-->
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <!--jquery-->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <!-- wow -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet"
+        type="text/css" media="all">
+
 </head>
+
 <body>
-<header class="header js-float-menu">
-  <h1 class="title">Responsive Design</h1>
 
-  <div class="menu-trigger js-toggle-sp-menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-  <nav class="nav-menu js-toggle-sp-menu-target">
-    <ul class="menu">
-      <li class="menu-item"><a class="menu-link" href="">TOP</a></li>
-      <li class="menu-item"><a class="menu-link" href="#news">NEWS</a></li>
-      <li class="menu-item"><a class="menu-link" href="#about">ABOUT</a></li>
-      <li class="menu-item"><a class="menu-link" href="#staff">STAFF</a></li>
-      <li class="menu-item"><a class="menu-link" href="#cource">COURCE</a></li>
-      <li class="menu-item"><a class="menu-link" href="#contact">CONTACT</a></li>
-    </ul>
-  </nav>
-</header>
+
 <main>
-  <section class="hero container-fluid js-float-menu-target">
-    <h2 class="hero-title">Responsive Design<br> is so good.</h2>
-  </section>
 
-  <section class="container container-ornament" id="news">
-    <h2 class="container-title"><span>NEWS</span></h2>
-    <div class="container-body">
-      <ul class="news">
-        <li class="news-item">
-          <a class="news-link" href="">
-            <span class="news-date">2019.12.31</span>
-            <span class="news-title">サンプルNEWSタイトルサンプルNEWSタイトル</span>
-          </a>
-        </li>
-        <li class="news-item">
-          <a class="news-link" href="">
-            <span class="news-date">2019.12.31</span>
-            <span class="news-title">サンプルNEWSタイトルサンプルNEWSタイトル</span>
-          </a>
-        </li>
-        <li class="news-item">
-          <a class="news-link" href="">
-            <span class="news-date">2019.12.31</span>
-            <span class="news-title">サンプルNEWSタイトルサンプルNEWSタイトル</span>
-          </a>
-        </li>
-      </ul>
+  <div class="home">
+    <div class="hero">
+
+      <nav class ="hero-nav">
+        <ul class ="hero-nav-container">
+          <li class ="hero-nav-item"><a href="#">Top</a></li>
+          <li class ="hero-nav-item"><a href="#">Register</a></li>
+          <li class ="hero-nav-item"><a href="#">Login</a></li>
+        </ul>
+
+      </nav>
+
+
+        <div class="hero-item">
+              <h3 class="hero-item-title">Inspiration</h3>
+              <div class="hero-item-text">
+                あなたのアイデアが<br>
+                誰かの価値に</div>
+        </div>
+
     </div>
-  </section>
 
-  <section class="bgColor-lightGray" id="about">
-    <div class="container container-lightGray">
-      <h2 class="container-title container-title-lightGray"><span>ABOUT</span></h2>
-      <div class="container-body">
-        <p>レスポンシブWebデザインとは、どんな大きさの画面でも見やすく、使いやすいWebサイトにするために必要なものです。
-          1つのHTML（Webサイトに載せる情報）で配信し、CSS（情報の大きさや位置など表示の指定）はデバイスごとに用意して表示を変えさせます。
-          内容は全て同じですが見せ方が違うということです。HTMLが１つなのでWebサイトに載せる情報を修正や更新する時に作業が1回で済みます。
-          デバイスごとにHTMLがあると修正や更新の作業をHTMLの数だけしなくてはなりません。
-          スマホに対応したWebサイトが検索結果の上位に表示されやすくなる「モバイルフレンドリー」や、スマホ用のページが順位の決め手になる「モバイルファーストインデックス」に対応できます。
-        </p>
-      </div>
-    </div>
-  </section>
+      <div class="home-container">
+        <h3 class ="home-header">あなたのアイデアから価値を生み出す</h3>
+        <div class="home-what">
 
-  <section class="container container-ornament" id="staff">
-    <h2 class="container-title"><span>STAFF</span></h2>
-    <div class="container-body">
-      <div class="panel-group panel-group-float">
-        <a href="" class="panel panel-hover panel-staff">
-          <div class="panel-body">
-            <img src="../images/staff1.jpg" alt="">
-          </div>
-        </a>
-        <a href="" class="panel panel-hover panel-staff">
-          <div class="panel-body">
-            <img src="../images/staff2.jpeg" alt="">
-          </div>
-        </a>
-        <a href="" class="panel panel-hover panel-staff">
-          <div class="panel-body">
-            <img src="../images/staff3.jpeg" alt="">
-          </div>
-        </a>
-        <a href="" class="panel panel-hover panel-staff">
-          <div class="panel-body">
-            <img src="../images/staff4.jpg" alt="">
-          </div>
-        </a>
-        <a href="" class="panel panel-hover panel-staff">
-          <div class="panel-body">
-            <img src="../images/staff5.jpg" alt="">
-          </div>
-        </a>
-        <a href="" class="panel panel-hover panel-staff">
-          <div class="panel-body">
-            <img src="../images/staff6.jpg" alt="">
-          </div>
-        </a>
-        <a href="" class="panel panel-hover panel-staff">
-          <div class="panel-body">
-            <img src="../images/staff1.jpg" alt="">
-          </div>
-        </a>
-        <a href="" class="panel panel-hover panel-staff">
-          <div class="panel-body">
-            <img src="../images/staff2.jpeg" alt="">
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="bgColor-lightGray" id="cource">
-    <div class="container container-lightGray">
-      <h2 class="container-title"><span>COURCE</span></h2>
-      <div class="container-body">
-        <div class="panel-group panel-group-flex">
-          <div class="panel panel-border panel-cource">
-            <div class="panel-head">
-              <span class="ft-corp ft-l">Bussiness</span>コース
+          <div class="home-what-container">
+            <div class="home-what-item">
+              <img src="../images/staff2.jpeg" alt="">
+              <p>ECサイト</p>
             </div>
-            <div class="panel-body">
-              <img src="../images/price1.jpg" alt="">
+            <div class="home-what-item">
+              <img src="../images/staff2.jpeg" alt="">
+              <p>SNS</p>
             </div>
-            <div class="panel-foot">
-              <p>多色使いで髪に立体的な表情が生まれ必要な部分にカラーリングを施すので髪全体の負担が少なくなります。ハイライト、又はローライトなどが含まれます。</p>
-            </div>
-          </div>
-          <div class="panel panel-border panel-cource panel-active">
-            <span class="panel-badge">
-              オス<br>スメ
-            </span>
-            <div class="panel-head">
-              <span class="ft-corp ft-l">Advance</span>コース
-            </div>
-            <div class="panel-body">
-              <img src="../images/price2.jpg" alt="">
-            </div>
-            <div class="panel-foot">
-              <p>髪に水分をたっぷり保ちながらぷるんとした自然な仕上がりのデジタルパーマです。低温でロットを巻くので髪へのダメージを最小限に抑えられ、まとまりのある髪になります。</p>
-            </div>
-          </div>
-          <div class="panel panel-border panel-cource">
-            <div class="panel-head">
-              <span class="ft-corp ft-l">Beginners</span>コース
-            </div>
-            <div class="panel-body">
-              <img src="../images/price3.jpg" alt="">
-            </div>
-            <div class="panel-foot">
-              <p>綺麗な髪はまず頭皮から。毛穴の詰まりを除去したり、頭皮のトリートメントで健康な髪と頭皮に。</p>
+            <div class="home-what-item">
+              <img src="../images/staff2.jpeg" alt="">
+              <p>マッチング</p>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <section class="container container-ornament" id="contact">
-    <h2 class="container-title"><span>CONTACT</span></h2>
-    <div class="container-body">
-      <form action="" class="form form-m">
-        <input class="input input-l" type="text" placeholder="お名前">
-        <input class="input input-l" type="email" placeholder="email">
-        <textarea class="input input-l input-textarea mb-xxl" placeholder="お問い合わせ内容"></textarea>
-        <button class="btn btn-corp btn-l">送信</button>
-      </form>
-    </div>
-  </section>
+        <div class="home-merit">
+
+          <h3 class ="home-header">アイデア提供のメリット</h3>
+
+          <div class="home-merit-evocation">
+          <p>自分のアイデアってあまり自信無いんだよな...</p>
+          <p>そんなあなたのアイデアもじつはだれかにとっては宝の山だったりします。</p>
+            <p>そんなアイデアを投稿するメリット</p>
+            <p class ="home-merit-evocation-accent">5点</p>
+            <p>挙げてみました。</p>
+          </div>
+          <div class="home-merit-container">
+            <div class="home-merit-item home-merit-item-left">
+              <img src="../images/staff2.jpeg" alt="">
+              <h3>影響力を持てる</h3>
+              <p>資本主義も成熟し今後は信用こそが本当の価値と言われる時代に発信力鍛えれます。</p>
+            </div>
+
+            <div class="home-merit-item home-merit-item-center">
+              <img src="../images/staff2.jpeg" alt="">
+              <h3>仲間が見つかる</h3>
+              <p>アイデアを投稿していく中で、ともに成長しあえる仲間を見つけることができます。</p>
+            </div>
+
+            <div class="home-merit-item home-merit-item-right">
+              <img src="../images/staff2.jpeg" alt="">
+              <h3>アイデアがお金になる</h3>
+              <p>ただ頭の中にあるだけであればガラクタ同然。誰かの手に渡ることで価値となりお金になります。</p>
+            </div>
+
+            <div class="home-merit-item home-merit-item-left">
+              <img src="../images/staff2.jpeg" alt="">
+              <h3>自己肯定感高められる</h3>
+              <p>自分のアイデアが誰かに認められることでより一層モチベーションが上がります。</p>
+            </div>
+
+            <div class="home-merit-item home-merit-item-left">
+              <img src="../images/staff2.jpeg" alt="">
+              <h3>論理的思考力Up</h3>
+              <p>どういう根拠でそのアイデアが上手くいくか論拠の提示で思考力上がります。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="home-recommend">
+          <p>あなたのアイデアを価値へと交換していきましょう</p>
+
+          拡大して出てくる
+          <form>
+            <input class="c-button home-recommend-button" value="新規登録">
+          </form>
+
+        </div>
+      </div>
+
+
+  </div>
+
 </main>
 
-<footer class="footer">
-  <p>Copyright © webukatu. All Rights Reserved</p>
-</footer>
+<footer>
 
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-<script src="../js/app.js"></script>
+  <div class="l-footer">
+    <div class="l-footer-container">
+
+      <div class="l-footer-content">
+        <h3>Inspiration</h3>
+        <p><a href="">Top</a></p>
+        <p><a href="">Mypage</a></p>
+        <p><a href="">Idea一覧</a></p>
+      </div>
+      <div class="l-footer-content">
+        <h3>Inspiration</h3>
+        <p><a href="">Top</a></p>
+        <p><a href="">Mypage</a></p>
+        <p><a href="">Idea一覧</a></p>
+      </div>
+      <div class="l-footer-content">
+        <h3>Inspiration</h3>
+        <p><a href="">Top</a></p>
+        <p><a href="">Mypage</a></p>
+        <p><a href="">Idea一覧</a></p>
+      </div>
+
+    </div>
+
+    <div class="l-footer-bootm">
+      <div class="l-footer-copyRight">
+        Copyright © 2019 Inspiration. All rights reserved.
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+<!-- script js-->
+<script src="js/script.js"></script>
+<!-- wow -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+
+
+
 </body>
 </html>
