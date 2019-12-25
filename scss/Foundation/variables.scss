@@ -93,6 +93,7 @@ $breakpoints: (
 // map-get()の第一引数に変数名、第二引数にマップ型のキーを渡すと、マップ型の値が返る
 // #{}は「インターポーレーション」といって、演算できない箇所、変数使えない箇所でも使えるようにするものcalcなどでよく使う
 // http://book.scss.jp/code/c4/08.html
+//何も引数がなければsmが指定される記述↓
 @mixin mq($breakpoint: sm) {
   @media #{map-get($breakpoints, $breakpoint)} {
     @content;
@@ -120,7 +121,7 @@ html, body {
 .f-h2{
   color:$color_accent;
   font-size:$font-size_xxl;
-  padding:5%;
+  padding:10%;
   text-align:center;
 }
 
@@ -129,6 +130,10 @@ html, body {
   font-size:$font-size_xl;
   position: relative;
   padding: 0.25em 0;
+
+  @include mq{
+    text-align:center;
+  }
 }
 
 .f-h3:after{
@@ -137,6 +142,8 @@ html, body {
   height: 4px;
   background: -webkit-linear-gradient(to right, $color_accent, transparent);
   background: linear-gradient(to right, $color_accent, transparent);
+
+
 }
 
 
@@ -145,6 +152,10 @@ html, body {
   color:$color_base;
   font-size: $font-size_l;
   font-weight:bold;
-  padding-bottom:1%;
+  padding:8%;
+
+  @include mq{
+    padding:5%;
+  }
 }
 

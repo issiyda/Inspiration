@@ -1,179 +1,146 @@
 @import "../../Foundation/foundation";
 
-.hero{
+
+
+.hero {
   background-image: url("../images/home1.jpg");
   background-position: bottom;
-  background-size:cover;
+  background-size: cover;
   display: inline-block;
-  height:700px;
-  width:100%;
-
-  &-nav{
-    background-color:rgba(255,190,218,0.4);
-    display:flex;
-    flex-direction: row;
-    height:100px;
-    justify-content: flex-end;
-    position: fixed;
-    width:100%;
+  height: 700px;
+  width: 100%;
 
 
-
-    &-container{
-      align-items: center;
-      display:flex;
-      flex-direction: row;
-      justify-content: space-around;
-      height:100px;
-      text-align: center;
-      width:40%;
-    }
-
-    &-item{
-      font-size: $font-size_l;
-      font-weight: bold!important;
-
-      a{
-        color:$color_w ;
-        text-decoration: none;
-        text-shadow: 1px 1px 1px $color_default;
-
-      }
-    }
-  }
-
-
-  &-item{
+  &-item {
     display: flex;
     flex-direction: column;
-    height:90%;
+    height: 90%;
     justify-content: center;
     text-align: center;
 
-    &-title{
-      font-size:$font-size_xxl;
-      margin-bottom:5%;
+    &-title {
+      font-size: $font-size_xxl;
+      margin-bottom: 5%;
     }
 
-    &-text{
-    letter-spacing: 1em;
+    &-text {
+      letter-spacing: 1em;
     }
   }
 }
 
-.home{
+.home {
 
-  &-header{
+  &-header {
     font-size: $font-size_xl;
     text-align: center;
-    margin:5% auto;
+    margin: 5% auto;
   }
 
-  &-container{
+  &-container {
   }
 
-  &-what{
+  &-what {
     text-align: center;
-    width:100%;
+    width: 100%;
 
-    &-container{
+    &-container {
       display: flex;
       flex-direction: row;
       justify-content: center;
-      margin:0 auto;
+      margin: 0 auto;
     }
-    &-item{
-      width:30%;
-      margin:0 3%;
 
-      img{
-        border-radius:2%;
-        width:100%;
+    &-item {
+      width: 30%;
+      margin: 0 3%;
+
+      img {
+        border-radius: 2%;
+        width: 100%;
       }
 
-      p{
+      p {
         align-items: center;
         font-size: $font-size_l;
-        font-weight:bold;
+        font-weight: bold;
 
       }
     }
   }
 
-  &-merit{
-    margin:0 auto 5%;
+  &-merit {
+    margin: 0 auto 5%;
 
-    &-evocation{
-      color:$color_default;
+    &-evocation {
+      color: $color_default;
       letter-spacing: 0.4em;
-      margin:10%;
+      margin: 10%;
       text-align: center;
 
 
-
-      &-accent{
-        color:$color_accent;
-        font-weight:bold;
-        font-size:$font-size_xxl;
-        padding:5%;
+      &-accent {
+        color: $color_accent;
+        font-weight: bold;
+        font-size: $font-size_xxl;
+        padding: 5%;
       }
 
 
     }
 
 
-    &-container{
+    &-container {
       @extend .home-what-container;
       flex-wrap: wrap;
     }
 
-    &-item{
-    @extend .home-what-item;
+    &-item {
+      @extend .home-what-item;
       margin: 0 auto 5%;
       text-align: center;
-      top:5%;
+      top: 5%;
 
 
-      img{
-        border-radius:2%;
-        width:80%;
+      img {
+        border-radius: 2%;
+        width: 80%;
       }
 
-      p{
+      p {
         background: $color_sub;
         box-sizing: border-box;
         font-size: $font-size_s;
         font-weight: bold;
-        margin:0 auto;
+        margin: 0 auto;
         padding: 3%;
-        width:80%;
+        width: 80%;
       }
 
-      &-left{
-        left:1%;
+      &-left {
+        left: 1%;
       }
 
-      &-center{
-        top:60%;
+      &-center {
+        top: 60%;
       }
 
-      &-right{
-        right:1%;
-        top:30%;
+      &-right {
+        right: 1%;
+        top: 30%;
 
       }
     }
   }
 
-  &-recommend{
-    text-align:center;
+  &-recommend {
+    text-align: center;
 
-    &-button{
+    &-button {
       text-align: center;
-      margin:5% auto;
-      width:15%;
+      margin: 5% auto;
+      width: 15%;
     }
   }
-
 }
 

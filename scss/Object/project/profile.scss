@@ -2,8 +2,12 @@
 
 .profile{
 
-  margin: 8% auto 12%;
+  margin: 0 auto 12%;
   width:50%;
+
+  @include mq{
+    width:80%;
+  }
 
 
   &-container{
@@ -14,6 +18,9 @@
     text-align: center;
 
     &-input{
+
+      margin-bottom: 10%;
+
       &-label{
         display:block;
         font-size: $font-size_xl;
@@ -23,8 +30,15 @@
 
     &-img{
       display: flex;
-      margin-top: 10%;
+      margin: 10% auto;
       width:100%;
+
+      @include mq{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+      }
 
       &-left{
         align-items: center;
@@ -32,11 +46,21 @@
         justify-content: center;
         width:40%;
         margin:5%;
+
+        @include mq {
+          margin: 0 auto;
+          width:60%;
+          word-wrap: break-word;
+        }
       }
 
       &-right{
         width:60%;
         margin:5%;
+
+        @include mq{
+          margin: 5% auto;
+        }
 
         img{
           width:100%;
