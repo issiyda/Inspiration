@@ -11,15 +11,22 @@ html, body {
           text-size-adjust: 100%;
   letter-spacing: 0.1em; }
 
-.main {
+main {
   width: 90%;
-  margin: 0 auto; }
+  margin: 0 auto 10%; }
+
+.main {
+  width: 100%;
+  margin: 0 auto 10%; }
 
 .f-h2 {
   color: #A16EFF;
   font-size: 30px;
-  padding: 10%;
+  padding: 5%;
   text-align: center; }
+  @media screen and (max-width: 414px) {
+    .f-h2 {
+      padding: 10%; } }
 
 .f-h3 {
   color: black;
@@ -122,9 +129,41 @@ input[type="radio"] {
   margin: 0 auto 5%;
   text-align: center;
   width: 50%; }
+  @media screen and (max-width: 414px) {
+    .c-form {
+      width: 85%; }
+      .c-form .c-button, .c-form .c-mini-button, .c-form .c-radio {
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-pack: center;
+                justify-content: center; } }
   .c-form-container {
+    box-sizing: border-box;
     font-weight: bold;
-    padding: 3%; }
+    padding: 5%; }
+    .c-form-container a {
+      margin: 0 auto 3%; }
+      @media screen and (max-width: 414px) {
+        .c-form-container a {
+          margin: 0 auto 10%; } }
+  .c-form-check {
+    margin: 3% auto; }
+    @media screen and (max-width: 414px) {
+      .c-form-check {
+        margin: 5% auto; } }
+    .c-form-check-box {
+      -webkit-transform: scale(1.3);
+              transform: scale(1.3); }
+  .c-form-reminder {
+    color: #A16EFF;
+    display: -webkit-box;
+    display: flex;
+    text-decoration: none;
+    font-weight: bolder;
+    margin-bottom: 3%;
+    -webkit-transition: 0.6s;
+    transition: 0.6s;
+    word-wrap: break-word; }
   .c-form-text-attention {
     color: mediumvioletred;
     margin: 5%; }
@@ -138,6 +177,9 @@ input[type="radio"] {
   margin: 5% auto;
   padding: 1%;
   width: 55%; }
+  @media screen and (max-width: 414px) {
+    .c-input, .c-textarea {
+      font-size: 14px; } }
   @media screen and (max-width: 414px) {
     .c-input, .c-textarea {
       width: 70%; } }

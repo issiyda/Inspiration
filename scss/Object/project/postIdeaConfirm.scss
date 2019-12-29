@@ -2,19 +2,27 @@
 
 
 /**
-confirm detailの共通部分　
+confirm とdetailの共通部分　
  */
 .confirm{
 
   margin: 8% auto 12%;
   width:60%;
 
+
+
   &-text{
+    box-sizing: border-box;
     background: $color_w;
     margin:0 auto;
     padding: 2%;
-    width:55%;
+    width:80%;
+    word-break:break-all;
 
+    @include mq{
+      width:75%;
+      padding: 7%;
+    }
   }
 
   &-container{

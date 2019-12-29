@@ -113,16 +113,26 @@ html, body {
   letter-spacing: 0.1em;
 }
 
-.main{
+main{
   width:90%;
-  margin: 0 auto;
+  margin: 0 auto 10%;
 }
+
+.main{
+  width:100%;
+  margin:0 auto 10% ;
+}
+
 
 .f-h2{
   color:$color_accent;
   font-size:$font-size_xxl;
-  padding:10%;
+  padding:5%;
   text-align:center;
+
+  @include mq{
+    padding: 10%;
+  }
 }
 
 .f-h3{

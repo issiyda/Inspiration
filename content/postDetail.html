@@ -20,19 +20,38 @@
 </head>
 
 <body>
-<div class="l-header">
-    <div class="l-header-left">
-        <a href="mypage.html">
-            Inspiration
-        </a>
+<div class ="nav">
+
+    <div class="nav-title">
+        Inspiration
     </div>
 
-        <div class="l-header-right">
-        <div class ="l-header-button">Top</div>
-        <div class ="l-header-button">Menu</div>
+    <div class="nav-trigger js-toggle-sp-menu">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
+
+    <div class="nav-sp">
+
+        <div class ="nav-heading">
+            <h2 class ="f-h2">Menu</h2>
+        </div>
+
+        <ul class ="nav-container">
+            <li class ="nav-item"><a href="#">Top</a></li>
+            <li class ="nav-item"><a href="#">Mypage</a></li>
+            <li class ="nav-item"><a href="#">Post</a></li>
+            <li class ="nav-item"><a href="#">Profile</a></li>
+            <li class ="nav-item"><a href="#">Logout</a></li>
+        </ul>
+
+    </div>
+
+
 
 </div>
+<div class="nav-height"></div>
 
 <main>
 
@@ -107,13 +126,13 @@
         </div>
 
 
-        <div class ="review review-container">
+        <div class ="voice voice-container">
 
-            <div class="review-posted">
-                <div class ="review-posted-name">
-                    <div class="review-img">
+            <div class="voice-posted">
+                <div class ="voice-posted-name">
+                    <div class="voice-img">
                     <img src="../images/staff2.jpeg" alt="">
-                        <div id="userName" class ="review-img-name">
+                        <div id="userName" class ="voice-img-name">
                             だーいし
                             <p>さん</p>
                         </div>
@@ -121,21 +140,26 @@
 
                 </div>
 
-                <div class ="review-posted-comment">
+                    <div class="voice-posted-star">
 
-                    <label for="reviewComment" class ="review-posted-comment-label">評価</label>
-                    <div id="reviewComment" class ="review-posted-comment-star">
-                        <i class="fas fa-star ic-star fa-2x"></i>
-                        <i class="fas fa-star ic-star fa-2x"></i>
-                        <i class="fas fa-star ic-star fa-2x"></i>
-                        <i class="fas fa-star ic-star fa-2x"></i>
-                        <i class="fas fa-star ic-star fa-2x"></i>
-
+                    <label for="voiceComment" class ="voice-posted-comment-label">評価</label>
+                    <div id="voiceComment" class ="voice-posted-comment-star">
+                        <div class="voice-posted-comment-star-top">
+                            <i class="fas fa-star ic-star fa-2x"></i>
+                            <i class="fas fa-star ic-star fa-2x"></i>
+                        </div>
+                        <div class="voice-posted-comment-star-bottom">
+                            <i class="fas fa-star ic-star fa-2x"></i>
+                            <i class="fas fa-star ic-star fa-2x"></i>
+                            <i class="fas fa-star ic-star fa-2x"></i>
+                        </div>
+                        </div>
                     </div>
 
+                <div class ="voice-posted-comment">
 
-                    <label for="reviewComment" class ="review-posted-comment-label">コメント</label>
-                    <div id="reviewComment" class ="review-posted-comment-content">
+                    <label for="voiceComment" class ="voice-posted-comment-label">コメント</label>
+                    <div id="voiceComment" class ="voice-posted-comment-content">
                         このアイデアは非常に素敵でしたね。
                         日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
                         日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
@@ -154,11 +178,11 @@
 
 
 
-            <div class="review-posted">
-                <div class ="review-posted-name">
-                    <div class="review-img">
+            <div class="voice-posted">
+                <div class ="voice-posted-name">
+                    <div class="voice-img">
                         <img src="../images/staff2.jpeg" alt="">
-                        <div class ="review-img-name">
+                        <div id="userName" class ="voice-img-name">
                             だーいし
                             <p>さん</p>
                         </div>
@@ -166,20 +190,26 @@
 
                 </div>
 
-                <div class ="review-posted-comment">
+                <div class="voice-posted-star">
 
-                    <label for="reviewComment" class ="review-posted-comment-label">評価</label>
-                    <div class ="review-posted-comment-star">
-                        <i class="fas fa-star ic-star fa-2x"></i>
-                        <i class="fas fa-star ic-star fa-2x"></i>
-                        <i class="fas fa-star ic-star fa-2x"></i>
-                        <i class="fas fa-star ic-star fa-2x"></i>
-                        <i class="fas fa-star ic-star fa-2x"></i>
-
+                    <label for="voiceComment" class ="voice-posted-comment-label">評価</label>
+                    <div id="voiceComment" class ="voice-posted-comment-star">
+                        <div class="voice-posted-comment-star-top">
+                            <i class="fas fa-star ic-star fa-2x"></i>
+                            <i class="fas fa-star ic-star fa-2x"></i>
+                        </div>
+                        <div class="voice-posted-comment-star-bottom">
+                            <i class="fas fa-star ic-star fa-2x"></i>
+                            <i class="fas fa-star ic-star fa-2x"></i>
+                            <i class="fas fa-star ic-star fa-2x"></i>
+                        </div>
                     </div>
+                </div>
 
-                    <label for="reviewComment" class ="review-posted-comment-label">コメント</label>
-                    <div class ="review-posted-comment-content">
+                <div class ="voice-posted-comment">
+
+                    <label for="voiceComment" class ="voice-posted-comment-label">コメント</label>
+                    <div id="voiceComment" class ="voice-posted-comment-content">
                         このアイデアは非常に素敵でしたね。
                         日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
                         日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
@@ -194,7 +224,7 @@
                     </div>
                 </div>
 
-
+            </div>
 
             </div>
 
@@ -202,13 +232,13 @@
                 <h3 class ="f-h3">コメント</h3>
             </div>
 
-            <div class="review-comment">
+            <div class="voice-comment">
                 <form action="">
-                    <div class ="review-comment-container" >
-                        <label for="review-comment">コメント</label>
-                        <textarea class ="c-input review-comment-input" name="" id="review-comment" cols="30" rows="10" placeholder="コメントを記入"></textarea>
+                    <div class ="voice-comment-container" >
+                        <label for="voice-comment">コメント</label>
+                        <textarea class ="c-input voice-comment-input" name="" id="voice-comment" cols="30" rows="10" placeholder="コメントを記入"></textarea>
                     </div>
-                    <input type="text" class="c-mini-button review-button" value="送信">
+                    <input type="text" class="c-mini-button voice-button" value="送信">
                 </form>
             </div>
         </div>

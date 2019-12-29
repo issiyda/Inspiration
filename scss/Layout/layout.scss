@@ -1,5 +1,5 @@
 @import "../Object/component/component";
-
+@import "../Foundation/foundation";
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 //ヘッダー
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
@@ -44,39 +44,118 @@
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
 .nav {
+  align-items: center;
   background-color: rgba(255, 190, 218, 0.4);
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   height: 100px;
-  justify-content: flex-end;
+  justify-content: space-between;
   position: fixed;
+  padding-left:30px;
+  padding-right:30px;
   width: 100%;
   z-index: 5;
+
+  &-title{
+    font-size:$font-size_xxl;
+    color:$color_w;
+    font-weight:bold;
+    text-shadow: 1px 1px 1px $color_default;
+  }
+
+
+
+  &-heading{
+    display: none;
+
+
+  }
+
+
+
+
+
+  &-trigger{
+    display: none;
+    @include mq() {
+      display: inline-block;
+    }
+    transition: all .4s;
+    box-sizing: border-box;
+    position: relative;
+    width: 40px;
+    height: 32px;
+    z-index: 3;
+    span {
+      display: inline-block;
+      transition: all .4s;
+      box-sizing: border-box;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: $color_sub;
+      border-radius: 4px;
+      &:nth-of-type(1) {
+        top: 0;
+      }
+      &:nth-of-type(2) {
+        top: 14px;
+      }
+      &:nth-of-type(3) {
+        bottom: 0;
+      }
+    }
+    &.active span {
+      &:nth-of-type(1) {
+        transform: translateY(12px) rotate(-45deg);
+      }
+
+      &:nth-of-type(2) {
+        opacity: 0;
+      }
+
+      &:nth-of-type(3) {
+        transform: translateY(-15px) rotate(45deg);
+      }
+    }
+  }
+
+  &-sp{
+    width:50%;
+
+    @include mq(){
+      display: none;
+
+    }
+  }
 
 
   &-container {
     align-items: center;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    height: 100px;
-    text-align: center;
-    width: 40%;
+    justify-content: space-between;
+    margin-right:15%;
 
-    @include mq(){
-      width:100%;
-    }
+
+
+
   }
 
   &-item {
     font-size: $font-size_l;
     font-weight: bold !important;
     list-style: none;
+    padding:5%;
+
 
     a {
       color: $color_w;
       text-decoration: none;
       text-shadow: 1px 1px 1px $color_default;
+
 
     }
   }

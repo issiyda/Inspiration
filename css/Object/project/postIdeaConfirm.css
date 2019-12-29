@@ -11,15 +11,22 @@ html, body {
           text-size-adjust: 100%;
   letter-spacing: 0.1em; }
 
-.main {
+main {
   width: 90%;
-  margin: 0 auto; }
+  margin: 0 auto 10%; }
+
+.main {
+  width: 100%;
+  margin: 0 auto 10%; }
 
 .f-h2 {
   color: #A16EFF;
   font-size: 30px;
-  padding: 10%;
+  padding: 5%;
   text-align: center; }
+  @media screen and (max-width: 414px) {
+    .f-h2 {
+      padding: 10%; } }
 
 .f-h3 {
   color: black;
@@ -47,16 +54,22 @@ html, body {
       padding: 5%; } }
 
 /**
-confirm detailの共通部分　
+confirm とdetailの共通部分　
  */
 .confirm {
   margin: 8% auto 12%;
   width: 60%; }
   .confirm-text {
+    box-sizing: border-box;
     background: #fff;
     margin: 0 auto;
     padding: 2%;
-    width: 55%; }
+    width: 80%;
+    word-break: break-all; }
+    @media screen and (max-width: 414px) {
+      .confirm-text {
+        width: 75%;
+        padding: 7%; } }
   .confirm-container {
     background: #F5F5F5;
     border-radius: 1%;

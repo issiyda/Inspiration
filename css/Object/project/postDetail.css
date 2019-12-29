@@ -11,15 +11,22 @@ html, body {
           text-size-adjust: 100%;
   letter-spacing: 0.1em; }
 
-.main {
+main {
   width: 90%;
-  margin: 0 auto; }
+  margin: 0 auto 10%; }
+
+.main {
+  width: 100%;
+  margin: 0 auto 10%; }
 
 .f-h2 {
   color: #A16EFF;
   font-size: 30px;
-  padding: 10%;
+  padding: 5%;
   text-align: center; }
+  @media screen and (max-width: 414px) {
+    .f-h2 {
+      padding: 10%; } }
 
 .f-h3 {
   color: black;
@@ -46,64 +53,159 @@ html, body {
     .f-h4 {
       padding: 5%; } }
 
-.review, .review-comment {
+.voice, .voice-comment {
   margin: 5% auto; }
-  .review-posted {
+  .voice-posted {
     background: #f6f5f4;
     display: -webkit-box;
     display: flex;
+    flex-wrap: wrap;
     padding: 3%; }
-    .review-posted-name, .review-comment label {
+    @media screen and (max-width: 414px) {
+      .voice-posted {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+                flex-direction: column; } }
+    .voice-posted-name, .voice-comment label {
+      border-radius: 3%;
+      background: #fff;
+      box-sizing: border-box;
+      margin: 5% 0 0 2%;
+      padding: 2% 1% 0 0;
       text-align: center;
-      width: 20%; }
-    .review-posted-comment, .review-comment textarea {
+      width: 30%; }
+      @media screen and (max-width: 414px) {
+        .voice-posted-name, .voice-comment label {
+          box-sizing: border-box;
+          display: -webkit-box;
+          display: flex;
+          margin: 10% auto;
+          padding: 5%;
+          width: 80%; } }
+    .voice-posted-star {
+      background: #fff;
+      box-sizing: border-box;
+      margin: 5% 0 0 5%;
+      padding-top: 2%;
+      width: 60%; }
+      @media screen and (max-width: 414px) {
+        .voice-posted-star {
+          display: -webkit-box;
+          display: flex;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+                  flex-direction: column;
+          -webkit-box-pack: center;
+                  justify-content: center;
+          margin: 0 auto 10%;
+          padding: 5% 0 10% 0;
+          width: 80%; } }
+    .voice-posted-comment, .voice-comment textarea {
+      border-radius: 3%;
       display: -webkit-box;
       display: flex;
       -webkit-box-orient: vertical;
       -webkit-box-direction: normal;
               flex-direction: column;
-      width: 80%; }
-      .review-posted-comment-label {
-        font-weight: bold; }
-      .review-posted-comment-content {
+      -webkit-box-pack: center;
+              justify-content: center;
+      width: 80%;
+      margin: 0 auto; }
+      @media screen and (max-width: 414px) {
+        .voice-posted-comment, .voice-comment textarea {
+          padding: 7%; } }
+      .voice-posted-comment-label {
+        font-weight: bold;
+        padding: 3% 3% 0 3%; }
+      .voice-posted-comment-content {
         background: #fff;
-        padding: 3%; }
-      .review-posted-comment-star {
+        padding: 8%;
+        margin: 6% auto; }
+      .voice-posted-comment-star {
+        border-radius: 3%;
         display: -webkit-box;
         display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+                flex-direction: column;
         justify-content: space-around;
+        height: 70%;
         margin: 0 auto;
         width: 70%; }
-  .review-img {
+        @media screen and (max-width: 414px) {
+          .voice-posted-comment-star {
+            padding: 10%; } }
+        .voice-posted-comment-star-top {
+          display: -webkit-box;
+          display: flex;
+          -webkit-box-pack: space-evenly;
+                  justify-content: space-evenly; }
+        .voice-posted-comment-star-bottom {
+          display: -webkit-box;
+          display: flex;
+          justify-content: space-around;
+          text-align: center; }
+  .voice-img {
     height: 100%;
-    margin: 0;
-    width: 100%; }
-    .review-img img {
+    width: 100%;
+    margin: 5% auto;
+    padding: 5% 0; }
+    .voice-img img {
       border-radius: 100%;
-      height: 100px;
-      width: 80px; }
-    .review-img-name {
+      height: 80px;
+      width: 60%; }
+      @media screen and (max-width: 414px) {
+        .voice-img img {
+          height: 100px; } }
+    .voice-img-name {
       color: #FFBEDA;
       font-weight: bold;
       margin: 0 auto;
       width: 80%; }
-  .review-comment {
+  .voice-comment {
     background: #f6f5f4;
     padding: 5%; }
-    .review-comment textarea {
+    .voice-comment label {
+      -webkit-box-align: center;
+              align-items: center;
+      background: #F5F5F5;
+      margin: 5% auto; }
+    .voice-comment textarea {
       margin: auto 3%;
       width: 74%; }
-    .review-comment-container {
+      @media screen and (max-width: 414px) {
+        .voice-comment textarea {
+          padding: 2%; } }
+    .voice-comment-container {
       -webkit-box-align: center;
               align-items: center;
       display: -webkit-box;
       display: flex;
-      width: 100%; }
-    .review-comment-input {
+      -webkit-box-pack: center;
+              justify-content: center;
+      width: 95%;
+      margin: 0 auto; }
+      @media screen and (max-width: 414px) {
+        .voice-comment-container {
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+                  flex-direction: column; } }
+      @media screen and (max-width: 414px) {
+        .voice-comment-container label {
+          display: -webkit-box;
+          display: flex;
+          -webkit-box-pack: center;
+                  justify-content: center; } }
+    .voice-comment-input {
       font-size: 14px;
       height: 20px;
       margin: 0; }
-  .review-button {
-    margin: 5% 0 0 84%;
-    padding: 1%;
+  .voice-button {
+    border: none;
+    margin: 3% 0 3% 75%;
+    padding: 1.5%;
     width: 10%; }
+    @media screen and (max-width: 414px) {
+      .voice-button {
+        margin: 8% 0 3% 62%;
+        width: 20%; } }

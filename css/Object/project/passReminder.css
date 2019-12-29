@@ -141,98 +141,12 @@ main {
     .f-h4 {
       padding: 5%; } }
 
-.hero {
-  background-image: url("../images/home1.jpg");
-  background-position: bottom;
-  background-size: cover;
-  display: inline-block;
-  height: 700px;
-  width: 100%; }
-  .hero-item {
-    display: -webkit-box;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-            flex-direction: column;
-    height: 90%;
-    -webkit-box-pack: center;
-            justify-content: center;
-    text-align: center; }
-    .hero-item-title {
-      font-size: 30px;
-      margin-bottom: 5%; }
-    .hero-item-text {
-      letter-spacing: 1em; }
-
-.home-header {
-  font-size: 24px;
-  text-align: center;
-  margin: 5% auto; }
-
-.home-what {
-  text-align: center;
-  width: 100%; }
-  .home-what-container, .home-merit-container {
-    display: -webkit-box;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-            flex-direction: row;
-    -webkit-box-pack: center;
-            justify-content: center;
-    margin: 0 auto; }
-  .home-what-item, .home-merit-item {
-    width: 30%;
-    margin: 0 3%; }
-    .home-what-item img, .home-merit-item img {
-      border-radius: 2%;
-      width: 100%; }
-    .home-what-item p, .home-merit-item p {
-      -webkit-box-align: center;
-              align-items: center;
-      font-size: 18px;
-      font-weight: bold; }
-
-.home-merit {
-  margin: 0 auto 5%; }
-  .home-merit-evocation {
-    color: black;
-    letter-spacing: 0.4em;
-    margin: 10%;
-    text-align: center; }
-    .home-merit-evocation-accent {
-      color: #A16EFF;
-      font-weight: bold;
-      font-size: 30px;
-      padding: 5%; }
-  .home-merit-container {
-    flex-wrap: wrap; }
-  .home-merit-item {
-    margin: 0 auto 5%;
-    text-align: center;
-    top: 5%; }
-    .home-merit-item img {
-      border-radius: 2%;
-      width: 80%; }
-    .home-merit-item p {
-      background: #F5F5F5;
+.c-form-container-passReminder {
+  padding: 2%; }
+  @media screen and (max-width: 414px) {
+    .c-form-container-passReminder {
       box-sizing: border-box;
-      font-size: 12px;
-      font-weight: bold;
-      margin: 0 auto;
-      padding: 3%;
-      width: 80%; }
-    .home-merit-item-left {
-      left: 1%; }
-    .home-merit-item-center {
-      top: 60%; }
-    .home-merit-item-right {
-      right: 1%;
-      top: 30%; }
+      padding: 5%; } }
 
-.home-recommend {
-  text-align: center; }
-  .home-recommend-button {
-    text-align: center;
-    margin: 5% auto;
-    width: 15%; }
+.passReminder-input {
+  margin-bottom: 5%; }
