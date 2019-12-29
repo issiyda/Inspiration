@@ -1,43 +1,6 @@
 @import "../Object/component/component";
 @import "../Foundation/foundation";
-//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-//ヘッダー
-//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
-
-.l-header{
-  background:$color_base;
-  display: flex;
-  height:100px;
-  justify-content: space-around;
-  &-left{
-    align-items: center;
-    font-weight:bold;
-    font-size: 30px;
-    display:flex;
-    padding-right:30%;
-  }
-
-  &-right{
-    display:flex;
-    flex-direction: row;
-    justify-content: space-around;
-    text-align: center;
-    align-items: center;
-    width:30%;
-
-  }
-  &-button{
-    @extend .c-button;
-    background: $color_w!important;
-    color:black!important;
-    margin:0 0 0 0 !important;
-    width:30% !important;
-
-  }
-
-
-}
 
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 //ヘッダー ver2
@@ -68,12 +31,7 @@
 
   &-heading{
     display: none;
-
-
   }
-
-
-
 
 
   &-trigger{
@@ -81,12 +39,14 @@
     @include mq() {
       display: inline-block;
     }
+
     transition: all .4s;
     box-sizing: border-box;
     position: relative;
     width: 40px;
     height: 32px;
     z-index: 3;
+
     span {
       display: inline-block;
       transition: all .4s;
@@ -127,8 +87,8 @@
 
     @include mq(){
       display: none;
-
     }
+
   }
 
 
@@ -138,10 +98,6 @@
     flex-direction: row;
     justify-content: space-between;
     margin-right:15%;
-
-
-
-
   }
 
   &-item {
@@ -167,11 +123,6 @@
 
 }
 
-
-
-
-
-
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 //フッター
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
@@ -182,6 +133,7 @@
   flex-direction: row;
   height:300px;
   justify-content: space-around;
+  opacity: 0.6;
   position:relative;
 
   @include mq{
@@ -243,15 +195,22 @@
 }
 
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-//サイドバー
+//サイドバー(スマホの場合のみ）
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 .sidebar{
   align-items: center;
+  background: $color_base;
   display:flex;
   height:100%;
-  margin:0 0% 0  75%;
+  //margin:0 0 0  75%;
   position:fixed;
-  width:20%;
+  width:100%;
+
+  @include mq {
+    &-h2 {
+      padding: 5%!important;
+    }
+  }
 
   &-container{
     background:$color_base;
@@ -290,7 +249,7 @@
   }
 
   &-item{
-    color:gray;
+    color:$color_w;
     display:flex;
     margin:10% auto;
     transition:0.8s;
@@ -305,14 +264,15 @@
   }
 
     &-logo{
-      color:gray;
+      color:$color_w;
       width:40%;
       text-align: center;
     }
 
     &-text{
-      font-size:$font-size_l;
+      font-size:$font-size_xl;
       font-weight:bolder;
+      text-align:center;
       width:60%;
 
     }

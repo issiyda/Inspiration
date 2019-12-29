@@ -57,6 +57,8 @@ main {
   margin: 5% auto; }
 
 .c-button, .c-mini-button, .c-radio {
+  -webkit-box-align: center;
+          align-items: center;
   background: #FFBEDA;
   border-color: #FFBEDA;
   border-radius: 5px;
@@ -65,7 +67,7 @@ main {
   display: block;
   font-size: 18px;
   font-weight: bolder;
-  margin: 0 0 5% 60%;
+  margin: 5% 0 5% 60%;
   padding: 2%;
   -webkit-transition: 0.4s;
   transition: 0.4s;
@@ -95,6 +97,12 @@ main {
   margin: 3% auto;
   padding: 3%;
   width: 20%; }
+  @media screen and (max-width: 414px) {
+    .c-radio {
+      box-sizing: border-box;
+      padding: 1%;
+      width: 40%;
+      margin: 7% auto; } }
   .c-radio:hover {
     color: #A16EFF;
     opacity: .7; }
@@ -203,10 +211,7 @@ input[type="radio"] {
 カードの画像
  */
   /**
-  ボタンが一つの際のcss
-   */
-  /**
-  ボタンが二つの際のcss
+
    */ }
   .ic-a {
     color: black;
