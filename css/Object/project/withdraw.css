@@ -53,15 +53,15 @@ main {
     .f-h4 {
       padding: 5%; } }
 
-.c-form-container ul {
+.withdraw-ul {
   margin: 5%; }
 
-.c-form-container li {
+.withdraw-li {
   font-size: 24px;
   font-weight: bolder;
   list-style: none; }
 
-.c-form-submit {
-  padding: 3%; }
-  .c-form-submit-button {
+.withdraw-submit {
+  padding: 3% 3% 5% 3%; }
+  .withdraw-submit-button {
     margin: 3% auto; }

@@ -53,7 +53,7 @@ main {
     .f-h4 {
       padding: 5%; } }
 
-.c-form-container {
+.register {
   background: #F5F5F5;
   display: -webkit-box;
   display: flex;
@@ -61,7 +61,7 @@ main {
   -webkit-box-direction: normal;
           flex-direction: column;
   text-align: center; }
-  .c-form-container-input label {
+  .register-input label {
     display: block;
     font-size: 24px;
     margin: 3%; }

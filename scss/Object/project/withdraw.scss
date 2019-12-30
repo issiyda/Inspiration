@@ -1,31 +1,38 @@
 @import "../../Foundation/variables";
 
+
+
 .c-form{
 
-  &-container{
 
 
-    ul{
-      margin:5%;
-
-    }
-
-    li{
-      font-size:$font-size_xl;
-      font-weight: bolder;
-      list-style: none;
-    }
-
-
-  }
-  &-text{
-  }
 
   &-submit{
-    padding:3%;
+
+    &-button{
+    }
+  }
+}
+
+.withdraw {
+
+  &-ul{
+    margin:5%;
+  }
+
+  &-li{
+    font-size:$font-size_xl;
+    font-weight: bolder;
+    list-style: none;
+  }
+
+  &-submit {
+    padding: 3% 3% 5% 3%;
 
     &-button{
       margin:3% auto;
+
     }
   }
+
 }

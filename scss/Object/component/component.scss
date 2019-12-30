@@ -321,9 +321,7 @@ input[type="radio"] {
       }
     }
   }
-  /**
 
-   */
 
   //==========================
   //ボタンが一つの際のcss
@@ -348,23 +346,32 @@ input[type="radio"] {
     z-index:3;
   }
 
+
   &-desc{
     background: #fff;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    height:200px;
+    height:240px;
     justify-content: left;
     margin: 15% auto 10%;
     overflow:hidden;
+    padding:5%;
     width:90%;
     word-break:normal;
 
-    &-heading{
 
-    }
+
 
     &-overflow{
       align-items: center;
+      height:10%;
+    }
+
+    &-text{
+      align-items: center;
+      display: flex;
+      height:90%;
     }
 
 

@@ -1,7 +1,9 @@
 @import "../../Foundation/foundation";
 
 
-
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+//ヒーローバナー
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 .hero {
   background-image: url("../images/home1.jpg");
   background-position: bottom;
@@ -29,6 +31,10 @@
   }
 }
 
+
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+//Home画面
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 .home {
 
   &-header {

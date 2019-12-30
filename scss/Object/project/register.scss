@@ -1,11 +1,13 @@
 @import "../../Foundation/variables";
 
-.c-form{
 
 
+//====================================
+//新規登録に関するcss
+//====================================
 
 
-  &-container{
+  .register{
     background: $color_sub;
     display: flex;
     flex-direction: column;
@@ -18,7 +20,7 @@
       margin:3%;
     }
     }
-  }
+
 
 
 
