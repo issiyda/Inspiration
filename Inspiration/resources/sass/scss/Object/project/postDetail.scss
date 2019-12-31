@@ -1,0 +1,293 @@
+@import "../../Foundation/variables";
+
+//====================================
+//PostDetail部分のcss
+//====================================
+.pd{
+
+  margin: 0 auto 12%;
+  width:50%;
+
+  @include mq{
+    width:80%;
+  }
+
+
+  &-container{
+    background: $color_sub;
+    border-radius:1%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    &-input{
+      margin-bottom: 10%;
+
+      &-label{
+        display:block;
+        font-size: $font-size_xl;
+        margin:3%;
+      }
+    }
+
+    &-img{
+      display: flex;
+      margin: 10% auto;
+      width:100%;
+
+      @include mq{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+      }
+
+      &-left{
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        width:40%;
+        margin:5%;
+
+        @include mq {
+          margin: 0 auto;
+          width:60%;
+          word-wrap: break-word;
+        }
+      }
+
+      &-right{
+        width:60%;
+        margin:5%;
+
+        @include mq{
+          margin: 5% auto;
+        }
+
+        img{
+          width:100%;
+        }
+      }
+
+
+      &-none{
+        display:none;
+      }
+    }
+  }
+}
+
+
+
+//====================================
+//Review部分のcss
+//====================================
+.voice{
+  margin:5% auto;
+
+
+
+  &-posted{
+    background: $color_bg;
+    display: flex;
+    flex-wrap: wrap;
+    padding:3%;
+
+    @include mq{
+      flex-direction: column;
+
+    }
+
+
+
+    &-name{
+      border-radius: 3%;
+      background: $color_w;
+      box-sizing: border-box;
+      margin:5% 0 0 2%;
+      padding:2% 1% 0 0;
+      text-align: center;
+      width:30%;
+
+      @include mq{
+        box-sizing:border-box;
+        display: flex;
+        margin: 10% auto ;
+        padding:5%;
+        width:80%;
+      }
+    }
+
+
+    &-star{
+      background: $color_w;
+      box-sizing: border-box;
+      margin:5% 0 0 5%;
+      padding-top:2%;
+      width: 60%;
+
+      @include mq{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0 auto 10%;
+        padding:5% 0 10% 0;
+        width:80%;
+
+      }
+
+      &-top{
+
+      }
+
+    }
+
+    &-comment{
+      border-radius: 3%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width:80%;
+      margin:0 auto;
+
+      @include mq{
+        padding: 7%;
+      }
+
+      &-label{
+        font-weight: bold;
+        padding:3% 3% 0 3%;
+      }
+
+      &-content {
+        background: $color_w;
+        padding: 8%;
+        margin: 6% auto;
+
+
+      }
+      &-star{
+        border-radius: 3%;
+        display: flex;
+        flex-direction: column;
+        justify-content:space-around;
+        height:70%;
+        margin:0 auto;
+        width:70%;
+
+        @include mq{
+          padding:10%;
+
+        }
+
+
+        &-top{
+          display: flex;
+          justify-content: space-evenly;
+        }
+
+        &-bottom{
+          display: flex;
+          justify-content: space-around;
+          text-align: center;
+        }
+
+
+      }
+    }
+
+
+  }
+
+  &-img{
+    height:100%;
+    width:100%;
+    margin: 5% auto;
+    padding:5% 0;
+
+    img{
+      border-radius:100%;
+      height:80px;
+      width:60%;
+
+      @include mq{
+        height:100px;
+      }
+    }
+    label{
+
+    }
+
+    &-name{
+      color:$color_base;
+      font-weight:bold;
+      margin:0 auto;
+      width:80%;
+    }
+  }
+
+  &-comment{
+    @extend .voice;
+    background: $color_bg;
+    padding:5%;
+
+    label{
+      align-items: center;
+      background: $color_sub;
+      @extend .voice-posted-name;
+      margin:5% auto;
+    }
+
+    textarea{
+      @extend .voice-posted-comment;
+      margin:auto 3%;
+      width:74%;
+
+      @include mq{
+        padding:2%;
+      }
+
+    }
+
+    &-container{
+      align-items: center;
+      display:flex;
+      justify-content: center;
+      width:95%;
+      margin: 0 auto;
+
+
+      @include mq{
+        flex-direction: column;
+      }
+
+      label{
+        @include mq{
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+
+    &-input{
+      font-size: $font-size_m;
+      height:20px;
+      margin:0;
+
+
+    }
+  }
+
+  &-button{
+    border:none;
+    margin:3% 0 3% 75%;
+    padding:1.5%;
+    width:10%;
+
+    @include mq{
+      margin:8% 0 3% 62%;
+      width:20%;
+
+    }
+  }
+}

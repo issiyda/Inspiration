@@ -1,0 +1,379 @@
+@import "../../Foundation/variables";
+
+//==========================
+//heading部分の共通パーツ
+//==========================
+.c-heading{
+  margin:5% auto;
+}
+
+
+//==========================
+//投稿ボタン
+//==========================
+.c-button{
+  align-items: center;
+  background: $color_base;
+  border-color: $color_base;
+  border-radius:5px;
+  box-shadow: 2px 2px 4px gray;
+  color:$color_sub;
+  display: block;
+  font-size: $font-size_l;
+  font-weight:bolder;
+  margin:5% 0 5% 60%;
+  padding:2%;
+  transition: 0.4s;
+  width:30%;
+
+  &:hover{
+    color:$color_accent;
+    opacity:0.7;
+    outline:none;
+    transition: 0.4s;
+  }
+}
+
+
+//==========================
+//詳細ボタン　お気に入りボタン
+//==========================
+.c-mini-button{
+  @extend .c-button;
+  font-size: $font-size_m;
+  text-align:center;
+  margin:0 2%;
+  padding:4%;
+  width:40%;
+
+  &:hover{
+    color:$color_accent;
+    transition: 0.4s;
+  }
+}
+
+
+
+//==========================
+//ラジオボタン
+//==========================
+
+.c-radio{
+  @extend .c-mini-button;
+  background: lightgray;
+  border-radius: 4px;
+  cursor: pointer;
+  margin:3% auto;
+  padding: 3%;
+  width:20%;
+
+  @include mq{
+    box-sizing: border-box;
+    padding:1%;
+    width:40%;
+    margin:7% auto;
+  }
+
+  &:hover{
+    color: $color_accent;
+    opacity: .7;
+  }
+}
+
+.c-radio-container{
+  background: $color_w;
+  border-radius:2%;
+  display : flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  justify-content: space-around;
+  margin:0 auto;
+  padding:1%;
+  text-align: center;
+  width:80%;
+}
+
+input[type="radio"] {
+  display:none;
+
+  &:checked + .c-radio {
+      background: $color_base;
+  }
+
+  &:disabled + .c-radio{
+  }
+}
+
+
+
+
+
+//==========================
+//説明用ラベル部品
+//==========================
+
+.c-label{
+  display:block;
+  font-size: $font-size_xl;
+  margin:3%;
+}
+
+//==========================
+//インプットフォーム
+//==========================
+
+.c-form{
+  background: $color_bg;
+  margin:0 auto 5%;
+  text-align: center;
+  width:50%;
+
+  @include mq{
+
+    .c-button{
+      display: flex;
+      justify-content: center;
+
+    }
+    width: 85%;
+  }
+
+  &-container{
+
+    box-sizing: border-box;
+    font-weight:bold;
+    padding:5%;
+
+    a{
+      margin: 0 auto 3%;
+
+      @include  mq{
+        margin: 0 auto 10%;
+      }
+    }
+  }
+
+  //==========================
+  //チェックボックス
+  //==========================
+  &-check {
+    margin: 3% auto;
+
+    @include mq{
+      margin: 5% auto
+    }
+    &-box{
+      transform:scale(1.3);
+    }
+  }
+
+  &-reminder{
+    color:$color_accent;
+    display: flex;
+    text-decoration: none;
+    font-weight: bolder;
+    margin-bottom: 3%;
+    transition:0.6s;
+    word-wrap: break-word;
+  }
+
+  &-text-attention{
+    color:mediumvioletred;
+    margin:5%;
+
+  }
+
+
+}
+
+
+//==========================
+//インプット部品
+//==========================
+
+.c-input{
+  background:#fff;
+  box-shadow: 2px 3px 5px gray;
+  display:block;
+  font-size: $font-size_l;
+  height:$font-size_xl;
+  margin:5% auto;
+  padding:1%;
+  width:55%;
+
+  @include mq{
+    font-size:$font-size_m;
+  }
+
+
+  @include mq{
+    width:70%;
+  }
+}
+
+//==========================
+//テキストエリア部品
+//==========================
+
+.c-textarea{
+  @extend .c-input;
+  height:20%;
+
+  @include mq {
+    width:70%;
+  }
+}
+
+
+//==========================
+//投稿一列の部品
+//==========================
+
+.ic{
+  display: flex;
+  flex-wrap: wrap;
+  width:100%;
+  margin:5% auto;
+
+  &-a{
+    color:black;
+    text-decoration: none;
+  }
+/**
+カード全体のcss
+ */
+  &-card{
+    background:$color_bg;
+    border-radius:2%;
+    height:110%;
+    margin:1% auto;
+    position: relative;
+    text-align: center;
+    width:17%;
+    z-index: 1;
+
+    @include mq {
+        width:47.5%
+    }
+
+  &-a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  }
+
+
+
+    /**
+    hoverさせた際の挙動
+     */
+        &:hover{
+          opacity:0.75;
+        }
+      }
+
+
+  &-review{
+    align-items: center;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    height:10%;
+    justify-content: space-around;
+    margin: 2% 0;
+    padding:10%;
+
+    @include mq{
+
+    }
+
+  }
+
+  &-star{
+    display: flex;
+    flex-direction: row;
+  }
+
+/**
+カードの画像
+ */
+  &-img {
+    height:160px;
+    margin:0 auto;
+    width:90%;
+    overflow: hidden;
+
+    &-item {
+      box-sizing: border-box;
+      height:100%;
+      transition: 0.5s;
+      transform: scale(1.0);
+      width: 100%;
+
+
+      &:hover {
+        transition: 0.5s;
+        transform: scale(1.3) skewX(4deg);
+      }
+    }
+  }
+
+
+  //==========================
+  //ボタンが一つの際のcss
+  //==========================
+  &-button-one-container{
+    display: flex;
+    justify-content: space-around;
+    margin: 10% auto;
+    padding: 3%;
+    z-index:3;
+  }
+
+  //==========================
+  //ボタンが二つの際のcss
+  //==========================
+  &-button-two-container{
+    display: flex;
+    justify-content: space-around;
+    margin:10% auto;
+    padding: 3%;
+    width:90%;
+    z-index:3;
+  }
+
+
+  &-desc{
+    background: #fff;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height:240px;
+    justify-content: left;
+    margin: 15% auto 10%;
+    overflow:hidden;
+    padding:5%;
+    width:90%;
+    word-break:normal;
+
+
+
+
+    &-overflow{
+      align-items: center;
+      height:10%;
+    }
+
+    &-text{
+      align-items: center;
+      display: flex;
+      height:90%;
+    }
+
+
+  }
+}

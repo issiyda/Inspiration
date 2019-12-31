@@ -1,0 +1,280 @@
+@import "../Object/component/component";
+@import "../Foundation/foundation";
+
+
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+//ヘッダー ver2
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+.nav {
+  align-items: center;
+  background-color: rgba(255, 190, 218, 0.4);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  justify-content: space-between;
+  position: fixed;
+  padding-left:30px;
+  padding-right:30px;
+  width: 100%;
+  z-index: 5;
+
+  &-title{
+    font-size:$font-size_xxl;
+    color:$color_w;
+    font-weight:bold;
+    text-shadow: 1px 1px 1px $color_default;
+  }
+
+
+
+  &-heading{
+    display: none;
+  }
+
+
+  &-trigger{
+    display: none;
+    @include mq() {
+      display: inline-block;
+    }
+
+    transition: all .4s;
+    box-sizing: border-box;
+    position: relative;
+    width: 40px;
+    height: 32px;
+    z-index: 3;
+
+    span {
+      display: inline-block;
+      transition: all .4s;
+      box-sizing: border-box;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: $color_sub;
+      border-radius: 4px;
+      &:nth-of-type(1) {
+        top: 0;
+      }
+      &:nth-of-type(2) {
+        top: 14px;
+      }
+      &:nth-of-type(3) {
+        bottom: 0;
+      }
+    }
+    &.active span {
+      &:nth-of-type(1) {
+        transform: translateY(12px) rotate(-45deg);
+      }
+
+      &:nth-of-type(2) {
+        opacity: 0;
+      }
+
+      &:nth-of-type(3) {
+        transform: translateY(-15px) rotate(45deg);
+      }
+    }
+  }
+
+  &-sp{
+    width:50%;
+
+    @include mq(){
+      display: none;
+    }
+
+  }
+
+
+  &-container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right:15%;
+  }
+
+  &-item {
+    font-size: $font-size_l;
+    font-weight: bold !important;
+    list-style: none;
+    padding:5%;
+
+
+    a {
+      color: $color_w;
+      text-decoration: none;
+      text-shadow: 1px 1px 1px $color_default;
+
+
+    }
+  }
+
+  &-height{
+    height:100px;
+  }
+
+
+}
+
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+//フッター
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+.l-footer{
+  background:#FFBEDA;
+  color:#fff;
+  flex-direction: row;
+  height:300px;
+  justify-content: space-around;
+  opacity: 0.6;
+  position:relative;
+
+  @include mq{
+    height:250px;
+  }
+
+  &-container{
+    display:flex;
+    justify-content: space-around;
+    margin:0 auto;
+    width:70%;
+    height:70%;
+
+    @include mq{
+      width:100%;
+    }
+  }
+
+  &-content{
+    margin-top:10%;
+
+    h3{
+      color:$color_accent;
+      font-weight: bolder;
+      font-size: $font-size_l;
+    }
+
+    p{
+      margin-left: $space_l;
+    }
+
+    a{
+      color:#fff;
+      text-decoration: none;
+
+    }
+  }
+
+  &-bottom{
+    text-align: center;
+  }
+
+  &-copyRight{
+    bottom:$space_l;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    position: absolute;
+    text-align: center;
+    width:70%;
+    left: 0;
+    right:0;
+
+    @include mq{
+      width:75%;
+    }
+
+  }
+}
+
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+//サイドバー(スマホの場合のみ）
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+.sidebar{
+  align-items: center;
+  background: $color_base;
+  display:flex;
+  height:100%;
+  //margin:0 0 0  75%;
+  position:fixed;
+  width:100%;
+
+  @include mq {
+    &-h2 {
+      padding: 5%!important;
+    }
+  }
+
+  &-container{
+    background:$color_base;
+    border-radius:1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height:60%;
+    padding:5%;
+    width:100%;
+
+    a {
+      color:$color_default;
+      position: relative;
+      text-decoration: none;
+    }
+    a::after {
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      content: '';
+      width: 80%;
+      height: 2px;
+      background: $color_w;
+      margin-left: 10%;
+      transform: scale(0, 1);
+      transform-origin: right top;
+      transition: transform .3s;
+
+    }
+    a:hover::after {
+      transform-origin: left top;
+      transform: scale(1, 1);
+    }
+
+  }
+
+  &-item{
+    color:$color_w;
+    display:flex;
+    margin:10% auto;
+    transition:0.8s;
+    width:100%;
+
+
+
+
+    &:hover{
+      opacity: 0.8;
+      transition:0.8s;
+  }
+
+    &-logo{
+      color:$color_w;
+      width:40%;
+      text-align: center;
+    }
+
+    &-text{
+      font-size:$font-size_xl;
+      font-weight:bolder;
+      text-align:center;
+      width:60%;
+
+    }
+  }
+  }

@@ -1,0 +1,14 @@
+@import "../../Foundation/foundation";
+.c-form-container-passReminder{
+
+  padding:2%;
+  @include mq{
+    box-sizing: border-box;
+    padding: 5%;
+  }
+}
+
+.passReminder-input{
+  margin-bottom:5%;
+}
+
