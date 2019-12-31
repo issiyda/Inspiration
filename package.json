@@ -2,6 +2,9 @@
   "name": "Graduate",
   "version": "1.0.0",
   "main": "index.js",
+    "engines": {
+        "node": "12.13.0"
+    },
   "dependencies": {
     "ajv": "^6.10.2",
     "amdefine": "^1.0.1",
@@ -350,4 +353,6 @@
   "author": "",
   "license": "ISC",
   "description": ""
+
+
 }
