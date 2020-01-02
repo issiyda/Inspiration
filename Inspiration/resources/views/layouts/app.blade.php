@@ -81,8 +81,8 @@
 
                 <ul class ="nav-container">
                     <li class ="nav-item"><a href="#">Home</a></li>
-                    <li class ="nav-item"><a href="{{route('user.login')}}">Login</a></li>
-                    <li class ="nav-item"><a href="{{route('user.logout')}}">Logout</a></li>
+                    <li class ="nav-item"><a href="{{route('register')}}">Register</a></li>
+                    <li class ="nav-item"><a href="{{route('login')}}">Login</a></li>
                 </ul>
 
             </div>

@@ -81,13 +81,23 @@
 
 
             <div class="c-form-container-input">
-                <label class ="c-label" for="mail">email</label>
-                <input id="mail" class ="c-input" type="text" placeholder="（例）info@.com">
+                <label class ="c-label" for="email">email</label>
+                <input id="email" name="email" class ="c-input" type="text" placeholder="（例）info@.com">
+                @error('email')
+                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
             </div>
 
             <div class="c-form-container-input">
                 <label class ="c-label" for="pass">password</label>
-                <input id="pass" class ="c-input" type="password" placeholder="（例）Jkl439fu">
+                <input id="pass" name="pass" class ="c-input" type="password" placeholder="（例）Jkl439fu">
+                @error('pass')
+                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
             </div>
 
 

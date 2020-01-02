@@ -62,8 +62,8 @@
 
                     <ul class ="nav-container">
                         <li class ="nav-item"><a href="#">Home</a></li>
-                        <li class ="nav-item"><a href="{{route('user.login')}}">Login</a></li>
-                        <li class ="nav-item"><a href="{{route('user.logout')}}">Logout</a></li>
+                        <li class ="nav-item"><a href="{{route('register')}}">Register</a></li>
+                        <li class ="nav-item"><a href="{{route('login')}}">Login</a></li>
                     </ul>
 
                 </div>
@@ -164,41 +164,8 @@
 
 </main>
 
-<footer>
+@extends('layouts/footer')
 
-    <div class="l-footer">
-        <div class="l-footer-container">
-
-            <div class="l-footer-content">
-                <h3>Inspiration</h3>
-                <p><a href="">Top</a></p>
-                <p><a href="">Mypage</a></p>
-                <p><a href="">Idea一覧</a></p>
-            </div>
-            <div class="l-footer-content">
-                <h3>Inspiration</h3>
-                <p><a href="">Top</a></p>
-                <p><a href="">Mypage</a></p>
-                <p><a href="">Idea一覧</a></p>
-            </div>
-            <div class="l-footer-content">
-                <h3>Inspiration</h3>
-                <p><a href="">Top</a></p>
-                <p><a href="">Mypage</a></p>
-                <p><a href="">Idea一覧</a></p>
-            </div>
-
-        </div>
-
-        <div class="l-footer-bootm">
-            <div class="l-footer-copyRight">
-                Copyright © 2019 Inspiration. All rights reserved.
-            </div>
-        </div>
-
-    </div>
-
-</footer>
 <!-- script js-->
 <script src="js/script.js"></script>
 <!-- wow -->
