@@ -88,6 +88,14 @@
       <path value="$PROJECT_DIR$/Inspiration/vendor/facade/ignition" />
       <path value="$PROJECT_DIR$/Inspiration/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/Inspiration/vendor/erusev/parsedown" />
+      <path value="$PROJECT_DIR$/Inspiration/vendor/laravel/ui" />
+      <path value="$PROJECT_DIR$/Inspiration/vendor/laravel/helpers" />
     </include_path>
+  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings load_method="CUSTOM_LOADER" custom_loader_path="$PROJECT_DIR$/Inspiration/vendor/autoload.php" />
+    </phpunit_settings>
   </component>
 </project>

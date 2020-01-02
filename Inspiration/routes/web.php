@@ -11,6 +11,22 @@
 |
 */
 
-Route::get('/{any}', function () {
+//Route::get('/{any}', function () {
+//    return view('home');
+//})->where('any', '.*');
+
+//Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/', function () {
     return view('home');
-})->where('any', '.*');
+});
+//    ->middleware('auth');
+
+Route::get('/login/remember', 'Auth\RememberPasswordController@showPassRememberForm')->name('password.request');
+
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('user.login');
+Route::post('/login', 'Auth\LoginController@login')->name('login');
+Route::post('/logout', 'Auth\LoginController@logout')->name('user.logout');
+
