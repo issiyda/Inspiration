@@ -14,7 +14,6 @@
     <!--jquery-->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
     <!--vue使うための記述-->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- wow -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet"
@@ -25,20 +24,21 @@
 <body>
 <div id="app">
 
-<NavBarComponent></NavBarComponent>
+<nav-bar-component></nav-bar-component>
 
 <router-view></router-view>
 
-<SideBarComponent></SideBarComponent>
+<side-bar-component></side-bar-component>
 
-<FooterComponent></FooterComponent>
+<footer-component></footer-component>
 
-    <!-- script js-->
+</div>
+
+<!-- script js-->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- wow -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
 
 
-</div>
 </body>
 </html>

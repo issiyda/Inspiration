@@ -12,4 +12,9 @@ class InspirationController extends Controller
     {
         return view('layouts.index');
     }
+
+    public function post()
+    {
+        return view('post');
+    }
 }
