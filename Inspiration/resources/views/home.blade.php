@@ -12,6 +12,9 @@
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <!--jquery-->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+    <!--vue使うための記述-->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
     <!-- wow -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet"
           type="text/css" media="all">
@@ -19,6 +22,9 @@
 </head>
 
 <body>
+<div id="app">
+
+
 
 
 <main class="main">
@@ -39,6 +45,7 @@
 {{--                        <li class ="nav-item"><a href="#">Login</a></li>--}}
 {{--                    </ul>--}}
 {{--                </div>--}}
+
 
                 <div class="nav-trigger js-toggle-sp-menu">
                     <span></span>
@@ -172,6 +179,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
 
 
-
+</div>
 </body>
 </html>

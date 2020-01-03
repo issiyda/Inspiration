@@ -77,12 +77,14 @@
 
     <div class="c-form">
 
-        <form class="c-form-container">
-
-
+        <form method="post" class="c-form-container">
+            @csrf
             <div class="c-form-container-input">
                 <label class ="c-label" for="email">email</label>
-                <input id="email" name="email" class ="c-input" type="text" placeholder="（例）info@.com">
+                <input id="email" value="{{old('email')}}" name="email" class ="c-input" type="text" placeholder="（例）info@.com">
+{{--                <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $errors->first('email') }}</strong>--}}
+{{--                                    </span>--}}
                 @error('email')
                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -92,8 +94,14 @@
 
             <div class="c-form-container-input">
                 <label class ="c-label" for="pass">password</label>
-                <input id="pass" name="pass" class ="c-input" type="password" placeholder="（例）Jkl439fu">
-                @error('pass')
+                <input id="pass" value="{{old('password')}}" name="password" class ="c-input" type="password" placeholder="（例）Jkl439fu">
+{{--                @error('pass')--}}
+{{--                <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $errors->first('pass') }}</strong>--}}
+{{--                                    </span>--}}
+{{--                @enderror--}}
+
+                @error('password')
                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
