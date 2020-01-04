@@ -53,7 +53,10 @@
 
 <script>
     export default {
-        name: "MypageComponent"
+        name: "MypageComponent",
+        mounted() {
+            console.log('MypageComponent mounted.')
+        }
     }
 </script>
 

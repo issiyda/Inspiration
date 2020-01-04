@@ -38,7 +38,10 @@
 
 <script>
     export default {
-        name: "FooterComponent"
+        name: "FooterComponent",
+        mounted() {
+            console.log('FooterComponent mounted.')
+        }
     }
 </script>
 

@@ -5,7 +5,7 @@
         <div class="profile">
             <h2 class="f-h2">アイデア投稿</h2>
 
-            <form class="profile-container">
+            <form method="post" class="profile-container">
 
 
                 <div class="profile-container-input">
@@ -71,7 +71,9 @@
 
 
 
-                    <input type="submit" class="c-button" value="投稿">
+                    <div class="c-button">
+                    <router-link to="postConfirm">投稿</router-link>
+                    </div>
                 </div>
             </form>
         </div>
@@ -82,7 +84,11 @@
 
 <script>
     export default {
-        name: "PostIdeaComponent"
+        name: "PostIdeaComponent",
+
+        mounted() {
+            console.log('PostIdeaComponent mounted.')
+        }
     }
 </script>
 

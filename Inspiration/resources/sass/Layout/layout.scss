@@ -96,14 +96,13 @@
         align-items: center;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-around;
   }
 
   &-item {
     font-size: $font-size_l;
     font-weight: bold !important;
     list-style: none;
-    padding:5%;
 
 
     a {

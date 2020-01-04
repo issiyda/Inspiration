@@ -23,7 +23,7 @@
                 <li class ="nav-item"><router-link to="/mypage">Mypage</router-link></li>
                 <li class ="nav-item"><router-link to="/post">Post</router-link></li>
                 <li class ="nav-item"><router-link to="/profile">Profile</router-link></li>
-                <li class ="nav-item"><router-link to="/logout">Logout</router-link></li>
+<!--                <li class ="nav-item"><a href="{{route('logout')}}"></a></li>-->
             </ul>
 
 <!--            <ul class ="nav-container">-->
@@ -48,7 +48,12 @@
 
 <script>
     export default {
-        name: "NavBarComponent"
+        name: "NavBarComponent",
+
+        mounted() {
+            console.log('NavbarComponent mounted.')
+        }
+
     }
 </script>
 

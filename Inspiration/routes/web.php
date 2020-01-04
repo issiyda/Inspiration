@@ -39,11 +39,12 @@
 ///**
 // * ログアウト実行
 // */
-//Route::post('/logout', 'Auth\LoginController@logout')->name('user.logout');
-//
+//Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Auth::routes();
+
 
 Route::get('/mypage', "InspirationController@mypage")->name('mypage');
 

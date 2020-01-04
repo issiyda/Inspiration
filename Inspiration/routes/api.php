@@ -20,4 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/mypage','InspirationController@mypage');
 
-Route::get('/post','InspirationController@post');
+//Route::get('/post','InspirationController@post');
