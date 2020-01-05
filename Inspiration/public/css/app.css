@@ -511,6 +511,7 @@ input[type=radio]:checked + .c-radio {
   height: 24px;
   margin: 5% auto;
   padding: 1%;
+  resize: vertical;
   width: 55%;
 }
 
@@ -1492,6 +1493,7 @@ input[type=radio]:checked + .c-radio {
   height: 24px;
   margin: 5% auto;
   padding: 1%;
+  resize: vertical;
   width: 55%;
 }
 
@@ -1944,6 +1946,10 @@ a {
   display: block;
   font-size: 24px;
   margin: 3%;
+}
+
+.profile-container-textarea {
+  height: 100%;
 }
 
 .profile-container-img {

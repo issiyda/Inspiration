@@ -18,8 +18,8 @@ class CreateIdeasTable extends Migration
             $table->integer('user_id');
             $table->integer('category_id');
             $table->string('name');
-            $table->string('overflow');
-            $table->string('content');
+            $table->text('overflow');
+            $table->text('content');
             $table->integer('price');
             $table->boolean('bought_flag');
             $table->boolean('delete_flag');

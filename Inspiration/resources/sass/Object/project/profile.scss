@@ -29,7 +29,13 @@
         font-size: $font-size_xl;
         margin:3%;
       }
+
+
     }
+
+      &-textarea{
+          height:100%;
+      }
 
     &-img{
       display: flex;

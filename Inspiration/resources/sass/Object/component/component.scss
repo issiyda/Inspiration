@@ -199,7 +199,8 @@ input[type="radio"] {
   height:$font-size_xl;
   margin:5% auto;
   padding:1%;
-  width:55%;
+    resize:vertical;
+    width:55%;
 
   @include mq{
     font-size:$font-size_m;

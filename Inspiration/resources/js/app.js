@@ -6,10 +6,10 @@
 
 require('./components');
 window.Vue = require('vue');
+window.axios = require('axios');
 import router from './router';
 import VueRouter from 'vue-router'
-
-
+import store from './store'
 
 new Vue({
     el: '#app',
@@ -36,5 +36,6 @@ Vue.use(VueRouter);
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    store
 });

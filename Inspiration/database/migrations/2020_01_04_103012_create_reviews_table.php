@@ -17,7 +17,7 @@ class CreateReviewsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->integer('idea_id');
-            $table->string('review_content');
+            $table->text('review_content');
             $table->integer('star');
             $table->timestamps();
         });

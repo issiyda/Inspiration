@@ -41,6 +41,9 @@
 // */
 //Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
+Route::get('/users','UserController@getUserData');
+
+
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Auth::routes();
