@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 /**
- * プロフィール画面の編集用
+ * プロフィールデータの編集用
  */
 Route::patch('/setting/{id}',function($id,Request $request){
 
@@ -39,11 +40,11 @@ Route::post('/fileupload',function(){
 
     request()->file->storeAs('public/',$file_name);
 
-//    $user = App\User::find($id);
-//
-//    $user->update(['img' =>'/storage/'.$file_name]);
-//
-//    return $user;
+    $user = App\User::find(2);
+
+    $user->update(['img' =>'../../../public/storage/'.$file_name]);
+
+    return $user;
 });
 
 

@@ -5146,8 +5146,10 @@ __webpack_require__.r(__webpack_exports__);
       isEmailEdit: false,
       isPasswordEdit: false,
       isIntroductionEdit: false,
-      selectedImg: false,
-      fileInfo: ""
+      selectedImg: true,
+      fileInfo: "",
+      img: "",
+      user: ""
     };
   },
   methods: {
@@ -5163,7 +5165,7 @@ __webpack_require__.r(__webpack_exports__);
     uploadImg: function uploadImg() {},
     selectImg: function selectImg() {
       if (this.$store.state.users.img === null) {
-        this.selectedImg = true;
+        this.selectedImg = false;
       }
     },
     fileSelected: function fileSelected(event) {
@@ -5171,33 +5173,37 @@ __webpack_require__.r(__webpack_exports__);
       console.log(event);
     },
     fileUpload: function fileUpload() {
+      var _this = this;
+
       var formData = new FormData();
       formData.append('file', this.fileInfo);
       axios.post('/api/fileupload', formData).then(function (response) {
         console.log(response);
+        _this.user = response.data;
+        console.log(error);
       });
     },
     updateEmail: function updateEmail(id, email) {
-      var _this = this;
+      var _this2 = this;
 
       axios.patch('/api/setting/' + id, {
         id: id,
         email: email
       }).then(function (response) {
-        _this.isEmailEdit = false;
+        _this2.isEmailEdit = false;
         console.log(response);
       })["catch"](function (error) {
         console.log(error);
       });
     },
     updateName: function updateName(id, name) {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.patch('/api/setting/' + id, {
         id: id,
         name: name
       }).then(function (response) {
-        _this2.isNameEdit = false;
+        _this3.isNameEdit = false;
         console.log(response);
       })["catch"](function (error) {
         console.log(error);
@@ -5214,13 +5220,13 @@ __webpack_require__.r(__webpack_exports__);
     // },
     //
     updateIntroduction: function updateIntroduction(id, introduction) {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.patch('/api/setting/' + id, {
         id: id,
         introduction: introduction
       }).then(function (response) {
-        _this3.isIntroductionEdit = false;
+        _this4.isIntroductionEdit = false;
         console.log(response);
       })["catch"](function (error) {
         console.log(error);
@@ -5228,7 +5234,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    this.$store.dispatch('getUsers'); // this.$store.state.users.password
+    this.$store.dispatch('getUsers');
+    this.getImg(); // this.$store.state.users.password
     // がnullやったら白抜き
     // 値アレば$store.state.users.password
   },
@@ -6489,11 +6496,11 @@ var render = function() {
               _c("label", [
                 _vm.selectedImg
                   ? _c("img", {
-                      attrs: { src: "$store.state.users.img", alt: "" }
+                      attrs: { src: this.$store.state.users.img, alt: "" }
                     })
                   : _c("img", {
                       attrs: {
-                        src: __webpack_require__(/*! ../../../public/img/staff2.jpeg */ "./public/img/staff2.jpeg"),
+                        src: __webpack_require__(/*! ../../../public/storage/ENNLkLbUcAAeqUc.jpeg */ "./storage/app/public/ENNLkLbUcAAeqUc.jpeg"),
                         alt: ""
                       }
                     }),
@@ -6505,7 +6512,13 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c("button", { on: { click: _vm.fileUpload } })
+              _c("button", {
+                on: {
+                  click: function($event) {
+                    return _vm.fileUpload(_vm.$store.state.users.id)
+                  }
+                }
+              })
             ])
           ]),
           _vm._v(" "),
@@ -20290,17 +20303,6 @@ module.exports = g;
 
 /***/ }),
 
-/***/ "./public/img/staff2.jpeg":
-/*!********************************!*\
-  !*** ./public/img/staff2.jpeg ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/staff2.jpeg?f9d87d0a32acbca16814208abb0e5edb";
-
-/***/ }),
-
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -21421,6 +21423,17 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./storage/app/public/ENNLkLbUcAAeqUc.jpeg":
+/*!*************************************************!*\
+  !*** ./storage/app/public/ENNLkLbUcAAeqUc.jpeg ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/ENNLkLbUcAAeqUc.jpeg?66cd0d8216b03e5bdda8797acac5ce56";
 
 /***/ }),
 

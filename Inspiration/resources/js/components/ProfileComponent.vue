@@ -16,12 +16,12 @@
                         </div>
                         <div class="profile-container-img-right">
                             <label>
-                                <img v-if="selectedImg" src="$store.state.users.img" alt="">
-                                <img v-else src="../../../public/img/staff2.jpeg" alt="">
+                                <img v-if="selectedImg" :src="this.$store.state.users.img" alt="">
+                                <img v-else src="../../../public/storage/ENNLkLbUcAAeqUc.jpeg" alt="">
                                 <input id="img" @change="fileSelected" class ="c-input profile-container-img-none" type="file" />
                                 <!-- hoverしたら画像をアップロードの文字が浮き上がって画像が薄暗く -->
                             </label>
-                            <button @click="fileUpload"></button>
+                            <button @click="fileUpload($store.state.users.id)"></button>
 
                         </div>
                     </div>
@@ -75,8 +75,10 @@
                 isEmailEdit: false,
                 isPasswordEdit: false,
                 isIntroductionEdit: false,
-                selectedImg: false,
+                selectedImg: true,
                 fileInfo:"",
+                img:"",
+                user:"",
 
 
         }
@@ -96,8 +98,8 @@
             },
 
             selectImg(){
-                if(this.$store.state.users.img ===null){
-                    this.selectedImg = true;
+                if(this.$store.state.users.img === null){
+                    this.selectedImg = false;
                 }
             },
 
@@ -113,8 +115,10 @@
                 formData.append('file',this.fileInfo);
 
                 axios.post('/api/fileupload',formData)
-                    .then(response =>{
-                    console.log(response)
+                    .then((response) =>{
+                    console.log(response);
+                        this.user = response.data;
+                    console.log(error);
                 });
 
             },
@@ -163,6 +167,7 @@
 
         mounted() {
             this.$store.dispatch('getUsers');
+            this.getImg();
 
             // this.$store.state.users.password
             // がnullやったら白抜き
@@ -173,7 +178,10 @@
 
         created() {
             this.selectImg();
-        }
+        },
+
+
+
     }
 </script>
 
