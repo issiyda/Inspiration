@@ -69,8 +69,16 @@
 
                     <ul class ="nav-container">
                         <li class ="nav-item"><a href="#">Home</a></li>
-                        <li class ="nav-item"><a href="{{route('register')}}">Register</a></li>
-                        <li class ="nav-item"><a href="{{route('login')}}">Login</a></li>
+
+{{--                        ログインしてる時--}}
+                        @auth
+                            <li class ="nav-item"><a href="{{route('login')}}">Mypage</a></li>
+                        @endauth
+{{--                        ログインしていない時--}}
+                        @guest
+                            <li class ="nav-item"><a href="{{route('register')}}">Register</a></li>
+                            <li class ="nav-item"><a href="{{route('login')}}">Login</a></li>
+                        @endguest
                     </ul>
 
                 </div>

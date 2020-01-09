@@ -10,6 +10,15 @@ export default new Vuex.Store({
         users:{}
 
     },
+
+    //getters:コンポーネントでいうcomputed的なもの
+    getters:{
+        //messageを使用するgetter
+        users(state) {
+            return state.users;
+        }
+    },
+
     mutations: {
         setUsers: function(state,users){
             state.users = users

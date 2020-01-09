@@ -6,7 +6,6 @@
 
 
             <h2 class="f-h2">プロフィール編集</h2>
-
             <form class="profile-container">
 
                 <div class="profile-container-input">
@@ -16,8 +15,8 @@
                         </div>
                         <div class="profile-container-img-right">
                             <label>
-                                <img v-if="selectedImg" :src="this.$store.state.users.img" alt="">
-                                <img v-else src="../../../public/storage/ENNLkLbUcAAeqUc.jpeg" alt="">
+                                <img v-if="selectedImg" src="userimg.img"  alt="">
+                                <img v-else src="../../../public/storage/スクリーンショット 2019-12-31 11.51.03.png" alt="">
                                 <input id="img" @change="fileSelected" class ="c-input profile-container-img-none" type="file" />
                                 <!-- hoverしたら画像をアップロードの文字が浮き上がって画像が薄暗く -->
                             </label>
@@ -75,13 +74,13 @@
                 isEmailEdit: false,
                 isPasswordEdit: false,
                 isIntroductionEdit: false,
-                selectedImg: true,
                 fileInfo:"",
-                img:"",
-                user:"",
+                user:[],
+                selectedImg: false,
 
 
-        }
+
+            }
 
         },
 
@@ -93,16 +92,13 @@
                 this.$router.go({path: this.$router.currentRoute.path, force: true});
             },
 
-            uploadImg: function(){
 
+
+
+
+            imgJudge:function(){
+                        this.selectedImg = true;
             },
-
-            selectImg(){
-                if(this.$store.state.users.img === null){
-                    this.selectedImg = false;
-                }
-            },
-
 
             fileSelected(event){
                     this.fileInfo = event.target.files[0];
@@ -118,6 +114,8 @@
                     .then((response) =>{
                     console.log(response);
                         this.user = response.data;
+                        if(response.data.img) this.selectedImg = true;
+                    }).catch((error) =>{
                     console.log(error);
                 });
 
@@ -166,8 +164,7 @@
         },
 
         mounted() {
-            this.$store.dispatch('getUsers');
-            this.getImg();
+            this.user = this.$store.dispatch('getUsers');
 
             // this.$store.state.users.password
             // がnullやったら白抜き
@@ -177,8 +174,17 @@
         },
 
         created() {
-            this.selectImg();
+            this.imgJudge()
+            this.user = $store.state.users;
         },
+
+        computed: {
+            userimg:function() {
+                return this.$store.state.users
+            }
+        },
+
+
 
 
 

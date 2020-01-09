@@ -52,6 +52,7 @@
 
         mounted() {
             console.log('NavbarComponent mounted.')
+            this.user = this.$store.dispatch('getUsers');
         }
 
     }

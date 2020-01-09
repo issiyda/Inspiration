@@ -17,7 +17,7 @@
 
                         <h4 class ="f-h4">タイトル</h4>
                         <div class="ic-img">
-                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">
+<!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
                         </div>
                         <div class="ic-review">
                             <span class ="ic-span">評価</span>
@@ -48,7 +48,7 @@
 
                         <h4 class ="f-h4">タイトル</h4>
                         <div class="ic-img">
-                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">
+<!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
                         </div>
                         <div class="ic-review">
                             <span class ="ic-span">評価</span>
@@ -79,7 +79,7 @@
 
                         <h4 class ="f-h4">タイトル</h4>
                         <div class="ic-img">
-                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">
+<!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
                         </div>
                         <div class="ic-review">
                             <span class ="ic-span">評価</span>
@@ -104,7 +104,7 @@
 
                         <h4 class ="f-h4">タイトル</h4>
                         <div class="ic-img">
-                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">
+<!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
                         </div>
                         <div class="ic-review">
                             <span class ="ic-span">評価</span>
@@ -129,7 +129,7 @@
 
                         <h4 class ="f-h4">タイトル</h4>
                         <div class="ic-img">
-                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">
+<!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
                         </div>
                         <div class="ic-review">
                             <span class ="ic-span">評価</span>
@@ -154,7 +154,7 @@
 
                         <h4 class ="f-h4">タイトル</h4>
                         <div class="ic-img">
-                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">
+<!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
                         </div>
                         <div class="ic-review">
                             <span class ="ic-span">評価</span>
@@ -179,7 +179,7 @@
 
                         <h4 class ="f-h4">タイトル</h4>
                         <div class="ic-img">
-                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">
+<!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
                         </div>
                         <div class="ic-review">
                             <span class ="ic-span">評価</span>
@@ -204,7 +204,7 @@
 
                         <h4 class ="f-h4">タイトル</h4>
                         <div class="ic-img">
-                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">
+<!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
                         </div>
                         <div class="ic-review">
                             <span class ="ic-span">評価</span>
@@ -229,7 +229,7 @@
 
                         <h4 class ="f-h4">タイトル</h4>
                         <div class="ic-img">
-                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">
+<!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
                         </div>
                         <div class="ic-review">
                             <span class ="ic-span">評価</span>
@@ -254,7 +254,7 @@
 
                         <h4 class ="f-h4">タイトル</h4>
                         <div class="ic-img">
-                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">
+<!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
                         </div>
                         <div class="ic-review">
                             <span class ="ic-span">評価</span>
@@ -279,7 +279,7 @@
 
                         <h4 class ="f-h4">タイトル</h4>
                         <div class="ic-img">
-                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">
+<!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
                         </div>
                         <div class="ic-review">
                             <span class ="ic-span">評価</span>
@@ -307,33 +307,7 @@
 
                         <h4 class ="f-h4">タイトル</h4>
                         <div class="ic-img">
-                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">
-                        </div>
-                        <div class="ic-review">
-                            <span class ="ic-span">評価</span>
-                            <i class="fas fa-star ic-star"></i>
-                            <i class="fas fa-star ic-star"></i>
-                            <i class="fas fa-star ic-star"></i>
-                            <i class="fas fa-star ic-star"></i>
-                            <i class="fas fa-star ic-star"></i>
-                        </div>
-                        <div class="ic-desc">
-                            <div class ="ic-desc-overflow">概要</div>
-                            サンプルサンプル サンプルサンプル サンプルサンプル サンプルサンプル
-                        </div>
-
-                        <div class="ic-button-one-container">
-                            <input type="submit" class="c-mini-button" value="詳細">
-                        </div>
-                    </a>
-                </div>
-
-                <div class="ic-card">
-                    <a class ="ic-a" href="#">
-
-                        <h4 class ="f-h4">タイトル</h4>
-                        <div class="ic-img">
-                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">
+<!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
                         </div>
                         <div class="ic-review">
                             <span class ="ic-span">評価</span>
@@ -359,7 +333,7 @@
 
                         <h4 class ="f-h4">タイトル</h4>
                         <div class="ic-img">
-                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">
+<!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
                         </div>
                         <div class="ic-review">
                             <span class ="ic-span">評価</span>
@@ -385,7 +359,33 @@
 
                         <h4 class ="f-h4">タイトル</h4>
                         <div class="ic-img">
-                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">
+<!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
+                        </div>
+                        <div class="ic-review">
+                            <span class ="ic-span">評価</span>
+                            <i class="fas fa-star ic-star"></i>
+                            <i class="fas fa-star ic-star"></i>
+                            <i class="fas fa-star ic-star"></i>
+                            <i class="fas fa-star ic-star"></i>
+                            <i class="fas fa-star ic-star"></i>
+                        </div>
+                        <div class="ic-desc">
+                            <div class ="ic-desc-overflow">概要</div>
+                            サンプルサンプル サンプルサンプル サンプルサンプル サンプルサンプル
+                        </div>
+
+                        <div class="ic-button-one-container">
+                            <input type="submit" class="c-mini-button" value="詳細">
+                        </div>
+                    </a>
+                </div>
+
+                <div class="ic-card">
+                    <a class ="ic-a" href="#">
+
+                        <h4 class ="f-h4">タイトル</h4>
+                        <div class="ic-img">
+<!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
                         </div>
                         <div class="ic-review">
                             <span class ="ic-span">評価</span>

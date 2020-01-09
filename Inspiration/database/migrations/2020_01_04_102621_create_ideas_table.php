@@ -16,13 +16,14 @@ class CreateIdeasTable extends Migration
         Schema::create('ideas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
-            $table->integer('category_id');
-            $table->string('name');
+            $table->integer('category_id')->nullable();
+            $table->string('img')->nullable();
+            $table->string('title');
             $table->text('overflow');
             $table->text('content');
             $table->integer('price');
-            $table->boolean('bought_flag');
-            $table->boolean('delete_flag');
+            $table->boolean('bought_flag')->default(0);
+            $table->boolean('delete_flag')->default(0);
             $table->timestamps();
         });
     }

@@ -15,39 +15,40 @@
 
 
                 <label for="ideaName" class="c-label">アイデア名</label>
-                <div id="ideaName" class="confirm-text">みんなで早起き</div>
+                <div id="ideaName"  class="confirm-text">{{$route.params.title}}</div>
 
                 <label for="category" class="c-label">カテゴリー名</label>
-                <div id="category" class="confirm-text">掲示板</div>
+                <div id="category" class="confirm-text">{{categoryName}}</div>
+
+                <label for="category" class="c-label">お値段</label>
+                <div id="prica" class="confirm-text">{{$route.params.price}} </div>
 
                 <label for="description" class="c-label">概要</label>
                 <div id="description" class="confirm-text">
-                    みんなで早起きをするためのグループメンバーを今回募集します。
+                    {{$route.params.overflow}}
                 </div>
+
 
 
                 <label for="contents" class="c-label">内容</label>
                 <div id="contents" class="confirm-text">
-                    みんなで早起きをするためのグループメンバーを今回募集します。
-
-                    チームメンバーは10人募集します。
-                    朝6時から勤務時間前までみんなで勉強します。
-                    非常にストイックなメンバーが集まると予想されるため
-                    一日でも参加報告が遅れた場合強制退会となります。
-                    ご了承くださいませ。
-                    aaaaaaaaaaaaaaaaaaaaaaaa
-                    aaaaaaaaaaaaaaaaaaaaaa
-                    aaaaaaaaaaaaaaaaaaaaa
+                    {{$route.params.content}}
                 </div>
-
                 <div class="confirm-attention">
                     <p>投稿を編集する場合は</p>
                     <br>
                     <p>下記の編集ボタンを押してください</p>
                 </div>
 
-                <div class ="c-button confirm-post">
-                <router-link to="post">編集する</router-link>
+                <div class ="c-button confirm-post" @click="editIdea()">
+                <router-link :to="{name:'post',params:{
+                     img: this.img,
+                     title:this.title,
+                     category_id:this.category_id,
+                     overflow:this.overflow,
+                     content:this.content,
+                     price:this.price,
+                     }}">編集する</router-link>
                 </div>
 
 
@@ -61,7 +62,7 @@
 
 
 
-                <div class ="c-button confirm-post" >
+                <div class ="c-button confirm-post" @click="postIdea(userId)">
                 <router-link to="postComplete">投稿する</router-link>
                 </div>
 
@@ -74,7 +75,93 @@
 
 <script>
     export default {
-        name: "PostIdeaComponent"
+        name: "PostConfirmComponent",
+
+        data:function(){
+            return{
+                img:'',
+                title:'',
+                category_id:'',
+                price:"",
+                overflow:'',
+                content:'',
+            }
+        },
+
+
+        mounted() {
+            console.log('ConfirmIdeaComponent mounted.');
+            this.user = this.$store.dispatch('getUsers');
+            this.title = this.$route.params.title;
+            this.img = this.$route.params.img;
+            this.category_id = this.$route.params.category_id;
+            this.price = this.$route.params.price;
+            this.overflow = this.$route.params.overflow;
+            this.content = this.$route.params.content;
+
+        },
+
+        methods: {
+
+            editIdea: function(){
+
+            },
+
+
+
+            postIdea: function(userId) {
+                axios.post('/api/post', {
+                    img: this.img,
+                    title: this.title,
+                    category_id: this.category_id,
+                    overflow: this.overflow,
+                    content: this.content,
+                    price: this.price,
+                    user_id: userId,
+                })
+                    .then((response) => {
+                        console.log(response);
+                        //投稿した後は詳細に飛びたい
+                    }).catch((error) => {
+                    console.log(error);
+                });
+            },
+        },
+
+
+
+
+
+        computed: {
+            userId() {
+                return this.$store.state.users.id
+            },
+
+            /**
+             * 数が増えたときにどうするか考えないと
+             *
+             * @returns {string}
+             */
+            categoryName(){
+                if(this.$route.params.category_id == "1" ){
+                    return 'マッチング'
+
+                }else if(this.$route.params.category_id == "2") {
+                    return '掲示板'
+                }
+
+                else if(this.$route.params.category_id == "3") {
+                    return 'SNS'
+                }else if(this.$route.params.category_id == "4") {
+                    return 'ECサイト'
+
+                } else if(this.$route.params.category_id == "5"){
+                    return '情報発信'
+                } else{
+                    return 'その他'
+                }
+            },
+        },
     }
 </script>
 
