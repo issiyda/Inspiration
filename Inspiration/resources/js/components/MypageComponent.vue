@@ -54,9 +54,41 @@
 <script>
     export default {
         name: "MypageComponent",
+
+        data:function(){
+            return{
+                Ideas:[],
+
+            }
+        },
+
+        methods:{
+
+            getUserIdeas:function(){
+                axios.get('/api/mypage/')
+                    .then((response) => {
+                        this.Ideas = response.data;
+                        console.log(response);
+                    }).catch((error)=>{
+                        console.log(error);
+                    });
+            }
+        },
+
+        created(){
+            this.getUserIdeas();
+        },
         mounted() {
             console.log('MypageComponent mounted.')
-        }
+
+        },
+
+        computed:{
+
+        },
+
+
+
     }
 </script>
 

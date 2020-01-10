@@ -2416,9 +2416,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MypageComponent",
+  data: function data() {
+    return {
+      Ideas: []
+    };
+  },
+  methods: {
+    getUserIdeas: function getUserIdeas() {
+      var _this = this;
+
+      axios.get('/api/mypage/').then(function (response) {
+        _this.Ideas = response.data;
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  },
+  created: function created() {
+    this.getUserIdeas();
+  },
   mounted: function mounted() {
     console.log('MypageComponent mounted.');
-  }
+  },
+  computed: {}
 });
 
 /***/ }),
@@ -2455,8 +2476,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "headerBeforeComponent"
+  name: "postCompletedComponent"
 });
 
 /***/ }),
@@ -4479,9 +4538,52 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("main", [
+    _c("h2", { staticClass: "f-h2" }, [_vm._v("投稿完了")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "c-form" }, [
+      _c("div", { staticClass: "c-form-container" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "c-button completed-button column-button" },
+          [
+            _c("router-link", { attrs: { to: "/mypage" } }, [
+              _vm._v("Mypageへ")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "c-button completed-button column-button" },
+          [_c("router-link", { attrs: { to: "/post" } }, [_vm._v("再投稿")])],
+          1
+        )
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "c-form-text-attention" }, [
+      _c("p", [_vm._v("〜投稿完了〜")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("新規投稿がされました")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("新しいアイデアでより一層世界を盛り上げましょう")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Twitterであなたのアイデアに")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("ついてもっと知ってもらう")])
+    ])
+  }
+]
 render._withStripped = true
 
 

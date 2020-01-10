@@ -14,6 +14,16 @@ class InspirationController extends Controller
         return view('layouts.index');
     }
 
+    public function myself()
+    {
+
+        $idea = Idea::get();
+
+        return response()->json([
+            'idea' =>$idea
+        ],200);
+    }
+
     public function confirm()
     {
 

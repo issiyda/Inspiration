@@ -1150,6 +1150,7 @@ a {
   display: -webkit-box;
   display: flex;
   height: 100%;
+  margin: 0 0 0  75%;
   position: fixed;
   width: 100%;
 }
@@ -3325,5 +3326,9 @@ a {
 
 .passReminder-input {
   margin-bottom: 5%;
+}
+
+.completed-button {
+  margin: 10% auto;
 }
 

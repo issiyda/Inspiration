@@ -19,9 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 /**
- * Mypage表示ルーティング
+ * 自分の投稿表示ルーティング
  */
-Route::get('/mypage','InspirationController@mypage');
+Route::get('/mypage/','InspirationController@myself');
 
 
 /**
