@@ -9,13 +9,13 @@
 
             <h3 class ="f-h3">購入したアイデア</h3>
 
-            <div class="ic">
+            <div class="ic" >
 
 
-                <div class="ic-card">
+                <div class="ic-card" v-for="myIdea in myIdeas">
                     <a class ="ic-a" href="#">
 
-                        <h4 class ="f-h4">タイトル</h4>
+                        <h4 class ="f-h4">{{myIdea.title}}</h4>
                         <div class="ic-img">
 <!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
                         </div>
@@ -30,8 +30,7 @@
                         <div class="ic-desc">
                             <div class ="ic-desc-overflow">概要</div>
                             <div class="ic-desc-text">
-                                サンプルサンプル サンプルサンプル サンプルサンプル サンプルサンプル
-                                サンプルサンプル サンプルサンプル サンプルサンプル サンプルサンプル
+                               {{myIdea.overflow}}
                             </div>
                         </div>
                     </a>
@@ -52,38 +51,45 @@
 </template>
 
 <script>
+
+    import { mapState } from 'vuex'
+
     export default {
         name: "MypageComponent",
 
         data:function(){
             return{
-                Ideas:[],
+                // user:{},
+                // buiedIdea: {},
+                // myIdea: {},
+                // favIdea :{} ,
+                // review : {}
 
-            }
+                }
+
         },
 
         methods:{
 
-            getUserIdeas:function(){
-                axios.get('/api/mypage/')
-                    .then((response) => {
-                        this.Ideas = response.data;
-                        console.log(response);
-                    }).catch((error)=>{
-                        console.log(error);
-                    });
-            }
+
         },
 
         created(){
-            this.getUserIdeas();
+            console.log('MypageComponent mounted.');
+            this.ideas = this.$store.dispatch('getUserIdeas');
+            this.user = this.$store.dispatch('getUsers');
+
         },
         mounted() {
-            console.log('MypageComponent mounted.')
+
 
         },
 
         computed:{
+
+             myIdeas(){
+                 return this.$store.state.ideas.myIdea;
+             }
 
         },
 

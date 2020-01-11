@@ -86,7 +86,7 @@
                      price:this.price,
                      overflow:this.overflow,
                      content:this.content,
-                     }}" >投稿</router-link>
+                     }}" >投稿確認</router-link>
                     </div>
                 </div>
             </form>
@@ -97,6 +97,8 @@
 </template>
 
 <script>
+    import {mapState} from "vuex";
+
     export default {
         name: "PostIdeaComponent",
 

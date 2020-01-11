@@ -2361,6 +2361,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2413,33 +2414,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MypageComponent",
   data: function data() {
-    return {
-      Ideas: []
+    return {// user:{},
+      // buiedIdea: {},
+      // myIdea: {},
+      // favIdea :{} ,
+      // review : {}
     };
   },
-  methods: {
-    getUserIdeas: function getUserIdeas() {
-      var _this = this;
-
-      axios.get('/api/mypage/').then(function (response) {
-        _this.Ideas = response.data;
-        console.log(response);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    }
-  },
+  methods: {},
   created: function created() {
-    this.getUserIdeas();
-  },
-  mounted: function mounted() {
     console.log('MypageComponent mounted.');
+    this.ideas = this.$store.dispatch('getUserIdeas');
+    this.user = this.$store.dispatch('getUsers');
   },
-  computed: {}
+  mounted: function mounted() {},
+  computed: {
+    myIdeas: function myIdeas() {
+      return this.$store.state.ideas.myIdea;
+    }
+  }
 });
 
 /***/ }),
@@ -2548,6 +2545,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2646,6 +2644,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostIdeaComponent",
   data: function data() {
@@ -4440,39 +4439,23 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("main", { staticClass: "main" }, [
-      _c("div", { staticClass: "p-mypage" }, [
-        _c("h2", { staticClass: "f-h2" }, [_vm._v("Myページ")]),
-        _vm._v(" "),
-        _c("h3", { staticClass: "f-h3" }, [_vm._v("購入したアイデア")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "ic" }, [
-          _c("div", { staticClass: "ic-card" }, [
+  return _c("main", { staticClass: "main" }, [
+    _c("div", { staticClass: "p-mypage" }, [
+      _c("h2", { staticClass: "f-h2" }, [_vm._v("Myページ")]),
+      _vm._v(" "),
+      _c("h3", { staticClass: "f-h3" }, [_vm._v("購入したアイデア")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "ic" },
+        _vm._l(_vm.myIdeas, function(myIdea) {
+          return _c("div", { staticClass: "ic-card" }, [
             _c("a", { staticClass: "ic-a", attrs: { href: "#" } }, [
-              _c("h4", { staticClass: "f-h4" }, [_vm._v("タイトル")]),
+              _c("h4", { staticClass: "f-h4" }, [_vm._v(_vm._s(myIdea.title))]),
               _vm._v(" "),
               _c("div", { staticClass: "ic-img" }),
               _vm._v(" "),
-              _c("div", { staticClass: "ic-review" }, [
-                _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
-                _vm._v(" "),
-                _c("i", { staticClass: "fas fa-star ic-star" }),
-                _vm._v(" "),
-                _c("i", { staticClass: "fas fa-star ic-star" }),
-                _vm._v(" "),
-                _c("i", { staticClass: "fas fa-star ic-star" }),
-                _vm._v(" "),
-                _c("i", { staticClass: "fas fa-star ic-star" }),
-                _vm._v(" "),
-                _c("i", { staticClass: "fas fa-star ic-star" })
-              ]),
+              _vm._m(0, true),
               _vm._v(" "),
               _c("div", { staticClass: "ic-desc" }, [
                 _c("div", { staticClass: "ic-desc-overflow" }, [
@@ -4481,15 +4464,38 @@ var staticRenderFns = [
                 _vm._v(" "),
                 _c("div", { staticClass: "ic-desc-text" }, [
                   _vm._v(
-                    "\n                                サンプルサンプル サンプルサンプル サンプルサンプル サンプルサンプル\n                                サンプルサンプル サンプルサンプル サンプルサンプル サンプルサンプル\n                            "
+                    "\n                               " +
+                      _vm._s(myIdea.overflow) +
+                      "\n                            "
                   )
                 ])
               ])
             ])
           ])
-        ]),
-        _vm._v("\n\n            →もっと見る的なものを作る\n\n\n        ")
-      ])
+        }),
+        0
+      ),
+      _vm._v("\n\n            →もっと見る的なものを作る\n\n\n        ")
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "ic-review" }, [
+      _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star" })
     ])
   }
 ]
@@ -5000,7 +5006,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("投稿")]
+                  [_vm._v("投稿確認")]
                 )
               ],
               1
@@ -23098,18 +23104,30 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
-    users: {}
+    users: {},
+    ideas: {
+      buyingIdea: {},
+      myIdea: {},
+      favIdea: {},
+      review: {}
+    }
   },
   //getters:コンポーネントでいうcomputed的なもの
   getters: {
     //messageを使用するgetter
     users: function users(state) {
       return state.users;
+    },
+    posts: function posts(state) {
+      return state.ideas;
     }
   },
   mutations: {
     setUsers: function setUsers(state, users) {
       state.users = users;
+    },
+    setIdeas: function setIdeas(state, ideas) {
+      state.ideas = ideas;
     }
   },
   actions: {
@@ -23118,6 +23136,21 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/users').then(function (response) {
         commit('setUsers', response.data);
         console.log(response);
+      });
+    },
+
+    /**
+     * 自分の投稿アイデア取得
+     * @param commit
+     * @returns {Promise<AxiosResponse<T>>}
+     */
+    getUserIdeas: function getUserIdeas(_ref2) {
+      var commit = _ref2.commit;
+      return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/mypage/').then(function (response) {
+        commit('setIdeas', response.data);
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
       });
     }
   },
