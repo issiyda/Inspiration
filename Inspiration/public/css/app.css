@@ -192,7 +192,7 @@ body {
 }
 
 main {
-  width: 100%;
+  width: 90% !important;
   margin: 0 auto 10%;
 }
 
@@ -268,7 +268,7 @@ body {
 }
 
 main {
-  width: 100%;
+  width: 90% !important;
   margin: 0 auto 10%;
 }
 
@@ -610,9 +610,9 @@ input[type="radio"]:checked + .c-radio {
 .ic-star {
   display: -webkit-box;
   display: flex;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-          flex-direction: row;
+          flex-direction: column;
 }
 
 .ic-img {
@@ -673,7 +673,7 @@ input[type="radio"]:checked + .c-radio {
   overflow: hidden;
   padding: 5%;
   width: 90%;
-  word-break: normal;
+  word-break: break-word;
 }
 
 .ic-desc-overflow {
@@ -882,7 +882,7 @@ body {
 }
 
 main {
-  width: 100%;
+  width: 90% !important;
   margin: 0 auto 10%;
 }
 
@@ -1251,7 +1251,7 @@ body {
 }
 
 main {
-  width: 100%;
+  width: 90% !important;
   margin: 0 auto 10%;
 }
 
@@ -1593,9 +1593,9 @@ input[type="radio"]:checked + .c-radio {
 .ic-star {
   display: -webkit-box;
   display: flex;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-          flex-direction: row;
+          flex-direction: column;
 }
 
 .ic-img {
@@ -1656,7 +1656,7 @@ input[type="radio"]:checked + .c-radio {
   overflow: hidden;
   padding: 5%;
   width: 90%;
-  word-break: normal;
+  word-break: break-word;
 }
 
 .ic-desc-overflow {
@@ -1688,7 +1688,7 @@ body {
 }
 
 main {
-  width: 100%;
+  width: 90% !important;
   margin: 0 auto 10%;
 }
 
@@ -1780,7 +1780,7 @@ body {
 }
 
 main {
-  width: 100%;
+  width: 90% !important;
   margin: 0 auto 10%;
 }
 
@@ -1856,7 +1856,7 @@ body {
 }
 
 main {
-  width: 100%;
+  width: 90% !important;
   margin: 0 auto 10%;
 }
 
@@ -2024,7 +2024,7 @@ body {
 }
 
 main {
-  width: 100%;
+  width: 90% !important;
   margin: 0 auto 10%;
 }
 
@@ -2196,7 +2196,7 @@ body {
 }
 
 main {
-  width: 100%;
+  width: 90% !important;
   margin: 0 auto 10%;
 }
 
@@ -2589,7 +2589,7 @@ body {
 }
 
 main {
-  width: 100%;
+  width: 90% !important;
   margin: 0 auto 10%;
 }
 
@@ -2860,7 +2860,7 @@ body {
 }
 
 main {
-  width: 100%;
+  width: 90% !important;
   margin: 0 auto 10%;
 }
 
@@ -3252,7 +3252,7 @@ body {
 }
 
 main {
-  width: 100%;
+  width: 90% !important;
   margin: 0 auto 10%;
 }
 

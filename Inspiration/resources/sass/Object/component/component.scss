@@ -296,7 +296,7 @@ input[type="radio"] {
 
   &-star{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
   }
 
 /**
@@ -359,7 +359,7 @@ input[type="radio"] {
     overflow:hidden;
     padding:5%;
     width:90%;
-    word-break:normal;
+    word-break:break-word;
 
 
 

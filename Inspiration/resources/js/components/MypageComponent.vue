@@ -12,7 +12,7 @@
             <div class="ic" >
 
 
-                <div class="ic-card" v-for="myIdea in myIdeas">
+                <div class="ic-card" v-for="myIdea in buyingIdeas">
                     <a class ="ic-a" href="#">
 
                         <h4 class ="f-h4">{{myIdea.title}}</h4>
@@ -35,12 +35,105 @@
                         </div>
                     </a>
                 </div>
-
-
-
-
-
             </div>
+
+                <h3 class ="f-h3">お気に入りアイデア</h3>
+
+                <div class="ic" >
+
+
+                    <div class="ic-card" v-for="myIdea in favIdeas">
+                        <a class ="ic-a" href="#">
+
+                            <h4 class ="f-h4">{{myIdea.title}}</h4>
+                            <div class="ic-img">
+                                <!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
+                            </div>
+                            <div class="ic-review">
+                                <span class ="ic-span">評価</span>
+                                <i class="fas fa-star ic-star"></i>
+                                <i class="fas fa-star ic-star"></i>
+                                <i class="fas fa-star ic-star"></i>
+                                <i class="fas fa-star ic-star"></i>
+                                <i class="fas fa-star ic-star"></i>
+                            </div>
+                            <div class="ic-desc">
+                                <div class ="ic-desc-overflow">概要</div>
+                                <div class="ic-desc-text">
+                                    {{myIdea.overflow}}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+
+                    <h3 class ="f-h3">投稿したアイデア</h3>
+
+                    <div class="ic" >
+
+
+                        <div class="ic-card" v-for="myIdea in myIdeas">
+                            <a class ="ic-a" href="#">
+
+                                <h4 class ="f-h4">{{myIdea.title}}</h4>
+                                <div class="ic-img">
+                                    <!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
+                                </div>
+                                <div class="ic-review">
+                                    <span class ="ic-span">評価</span>
+                                    <div>
+                                    <i class="fas fa-star ic-star"></i>
+                                    <i class="fas fa-star ic-star"></i>
+                                    </div>
+                                    <div>
+                                    <i class="fas fa-star ic-star"></i>
+                                    <i class="fas fa-star ic-star"></i>
+                                    <i class="fas fa-star ic-star"></i>
+                                    </div>
+                                </div>
+                                <div class="ic-desc">
+                                    <div class ="ic-desc-overflow">概要</div>
+                                    <div class="ic-desc-text">
+                                        {{myIdea.overflow}}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+
+
+                        <h3 class ="f-h3">新着レビュー</h3>
+
+                        <div class="ic" >
+
+
+                            <div class="ic-card" v-for="myIdea in reviews">
+                                <a class ="ic-a" href="#">
+
+                                    <h4 class ="f-h4">{{myIdea.title}}</h4>
+                                    <div class="ic-img">
+                                        <!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
+                                    </div>
+                                    <div class="ic-review">
+                                        <span class ="ic-span">評価</span>
+                                        <i class="fas fa-star ic-star"></i>
+                                        <i class="fas fa-star ic-star"></i>
+                                        <i class="fas fa-star ic-star"></i>
+                                        <i class="fas fa-star ic-star"></i>
+                                        <i class="fas fa-star ic-star"></i>
+                                    </div>
+                                    <div class="ic-desc">
+                                        <div class ="ic-desc-overflow">概要</div>
+                                        <div class="ic-desc-text">
+                                            {{myIdea.overflow}}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
 
             →もっと見る的なものを作る
 
@@ -87,9 +180,28 @@
 
         computed:{
 
-             myIdeas(){
-                 return this.$store.state.ideas.myIdea;
-             }
+            buyingIdeas(){
+                return this.$store.state.ideas.buyingIdea;
+            },
+
+            myIdeas(){
+                return this.$store.state.ideas.myIdea;
+            },
+
+            favIdeas(){
+                return this.$store.state.ideas.favIdea;
+
+            },
+            reviews(){
+                return this.$store.state.ideas.review;
+
+            },
+
+
+
+
+
+
 
         },
 

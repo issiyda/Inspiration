@@ -2414,6 +2414,99 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MypageComponent",
@@ -2433,8 +2526,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {},
   computed: {
+    buyingIdeas: function buyingIdeas() {
+      return this.$store.state.ideas.buyingIdea;
+    },
     myIdeas: function myIdeas() {
       return this.$store.state.ideas.myIdea;
+    },
+    favIdeas: function favIdeas() {
+      return this.$store.state.ideas.favIdea;
+    },
+    reviews: function reviews() {
+      return this.$store.state.ideas.review;
     }
   }
 });
@@ -4448,7 +4550,7 @@ var render = function() {
       _c(
         "div",
         { staticClass: "ic" },
-        _vm._l(_vm.myIdeas, function(myIdea) {
+        _vm._l(_vm.buyingIdeas, function(myIdea) {
           return _c("div", { staticClass: "ic-card" }, [
             _c("a", { staticClass: "ic-a", attrs: { href: "#" } }, [
               _c("h4", { staticClass: "f-h4" }, [_vm._v(_vm._s(myIdea.title))]),
@@ -4475,11 +4577,168 @@ var render = function() {
         }),
         0
       ),
+      _vm._v(" "),
+      _c("h3", { staticClass: "f-h3" }, [_vm._v("お気に入りアイデア")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "ic" },
+        _vm._l(_vm.favIdeas, function(myIdea) {
+          return _c("div", { staticClass: "ic-card" }, [
+            _c("a", { staticClass: "ic-a", attrs: { href: "#" } }, [
+              _c("h4", { staticClass: "f-h4" }, [_vm._v(_vm._s(myIdea.title))]),
+              _vm._v(" "),
+              _c("div", { staticClass: "ic-img" }),
+              _vm._v(" "),
+              _vm._m(1, true),
+              _vm._v(" "),
+              _c("div", { staticClass: "ic-desc" }, [
+                _c("div", { staticClass: "ic-desc-overflow" }, [
+                  _vm._v("概要")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "ic-desc-text" }, [
+                  _vm._v(
+                    "\n                                    " +
+                      _vm._s(myIdea.overflow) +
+                      "\n                                "
+                  )
+                ])
+              ])
+            ])
+          ])
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _c("h3", { staticClass: "f-h3" }, [_vm._v("投稿したアイデア")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "ic" },
+        _vm._l(_vm.myIdeas, function(myIdea) {
+          return _c("div", { staticClass: "ic-card" }, [
+            _c("a", { staticClass: "ic-a", attrs: { href: "#" } }, [
+              _c("h4", { staticClass: "f-h4" }, [_vm._v(_vm._s(myIdea.title))]),
+              _vm._v(" "),
+              _c("div", { staticClass: "ic-img" }),
+              _vm._v(" "),
+              _vm._m(2, true),
+              _vm._v(" "),
+              _c("div", { staticClass: "ic-desc" }, [
+                _c("div", { staticClass: "ic-desc-overflow" }, [
+                  _vm._v("概要")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "ic-desc-text" }, [
+                  _vm._v(
+                    "\n                                        " +
+                      _vm._s(myIdea.overflow) +
+                      "\n                                    "
+                  )
+                ])
+              ])
+            ])
+          ])
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _c("h3", { staticClass: "f-h3" }, [_vm._v("新着レビュー")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "ic" },
+        _vm._l(_vm.reviews, function(myIdea) {
+          return _c("div", { staticClass: "ic-card" }, [
+            _c("a", { staticClass: "ic-a", attrs: { href: "#" } }, [
+              _c("h4", { staticClass: "f-h4" }, [_vm._v(_vm._s(myIdea.title))]),
+              _vm._v(" "),
+              _c("div", { staticClass: "ic-img" }),
+              _vm._v(" "),
+              _vm._m(3, true),
+              _vm._v(" "),
+              _c("div", { staticClass: "ic-desc" }, [
+                _c("div", { staticClass: "ic-desc-overflow" }, [
+                  _vm._v("概要")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "ic-desc-text" }, [
+                  _vm._v(
+                    "\n                                            " +
+                      _vm._s(myIdea.overflow) +
+                      "\n                                        "
+                  )
+                ])
+              ])
+            ])
+          ])
+        }),
+        0
+      ),
       _vm._v("\n\n            →もっと見る的なものを作る\n\n\n        ")
     ])
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "ic-review" }, [
+      _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "ic-review" }, [
+      _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "ic-review" }, [
+      _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
+      _vm._v(" "),
+      _c("div", [
+        _c("i", { staticClass: "fas fa-star ic-star" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fas fa-star ic-star" })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c("i", { staticClass: "fas fa-star ic-star" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fas fa-star ic-star" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fas fa-star ic-star" })
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
