@@ -6,6 +6,7 @@ import notfound from './components/NotFoundComponent';
 import mypage from './components/MypageComponent';
 import profile from './components/ProfileComponent';
 import allBuy from './components/AllBuyComponent';
+import allPost from './components/AllPostComponent'
 import allFavorite from './components/AllFavoriteComponent';
 import allReview from './components/AllReviewComponent';
 import post from './components/PostIdeaComponent';
@@ -22,6 +23,17 @@ import postComplete from './components/PostCompletedComponent';
 export default new Router({
     // モードの設定
     mode: 'history',
+
+    /**
+     * ページ遷移時にページトップに移動
+     * @param to
+     * @param from
+     * @param savedPosition
+     * @returns {{x: number, y: number}}
+     */
+    scrollBehavior (to, from, savedPosition) {
+        return { x: 0, y: 0 }; // トップに移動
+    },
     routes: [
 
         // {
@@ -53,6 +65,12 @@ export default new Router({
             path: '/allBuy',
             name: allBuy,
             component: allBuy
+        },
+
+        {
+            path: '/allPost',
+            name: allPost,
+            component: allPost
         },
 
         {
@@ -95,7 +113,7 @@ export default new Router({
 
         {
             path: '/postDetail',
-            name: postDetail,
+            name: "postDetail",
             component: postDetail
         },
 

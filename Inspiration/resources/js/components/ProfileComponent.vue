@@ -174,7 +174,7 @@
         },
 
         created() {
-            this.imgJudge()
+            this.imgJudge();
             this.user = $store.state.users;
         },
 

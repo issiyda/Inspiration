@@ -17,9 +17,8 @@ use Illuminate\Support\Facades\Auth;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 /**
- * 自分の投稿表示ルーティング
+ * 投稿取得/表示ルーティング
  */
 Route::get('/mypage/','InspirationController@myself');
 
@@ -56,7 +55,7 @@ Route::get('/ideaEdit','InspirationController@ideaDelete');
 /**
  *アイデア詳細ルーティング
  */
-Route::get('/detail','InspirationController@detail');
+Route::get('/detail/{id}','InspirationController@detail');
 
 
 /**
@@ -105,7 +104,7 @@ ROUTE::get('/all/search','InspirationController@search');
 /**
  * お気に入り機能のルーティング
  */
-ROUTE::get('/favorite','InspirationController@favorite');
+ROUTE::post('/favorite','InspirationController@favSwitch');
 
 /**
  * 決済機能のルーティング

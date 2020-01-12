@@ -12,10 +12,10 @@
             <div class="ic" >
 
 
-                <div class="ic-card" v-for="myIdea in buyingIdeas">
+                <div class="ic-card" v-for="buyingIdea in buyingIdeas.slice(0,5)">
                     <a class ="ic-a" href="#">
 
-                        <h4 class ="f-h4">{{myIdea.title}}</h4>
+                        <h4 class ="f-h4">{{buyingIdea.title}}</h4>
                         <div class="ic-img">
 <!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
                         </div>
@@ -30,22 +30,28 @@
                         <div class="ic-desc">
                             <div class ="ic-desc-overflow">概要</div>
                             <div class="ic-desc-text">
-                               {{myIdea.overflow}}
+                               {{buyingIdea.overflow}}
                             </div>
                         </div>
                     </a>
                 </div>
             </div>
 
-                <h3 class ="f-h3">お気に入りアイデア</h3>
-
-                <div class="ic" >
+            <router-link to="/allBuy" class ="p-mypage-more">もっと見る</router-link>
 
 
-                    <div class="ic-card" v-for="myIdea in favIdeas">
+
+            <h3 class ="f-h3">お気に入りアイデア</h3>
+
+
+
+            <div class="ic" >
+
+
+                    <div class="ic-card" v-for="favIdea in favIdeas.slice(0,5)">
                         <a class ="ic-a" href="#">
 
-                            <h4 class ="f-h4">{{myIdea.title}}</h4>
+                            <h4 class ="f-h4">{{favIdea.title}}</h4>
                             <div class="ic-img">
                                 <!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
                             </div>
@@ -60,20 +66,22 @@
                             <div class="ic-desc">
                                 <div class ="ic-desc-overflow">概要</div>
                                 <div class="ic-desc-text">
-                                    {{myIdea.overflow}}
+                                    {{favIdea.overflow}}
                                 </div>
                             </div>
                         </a>
                     </div>
                 </div>
 
+            <router-link to="/allFavorite" class ="p-mypage-more">もっと見る</router-link>
 
-                    <h3 class ="f-h3">投稿したアイデア</h3>
+
+            <h3 class ="f-h3">投稿したアイデア</h3>
 
                     <div class="ic" >
 
 
-                        <div class="ic-card" v-for="myIdea in myIdeas">
+                        <div class="ic-card" v-for="myIdea in myIdeas.slice(0,5)">
                             <a class ="ic-a" href="#">
 
                                 <h4 class ="f-h4">{{myIdea.title}}</h4>
@@ -100,19 +108,22 @@
                                 </div>
                             </a>
                         </div>
+
                     </div>
 
+            <router-link to="/allPost" class ="p-mypage-more">もっと見る</router-link>
 
 
-                        <h3 class ="f-h3">新着レビュー</h3>
+
+            <h3 class ="f-h3">新着レビュー</h3>
 
                         <div class="ic" >
 
 
-                            <div class="ic-card" v-for="myIdea in reviews">
+                            <div class="ic-card" v-for="review in reviews.slice(0,5)">
                                 <a class ="ic-a" href="#">
 
-                                    <h4 class ="f-h4">{{myIdea.title}}</h4>
+                                    <h4 class ="f-h4">{{review.title}}</h4>
                                     <div class="ic-img">
                                         <!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
                                     </div>
@@ -127,7 +138,7 @@
                                     <div class="ic-desc">
                                         <div class ="ic-desc-overflow">概要</div>
                                         <div class="ic-desc-text">
-                                            {{myIdea.overflow}}
+                                            {{review.overflow}}
                                         </div>
                                     </div>
                                 </a>
@@ -135,7 +146,10 @@
 
                         </div>
 
-            →もっと見る的なものを作る
+            <router-link to="/allReview" class ="p-mypage-more">もっと見る</router-link>
+
+
+
 
 
         </div>
@@ -170,7 +184,6 @@
         created(){
             console.log('MypageComponent mounted.');
             this.ideas = this.$store.dispatch('getUserIdeas');
-            this.user = this.$store.dispatch('getUsers');
 
         },
         mounted() {
@@ -196,13 +209,6 @@
                 return this.$store.state.ideas.review;
 
             },
-
-
-
-
-
-
-
         },
 
 
@@ -211,5 +217,6 @@
 </script>
 
 <style scoped>
+
 
 </style>

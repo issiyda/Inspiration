@@ -27,7 +27,7 @@
 
 
 
-<main class="main">
+<main>
 
     <div class="home">
         <div class="hero">
