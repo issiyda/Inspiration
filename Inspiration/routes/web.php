@@ -41,6 +41,10 @@
 // */
 //Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
+Route::post('/home',function(){
+    return view('home');
+});
+
 Route::get('/users','UserController@getUserData');
 
 

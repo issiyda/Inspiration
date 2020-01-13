@@ -12,6 +12,12 @@ class InspirationController extends Controller
 {
     //
 
+    public function withdraw($id)
+    {
+        User::find($id)->delete();
+    }
+
+
     public function mypage()
     {
         return view('layouts.index');
@@ -44,20 +50,20 @@ class InspirationController extends Controller
          */
         $favIdea = Favorite::where('fav_flag', 1)
             ->with(['ideas' => function ($q) {
-                $q->where('user_id', 2);
+                $q->where('user_id', 1);
             }])->latest()->get();
 
         /**
          * ログイン中のユーザが投稿したアイデアデータ取得
          */
-        $myIdea = Idea::where('user_id', 2)
+        $myIdea = Idea::where('user_id', 1)
             ->latest()->get();
 
         /**
          *ログイン中のユーザ投稿に対するレビュー
          */
         $review = Review::with(['ideas' => function ($q) {
-            $q->where('user_id', 2);
+            $q->where('user_id', 1);
         }])->latest()->get();
 
 
@@ -85,6 +91,21 @@ class InspirationController extends Controller
         ]);
     }
 
+    public function favState(Request $request)
+    {
+        $userId = $request->input('userId');
+        $ideaId = $request->input('ideaId');
+
+        $favState = Favorite::where('user_id', $userId)
+            ->where('idea_id', $ideaId)->value('fav_flag');
+
+        return response()->json([
+            'favState' =>$favState,
+//            'success' => 'getting favState successfully!'
+        ],200);
+
+    }
+
     public function favSwitch(Request $request)
     {
 
@@ -107,6 +128,7 @@ class InspirationController extends Controller
             ],200);
             }
 
+        //データが有れば切り替える
         else {
             if($favState === 0){
                 $favState = Favorite::where('user_id', $userId)
@@ -117,7 +139,6 @@ class InspirationController extends Controller
 
                 return response()->json([
                     'data' =>$favState,
-
                     'success' => 'user adding fav successfully!'
                 ],200);
 
@@ -130,7 +151,6 @@ class InspirationController extends Controller
 
                 return response()->json([
                     'data' =>$favState,
-
                     'success' => 'user removed fav successfully!'
                 ],200);
 
@@ -143,7 +163,6 @@ class InspirationController extends Controller
                 'success' => 'user updated successfully!'
             ],200);
         }
-//        データが有れば更新する
 
 
     }

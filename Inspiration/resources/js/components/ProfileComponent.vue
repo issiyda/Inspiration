@@ -54,8 +54,8 @@
                         <textarea v-else id="introduction" @blur="updateIntroduction($store.state.users.id, $store.state.users.introduction)" v-model="$store.state.users.introduction" class="c-input" type="text" placeholder="（例）お取引よろしくお願いいたします">{$store.state.users.introduction}</textarea>
                     </div>
 
-                    <div class="c-button">
-                        <router-link to="/profile">投稿</router-link>
+                    <div class="c-button profile-withdraw">
+                        <router-link to="/withdraw">退会する</router-link>
                     </div>
                 </div>
             </form>

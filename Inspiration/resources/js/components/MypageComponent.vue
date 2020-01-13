@@ -184,6 +184,7 @@
         created(){
             console.log('MypageComponent mounted.');
             this.ideas = this.$store.dispatch('getUserIdeas');
+            this.user = this.$store.dispatch('getUsers');
 
         },
         mounted() {

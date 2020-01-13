@@ -15,6 +15,7 @@ import postEdit from './components/EditIdeaComponent';
 import postDetail from './components/PostDetailComponent';
 import allIdea from './components/AllIdeaComponent';
 import postComplete from './components/PostCompletedComponent';
+import withdraw from "./components/withdrawComponent";
 
 // bladeで行う
 // import withdraw from './components/withdrawComponent';
@@ -122,6 +123,14 @@ export default new Router({
             name: allIdea,
             component: allIdea
         },
+
+        {
+            path: '/withdraw',
+            name: 'withdraw',
+            component: withdraw
+        },
+
+
 
 
     ]

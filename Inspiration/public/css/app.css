@@ -1026,6 +1026,10 @@ input[type="radio"]:checked + .c-radio {
   display: none;
 }
 
+.profile-withdraw {
+  margin: 0 auto;
+}
+
 /**
 confirm とdetailの共通部分　
  */
@@ -1613,5 +1617,10 @@ confirm とdetailの共通部分　
 
 .completed-button {
   margin: 10% auto;
+}
+
+.email-alert {
+  color: #A16EFF;
+  padding: 5%;
 }
 

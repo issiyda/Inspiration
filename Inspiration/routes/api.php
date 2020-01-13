@@ -17,6 +17,11 @@ use Illuminate\Support\Facades\Auth;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/withdraw/{id}','InspirationController@withdraw');
+
+
+
 /**
  * 投稿取得/表示ルーティング
  */
@@ -99,6 +104,9 @@ Route::post('/fileupload',function(){
  * AllPost検索機能のルーティング
  */
 ROUTE::get('/all/search','InspirationController@search');
+
+
+ROUTE::get('/favState','InspirationController@favState');
 
 
 /**

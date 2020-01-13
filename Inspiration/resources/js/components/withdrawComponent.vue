@@ -25,9 +25,10 @@
 
             </div>
 
-            <form action="post" class ="c-form-submit withdraw-submit">
+            <form method="get" action="/home" class ="c-form-submit withdraw-submit" @click="userWithdraw($store.state.users.id)">
                 <input type="submit" class="c-button withdraw-submit-button" value="退会する">
             </form>
+            {{$store.state.users.id}}
         </div>
 
     </main>
@@ -36,9 +37,27 @@
 
 <script>
     export default {
-        name: "headerBeforeComponent"
+        name: "headerBeforeComponent",
+
+
+        mounted() {
+            console.log('withdrawComponent mounted');
+        },
+
+        methods: {
+            userWithdraw: function (id) {
+                axios.get('/api/withdraw/'+id,
+                    {id: id})
+                    .then((response) => {
+                        console.log(response)
+                    }).catch((error) => {
+                    console.log(error);
+                })
+            }
+        },
     }
 </script>
+
 
 <style scoped>
 

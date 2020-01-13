@@ -62,7 +62,7 @@
                     <label for="contents" class="c-label">内容</label>
                     <div for="fav" class="confirm-text">
                         ハートClickでお気に入り切り替え
-                        <i id ="fav" class="fas fa-heart fa-2x" @click="favSwitch($store.state.users.id,detail.id)"></i>
+                        <i id ="fav" :class="{'fas': true, 'fa-heart':true ,'fa-2x':true,'fav': favActive}" @click="favSwitch($store.state.users.id,detail.id)"></i>
                     </div>
 
                 </div>
@@ -209,6 +209,9 @@
             return {
                 id:'',
                 detail:{},
+                favActive:"",
+                user:{},
+                favState:""
 
         }
         },
@@ -224,30 +227,67 @@
                    console.log(response)
                }).catch((error) =>{
                    console.log(error);
-               })
-            }
+               });
+
+                this.getState();
+            },
+
+            /**
+             * お気に入り状態取得
+             */
+            getState:function() {
+                axios.get('/api/favState', {
+                    params: {
+                        userId: this.$store.state.users.id,
+                        ideaId: this.id
+                    }
+                })
+                    .then((response) => {
+                        this.favState = response.data
+                    }).catch((error) => {
+                    console.log(error);
+                });
+            },
+        },
+
+        watch:{
+
+            favState: function()
+            {
+                if(this.favState.favState === 1)
+                    this.favActive = true;
+                else if(this.favState.favState === 0)
+                    this.favActive = false;
+            },
+
         },
 
 
         created() {
-
+            this.user = this.$store.dispatch('getUsers');
             this.id = this.$route.params.id;
 
+
+            /**
+             * 投稿詳細取得
+             */
             axios.get('/api/detail/'+this.id, {
             })
                 .then((response) => {
                     console.log(response.data);
                     this.detail = response.data
-
                 }).catch((error) => {
                 console.log(error);
-
             });
+
+
         },
 
         mounted(){
+
+          this.getState();
+
             console.log('PostDetailComponent mounted')
-            this.user = this.$store.dispatch('getUsers');
         }
 
 
@@ -255,5 +295,8 @@
 </script>
 
 <style scoped>
+    .fav{
+        color:#FFBEDA
+    }
 
 </style>
