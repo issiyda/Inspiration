@@ -40,12 +40,7 @@
 
 
 
-                    <div class="profile-container-input">
-                        <label class ="c-label" for="pass">パスワード</label>
-<!--                        <input id="pass" class ="c-input" type="password" placeholder="（例）Jkl439fu">-->
-                        <div v-if="!isPassEdit" @dblclick="isPassEdit = true" class="c-input" type="text" placeholder="AMdi78nv6" value="{$store.state.users.password}">{{$store.state.users.password}}</div>
-                        <input v-else id="pass" @blur="updatePass($store.state.users.id, $store.state.users.password)" v-model="$store.state.users.password" class="c-input" type="text" placeholder="（例）Abdj78Kl" value="{$store.state.users.password}">
-                    </div>
+
 
                     <div class="profile-container-input">
                         <label class ="c-label" for="introduction">プロフィール文</label>
@@ -54,9 +49,21 @@
                         <textarea v-else id="introduction" @blur="updateIntroduction($store.state.users.id, $store.state.users.introduction)" v-model="$store.state.users.introduction" class="c-input" type="text" placeholder="（例）お取引よろしくお願いいたします">{$store.state.users.introduction}</textarea>
                     </div>
 
-                    <div class="c-button profile-withdraw">
-                        <router-link to="/withdraw">退会する</router-link>
+                    <div class="profile-container-input">
+                        <label class ="c-label" for="pass">パスワード</label>
+                        <div class="c-button profile-withdraw">
+                            <router-link to="/passEdit">パスワード編集画面へ</router-link>
+                        </div>
                     </div>
+
+                    <div class="profile-container-input">
+                        <label class ="c-label" for="withdraw">退会</label>
+                        <div id="withdraw" class="c-button profile-withdraw">
+                            <router-link to="/withdraw">退会画面へ</router-link>
+                        </div>
+                    </div>
+
+
                 </div>
             </form>
         </div>
@@ -72,7 +79,7 @@
             return {
                 isNameEdit: false,
                 isEmailEdit: false,
-                isPasswordEdit: false,
+                // isPasswordEdit: false,
                 isIntroductionEdit: false,
                 fileInfo:"",
                 user:[],

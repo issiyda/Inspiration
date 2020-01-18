@@ -8,9 +8,9 @@
 
 
 
-
-                <div class="confirm-container-img">
-<!--                    <img src="{{asset(('/img/staff6.jpeg'))}}" alt="">                    &lt;!&ndash; hoverしたら画像をアップロードの文字が浮き上がって画像が薄暗く &ndash;&gt;-->
+                <label for="ideaImg" class="c-label">アイデア画像</label>
+                <div id="ideaImg" class="confirm-container-img">
+                    <img :src="$route.params.img" v-show="upLoadedImage" alt="">
                 </div>
 
 

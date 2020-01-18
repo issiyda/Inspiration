@@ -137,3 +137,13 @@ a{
   }
 }
 
+// ==============================
+// エラー時の表示
+// ==============================
+.error{
+        color: $color_base;
+        font-weight:bolder;
+        font-size:$font-size_l;
+        padding:5%;
+}
+

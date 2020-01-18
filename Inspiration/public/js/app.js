@@ -86,17 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "../images/staff6.jpg":
-/*!****************************!*\
-  !*** ../images/staff6.jpg ***!
-  \****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/staff6.jpg?875f7c2a003a4066c1aab7508d454892";
-
-/***/ }),
-
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
@@ -2406,6 +2395,163 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PasswordEdit.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PasswordEdit.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _window$validators = window.validators,
+    required = _window$validators.required,
+    minLength = _window$validators.minLength,
+    sameAs = _window$validators.sameAs;
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "passwordEdit",
+  data: function data() {
+    return {
+      currentPass: '',
+      currentPassMessage: "",
+      newPass: '',
+      reNewPass: '',
+      dbCurrentPass: this.$store.state.users.id,
+      isMatched: false,
+      posted: false
+    };
+  },
+  methods: {
+    checkPass: function checkPass() {
+      var _this = this;
+
+      axios.get('/api/checkPass', {
+        params: {
+          user_id: this.$store.state.users.id,
+          inputPass: this.currentPass
+        }
+      }).then(function (response) {
+        // 確認用
+        // console.log(response)
+        _this.currentPassMessage = response.data.message;
+        _this.isMatched = true;
+
+        if (_this.currentPass == "") {
+          _this.currentPassMessage = "";
+          _this.isMatched = false;
+        }
+      })["catch"](function (error) {
+        console.log(error);
+        _this.currentPassMessage = '時間をおいてお試し下さい';
+      });
+    },
+    updatePass: function updatePass() {
+      var _this2 = this;
+
+      axios.post('/api/updatePass', {
+        user_id: this.$store.state.users.id,
+        // currentPass: this.currentPass,
+        newPass: this.newPass // reNewPass: this.reNewPass
+
+      }).then(function (response) {
+        console.log(response);
+        _this2.posted = true;
+        return _this2.stateMessage;
+      })["catch"](function (error) {
+        console.log(error);
+      }); // this.currentPass = '';
+      // this.currentPassMessage ="";
+      // this.reNewPass='';
+    }
+  },
+  computed: {
+    stateMessage: function stateMessage() {
+      return 'Pass変更完了しました';
+    }
+  },
+  mounted: function mounted() {
+    console.log('PostIdeaComponent mounted.');
+    this.user = this.$store.dispatch('getUsers');
+  },
+  // watch:{
+  //     currentPass:{
+  //         if(this.dbCurrentPass !== this.currentPass)
+  //     {
+  //         this.isMatched = true
+  //     }
+  //     }
+  // }
+  validations: {
+    currentPass: {
+      required: required
+    },
+    newPass: {
+      required: required,
+      minLength: minLength(8) // notSamePassword: !sameAs('currentPass')
+
+    },
+    reNewPass: {
+      required: required,
+      sameAsPassword: sameAs('newPass')
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PostCompletedComponent.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PostCompletedComponent.vue?vue&type=script&lang=js& ***!
@@ -2864,7 +3010,8 @@ __webpack_require__.r(__webpack_exports__);
       category_id: '',
       price: "",
       overflow: '',
-      content: ''
+      content: '',
+      upLoadedImage: ""
     };
   },
   mounted: function mounted() {
@@ -2899,6 +3046,21 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    onFileChange: function onFileChange(e) {
+      var files = e.target.files;
+      this.createImage(files[0]);
+    },
+    createImage: function createImage(file) {
+      var _this = this;
+
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        _this.upLoadedImage = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
     }
   },
   computed: {
@@ -3139,13 +3301,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ProfileComponent",
   data: function data() {
     return {
       isNameEdit: false,
       isEmailEdit: false,
-      isPasswordEdit: false,
+      // isPasswordEdit: false,
       isIntroductionEdit: false,
       fileInfo: "",
       user: [],
@@ -5450,6 +5619,211 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PasswordEdit.vue?vue&type=template&id=087bbea0&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PasswordEdit.vue?vue&type=template&id=087bbea0&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("main", [
+    _c("h2", { staticClass: "f-h2" }, [_vm._v("パスワード変更")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "c-form" }, [
+      _c(
+        "form",
+        {
+          staticClass: "c-form-container register",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.updatePass($event)
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "c-form-container-input register-input" }, [
+            _c("label", { staticClass: "c-label", attrs: { for: "mail" } }, [
+              _vm._v("現在のpassword")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.currentPass,
+                  expression: "currentPass"
+                }
+              ],
+              staticClass: "c-input",
+              attrs: {
+                id: "mail",
+                type: "text",
+                placeholder: "（例）info@.com"
+              },
+              domProps: { value: _vm.currentPass },
+              on: {
+                input: [
+                  function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.currentPass = $event.target.value
+                  },
+                  function($event) {
+                    return _vm.$v.currentPass.$touch()
+                  }
+                ],
+                blur: function($event) {
+                  return _vm.checkPass()
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.$v.currentPass.$error
+              ? _c("div", { staticClass: "error" }, [
+                  !_vm.$v.currentPass.required
+                    ? _c("span", [_vm._v("入力必須です")])
+                    : _vm._e()
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.isMatched
+              ? _c("span", { staticClass: "error" }, [
+                  _vm._v(_vm._s(_vm.currentPassMessage))
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "c-form-container-input register-input" }, [
+            _c("label", { staticClass: "c-label", attrs: { for: "pass" } }, [
+              _vm._v("新規password")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.newPass,
+                  expression: "newPass"
+                }
+              ],
+              staticClass: "c-input",
+              attrs: {
+                id: "pass",
+                type: "password",
+                placeholder: "（例）Jkl439fu"
+              },
+              domProps: { value: _vm.newPass },
+              on: {
+                input: [
+                  function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.newPass = $event.target.value
+                  },
+                  function($event) {
+                    return _vm.$v.newPass.$touch()
+                  }
+                ]
+              }
+            }),
+            _vm._v(" "),
+            _vm.$v.newPass.$error
+              ? _c("div", { staticClass: "error" }, [
+                  !_vm.$v.newPass.required
+                    ? _c("span", [_vm._v("入力必須です")])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.$v.newPass.minLength
+                    ? _c("span", [_vm._v("8文字以上で記入してください")])
+                    : _vm._e()
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "c-form-container-input register-input" }, [
+            _c("label", { staticClass: "c-label", attrs: { for: "repass" } }, [
+              _vm._v("確認用新規password")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.reNewPass,
+                  expression: "reNewPass"
+                }
+              ],
+              staticClass: "c-input",
+              attrs: {
+                id: "repass",
+                type: "password",
+                placeholder: "パスワード再入力"
+              },
+              domProps: { value: _vm.reNewPass },
+              on: {
+                input: [
+                  function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.reNewPass = $event.target.value
+                  },
+                  function($event) {
+                    return _vm.$v.reNewPass.$touch()
+                  }
+                ]
+              }
+            }),
+            _vm._v(" "),
+            _vm.$v.reNewPass.$error
+              ? _c("div", { staticClass: "error" }, [
+                  !_vm.$v.reNewPass.required
+                    ? _c("span", [_vm._v("入力必須です")])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.$v.reNewPass.sameAsPassword
+                    ? _c("span", [_vm._v("パスワードが一致しません")])
+                    : _vm._e()
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _vm.posted
+            ? _c("div", { staticClass: "error" }, [
+                _vm._v(_vm._s(_vm.stateMessage))
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "c-button",
+            attrs: { type: "submit", disabled: _vm.$v.$invalid }
+          })
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PostCompletedComponent.vue?vue&type=template&id=a844d246&scoped=true&":
 /*!*************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PostCompletedComponent.vue?vue&type=template&id=a844d246&scoped=true& ***!
@@ -5933,25 +6307,44 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "profile-container-img-right" }, [
                 _c("label", [
-                  _c("img", {
-                    attrs: {
-                      src: __webpack_require__(/*! ../../../../images/staff6.jpg */ "../images/staff6.jpg"),
-                      alt: ""
-                    }
-                  }),
-                  _vm._v(" "),
                   _c(
                     "input",
                     _vm._b(
                       {
                         staticClass: "c-input profile-container-img-none",
-                        attrs: { id: "img", type: "file" }
+                        attrs: { id: "img", type: "file" },
+                        on: { change: _vm.onFileChange }
                       },
                       "input",
                       _vm.img,
                       false
                     )
-                  )
+                  ),
+                  _vm._v(" "),
+                  _c("i", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.upLoadedImage,
+                        expression: "!upLoadedImage"
+                      }
+                    ],
+                    staticClass: "fas fa-plus fa-7x",
+                    attrs: { "aria-hidden": "true" }
+                  }),
+                  _vm._v(" "),
+                  _c("img", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.upLoadedImage,
+                        expression: "upLoadedImage"
+                      }
+                    ],
+                    attrs: { src: _vm.upLoadedImage, alt: "" }
+                  })
                 ])
               ])
             ]),
@@ -6280,7 +6673,7 @@ var render = function() {
                       to: {
                         name: "postConfirm",
                         params: {
-                          img: this.img,
+                          img: this.upLoadedImage,
                           title: this.title,
                           category_id: this.category_id,
                           price: this.price,
@@ -6339,7 +6732,27 @@ var render = function() {
       _c("h2", { staticClass: "f-h2" }, [_vm._v("アイデア投稿確認画面")]),
       _vm._v(" "),
       _c("form", { staticClass: "confirm-container" }, [
-        _c("div", { staticClass: "confirm-container-img" }),
+        _c("label", { staticClass: "c-label", attrs: { for: "ideaImg" } }, [
+          _vm._v("アイデア画像")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "confirm-container-img", attrs: { id: "ideaImg" } },
+          [
+            _c("img", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.upLoadedImage,
+                  expression: "upLoadedImage"
+                }
+              ],
+              attrs: { src: _vm.$route.params.img, alt: "" }
+            })
+          ]
+        ),
         _vm._v(" "),
         _c("label", { staticClass: "c-label", attrs: { for: "ideaName" } }, [
           _vm._v("アイデア名")
@@ -6374,9 +6787,9 @@ var render = function() {
           { staticClass: "confirm-text", attrs: { id: "description" } },
           [
             _vm._v(
-              "\n                    " +
+              "\n                " +
                 _vm._s(_vm.$route.params.overflow) +
-                "\n                "
+                "\n            "
             )
           ]
         ),
@@ -6387,9 +6800,9 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "confirm-text", attrs: { id: "contents" } }, [
           _vm._v(
-            "\n                    " +
+            "\n                " +
               _vm._s(_vm.$route.params.content) +
-              "\n                "
+              "\n            "
           )
         ]),
         _vm._v(" "),
@@ -6666,67 +7079,6 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "profile-container-input" }, [
-            _c("label", { staticClass: "c-label", attrs: { for: "pass" } }, [
-              _vm._v("パスワード")
-            ]),
-            _vm._v(" "),
-            !_vm.isPassEdit
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "c-input",
-                    attrs: {
-                      type: "text",
-                      placeholder: "AMdi78nv6",
-                      value: "{$store.state.users.password}"
-                    },
-                    on: {
-                      dblclick: function($event) {
-                        _vm.isPassEdit = true
-                      }
-                    }
-                  },
-                  [_vm._v(_vm._s(_vm.$store.state.users.password))]
-                )
-              : _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.$store.state.users.password,
-                      expression: "$store.state.users.password"
-                    }
-                  ],
-                  staticClass: "c-input",
-                  attrs: {
-                    id: "pass",
-                    type: "text",
-                    placeholder: "（例）Abdj78Kl",
-                    value: "{$store.state.users.password}"
-                  },
-                  domProps: { value: _vm.$store.state.users.password },
-                  on: {
-                    blur: function($event) {
-                      return _vm.updatePass(
-                        _vm.$store.state.users.id,
-                        _vm.$store.state.users.password
-                      )
-                    },
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.$store.state.users,
-                        "password",
-                        $event.target.value
-                      )
-                    }
-                  }
-                })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "profile-container-input" }, [
             _c(
               "label",
               { staticClass: "c-label", attrs: { for: "introduction" } },
@@ -6792,16 +7144,44 @@ var render = function() {
                 )
           ]),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "c-button profile-withdraw" },
-            [
-              _c("router-link", { attrs: { to: "/withdraw" } }, [
-                _vm._v("退会する")
-              ])
-            ],
-            1
-          )
+          _c("div", { staticClass: "profile-container-input" }, [
+            _c("label", { staticClass: "c-label", attrs: { for: "pass" } }, [
+              _vm._v("パスワード")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "c-button profile-withdraw" },
+              [
+                _c("router-link", { attrs: { to: "/passEdit" } }, [
+                  _vm._v("パスワード編集画面へ")
+                ])
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "profile-container-input" }, [
+            _c(
+              "label",
+              { staticClass: "c-label", attrs: { for: "withdraw" } },
+              [_vm._v("退会")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "c-button profile-withdraw",
+                attrs: { id: "withdraw" }
+              },
+              [
+                _c("router-link", { attrs: { to: "/withdraw" } }, [
+                  _vm._v("退会画面へ")
+                ])
+              ],
+              1
+            )
+          ])
         ])
       ])
     ])
@@ -23268,6 +23648,7 @@ new Vue({
   router: _router__WEBPACK_IMPORTED_MODULE_0__["default"]
 });
 Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
+Vue.use(window.vuelidate["default"]);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -23852,6 +24233,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotFoundComponent_vue_vue_type_template_id_2b13f773_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotFoundComponent_vue_vue_type_template_id_2b13f773_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/PasswordEdit.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/components/PasswordEdit.vue ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PasswordEdit_vue_vue_type_template_id_087bbea0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PasswordEdit.vue?vue&type=template&id=087bbea0&scoped=true& */ "./resources/js/components/PasswordEdit.vue?vue&type=template&id=087bbea0&scoped=true&");
+/* harmony import */ var _PasswordEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PasswordEdit.vue?vue&type=script&lang=js& */ "./resources/js/components/PasswordEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PasswordEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PasswordEdit_vue_vue_type_template_id_087bbea0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PasswordEdit_vue_vue_type_template_id_087bbea0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "087bbea0",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/PasswordEdit.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/PasswordEdit.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/PasswordEdit.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PasswordEdit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PasswordEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/PasswordEdit.vue?vue&type=template&id=087bbea0&scoped=true&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/PasswordEdit.vue?vue&type=template&id=087bbea0&scoped=true& ***!
+  \*********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordEdit_vue_vue_type_template_id_087bbea0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PasswordEdit.vue?vue&type=template&id=087bbea0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PasswordEdit.vue?vue&type=template&id=087bbea0&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordEdit_vue_vue_type_template_id_087bbea0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordEdit_vue_vue_type_template_id_087bbea0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -24520,7 +24970,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_AllIdeaComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/AllIdeaComponent */ "./resources/js/components/AllIdeaComponent.vue");
 /* harmony import */ var _components_PostCompletedComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/PostCompletedComponent */ "./resources/js/components/PostCompletedComponent.vue");
 /* harmony import */ var _components_withdrawComponent__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/withdrawComponent */ "./resources/js/components/withdrawComponent.vue");
+/* harmony import */ var _components_PasswordEdit__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/PasswordEdit */ "./resources/js/components/PasswordEdit.vue");
  // コンポーネントをインポート
+
 
 
 
@@ -24618,6 +25070,10 @@ __webpack_require__.r(__webpack_exports__);
     path: '/withdraw',
     name: 'withdraw',
     component: _components_withdrawComponent__WEBPACK_IMPORTED_MODULE_14__["default"]
+  }, {
+    path: '/passEdit',
+    name: 'passEdit',
+    component: _components_PasswordEdit__WEBPACK_IMPORTED_MODULE_15__["default"]
   }]
 }));
 

@@ -18,9 +18,9 @@
                         </div>
                         <div class="profile-container-img-right">
                             <label>
-                                <img src="../../../../images/staff6.jpg" alt="">
-                                <input id="img" v-bind="img" class ="c-input profile-container-img-none" type="file" />
-                                <!-- hoverしたら画像をアップロードの文字が浮き上がって画像が薄暗く -->
+                                <input id="img" @change ="onFileChange" v-bind="img" class ="c-input profile-container-img-none" type="file" />
+                                <i aria-hidden="true" v-show="!upLoadedImage" class="fas fa-plus fa-7x"></i>
+                                <img :src="upLoadedImage" v-show="upLoadedImage" alt="">
                             </label>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
 <!--                         v-on:click="confirmIdea(userId)"-->
 <!--                    >-->
                     <router-link  :to="{name:'postConfirm',params:{
-                     img: this.img,
+                     img: this.upLoadedImage,
                      title:this.title,
                      category_id:this.category_id,
                      price:this.price,
@@ -110,6 +110,7 @@
                 price:"",
                 overflow:'',
                 content:'',
+                upLoadedImage:"",
             }
 
         },
@@ -117,7 +118,6 @@
         mounted() {
             console.log('PostIdeaComponent mounted.');
             this.user = this.$store.dispatch('getUsers');
-
         },
 
         methods: {
@@ -149,6 +149,19 @@
                         console.log(error);
                 });
                 },
+
+            onFileChange(e){
+                let files = e.target.files;
+                this.createImage(files[0]);
+            },
+
+            createImage(file){
+                let reader = new FileReader();
+                reader.onload = (e) =>{
+                    this.upLoadedImage = e.target.result
+                };
+                reader.readAsDataURL(file);
+            }
             },
         computed:{
            userId(){

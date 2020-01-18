@@ -7,10 +7,41 @@ use App\Idea;
 use App\Review;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class InspirationController extends Controller
 {
     //
+
+    public function checkPass(Request $request)
+    {
+        $userId = $request->input('user_id');
+        $inputPass = $request->input('inputPass');
+        $userPass = User::find($userId)->select('password')->first();
+
+        if ((Hash::check($inputPass, $userPass['password']))) {
+            return response()->json([
+            ]);
+        } elseif (!(Hash::check($inputPass, $userPass))) {
+            return response()->json([
+                'message' => '現在のパスと一致しません',
+            ]);
+
+
+        }
+    }
+
+    public function updatePass(Request $request)
+    {
+        $userId = $request->input('user_id');
+        $newPass = $request->input('newPass');
+
+        User::find($userId)->update(['password' => Hash::make($newPass)]);
+
+        return response()->json([
+            'success' => 'パスワードを変更しました',
+        ]);
+    }
 
     public function withdraw($id)
     {

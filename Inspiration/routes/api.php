@@ -18,8 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+/**
+ * 退会用ルーティング
+ */
 Route::get('/withdraw/{id}','InspirationController@withdraw');
 
+Route::get('/checkPass','InspirationController@checkPass');
 
 
 /**
@@ -98,6 +102,10 @@ Route::post('/fileupload',function(){
 
     return $user;
 });
+/**
+ * パスワードアップデート用ルーティング
+ */
+Route::post('/updatePass','InspirationController@updatePass');
 
 
 /**

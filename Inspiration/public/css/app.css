@@ -253,6 +253,13 @@ a {
   }
 }
 
+.error {
+  color: #FFBEDA;
+  font-weight: bolder;
+  font-size: 18px;
+  padding: 5%;
+}
+
 .nav {
   -webkit-box-align: center;
           align-items: center;
