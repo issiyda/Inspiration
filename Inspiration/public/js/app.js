@@ -2821,6 +2821,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "headerBeforeComponent",
   data: function data() {
@@ -2829,7 +2843,8 @@ __webpack_require__.r(__webpack_exports__);
       detail: {},
       favActive: "",
       user: {},
-      favState: ""
+      favState: "",
+      contributorFlag: true
     };
   },
   methods: {
@@ -2861,6 +2876,10 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    contributorJudge: function contributorJudge() {
+      if (this.$store.state.users.id === this.detail.user_id) console.log(this.$store.state.users.id === this.detail.user_id);
+      this.contributorFlag = false;
     }
   },
   watch: {
@@ -2871,7 +2890,9 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this2 = this;
 
-    this.user = this.$store.dispatch('getUsers');
+    this.user = this.$store.dispatch('getUsers').then(function () {
+      _this2.contributorJudge();
+    });
     this.id = this.$route.params.id;
     /**
      * 投稿詳細取得
@@ -3011,7 +3032,8 @@ __webpack_require__.r(__webpack_exports__);
       price: "",
       overflow: '',
       content: '',
-      upLoadedImage: ""
+      upLoadedImage: "",
+      fileInfo: ""
     };
   },
   mounted: function mounted() {
@@ -3047,20 +3069,33 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    onFileChange: function onFileChange(e) {
-      var files = e.target.files;
-      this.createImage(files[0]);
+    onFileChange: function onFileChange(event) {
+      this.fileInfo = event.target.files[0];
+      this.saveImage();
+      this.createImage();
     },
-    createImage: function createImage(file) {
+    createImage: function createImage() {
       var _this = this;
 
+      //画像をプレビュー表示するロジック
       var reader = new FileReader();
 
       reader.onload = function (e) {
         _this.upLoadedImage = e.target.result;
       };
 
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(this.fileInfo);
+    },
+    //画像をDBに保存してパスを保存するロジック
+    saveImage: function saveImage() {
+      var formData = new FormData();
+      console.log(this.fileInfo);
+      formData.append('file', this.fileInfo);
+      axios.post('/api/fileUpload', formData).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   },
   computed: {
@@ -3168,8 +3203,8 @@ __webpack_require__.r(__webpack_exports__);
       content: ''
     };
   },
-  mounted: function mounted() {
-    console.log('ConfirmIdeaComponent mounted.');
+  created: function created() {
+    console.log('ConfirmIdeaComponent created.');
     this.user = this.$store.dispatch('getUsers');
     this.title = this.$route.params.title;
     this.img = this.$route.params.img;
@@ -3178,6 +3213,7 @@ __webpack_require__.r(__webpack_exports__);
     this.overflow = this.$route.params.overflow;
     this.content = this.$route.params.content;
   },
+  mounted: function mounted() {},
   methods: {
     editIdea: function editIdea() {},
     postIdea: function postIdea(userId) {
@@ -3306,8 +3342,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ProfileComponent",
   data: function data() {
@@ -3316,62 +3350,71 @@ __webpack_require__.r(__webpack_exports__);
       isEmailEdit: false,
       // isPasswordEdit: false,
       isIntroductionEdit: false,
-      fileInfo: "",
+      upLoadedImage: "",
       user: [],
-      selectedImg: false
+      selectedImg: false,
+      fileInfo: "",
+      profileImg: ''
     };
   },
   methods: {
     /**
      * ページ読み込みできるメソッド
      */
-    reset: function reset() {
-      this.$router.go({
-        path: this.$router.currentRoute.path,
-        force: true
-      });
+    load: function load() {
+      console.log('loaded');
     },
-    imgJudge: function imgJudge() {
-      this.selectedImg = true;
-    },
-    fileSelected: function fileSelected(event) {
+    onFileChange: function onFileChange(event) {
       this.fileInfo = event.target.files[0];
-      console.log(event);
+      this.fileUpload();
+      this.createImage();
+    },
+    createImage: function createImage() {
+      var _this = this;
+
+      //画像をプレビュー表示するロジック
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        _this.profileImg = e.target.result;
+      };
+
+      reader.readAsDataURL(this.fileInfo);
     },
     fileUpload: function fileUpload() {
-      var _this = this;
+      var _this2 = this;
 
       var formData = new FormData();
       formData.append('file', this.fileInfo);
-      axios.post('/api/fileupload', formData).then(function (response) {
+      axios.post('/api/fileUpload', formData).then(function (response) {
         console.log(response);
-        _this.user = response.data;
-        if (response.data.img) _this.selectedImg = true;
+        _this2.user = response.data;
+        if (response.data.img) _this2.selectedImg = true;
       })["catch"](function (error) {
         console.log(error);
       });
     },
     updateEmail: function updateEmail(id, email) {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.patch('/api/setting/' + id, {
         id: id,
         email: email
       }).then(function (response) {
-        _this2.isEmailEdit = false;
+        _this3.isEmailEdit = false;
         console.log(response);
       })["catch"](function (error) {
         console.log(error);
       });
     },
     updateName: function updateName(id, name) {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.patch('/api/setting/' + id, {
         id: id,
         name: name
       }).then(function (response) {
-        _this3.isNameEdit = false;
+        _this4.isNameEdit = false;
         console.log(response);
       })["catch"](function (error) {
         console.log(error);
@@ -3388,32 +3431,38 @@ __webpack_require__.r(__webpack_exports__);
     // },
     //
     updateIntroduction: function updateIntroduction(id, introduction) {
-      var _this4 = this;
+      var _this5 = this;
 
       axios.patch('/api/setting/' + id, {
         id: id,
         introduction: introduction
       }).then(function (response) {
-        _this4.isIntroductionEdit = false;
+        _this5.isIntroductionEdit = false;
         console.log(response);
       })["catch"](function (error) {
         console.log(error);
       });
     }
   },
+  created: function created() {
+    this.user = this.$store.dispatch('getUsers');
+    this.user = this.$store.state.users;
+    this.profileImg = this.$store.state.users.img;
+    console.log('created');
+  },
   mounted: function mounted() {
-    this.user = this.$store.dispatch('getUsers'); // this.$store.state.users.password
+    // this.$store.state.users.password
     // がnullやったら白抜き
     // 値アレば$store.state.users.password
-  },
-  created: function created() {
-    this.imgJudge();
-    this.user = $store.state.users;
+    console.log('mounted');
   },
   computed: {
     userimg: function userimg() {
       return this.$store.state.users;
     }
+  },
+  beforeUpdate: function beforeUpdate() {
+    this.profileImg = this.$store.state.users.img;
   }
 });
 
@@ -5997,7 +6046,7 @@ var render = function() {
               _c(
                 "label",
                 { staticClass: "c-label", attrs: { for: "contents" } },
-                [_vm._v("内容")]
+                [_vm._v("お気に入り")]
               ),
               _vm._v(" "),
               _c(
@@ -6025,7 +6074,43 @@ var render = function() {
                     }
                   })
                 ]
-              )
+              ),
+              _vm._v(" "),
+              _vm.contributorFlag
+                ? _c("div", [
+                    _c(
+                      "label",
+                      { staticClass: "c-label", attrs: { for: "purchase" } },
+                      [_vm._v("購入")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "c-button", attrs: { id: "purchase" } },
+                      [
+                        _vm._v(
+                          "\n                        購入する\n                    "
+                        )
+                      ]
+                    )
+                  ])
+                : _c("div", [
+                    _c(
+                      "label",
+                      { staticClass: "c-label", attrs: { for: "delete" } },
+                      [_vm._v("削除")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "c-button", attrs: { id: "delete" } },
+                      [
+                        _vm._v(
+                          "\n                        アイデア削除\n                    "
+                        )
+                      ]
+                    )
+                  ])
             ])
           ])
         }),
@@ -6739,19 +6824,7 @@ var render = function() {
         _c(
           "div",
           { staticClass: "confirm-container-img", attrs: { id: "ideaImg" } },
-          [
-            _c("img", {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.upLoadedImage,
-                  expression: "upLoadedImage"
-                }
-              ],
-              attrs: { src: _vm.$route.params.img, alt: "" }
-            })
-          ]
+          [_c("img", { attrs: { src: this.img, alt: "" } })]
         ),
         _vm._v(" "),
         _c("label", { staticClass: "c-label", attrs: { for: "ideaName" } }, [
@@ -6925,29 +6998,41 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "profile-container-img-right" }, [
               _c("label", [
-                _vm.selectedImg
-                  ? _c("img", { attrs: { src: "userimg.img", alt: "" } })
-                  : _c("img", {
-                      attrs: {
-                        src: __webpack_require__(/*! ../../../public/storage/スクリーンショット 2019-12-31 11.51.03.png */ "./storage/app/public/スクリーンショット 2019-12-31 11.51.03.png"),
-                        alt: ""
-                      }
-                    }),
+                _c("i", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: this.profileImg,
+                      expression: "this.profileImg"
+                    }
+                  ],
+                  staticClass: "fas fa-plus fa-7x",
+                  attrs: { "aria-hidden": "true" }
+                }),
+                _vm._v(" "),
+                _c("img", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: this.profileImg,
+                      expression: "this.profileImg"
+                    }
+                  ],
+                  attrs: { src: this.profileImg, alt: "" }
+                }),
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "c-input profile-container-img-none",
                   attrs: { id: "img", type: "file" },
-                  on: { change: _vm.fileSelected }
-                })
-              ]),
-              _vm._v(" "),
-              _c("button", {
-                on: {
-                  click: function($event) {
-                    return _vm.fileUpload(_vm.$store.state.users.id)
+                  on: {
+                    change: function($event) {
+                      return _vm.onFileChange()
+                    }
                   }
-                }
-              })
+                })
+              ])
             ])
           ]),
           _vm._v(" "),
@@ -7151,7 +7236,10 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "c-button profile-withdraw" },
+              {
+                staticClass: "c-button profile-withdraw",
+                attrs: { id: "pass" }
+              },
               [
                 _c("router-link", { attrs: { to: "/passEdit" } }, [
                   _vm._v("パスワード編集画面へ")
@@ -25126,6 +25214,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     }
   },
   actions: {
+    /**
+     * ユーザー情報取得
+     * @param commit
+     * @returns {Promise<AxiosResponse<T>>}
+     */
     getUsers: function getUsers(_ref) {
       var commit = _ref.commit;
       return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/users').then(function (response) {
@@ -25162,17 +25255,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./storage/app/public/スクリーンショット 2019-12-31 11.51.03.png":
-/*!**************************************************************!*\
-  !*** ./storage/app/public/スクリーンショット 2019-12-31 11.51.03.png ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/スクリーンショット 2019-12-31 11.51.03.png?1df05bcd0570975f12342673ffb8e879";
 
 /***/ }),
 
