@@ -59,10 +59,24 @@
 
 <!--                    未購入の場合は購入後に表示されますの表記-->
 
-                    <label for="contents" class="c-label">内容</label>
+                    <label for="contents" class="c-label">お気に入り</label>
                     <div for="fav" class="confirm-text">
                         ハートClickでお気に入り切り替え
                         <i id ="fav" :class="{'fas': true, 'fa-heart':true ,'fa-2x':true,'fav': favActive}" @click="favSwitch($store.state.users.id,detail.id)"></i>
+                    </div>
+
+                    <div v-if="contributorFlag">
+                        <label for="purchase" class="c-label">購入</label>
+                    <div id="purchase" class="c-button">
+                        購入する
+                    </div>
+                    </div>
+
+                    <div v-else>
+                    <label for="delete" class="c-label">削除</label>
+                    <div id="delete" class="c-button">
+                        アイデア削除
+                    </div>
                     </div>
 
                 </div>
@@ -211,9 +225,43 @@
                 detail:{},
                 favActive:"",
                 user:{},
-                favState:""
+                favState:"",
+                contributorFlag:true,
+                userId:""
+
 
         }
+        },
+
+        created() {
+            this.user = this.$store.dispatch('getUsers')
+                .then(()=>{
+                    // this.contributorJudge();
+                });
+            this.id = this.$route.params.id;
+            this.userId = this.$route.params.ideaUserId;
+
+
+            /**
+             * 投稿詳細取得
+             */
+            axios.get('/api/detail/'+this.id, {
+            })
+                .then((response) => {
+                    console.log(response.data);
+                    this.detail = response.data
+                    this.contributorJudge();
+                }).catch((error) => {
+                console.log(error);
+            });
+
+
+        },
+
+        mounted(){
+
+            this.getState();
+            console.log('PostDetailComponent mounted')
         },
 
         methods:{
@@ -248,6 +296,14 @@
                     console.log(error);
                 });
             },
+
+            //投稿者の投稿か確認
+            contributorJudge:function(){
+                if(this.$store.state.users.id　=== this.userId) {
+                    console.log(this.$store.state.users.id === this.userId)
+                    this.contributorFlag = false;
+                }
+            }
         },
 
         watch:{
@@ -263,32 +319,7 @@
         },
 
 
-        created() {
-            this.user = this.$store.dispatch('getUsers');
-            this.id = this.$route.params.id;
 
-
-            /**
-             * 投稿詳細取得
-             */
-            axios.get('/api/detail/'+this.id, {
-            })
-                .then((response) => {
-                    console.log(response.data);
-                    this.detail = response.data
-                }).catch((error) => {
-                console.log(error);
-            });
-
-
-        },
-
-        mounted(){
-
-          this.getState();
-
-            console.log('PostDetailComponent mounted')
-        }
 
 
     }
@@ -296,7 +327,12 @@
 
 <style scoped>
     .fav{
-        color:#FFBEDA
+        color:#FFBEDA;
+        margin:5% auto;
+    }
+
+    .c-button{
+        margin:5% auto;
     }
 
 </style>

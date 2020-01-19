@@ -10,7 +10,7 @@
 
                 <label for="ideaImg" class="c-label">アイデア画像</label>
                 <div id="ideaImg" class="confirm-container-img">
-                    <img :src="$route.params.img" v-show="upLoadedImage" alt="">
+                    <img :src="this.img"  alt="">
                 </div>
 
 
@@ -88,9 +88,8 @@
             }
         },
 
-
-        mounted() {
-            console.log('ConfirmIdeaComponent mounted.');
+        created() {
+            console.log('ConfirmIdeaComponent created.');
             this.user = this.$store.dispatch('getUsers');
             this.title = this.$route.params.title;
             this.img = this.$route.params.img;
@@ -98,6 +97,11 @@
             this.price = this.$route.params.price;
             this.overflow = this.$route.params.overflow;
             this.content = this.$route.params.content;
+        },
+
+
+        mounted() {
+
 
         },
 

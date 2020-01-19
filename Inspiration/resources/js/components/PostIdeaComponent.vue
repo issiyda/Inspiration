@@ -111,6 +111,7 @@
                 overflow:'',
                 content:'',
                 upLoadedImage:"",
+                fileInfo:""
             }
 
         },
@@ -150,17 +151,38 @@
                 });
                 },
 
-            onFileChange(e){
-                let files = e.target.files;
-                this.createImage(files[0]);
+
+
+
+            onFileChange(event){
+                this.fileInfo = event.target.files[0]
+                this.saveImage()
+                this.createImage();
             },
 
-            createImage(file){
+            createImage() {
+                //画像をプレビュー表示するロジック
                 let reader = new FileReader();
-                reader.onload = (e) =>{
+                reader.onload = (e) => {
                     this.upLoadedImage = e.target.result
                 };
-                reader.readAsDataURL(file);
+                reader.readAsDataURL(this.fileInfo);
+            },
+                //画像をDBに保存してパスを保存するロジック
+
+             saveImage(){
+
+                const formData = new FormData()
+                 console.log(this.fileInfo)
+                 formData.append('file',this.fileInfo);
+
+                axios.post('/api/fileUpload',formData)
+                    .then(response =>{
+                        console.log(response)
+                    }).catch((error)=>{
+                    console.log(error)
+                })
+
             }
             },
         computed:{

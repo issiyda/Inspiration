@@ -2031,6 +2031,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllPostComponent",
   computed: {
@@ -2844,8 +2846,33 @@ __webpack_require__.r(__webpack_exports__);
       favActive: "",
       user: {},
       favState: "",
-      contributorFlag: true
+      contributorFlag: true,
+      userId: ""
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    this.user = this.$store.dispatch('getUsers').then(function () {// this.contributorJudge();
+    });
+    this.id = this.$route.params.id;
+    this.userId = this.$route.params.ideaUserId;
+    /**
+     * 投稿詳細取得
+     */
+
+    axios.get('/api/detail/' + this.id, {}).then(function (response) {
+      console.log(response.data);
+      _this.detail = response.data;
+
+      _this.contributorJudge();
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  },
+  mounted: function mounted() {
+    this.getState();
+    console.log('PostDetailComponent mounted');
   },
   methods: {
     favSwitch: function favSwitch(userId, ideaId) {
@@ -2864,7 +2891,7 @@ __webpack_require__.r(__webpack_exports__);
      * お気に入り状態取得
      */
     getState: function getState() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('/api/favState', {
         params: {
@@ -2872,42 +2899,23 @@ __webpack_require__.r(__webpack_exports__);
           ideaId: this.id
         }
       }).then(function (response) {
-        _this.favState = response.data;
+        _this2.favState = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
     },
+    //投稿者の投稿か確認
     contributorJudge: function contributorJudge() {
-      if (this.$store.state.users.id === this.detail.user_id) console.log(this.$store.state.users.id === this.detail.user_id);
-      this.contributorFlag = false;
+      if (this.$store.state.users.id === this.userId) {
+        console.log(this.$store.state.users.id === this.userId);
+        this.contributorFlag = false;
+      }
     }
   },
   watch: {
     favState: function favState() {
       if (this.favState.favState === 1) this.favActive = true;else if (this.favState.favState === 0) this.favActive = false;
     }
-  },
-  created: function created() {
-    var _this2 = this;
-
-    this.user = this.$store.dispatch('getUsers').then(function () {
-      _this2.contributorJudge();
-    });
-    this.id = this.$route.params.id;
-    /**
-     * 投稿詳細取得
-     */
-
-    axios.get('/api/detail/' + this.id, {}).then(function (response) {
-      console.log(response.data);
-      _this2.detail = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-  },
-  mounted: function mounted() {
-    this.getState();
-    console.log('PostDetailComponent mounted');
   }
 });
 
@@ -3729,7 +3737,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.fav[data-v-a7d47a5e]{\n    color:#FFBEDA\n}\n\n", ""]);
+exports.push([module.i, "\n.fav[data-v-a7d47a5e]{\n    color:#FFBEDA;\n    margin:5% auto;\n}\n.c-button[data-v-a7d47a5e]{\n    margin:5% auto;\n}\n\n", ""]);
 
 // exports
 
@@ -5054,7 +5062,8 @@ var render = function() {
                           to: {
                             name: "postDetail",
                             params: {
-                              id: myIdea.id
+                              id: myIdea.id,
+                              ideaUserId: myIdea.user_id
                             }
                           }
                         }

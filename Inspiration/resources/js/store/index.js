@@ -40,6 +40,11 @@ export default new Vuex.Store({
         }
     },
     actions: {
+        /**
+         * ユーザー情報取得
+         * @param commit
+         * @returns {Promise<AxiosResponse<T>>}
+         */
         getUsers: function({commit}) {
             return axios.get('/users')
                 .then(response => {

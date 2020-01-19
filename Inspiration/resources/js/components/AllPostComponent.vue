@@ -41,7 +41,9 @@
 
                             <div class="c-mini-button">
                                 <router-link :to="{name:'postDetail',params:{
-                                id: myIdea.id}}">
+                                id: myIdea.id,
+                                ideaUserId: myIdea.user_id
+                                }}">
                                     詳細</router-link>
                             </div>
                             <div type="submit" class="c-mini-button" value="編集">

@@ -13,15 +13,13 @@
                         <div class="profile-container-img-left">
                             <label class ="c-label" for="img">プロフィール画像</label>
                         </div>
-                        <div class="profile-container-img-right">
+                        <div v-cloak class="profile-container-img-right">
                             <label>
-                                <img v-if="selectedImg" src="userimg.img"  alt="">
-                                <img v-else src="../../../public/storage/スクリーンショット 2019-12-31 11.51.03.png" alt="">
-                                <input id="img" @change="fileSelected" class ="c-input profile-container-img-none" type="file" />
+                                <i aria-hidden="true" v-show="this.profileImg" class="fas fa-plus fa-7x"></i>
+                                <img :src="this.profileImg"  v-show="this.profileImg" alt="">
+                                <input id="img" @change="onFileChange()" class ="c-input profile-container-img-none" type="file" />
                                 <!-- hoverしたら画像をアップロードの文字が浮き上がって画像が薄暗く -->
                             </label>
-                            <button @click="fileUpload($store.state.users.id)"></button>
-
                         </div>
                     </div>
 
@@ -51,7 +49,7 @@
 
                     <div class="profile-container-input">
                         <label class ="c-label" for="pass">パスワード</label>
-                        <div class="c-button profile-withdraw">
+                        <div id="pass" class="c-button profile-withdraw">
                             <router-link to="/passEdit">パスワード編集画面へ</router-link>
                         </div>
                     </div>
@@ -81,9 +79,11 @@
                 isEmailEdit: false,
                 // isPasswordEdit: false,
                 isIntroductionEdit: false,
-                fileInfo:"",
+                upLoadedImage:"",
                 user:[],
                 selectedImg: false,
+                fileInfo:"",
+                profileImg:''
 
 
 
@@ -95,21 +95,29 @@
             /**
              * ページ読み込みできるメソッド
              */
-            reset: function () {
-                this.$router.go({path: this.$router.currentRoute.path, force: true});
+
+            load: function() {
+                console.log('loaded');
             },
 
 
 
 
-
-            imgJudge:function(){
-                        this.selectedImg = true;
+            onFileChange(event){
+                this.fileInfo = event.target.files[0];
+                this.fileUpload()
+                this.createImage();
             },
 
-            fileSelected(event){
-                    this.fileInfo = event.target.files[0];
-                    console.log(event);
+
+
+            createImage() {
+                //画像をプレビュー表示するロジック
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    this.profileImg = e.target.result
+                };
+                reader.readAsDataURL(this.fileInfo);
             },
 
             fileUpload(){
@@ -117,7 +125,7 @@
 
                 formData.append('file',this.fileInfo);
 
-                axios.post('/api/fileupload',formData)
+                axios.post('/api/fileUpload',formData)
                     .then((response) =>{
                     console.log(response);
                         this.user = response.data;
@@ -170,19 +178,23 @@
                 }
         },
 
-        mounted() {
+        created() {
             this.user = this.$store.dispatch('getUsers');
+            this.user = this.$store.state.users;
+            this.profileImg = this.$store.state.users.img;
+            console.log('created')
+
+        },
+
+        mounted() {
 
             // this.$store.state.users.password
             // がnullやったら白抜き
             // 値アレば$store.state.users.password
+            console.log('mounted')
 
 
-        },
 
-        created() {
-            this.imgJudge();
-            this.user = $store.state.users;
         },
 
         computed: {
@@ -190,6 +202,10 @@
                 return this.$store.state.users
             }
         },
+
+        beforeUpdate(){
+            this.profileImg = this.$store.state.users.img;
+    },
 
 
 

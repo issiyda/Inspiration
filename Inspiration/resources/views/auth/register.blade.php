@@ -103,12 +103,12 @@
 
                 <div class="c-form-container-input register-input">
                     <label class ="c-label" for="pass_confirmation">password再入力</label>
-                    <input id="pass_confirmation" name="passRe" class ="c-input" type="password" placeholder="パスワード再入力">
-                    @error('passRe')
-                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('passRe') }}</strong>
-                                    </span>
-                    @enderror
+                    <input id="pass_confirmation" name="password_confirmation" class ="c-input" type="password" placeholder="パスワード再入力">
+{{--                    @error('passRe')--}}
+{{--                    <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $errors->first('passRe') }}</strong>--}}
+{{--                                    </span>--}}
+{{--                    @enderror--}}
                 </div>
 
                 <input type="submit" class="c-button" >

@@ -122,6 +122,55 @@ class InspirationController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * アイデア投稿用
+     */
+    public function imgUpload(Request $request)
+    {
+        $file = request()->file;
+
+        $file_name = $file->getClientOriginalName();
+
+            $file->storeAs('public/',$file_name);
+
+            $user = \App\User::find(1);
+
+
+
+            $user->update(['img' =>'/storage/'.$file_name]);
+
+//            return $user;
+
+
+    }
+
+    /**
+     * @param Request $request
+     * プロフィール画像投稿用
+     */
+    public function profileImg(Request $request)
+    {
+        $file = request()->file;
+
+        $file_name = $file->getClientOriginalName();
+
+        $file->storeAs('public/',$file_name);
+
+        $user = \App\User::find(1);
+
+        $user->update(['img' =>'/storage/'.$file_name]);
+
+//            return $user;
+
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * お気に入り情報取得
+     */
     public function favState(Request $request)
     {
         $userId = $request->input('userId');
@@ -137,6 +186,11 @@ class InspirationController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * お気に入りの切り替え
+     */
     public function favSwitch(Request $request)
     {
 
