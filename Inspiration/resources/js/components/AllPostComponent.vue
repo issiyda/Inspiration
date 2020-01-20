@@ -81,6 +81,10 @@
                 return this.$store.state.ideas.myIdea;
             },
 
+            beforeUpdate() {
+                this.$emit('close-loading');
+            },
+
         },
 
     }

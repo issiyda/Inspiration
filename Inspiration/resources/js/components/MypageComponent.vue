@@ -149,6 +149,10 @@
             <router-link to="/allReview" class ="p-mypage-more">もっと見る</router-link>
 
 
+            <div class ="c-button">
+                <router-link to="/allIdea">全アイデアを見る</router-link>
+            </div>
+
 
 
 
@@ -182,14 +186,14 @@
         },
 
         created(){
+            this.$emit('open-loading');
             console.log('MypageComponent mounted.');
             this.ideas = this.$store.dispatch('getUserIdeas');
-            this.user = this.$store.dispatch('getUsers');
+            this.user = this.$store.dispatch('getUsers')
 
         },
-        mounted() {
-
-
+        beforeUpdate() {
+            this.$emit('close-loading');
         },
 
         computed:{

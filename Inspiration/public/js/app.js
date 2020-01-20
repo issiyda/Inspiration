@@ -1904,6 +1904,9 @@ __webpack_require__.r(__webpack_exports__);
     console.log('AllBuyComponent mounted.');
     this.ideas = this.$store.dispatch('getUserIdeas');
   },
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
+  },
   computed: {
     buyingIdeas: function buyingIdeas() {
       return this.$store.state.ideas.buyingIdea;
@@ -1927,7 +1930,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "AllFavoriteComponent"
+  name: "AllFavoriteComponent",
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
+  }
 });
 
 /***/ }),
@@ -1945,8 +1951,130 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "AllIdeaComponent"
+  name: "AllIdeaComponent",
+  data: function data() {
+    return {
+      ideas: {}
+    };
+  },
+  mounted: function mounted() {
+    this.ideas = this.$store.state.ideas.allIdea;
+  },
+  created: function created() {
+    this.ideas = this.$store.dispatch('getUserIdeas');
+  },
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
+  },
+  methods: {
+    categoryName: function categoryName(id) {
+      if (id === 1) {
+        return 'マッチング';
+      } else if (id === 2) {
+        return '掲示板';
+      } else if (id === 3) {
+        return 'SNS';
+      } else if (id === 4) {
+        return 'ECサイト';
+      } else if (id === 5) {
+        return '情報発信';
+      } else {
+        return 'その他';
+      }
+    }
+  },
+  computed: {
+    filteredIdeas: function filteredIdeas() {}
+    /**
+     * 数が増えたときにどうするか考えないと
+     *
+     * @returns {string}
+     */
+    // categoryName(id){
+    //     if(id === 1 ){
+    //         return 'マッチング'
+    //
+    //     }else if(id === 2) {
+    //         return '掲示板'
+    //     }
+    //
+    //     else if(id === 3) {
+    //         return 'SNS'
+    //     }else if(id === 4) {
+    //         return 'ECサイト'
+    //
+    //     } else if(id === 5){
+    //         return '情報発信'
+    //     } else{
+    //         return 'その他'
+    //     }
+    // },
+
+  }
 });
 
 /***/ }),
@@ -2038,6 +2166,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     myIdeas: function myIdeas() {
       return this.$store.state.ideas.myIdea;
+    },
+    beforeUpdate: function beforeUpdate() {
+      this.$emit('close-loading');
     }
   }
 });
@@ -2058,7 +2189,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "AllReviewComponent"
+  name: "AllReviewComponent",
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
+  }
 });
 
 /***/ }),
@@ -2168,7 +2302,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "EditIdeaComponent"
+  name: "EditIdeaComponent",
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
+  }
 });
 
 /***/ }),
@@ -2342,6 +2479,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MypageComponent",
@@ -2355,11 +2496,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {},
   created: function created() {
+    this.$emit('open-loading');
     console.log('MypageComponent mounted.');
     this.ideas = this.$store.dispatch('getUserIdeas');
     this.user = this.$store.dispatch('getUsers');
   },
-  mounted: function mounted() {},
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
+  },
   computed: {
     buyingIdeas: function buyingIdeas() {
       return this.$store.state.ideas.buyingIdea;
@@ -2528,6 +2672,9 @@ var _window$validators = window.validators,
     console.log('PostIdeaComponent mounted.');
     this.user = this.$store.dispatch('getUsers');
   },
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
+  },
   // watch:{
   //     currentPass:{
   //         if(this.dbCurrentPass !== this.currentPass)
@@ -2606,7 +2753,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "postCompletedComponent"
+  name: "postCompletedComponent",
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
+  }
 });
 
 /***/ }),
@@ -2837,6 +2987,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "headerBeforeComponent",
   data: function data() {
@@ -2847,12 +3004,14 @@ __webpack_require__.r(__webpack_exports__);
       user: {},
       favState: "",
       contributorFlag: true,
-      userId: ""
+      userId: "",
+      deleteState: true
     };
   },
   created: function created() {
     var _this = this;
 
+    this.$emit('close-loading');
     this.user = this.$store.dispatch('getUsers').then(function () {// this.contributorJudge();
     });
     this.id = this.$route.params.id;
@@ -2871,9 +3030,11 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   mounted: function mounted() {
+    this.$emit('close-loading');
     this.getState();
     console.log('PostDetailComponent mounted');
   },
+  beforeUpdate: function beforeUpdate() {},
   methods: {
     favSwitch: function favSwitch(userId, ideaId) {
       axios.post('/api/favorite/', {
@@ -2910,8 +3071,29 @@ __webpack_require__.r(__webpack_exports__);
         console.log(this.$store.state.users.id === this.userId);
         this.contributorFlag = false;
       }
+    },
+
+    /**
+     * 投稿削除のためのルーティング
+     */
+    postDelete: function postDelete() {
+      axios["delete"]('/api/ideaDelete', {
+        params: {
+          ideaId: this.id
+        }
+      }).then(function (response) {
+        console.log(response);
+        alert("削除完了しました");
+      })["catch"](function (error) {
+        console.log(error);
+        alert("削除失敗しました");
+      });
+    },
+    appearForm: function appearForm() {
+      this.deleteState = false;
     }
   },
+  computed: {},
   watch: {
     favState: function favState() {
       if (this.favState.favState === 1) this.favActive = true;else if (this.favState.favState === 0) this.favActive = false;
@@ -3047,6 +3229,9 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     console.log('PostIdeaComponent mounted.');
     this.user = this.$store.dispatch('getUsers');
+  },
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
   },
   methods: {
     confirm: function confirm() {
@@ -3222,6 +3407,9 @@ __webpack_require__.r(__webpack_exports__);
     this.content = this.$route.params.content;
   },
   mounted: function mounted() {},
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
+  },
   methods: {
     editIdea: function editIdea() {},
     postIdea: function postIdea(userId) {
@@ -3350,6 +3538,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ProfileComponent",
   data: function data() {
@@ -3362,16 +3551,32 @@ __webpack_require__.r(__webpack_exports__);
       user: [],
       selectedImg: false,
       fileInfo: "",
-      profileImg: ''
+      profileImg: false
     };
   },
+  created: function created() {
+    this.user = this.$store.dispatch('getUsers'); // this.user = this.$store.state.users
+
+    console.log('created'); // this.img_src = require(this.profileImg);
+
+    this.getImg();
+  },
+  mounted: function mounted() {
+    this.profileImg = __webpack_require__("./resources/js/components sync recursive")(this.$store.state.users.img); // this.$store.state.users.password
+    // がnullやったら白抜き
+    // 値アレば$store.state.users.password
+
+    console.log('mounted');
+  },
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
+  },
+  computed: {},
   methods: {
     /**
-     * ページ読み込みできるメソッド
+     * DBから画像取得
      */
-    load: function load() {
-      console.log('loaded');
-    },
+    getImg: function getImg() {},
     onFileChange: function onFileChange(event) {
       this.fileInfo = event.target.files[0];
       this.fileUpload();
@@ -3451,27 +3656,10 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     }
-  },
-  created: function created() {
-    this.user = this.$store.dispatch('getUsers');
-    this.user = this.$store.state.users;
-    this.profileImg = this.$store.state.users.img;
-    console.log('created');
-  },
-  mounted: function mounted() {
-    // this.$store.state.users.password
-    // がnullやったら白抜き
-    // 値アレば$store.state.users.password
-    console.log('mounted');
-  },
-  computed: {
-    userimg: function userimg() {
-      return this.$store.state.users;
-    }
-  },
-  beforeUpdate: function beforeUpdate() {
-    this.profileImg = this.$store.state.users.img;
-  }
+  } // beforeUpdate() {
+  //     this.profileImg this.$store.state.users.img;
+  // }
+
 });
 
 /***/ }),
@@ -3709,6 +3897,9 @@ __webpack_require__.r(__webpack_exports__);
   name: "headerBeforeComponent",
   mounted: function mounted() {
     console.log('withdrawComponent mounted');
+  },
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
   },
   methods: {
     userWithdraw: function userWithdraw(id) {
@@ -4994,7 +5185,114 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("main", { staticClass: "main" }, [
+    _c("div", { staticClass: "p-mypage" }, [
+      _c("h2", { staticClass: "f-h2" }, [_vm._v("全アイデア")]),
+      _vm._v(" "),
+      _c("h3", { staticClass: "f-h3" }, [_vm._v("全アイデア")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.keyword,
+            expression: "keyword"
+          }
+        ],
+        attrs: { type: "text" },
+        domProps: { value: _vm.keyword },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.keyword = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "ic" },
+        _vm._l(_vm.filteredIdeas, function(allIdea) {
+          return _c(
+            "div",
+            { staticClass: "ic-card" },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "ic-a",
+                  attrs: {
+                    to: {
+                      name: "postDetail",
+                      params: {
+                        id: allIdea.id,
+                        ideaUserId: allIdea.userId
+                      }
+                    },
+                    href: "#"
+                  }
+                },
+                [
+                  _c("h4", { staticClass: "f-h4" }, [
+                    _vm._v(_vm._s(allIdea.title))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ic-img" }),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("カテゴリ")]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _vm._v(_vm._s(_vm.categoryName(allIdea.category_id)))
+                  ]),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("価格")]),
+                  _vm._v(" "),
+                  _c("div", [_vm._v(_vm._s(allIdea.price))]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ic-review" }, [
+                    _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
+                    _vm._v(" "),
+                    _c("i", { staticClass: "fas fa-star ic-star" }),
+                    _vm._v(" "),
+                    _c("i", { staticClass: "fas fa-star ic-star" }),
+                    _vm._v(" "),
+                    _c("i", { staticClass: "fas fa-star ic-star" }),
+                    _vm._v(" "),
+                    _c("i", { staticClass: "fas fa-star ic-star" }),
+                    _vm._v(" "),
+                    _c("i", { staticClass: "fas fa-star ic-star" })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ic-desc" }, [
+                    _c("div", { staticClass: "ic-desc-overflow" }, [
+                      _vm._v("概要")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "ic-desc-text" }, [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(allIdea.overflow) +
+                          "\n                        "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("投稿日")]),
+                  _vm._v(" "),
+                  _c("div", [_vm._v(_vm._s(allIdea.created_at))])
+                ]
+              )
+            ],
+            1
+          )
+        }),
+        0
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -5563,6 +5861,17 @@ var render = function() {
           "router-link",
           { staticClass: "p-mypage-more", attrs: { to: "/allReview" } },
           [_vm._v("もっと見る")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "c-button" },
+          [
+            _c("router-link", { attrs: { to: "/allIdea" } }, [
+              _vm._v("全アイデアを見る")
+            ])
+          ],
+          1
         )
       ],
       1
@@ -6112,14 +6421,58 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "c-button", attrs: { id: "delete" } },
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.deleteState,
+                            expression: "deleteState"
+                          }
+                        ],
+                        staticClass: "c-button",
+                        attrs: { id: "delete" },
+                        on: {
+                          click: function($event) {
+                            return _vm.appearForm()
+                          }
+                        }
+                      },
                       [
                         _vm._v(
                           "\n                        アイデア削除\n                    "
                         )
                       ]
                     )
-                  ])
+                  ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.deleteState,
+                      expression: "!deleteState"
+                    }
+                  ]
+                },
+                [
+                  _c("p", [_vm._v("本当に削除しますか？？")]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "c-button", on: { click: _vm.postDelete } },
+                    [
+                      _c("router-link", { attrs: { to: "mypage" } }, [
+                        _vm._v("削除")
+                      ])
+                    ],
+                    1
+                  )
+                ]
+              )
             ])
           ])
         }),
@@ -7025,11 +7378,11 @@ var render = function() {
                     {
                       name: "show",
                       rawName: "v-show",
-                      value: this.profileImg,
-                      expression: "this.profileImg"
+                      value: !this.profileImg,
+                      expression: "!this.profileImg"
                     }
                   ],
-                  attrs: { src: this.profileImg, alt: "" }
+                  attrs: { src: _vm.profileImg, alt: "" }
                 }),
                 _vm._v(" "),
                 _c("input", {
@@ -23739,11 +24092,12 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 
+ //
+// new Vue({
+//     el: '#app',
+//     router: router
+// });
 
-new Vue({
-  el: '#app',
-  router: _router__WEBPACK_IMPORTED_MODULE_0__["default"]
-});
 Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 Vue.use(window.vuelidate["default"]);
 /**
@@ -23756,11 +24110,47 @@ Vue.use(window.vuelidate["default"]);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+var loadImg = new Vue();
 var app = new Vue({
   el: '#app',
   router: _router__WEBPACK_IMPORTED_MODULE_0__["default"],
-  store: _store__WEBPACK_IMPORTED_MODULE_2__["default"]
+  store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
+  data: function data() {
+    return {
+      show: true
+    };
+  },
+  mounted: function mounted() {
+    console.log('loadingComponent mounted');
+  },
+  methods: {
+    openMethod: function openMethod() {
+      this.show = true;
+    },
+    closeMethod: function closeMethod() {
+      this.show = false;
+    }
+  }
 });
+
+/***/ }),
+
+/***/ "./resources/js/components sync recursive":
+/*!**************************************!*\
+  !*** ./resources/js/components sync ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function webpackEmptyContext(req) {
+	var e = new Error("Cannot find module '" + req + "'");
+	e.code = 'MODULE_NOT_FOUND';
+	throw e;
+}
+webpackEmptyContext.keys = function() { return []; };
+webpackEmptyContext.resolve = webpackEmptyContext;
+module.exports = webpackEmptyContext;
+webpackEmptyContext.id = "./resources/js/components sync recursive";
 
 /***/ }),
 
@@ -23779,7 +24169,6 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('nav-bar-component', __webpack_require__(/*! ./components/common/NavBarComponent */ "./resources/js/components/common/NavBarComponent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('side-bar-component', __webpack_require__(/*! ./components/common/SideBarComponent */ "./resources/js/components/common/SideBarComponent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('footer-component', __webpack_require__(/*! ./components/common/FooterComponent */ "./resources/js/components/common/FooterComponent.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('');
 
 /***/ }),
 
@@ -25198,6 +25587,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   state: {
     users: {},
     ideas: {
+      allIdea: {},
       buyingIdea: {},
       myIdea: {},
       favIdea: {},

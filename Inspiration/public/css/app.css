@@ -557,6 +557,23 @@ a {
   margin: 5% auto;
 }
 
+.gif-container {
+  height: 700px;
+  width: 100%;
+  z-index: 2;
+  background: #fff;
+  -webkit-box-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+}
+
+.loading {
+  width: 20%;
+}
+
 .c-button,
 .c-mini-button,
 .c-radio {

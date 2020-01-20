@@ -121,6 +121,10 @@
             this.user = this.$store.dispatch('getUsers');
         },
 
+        beforeUpdate() {
+            this.$emit('close-loading');
+        },
+
         methods: {
             confirm: function () {
                 this.$router.push({ name: 'postConfirm',params:{

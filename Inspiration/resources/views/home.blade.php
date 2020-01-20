@@ -22,6 +22,8 @@
 </head>
 
 <body>
+
+
 <div id="app">
 
 
@@ -114,6 +116,7 @@
                     </div>
                     <div class="home-what-item">
                         <img src="{{asset(('/img/staff2.jpeg'))}}" alt="">
+
                         <p>マッチング</p>
                     </div>
                 </div>

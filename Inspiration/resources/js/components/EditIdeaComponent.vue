@@ -95,7 +95,11 @@
 
 <script>
     export default {
-        name: "EditIdeaComponent"
+        name: "EditIdeaComponent",
+
+        beforeUpdate() {
+            this.$emit('close-loading');
+        },
     }
 </script>
 

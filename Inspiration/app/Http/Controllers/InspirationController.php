@@ -112,6 +112,19 @@ class InspirationController extends Controller
 
     }
 
+    public function ideaDelete(Request $request){
+
+
+        $ideaId = $request->input('ideaId');
+
+
+        Idea::where('id',$ideaId)->delete();
+
+        return response()->json([
+            'success' => 'アイデアを削除しました'
+        ]);
+    }
+
 
     public function post(Request $request)
     {

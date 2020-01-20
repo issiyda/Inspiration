@@ -102,7 +102,10 @@
 
         mounted() {
 
+        },
 
+        beforeUpdate() {
+            this.$emit('close-loading');
         },
 
         methods: {

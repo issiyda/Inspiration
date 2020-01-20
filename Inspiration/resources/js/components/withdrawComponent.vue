@@ -44,6 +44,10 @@
             console.log('withdrawComponent mounted');
         },
 
+        beforeUpdate() {
+            this.$emit('close-loading');
+        },
+
         methods: {
             userWithdraw: function (id) {
                 axios.get('/api/withdraw/'+id,

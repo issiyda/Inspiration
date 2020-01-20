@@ -4,8 +4,13 @@
 
 <script>
     export default {
-        name: "AllFavoriteComponent"
+        name: "AllFavoriteComponent",
+
+        beforeUpdate() {
+            this.$emit('close-loading');
+        },
     }
+
 </script>
 
 <style scoped>

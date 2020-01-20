@@ -69,6 +69,10 @@
 
         },
 
+        beforeUpdate() {
+            this.$emit('close-loading');
+        },
+
         computed:{
 
             buyingIdeas(){

@@ -131,6 +131,10 @@
             this.user = this.$store.dispatch('getUsers');
         },
 
+        beforeUpdate() {
+            this.$emit('close-loading');
+        },
+
         // watch:{
         //     currentPass:{
         //         if(this.dbCurrentPass !== this.currentPass)

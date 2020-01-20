@@ -10,11 +10,11 @@ window.axios = require('axios');
 import router from './router';
 import VueRouter from 'vue-router'
 import store from './store'
-
-new Vue({
-    el: '#app',
-    router: router
-});
+//
+// new Vue({
+//     el: '#app',
+//     router: router
+// });
 
 Vue.use(VueRouter);
 Vue.use(window.vuelidate.default);
@@ -29,10 +29,37 @@ Vue.use(window.vuelidate.default);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-
+const loadImg = new Vue();
 
 const app = new Vue({
     el: '#app',
     router,
-    store
+    store,
+
+    data:function(){
+
+        return{
+
+            show: true
+        }
+
+    },
+
+    mounted: function(){
+        console.log('loadingComponent mounted');
+    },
+
+    methods:{
+
+
+
+        openMethod: function(){
+            this.show = true
+        },
+
+        closeMethod: function(){
+            this.show = false
+        }
+    },
+
 });

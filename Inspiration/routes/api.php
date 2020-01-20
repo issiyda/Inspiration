@@ -70,7 +70,7 @@ Route::get('/detail/{id}','InspirationController@detail');
 /**
  * アイデア削除ルーティング
  */
-Route::get('/ideaEdit','InspirationController@ideaDelete');
+Route::delete('/ideaDelete','InspirationController@ideaDelete');
 
 
 /**

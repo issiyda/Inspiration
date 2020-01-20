@@ -5,6 +5,8 @@
 <script>
     export default {
         name: "passReminderComponent"
+
+
     }
 </script>
 

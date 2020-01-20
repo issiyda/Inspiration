@@ -42,7 +42,11 @@
 
 <script>
     export default {
-        name: "postCompletedComponent"
+        name: "postCompletedComponent",
+
+        beforeUpdate() {
+            this.$emit('close-loading');
+        },
     }
 </script>
 

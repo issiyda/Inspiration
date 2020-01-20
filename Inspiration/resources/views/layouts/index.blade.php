@@ -22,10 +22,10 @@
 </head>
 
 <body>
+
 <div id="app">
 
-
-{{--<nav-bar-component></nav-bar-component>--}}
+    {{--<nav-bar-component></nav-bar-component>--}}
 
     <div class ="nav">
 
@@ -67,15 +67,26 @@
 
     </div>
 
+
+
     <div class="nav-height"></div>
 
-<router-view></router-view>
+    <div class ="gif-container" v-if="show">
+        <img class ="loading" src="/images/ajax-loader.gif">
+    </div>
+{{--    <loading-component></loading-component>--}}
+
+
+    <router-view v-on:close-loading="closeMethod()" v-on:open-loading="openMethod()"></router-view>
+
 
 <side-bar-component></side-bar-component>
 
 <footer-component></footer-component>
 
 </div>
+
+
 
 <!-- script js-->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -84,6 +95,8 @@
 {{--Vueのバリデーション用--}}
 <script src="https://cdn.jsdelivr.net/npm/vuelidate@0.7.4/dist/validators.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vuelidate@0.7.4/dist/vuelidate.min.js"></script>
+
+
 
 </body>
 </html>

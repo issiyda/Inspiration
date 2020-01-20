@@ -10,11 +10,11 @@ export default new Vuex.Store({
 
         users:{},
         ideas: {
+            allIdea:{},
             buyingIdea: {},
             myIdea: {},
             favIdea :{} ,
             review : {}
-
         }
 
     },
@@ -37,7 +37,7 @@ export default new Vuex.Store({
         },
         setIdeas: function(state,ideas){
             state.ideas = ideas
-        }
+        },
     },
     actions: {
         /**

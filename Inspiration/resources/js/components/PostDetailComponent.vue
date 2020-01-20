@@ -74,9 +74,16 @@
 
                     <div v-else>
                     <label for="delete" class="c-label">削除</label>
-                    <div id="delete" class="c-button">
+                    <div id="delete" class="c-button" v-show="deleteState" @click="appearForm()">
                         アイデア削除
                     </div>
+                    </div>
+
+                    <div v-show="!deleteState">
+                        <p>本当に削除しますか？？</p>
+                        <div class="c-button" @click="postDelete" >
+                            <router-link to="mypage">削除</router-link>
+                        </div>
                     </div>
 
                 </div>
@@ -227,13 +234,18 @@
                 user:{},
                 favState:"",
                 contributorFlag:true,
-                userId:""
+                userId:"",
+                deleteState:true
+
 
 
         }
         },
 
+
         created() {
+            this.$emit('close-loading');
+
             this.user = this.$store.dispatch('getUsers')
                 .then(()=>{
                     // this.contributorJudge();
@@ -259,23 +271,25 @@
         },
 
         mounted(){
-
+            this.$emit('close-loading');
             this.getState();
             console.log('PostDetailComponent mounted')
         },
 
-        methods:{
+        beforeUpdate() {
+        },
+        methods: {
 
-            favSwitch:function(userId,ideaId)
-            {
-               axios.post('/api/favorite/',
-                   {userId:userId,
-                    ideaId:ideaId
-               }).then((response) =>{
-                   console.log(response)
-               }).catch((error) =>{
-                   console.log(error);
-               });
+            favSwitch: function (userId, ideaId) {
+                axios.post('/api/favorite/',
+                    {
+                        userId: userId,
+                        ideaId: ideaId
+                    }).then((response) => {
+                    console.log(response)
+                }).catch((error) => {
+                    console.log(error);
+                });
 
                 this.getState();
             },
@@ -283,7 +297,7 @@
             /**
              * お気に入り状態取得
              */
-            getState:function() {
+            getState: function () {
                 axios.get('/api/favState', {
                     params: {
                         userId: this.$store.state.users.id,
@@ -298,13 +312,42 @@
             },
 
             //投稿者の投稿か確認
-            contributorJudge:function(){
-                if(this.$store.state.users.id　=== this.userId) {
+            contributorJudge: function () {
+                if (this.$store.state.users.id === this.userId) {
                     console.log(this.$store.state.users.id === this.userId)
                     this.contributorFlag = false;
                 }
+            },
+
+            /**
+             * 投稿削除のためのルーティング
+             */
+            postDelete: function () {
+                axios.delete('/api/ideaDelete', {
+                    params: {
+                        ideaId: this.id
+                    }
+                }).then((response) => {
+                    console.log(response)
+                    alert("削除完了しました");
+                }).catch((error) => {
+                    console.log(error);
+                    alert("削除失敗しました");
+
+                })
+            },
+
+            appearForm:function(){
+
+                this.deleteState = false
             }
         },
+
+        computed:{
+
+
+            },
+
 
         watch:{
 

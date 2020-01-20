@@ -4,7 +4,11 @@
 
 <script>
     export default {
-        name: "AllReviewComponent"
+        name: "AllReviewComponent",
+
+        beforeUpdate() {
+            this.$emit('close-loading');
+        },
     }
 </script>
 
