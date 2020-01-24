@@ -1648,3 +1648,64 @@ confirm とdetailの共通部分　
   padding: 5%;
 }
 
+.allIdea-button {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  margin: 5% 0 5% 75%;
+  padding: 1%;
+  width: 15%;
+}
+
+.search {
+  margin-bottom: 5%;
+}
+
+.search h4 {
+  margin-bottom: 5%;
+}
+
+.search-container {
+  display: -webkit-box;
+  display: flex;
+  justify-content: space-around;
+}
+
+.search-subject {
+  width: 100%;
+  text-align: center;
+}
+
+.search-category {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+  width: 30%;
+}
+
+.search-category-radio {
+  margin: 4% auto;
+  width: 30%;
+}
+
+.search-price {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 20%;
+}
+
+.search-price-input {
+  height: 10%;
+  width: 80%;
+}
+
+.search-date {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+  width: 20%;
+}
+

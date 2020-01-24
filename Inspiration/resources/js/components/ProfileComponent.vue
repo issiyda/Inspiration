@@ -102,7 +102,7 @@
         },
 
         mounted() {
-            this.profileImg = require(this.$store.state.users.img);
+            // this.profileImg = require(this.$store.state.users.img);
             // this.$store.state.users.password
             // がnullやったら白抜き
             // 値アレば$store.state.users.password

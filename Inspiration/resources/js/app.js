@@ -10,14 +10,13 @@ window.axios = require('axios');
 import router from './router';
 import VueRouter from 'vue-router'
 import store from './store'
-//
-// new Vue({
-//     el: '#app',
-//     router: router
-// });
+import VCalendar from 'v-calendar';
+
+
 
 Vue.use(VueRouter);
 Vue.use(window.vuelidate.default);
+Vue.use(VCalendar);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -31,6 +30,8 @@ Vue.use(window.vuelidate.default);
 
 const loadImg = new Vue();
 
+
+
 const app = new Vue({
     el: '#app',
     router,
@@ -40,7 +41,13 @@ const app = new Vue({
 
         return{
 
-            show: true
+            show: true,
+            mode: 'single',
+            formats: {
+                input: ['YYYY-MM-DD'],
+            },
+            selectedDate: null,
+
         }
 
     },
@@ -61,5 +68,11 @@ const app = new Vue({
             this.show = false
         }
     },
+
+    filters: {
+        moment: function (date) {
+            return moment(date).format('YYYY/MM/DD HH:mm');// eslint-disable-line
+        }
+    }
 
 });

@@ -66,6 +66,57 @@ Route::get('/ideaEdit','InspirationController@ideaDelete');
  */
 Route::get('/detail/{id}','InspirationController@detail');
 
+/**
+ * カテゴリー検索
+ */
+Route::get('categorySearch','InspirationController@categorySearch');
+
+/**
+ * 価格検索以上
+ */
+Route::get('priceSearch/higher','InspirationController@priceSearchHigher');
+
+/**
+ * 価格検索以下
+ */
+Route::get('priceSearch/lower','InspirationController@priceSearchLower');
+
+/**
+ * 価格検索中間
+ */
+Route::get('priceSearch/middle','InspirationController@priceSearchMiddle');
+
+Route::get('termSearch/before','InspirationController@termSearchBefore');
+
+/**
+ * 期間検索（年別）
+ */
+Route::get('termSearch/year','InspirationController@termSearchYear');
+
+/**
+ * 期間検索（月別）
+ */
+Route::get('termSearch/month','InspirationController@termSearchMonth');
+
+/**
+ * 期間検索（日別）
+ */
+Route::get('termSearch/day','InspirationController@termSearchDay');
+
+/**
+ * 期間検索（以前）
+ */
+Route::get('termSearch/before','InspirationController@termSearchBefore');
+
+/**
+ * 期間検索（以降）
+ */
+Route::get('termSearch/after','InspirationController@termSearchAfter');
+
+/**
+ * 期間検索（間）
+ */
+Route::get('termSearch/middle','InspirationController@termSearchMiddle');
 
 /**
  * アイデア削除ルーティング
