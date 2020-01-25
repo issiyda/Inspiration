@@ -1639,8 +1639,56 @@ confirm とdetailの共通部分　
   margin-bottom: 5%;
 }
 
-.completed-button {
+.completed-paragraph {
+  margin: 3%;
+}
+
+.completed-header {
+  color: #FFBEDA;
+  font-size: 24px;
   margin: 10% auto;
+}
+
+.completed-share {
+  border: none;
+  box-shadow: 2px 2px 4px gray;
+  color: #FFF;
+  border-radius: 7px;
+  display: inline-block;
+  height: 10%;
+  width: 45%;
+  text-align: center;
+  font-size: 24px;
+  line-height: 50px;
+  background: #1da1f3;
+  margin: 10% auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.completed-share-twitter {
+  text-shadow: 2px 2px 0px #4287d6;
+  font-size: 30px;
+}
+
+.completed-share span {
+  display: inline-block;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.completed-share:hover span {
+  -webkit-transform: rotateX(360deg);
+  transform: rotateX(360deg);
+}
+
+.completed-container {
+  display: -webkit-box;
+  display: flex;
+}
+
+.completed-button {
+  margin: 5% auto;
 }
 
 .email-alert {

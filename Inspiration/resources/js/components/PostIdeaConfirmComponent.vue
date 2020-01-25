@@ -63,7 +63,8 @@
 
 
                 <div class ="c-button confirm-post" @click="postIdea(userId)">
-                <router-link to="postComplete">投稿する</router-link>
+                <router-link :to="{name:'postComplete',params:{
+                                    title:this.title}}">投稿する</router-link>
                 </div>
 
             </form>

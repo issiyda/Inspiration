@@ -11,7 +11,7 @@
                 <div class="profile-container-input">
                     <div class="profile-container-img">
                         <div class="profile-container-img-left">
-                            <label class ="c-label" for="img">プロフィール画像</label>
+                            <label class="c-label" for="img">プロフィール画像</label>
                         </div>
                         <div v-cloak class="profile-container-img-right">
                             <label>
@@ -42,23 +42,30 @@
 
 
                     <div class="profile-container-input">
-                        <label class ="c-label" for="introduction">プロフィール文</label>
+                        <label class="c-label" for="introduction">プロフィール文</label>
 <!--                        <textarea name="" id="profile" class ="c-textarea" cols="30" rows="10" placeholder="自己紹介を記入してください"></textarea>-->
                         <div v-if="!isIntroductionEdit" @dblclick="isIntroductionEdit = true" class="c-input profile-container-textarea" type="text" placeholder="（例）お取引よろしくお願いいたします" value="{$store.state.users.introduction}">{{$store.state.users.introduction}}</div>
                         <textarea v-else id="introduction" @blur="updateIntroduction($store.state.users.id, $store.state.users.introduction)" v-model="$store.state.users.introduction" class="c-input" type="text" placeholder="（例）お取引よろしくお願いいたします">{$store.state.users.introduction}</textarea>
                     </div>
 
                     <div class="profile-container-input">
-                        <label class ="c-label" for="pass">パスワード</label>
-                        <div id="pass" class="c-button profile-withdraw">
-                            <router-link to="/passEdit">パスワード編集画面へ</router-link>
+                        <label class="c-label" for="profileDetail">プロフィール詳細</label>
+                        <div id="profileDetail" class="c-button profile-withdraw">
+                            <router-link to="/profileDetail">詳細画面へ</router-link>
                         </div>
                     </div>
 
                     <div class="profile-container-input">
-                        <label class ="c-label" for="withdraw">退会</label>
+                        <label class="c-label" for="pass">パスワード変更</label>
+                        <div id="pass" class="c-button profile-withdraw">
+                            <router-link to="/passEdit">編集する</router-link>
+                        </div>
+                    </div>
+
+                    <div class="profile-container-input">
+                        <label class="c-label" for="withdraw">退会</label>
                         <div id="withdraw" class="c-button profile-withdraw">
-                            <router-link to="/withdraw">退会画面へ</router-link>
+                            <router-link to="/withdraw">退会する</router-link>
                         </div>
                     </div>
 

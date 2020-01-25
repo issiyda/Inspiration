@@ -12,7 +12,7 @@ class Favorite extends Model
         'user_id', 'idea_id', 'fav_flag',
     ];
 
-    public function ideas()
+    public function idea()
     {
         return $this->belongsTo('App\Idea');
     }

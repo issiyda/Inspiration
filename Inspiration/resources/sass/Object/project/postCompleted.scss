@@ -1,0 +1,61 @@
+.completed {
+
+    &-paragraph{
+        margin:3%;
+    }
+
+    &-header{
+        color:$color_base;
+        font-size:$font-size_xl;
+        margin: 10% auto;
+    }
+
+
+    &-share {
+        border:none;
+        box-shadow: 2px 2px 4px gray;
+        color: #FFF;
+        border-radius: 7px;
+        display: inline-block;
+        height: 10%;
+        width: 45%;
+        text-align: center;
+        font-size: $font-size_xl;
+        line-height: 50px;
+        background: #1da1f3;
+        margin:10% auto;
+        overflow: hidden;
+        text-decoration:none;
+
+        &-twitter {
+            text-shadow: 2px 2px 0px #4287d6;
+            font-size: 30px;
+        }
+
+        span{
+            display:inline-block;
+            transition: .5s;
+        }
+
+        &:hover span{
+            -webkit-transform: rotateX(360deg);
+            transform: rotateX(360deg);
+        }
+
+    }
+
+    &-container{
+        display:flex;
+    }
+
+    &-button{
+        margin:5% auto;
+    }
+
+
+
+
+
+
+
+}

@@ -37,7 +37,7 @@ class Idea extends Model
 
     public function favorites()
     {
-        return $this->hasMany('App\Idea');
+        return $this->hasMany('App\Favorite');
     }
 }
 

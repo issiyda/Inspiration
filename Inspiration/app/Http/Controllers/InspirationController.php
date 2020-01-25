@@ -65,8 +65,10 @@ class InspirationController extends Controller
 
     }
 
-    public function myself()
+    public function myself(Request $request)
     {
+
+        $userId = $request->Input('userId');
 
         $allIdea = Idea::get();
 
@@ -80,15 +82,14 @@ class InspirationController extends Controller
         /**
          * ログイン中のユーザがお気に入りにしたアイデアデータ取得
          */
-        $favIdea = Favorite::where('fav_flag', 1)
-            ->with(['ideas' => function ($q) {
-                $q->where('user_id', 1);
-            }])->latest()->get();
+        $favIdea = Idea::wherehas('favorites' ,function($q){
+            $q->where('fav_flag',1);
+        })->latest()->get();
 
         /**
          * ログイン中のユーザが投稿したアイデアデータ取得
          */
-        $myIdea = Idea::where('user_id', 1)
+        $myIdea = Idea::where('user_id',1)
             ->latest()->get();
 
         /**

@@ -119,7 +119,7 @@
                     <div class="ic-card" v-for="allIdea in this.ideas">
                         <router-link :to="{name:'postDetail', params:{
                         id:allIdea.id,
-                        ideaUserId:allIdea.userId
+                        ideaUserId:allIdea.user_id
                         }}" class ="ic-a" href="#">
 
                             <h4 class ="f-h4">{{allIdea.title}}</h4>

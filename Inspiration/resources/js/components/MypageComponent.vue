@@ -8,16 +8,18 @@
 
 
             <h3 class ="f-h3">購入したアイデア</h3>
+            <div class="ic">
 
-            <div class="ic" >
 
-
-                <div class="ic-card" v-for="buyingIdea in buyingIdeas.slice(0,5)">
-                    <a class ="ic-a" href="#">
+                <div class="ic-card" v-for="buyingIdea in buyingIdeas">
+                    <router-link v-bind:to="{name:'postDetail',params:{
+                     id: buyingIdea.id,
+                     ideaUserId: buyingIdea.user_id
+                     }}" class ="ic-a" href="#">
 
                         <h4 class ="f-h4">{{buyingIdea.title}}</h4>
                         <div class="ic-img">
-<!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
+<!--                            <img :src="buyingIdea.img" alt="idea" class="ic-img-item">-->
                         </div>
                         <div class="ic-review">
                             <span class ="ic-span">評価</span>
@@ -33,7 +35,8 @@
                                {{buyingIdea.overflow}}
                             </div>
                         </div>
-                    </a>
+
+                    </router-link>
                 </div>
             </div>
 
@@ -49,8 +52,10 @@
 
 
                     <div class="ic-card" v-for="favIdea in favIdeas.slice(0,5)">
-                        <a class ="ic-a" href="#">
-
+                        <router-link v-bind:to="{name:'postDetail',params:{
+                                id: favIdea.id,
+                                ideaUserId: favIdea.user_id
+                                }}" class ="ic-a" href="#">
                             <h4 class ="f-h4">{{favIdea.title}}</h4>
                             <div class="ic-img">
                                 <!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
@@ -69,7 +74,7 @@
                                     {{favIdea.overflow}}
                                 </div>
                             </div>
-                        </a>
+                        </router-link>
                     </div>
                 </div>
 
@@ -82,8 +87,10 @@
 
 
                         <div class="ic-card" v-for="myIdea in myIdeas.slice(0,5)">
-                            <a class ="ic-a" href="#">
-
+                            <router-link v-bind:to="{name:'postDetail',params:{
+                                id: myIdea.id,
+                                ideaUserId: myIdea.user_id
+                                }}" class ="ic-a" href="#">
                                 <h4 class ="f-h4">{{myIdea.title}}</h4>
                                 <div class="ic-img">
                                     <!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
@@ -106,9 +113,8 @@
                                         {{myIdea.overflow}}
                                     </div>
                                 </div>
-                            </a>
+                            </router-link>
                         </div>
-
                     </div>
 
             <router-link to="/allPost" class ="p-mypage-more">もっと見る</router-link>
@@ -163,10 +169,9 @@
 
 <script>
 
-    import { mapState } from 'vuex'
 
     export default {
-        name: "MypageComponent",
+        name: "MyPageComponent",
 
         data:function(){
             return{
@@ -188,8 +193,9 @@
         created(){
             this.$emit('open-loading');
             console.log('MypageComponent mounted.');
-            this.ideas = this.$store.dispatch('getUserIdeas');
             this.user = this.$store.dispatch('getUsers')
+            this.ideas = this.$store.dispatch('getUserIdeas')
+
 
         },
         beforeUpdate() {

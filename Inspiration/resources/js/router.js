@@ -5,6 +5,7 @@ import Router from 'vue-router'
 import notfound from './components/NotFoundComponent';
 import mypage from './components/MypageComponent';
 import profile from './components/ProfileComponent';
+import profileDetail from './components/ProfileDetailComponent'
 import allBuy from './components/AllBuyComponent';
 import allPost from './components/AllPostComponent'
 import allFavorite from './components/AllFavoriteComponent';
@@ -59,31 +60,37 @@ export default new Router({
 
         {
             path: '/profile',
-            name: profile,
+            name: 'profile',
             component: profile
         },
 
         {
+            path: '/profileDetail',
+            name: 'profileDetail',
+            component: profileDetail
+        },
+
+        {
             path: '/allBuy',
-            name: allBuy,
+            name: 'allBuy',
             component: allBuy
         },
 
         {
             path: '/allPost',
-            name: allPost,
+            name: 'allPost',
             component: allPost
         },
 
         {
             path: '/allFavorite',
-            name: allFavorite,
+            name: 'allFavorite',
             component: allFavorite
         },
 
         {
             path: '/allReview',
-            name: allReview,
+            name: 'allReview',
             component: allReview
         },
 
@@ -102,13 +109,13 @@ export default new Router({
         },
         {
             path: '/postComplete',
-            name: postComplete,
+            name: 'postComplete',
             component: postComplete
         },
 
         {
             path: '/postEdit',
-            name: postEdit,
+            name: 'postEdit',
             component: postEdit
         },
 
@@ -121,7 +128,7 @@ export default new Router({
 
         {
             path: '/allidea',
-            name: allIdea,
+            name: 'allIdea',
             component: allIdea
         },
 
