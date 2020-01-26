@@ -62,7 +62,7 @@
 
 
 
-                <div class ="c-button confirm-post" @click="postIdea(userId)">
+                <div class ="c-button confirm-post" @click="saveIdea(userId)">
                 <router-link :to="{name:'postComplete',params:{
                                     title:this.title}}">投稿する</router-link>
                 </div>
@@ -117,8 +117,9 @@
 
 
 
-            postIdea: function(userId) {
-                axios.post('/api/post', {
+            //投稿保存
+            saveIdea: function(userId) {
+                axios.post('/api/saveIdea', {
                     img: this.img,
                     title: this.title,
                     category_id: this.category_id,

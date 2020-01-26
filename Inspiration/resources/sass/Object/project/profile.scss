@@ -45,10 +45,12 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-
       }
 
-      &-left{
+
+
+
+        &-left{
         align-items: center;
         display: flex;
         justify-content: center;
@@ -80,6 +82,13 @@
         display:none;
       }
 
+
+        &-message{
+            font-weight: bolder;
+            color:$color_base;
+            font-size:$font-size_xl;
+            margin-bottom:15%;
+        }
 
     }
   }

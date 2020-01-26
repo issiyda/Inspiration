@@ -18,7 +18,7 @@
                         </div>
                         <div class="profile-container-img-right">
                             <label>
-                                <input id="img" @change ="onFileChange" v-bind="img" class ="c-input profile-container-img-none" type="file" />
+                                <input id="img" @change="onFileChange" v-bind="img" class ="c-input profile-container-img-none" type="file" />
                                 <i aria-hidden="true" v-show="!upLoadedImage" class="fas fa-plus fa-7x"></i>
                                 <img :src="upLoadedImage" v-show="upLoadedImage" alt="">
                             </label>
@@ -172,12 +172,13 @@
                 };
                 reader.readAsDataURL(this.fileInfo);
             },
-                //画像をDBに保存してパスを保存するロジック
 
+
+            //画像をDBに保存してパスを保存するロジック
              saveImage(){
 
                 const formData = new FormData()
-                 console.log(this.fileInfo)
+                 console.log(this.fileInfo);
                  formData.append('file',this.fileInfo);
 
                 axios.post('/api/fileUpload',formData)

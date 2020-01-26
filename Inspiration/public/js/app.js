@@ -3787,8 +3787,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     editIdea: function editIdea() {},
-    postIdea: function postIdea(userId) {
-      axios.post('/api/post', {
+    //投稿保存
+    saveIdea: function saveIdea(userId) {
+      axios.post('/api/saveIdea', {
         img: this.img,
         title: this.title,
         category_id: this.category_id,
@@ -3921,6 +3922,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ProfileComponent",
   data: function data() {
@@ -3930,18 +3943,17 @@ __webpack_require__.r(__webpack_exports__);
       // isPasswordEdit: false,
       isIntroductionEdit: false,
       upLoadedImage: "",
-      user: [],
+      user: {},
       selectedImg: false,
       fileInfo: "",
-      profileImg: false
+      profileImg: false,
+      profImgChangeMessage: "変更完了しました",
+      ImgChangeState: false
     };
   },
   created: function created() {
-    this.user = this.$store.dispatch('getUsers'); // this.user = this.$store.state.users
-
+    this.user = this.$store.dispatch('getUsers').then(this.user = this.$store.state.users).then(this.getImg());
     console.log('created'); // this.img_src = require(this.profileImg);
-
-    this.getImg();
   },
   mounted: function mounted() {
     // this.profileImg = require(this.$store.state.users.img);
@@ -3958,13 +3970,17 @@ __webpack_require__.r(__webpack_exports__);
     /**
      * DBから画像取得
      */
-    getImg: function getImg() {},
+    getImg: function getImg() {
+      if (this.user.img !== null) {
+        this.profileImg = __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets".concat(this.user.img));
+      }
+    },
     onFileChange: function onFileChange(event) {
       this.fileInfo = event.target.files[0];
-      this.fileUpload();
-      this.createImage();
+      this.previewImage();
+      console.log('onFileChangeFinished');
     },
-    createImage: function createImage() {
+    previewImage: function previewImage() {
       var _this = this;
 
       //画像をプレビュー表示するロジック
@@ -3976,14 +3992,17 @@ __webpack_require__.r(__webpack_exports__);
 
       reader.readAsDataURL(this.fileInfo);
     },
-    fileUpload: function fileUpload() {
+    saveImage: function saveImage() {
       var _this2 = this;
 
       var formData = new FormData();
+      console.log(this.fileInfo);
       formData.append('file', this.fileInfo);
       axios.post('/api/fileUpload', formData).then(function (response) {
         console.log(response);
         _this2.user = response.data;
+        _this2.user = _this2.$store.dispatch('getUsers');
+        _this2.ImgChangeState = true;
         if (response.data.img) _this2.selectedImg = true;
       })["catch"](function (error) {
         console.log(error);
@@ -4015,16 +4034,6 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    // updatePass: function(id,password) {
-    //     axios.patch('/api/setting/' + id, {id: id, password: password})
-    //         .then((response) => {
-    //         this.isPasswordnEdit = false;
-    //         console.log(response);
-    //     }).catch((error) => {
-    //         console.log(error);
-    //     });
-    // },
-    //
     updateIntroduction: function updateIntroduction(id, introduction) {
       var _this5 = this;
 
@@ -9016,7 +9025,7 @@ var render = function() {
             staticClass: "c-button confirm-post",
             on: {
               click: function($event) {
-                return _vm.postIdea(_vm.userId)
+                return _vm.saveIdea(_vm.userId)
               }
             }
           },
@@ -9100,13 +9109,19 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "profile-container-img-right" }, [
               _c("label", [
+                _c("input", {
+                  staticClass: "c-input profile-container-img-none",
+                  attrs: { id: "img", type: "file" },
+                  on: { change: _vm.onFileChange }
+                }),
+                _vm._v(" "),
                 _c("i", {
                   directives: [
                     {
                       name: "show",
                       rawName: "v-show",
-                      value: this.profileImg,
-                      expression: "this.profileImg"
+                      value: !_vm.profileImg,
+                      expression: "!profileImg"
                     }
                   ],
                   staticClass: "fas fa-plus fa-7x",
@@ -9118,25 +9133,43 @@ var render = function() {
                     {
                       name: "show",
                       rawName: "v-show",
-                      value: !this.profileImg,
-                      expression: "!this.profileImg"
+                      value: _vm.profileImg,
+                      expression: "profileImg"
                     }
                   ],
-                  attrs: { src: _vm.profileImg, alt: "" }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "c-input profile-container-img-none",
-                  attrs: { id: "img", type: "file" },
-                  on: {
-                    change: function($event) {
-                      return _vm.onFileChange()
-                    }
-                  }
+                  attrs: { src: _vm.profileImg, alt: "profileImg" }
                 })
               ])
             ])
           ]),
+          _vm._v(" "),
+          _vm.ImgChangeState
+            ? _c("div", { staticClass: "profile-container-img-message" }, [
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.profImgChangeMessage) +
+                    "\n                    "
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "c-button profile-withdraw",
+              attrs: { id: "withdraw" },
+              on: {
+                click: function($event) {
+                  return _vm.saveImage()
+                }
+              }
+            },
+            [
+              _vm._v(
+                "\n                        プロフ画像に設定\n                    "
+              )
+            ]
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "profile-container-input" }, [
             _c(
@@ -25963,6 +25996,43 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./resources/js sync recursive ^\\.\\/assets.*$":
+/*!******************************************!*\
+  !*** ./resources/js sync ^\.\/assets.*$ ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./assets/images/スクリーンショット 2019-12-29 14.47.31.png": "./storage/app/public/images/スクリーンショット 2019-12-29 14.47.31.png",
+	"./assets/images/スクリーンショット 2019-12-31 11.51.03.png": "./storage/app/public/images/スクリーンショット 2019-12-31 11.51.03.png",
+	"./assets/images/スクリーンショット 2019-12-31 11.55.15.png": "./storage/app/public/images/スクリーンショット 2019-12-31 11.55.15.png",
+	"./assets/images/スクリーンショット 2020-01-19 21.20.33.png": "./storage/app/public/images/スクリーンショット 2020-01-19 21.20.33.png",
+	"./assets/images/スクリーンショット 2020-01-19 21.54.46.png": "./storage/app/public/images/スクリーンショット 2020-01-19 21.54.46.png"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./resources/js sync recursive ^\\.\\/assets.*$";
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -27697,6 +27767,61 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./storage/app/public/images/スクリーンショット 2019-12-29 14.47.31.png":
+/*!*********************************************************************!*\
+  !*** ./storage/app/public/images/スクリーンショット 2019-12-29 14.47.31.png ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2019-12-29 14.47.31.png?4111916df5447928afeb96425a45a4b2";
+
+/***/ }),
+
+/***/ "./storage/app/public/images/スクリーンショット 2019-12-31 11.51.03.png":
+/*!*********************************************************************!*\
+  !*** ./storage/app/public/images/スクリーンショット 2019-12-31 11.51.03.png ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2019-12-31 11.51.03.png?1df05bcd0570975f12342673ffb8e879";
+
+/***/ }),
+
+/***/ "./storage/app/public/images/スクリーンショット 2019-12-31 11.55.15.png":
+/*!*********************************************************************!*\
+  !*** ./storage/app/public/images/スクリーンショット 2019-12-31 11.55.15.png ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2019-12-31 11.55.15.png?fa34230d5423367f31e4df2fcfe4e3aa";
+
+/***/ }),
+
+/***/ "./storage/app/public/images/スクリーンショット 2020-01-19 21.20.33.png":
+/*!*********************************************************************!*\
+  !*** ./storage/app/public/images/スクリーンショット 2020-01-19 21.20.33.png ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2020-01-19 21.20.33.png?b60ed37bca52c9545743f95944461e08";
+
+/***/ }),
+
+/***/ "./storage/app/public/images/スクリーンショット 2020-01-19 21.54.46.png":
+/*!*********************************************************************!*\
+  !*** ./storage/app/public/images/スクリーンショット 2020-01-19 21.54.46.png ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2020-01-19 21.54.46.png?a1301b6c67d6a47fce771acbe8268f4d";
 
 /***/ }),
 

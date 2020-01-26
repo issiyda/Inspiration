@@ -40,7 +40,7 @@ Route::post('/confirm','InspirationController@confirm');
 /**
  * アイデア投稿機能ルーティング
  */
-Route::post('/post','InspirationController@post');
+Route::post('/post','IdeaPostController@post');
 
 
 /**
@@ -59,6 +59,10 @@ Route::get('/ideaEdit','InspirationController@ideaEdit');
  */
 Route::get('/ideaEdit','InspirationController@ideaDelete');
 
+/**
+ * 投稿保存
+ */
+Route::post('/saveIdea','inspirationController@ideaSave');
 
 
 /**
@@ -69,54 +73,54 @@ Route::get('/detail/{id}','InspirationController@detail');
 /**
  * カテゴリー検索
  */
-Route::get('categorySearch','InspirationController@categorySearch');
+Route::get('categorySearch','IdeaSearchController@categorySearch');
 
 /**
  * 価格検索以上
  */
-Route::get('priceSearch/higher','InspirationController@priceSearchHigher');
+Route::get('priceSearch/higher','IdeaSearchController@priceSearchHigher');
 
 /**
  * 価格検索以下
  */
-Route::get('priceSearch/lower','InspirationController@priceSearchLower');
+Route::get('priceSearch/lower','IdeaSearchController@priceSearchLower');
 
 /**
  * 価格検索中間
  */
-Route::get('priceSearch/middle','InspirationController@priceSearchMiddle');
+Route::get('priceSearch/middle','IdeaSearchController@priceSearchMiddle');
 
-Route::get('termSearch/before','InspirationController@termSearchBefore');
+Route::get('termSearch/before','IdeaSearchController@termSearchBefore');
 
 /**
  * 期間検索（年別）
  */
-Route::get('termSearch/year','InspirationController@termSearchYear');
+Route::get('termSearch/year','IdeaSearchController@termSearchYear');
 
 /**
  * 期間検索（月別）
  */
-Route::get('termSearch/month','InspirationController@termSearchMonth');
+Route::get('termSearch/month','IdeaSearchController@termSearchMonth');
 
 /**
  * 期間検索（日別）
  */
-Route::get('termSearch/day','InspirationController@termSearchDay');
+Route::get('termSearch/day','IdeaSearchController@termSearchDay');
 
 /**
  * 期間検索（以前）
  */
-Route::get('termSearch/before','InspirationController@termSearchBefore');
+Route::get('termSearch/before','IdeaSearchController@termSearchBefore');
 
 /**
  * 期間検索（以降）
  */
-Route::get('termSearch/after','InspirationController@termSearchAfter');
+Route::get('termSearch/after','IdeaSearchController@termSearchAfter');
 
 /**
  * 期間検索（間）
  */
-Route::get('termSearch/middle','InspirationController@termSearchMiddle');
+Route::get('termSearch/middle','IdeaSearchController@termSearchMiddle');
 
 /**
  * アイデア削除ルーティング
@@ -141,15 +145,15 @@ Route::patch('/setting/{id}',function($id,Request $request){
 /**
  * プロフィール画像アップロード
  */
-Route::post('/fileupload',function(){
+Route::post('/fileUpload',function(){
 
     $file_name = request()->file->getClientOriginalName();
 
-    request()->file->storeAs('public/',$file_name);
+    request()->file->storeAs('public/images',$file_name);
 
-    $user = App\User::find(2);
+    $user = App\User::find(1);
 
-    $user->update(['img' =>'/storage/'.$file_name]);
+    $user->update(['img' =>'/images/'.$file_name]);
 
     return $user;
 });
@@ -166,7 +170,6 @@ ROUTE::get('/all/search','InspirationController@search');
 
 
 ROUTE::get('/favState','InspirationController@favState');
-
 
 /**
  * お気に入り機能のルーティング

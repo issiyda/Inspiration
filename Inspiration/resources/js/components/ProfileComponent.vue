@@ -15,13 +15,25 @@
                         </div>
                         <div v-cloak class="profile-container-img-right">
                             <label>
-                                <i aria-hidden="true" v-show="this.profileImg" class="fas fa-plus fa-7x"></i>
-                                <img :src="profileImg"   v-show="!this.profileImg" alt="">
-                                <input id="img" @change="onFileChange()" class ="c-input profile-container-img-none" type="file" />
+                                <input id="img" @change="onFileChange" class ="c-input profile-container-img-none" type="file" />
+                                <i aria-hidden="true" v-show="!profileImg" class="fas fa-plus fa-7x"></i>
+                                <img :src="profileImg" v-show="profileImg" alt="profileImg">
                                 <!-- hoverしたら画像をアップロードの文字が浮き上がって画像が薄暗く -->
                             </label>
                         </div>
+
+
                     </div>
+
+                    <div v-if="ImgChangeState" class="profile-container-img-message">
+                        {{profImgChangeMessage}}
+                    </div>
+
+                    <div id="withdraw" @click="saveImage()" class="c-button profile-withdraw">
+                        プロフ画像に設定
+                    </div>
+
+
 
 
 
@@ -88,10 +100,12 @@
                 // isPasswordEdit: false,
                 isIntroductionEdit: false,
                 upLoadedImage: "",
-                user: [],
+                user: {},
                 selectedImg: false,
                 fileInfo: "",
                 profileImg: false,
+                profImgChangeMessage:"変更完了しました",
+                ImgChangeState:false
 
 
             }
@@ -100,11 +114,11 @@
 
         created() {
             this.user = this.$store.dispatch('getUsers')
-            // this.user = this.$store.state.users
-            console.log('created');
+                .then(this.user = this.$store.state.users)
+                .then(this.getImg())
+                console.log('created');
 
             // this.img_src = require(this.profileImg);
-            this.getImg()
 
         },
 
@@ -132,39 +146,43 @@
              * DBから画像取得
              */
             getImg(){
-
+                if(this.user.img !== null) {
+                    this.profileImg = require(`../assets${this.user.img}`)
+                }
             },
 
             onFileChange(event) {
                 this.fileInfo = event.target.files[0];
-                this.fileUpload()
-                this.createImage();
+                this.previewImage();
+                console.log('onFileChangeFinished')
             },
 
 
-            createImage() {
+            previewImage() {
                 //画像をプレビュー表示するロジック
                 let reader = new FileReader();
                 reader.onload = (e) => {
                     this.profileImg = e.target.result
                 };
                 reader.readAsDataURL(this.fileInfo);
+
             },
 
-            fileUpload() {
+            saveImage() {
                 const formData = new FormData();
-
+                console.log(this.fileInfo);
                 formData.append('file', this.fileInfo);
 
                 axios.post('/api/fileUpload', formData)
                     .then((response) => {
                         console.log(response);
                         this.user = response.data;
+                        this.user = this.$store.dispatch('getUsers');
+                        this.ImgChangeState = true;
                         if (response.data.img) this.selectedImg = true;
                     }).catch((error) => {
                     console.log(error);
                 });
-
             },
 
 
@@ -188,16 +206,7 @@
                 })
             },
 
-            // updatePass: function(id,password) {
-            //     axios.patch('/api/setting/' + id, {id: id, password: password})
-            //         .then((response) => {
-            //         this.isPasswordnEdit = false;
-            //         console.log(response);
-            //     }).catch((error) => {
-            //         console.log(error);
-            //     });
-            // },
-            //
+
             updateIntroduction: function (id, introduction) {
                 axios.patch('/api/setting/' + id, {id: id, introduction: introduction})
                     .then((response) => {
