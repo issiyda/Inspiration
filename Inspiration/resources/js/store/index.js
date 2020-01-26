@@ -43,24 +43,31 @@ export default new Vuex.Store({
         /**
          * ユーザー情報取得
          * @param commit
-         * @returns {Promise<AxiosResponse<T>>}
          */
         getUsers: function({commit}) {
-            return axios.get('/users')
+                return  axios.get('/users')
                 .then(response => {
-                    commit('setUsers', response.data);
+                    commit('setUsers',response.data);
                     console.log(response);
+                })
+                .catch((error) =>{
+                    console.log(error);
                 });
+
         },
 
         /**
          * 自分の投稿アイデア取得
          * @param commit
-         * @returns {Promise<AxiosResponse<T>>}
+         * @param dispatch
          */
-        getUserIdeas:function({commit}){
-            return axios.get('/api/mypage/')
-                .then(response => {
+        getUserIdeas: async function({commit,dispatch}){
+            await dispatch('getUsers')
+            axios.get('/api/mypage/',{
+                    params:{
+                userId:this.state.users.id
+                        }
+            }).then(response => {
                     commit('setIdeas', response.data);
                     console.log(response);
                 }).catch((error)=>{
@@ -70,6 +77,42 @@ export default new Vuex.Store({
 
 
     },
+
+    // actions: {
+    //     /**
+    //      * ユーザー情報取得
+    //      * @param commit
+    //      * @returns {Promise<AxiosResponse<T>>}
+    //      */
+    //     getUsers: async function({commit,dispatch}) {
+    //         return axios.get('/users')
+    //             .then(response => {
+    //                 commit('setUsers', response.data);
+    //                 console.log(response);
+    //             }, await dispatch('getUserIdeas'));
+    //     },
+    //
+    //     /**
+    //      * 自分の投稿アイデア取得
+    //      * @param commit
+    //      * @returns {Promise<AxiosResponse<T>>}
+    //      */
+    //     getUserIdeas:function({commit}){
+    //         return axios.get('/api/mypage/',{
+    //             params:{
+    //                 userId:this.state.users.id
+    //             }
+    //         })
+    //             .then(response => {
+    //                 commit('setIdeas', response.data);
+    //                 console.log(response);
+    //             }).catch((error)=>{
+    //                 console.log(error);
+    //             });
+    //     },
+    //
+    //
+    // },
     modules: {
     }
 })

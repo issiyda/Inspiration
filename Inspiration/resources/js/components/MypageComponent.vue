@@ -193,7 +193,7 @@
         created(){
             this.$emit('open-loading');
             console.log('MypageComponent mounted.');
-            this.user = this.$store.dispatch('getUsers')
+            // this.user = this.$store.dispatch('getUsers');
             this.ideas = this.$store.dispatch('getUserIdeas')
 
 

@@ -89,7 +89,7 @@ class InspirationController extends Controller
         /**
          * ログイン中のユーザが投稿したアイデアデータ取得
          */
-        $myIdea = Idea::where('user_id',1)
+        $myIdea = Idea::where('user_id',$userId)
             ->latest()->get();
 
         /**
@@ -105,7 +105,8 @@ class InspirationController extends Controller
             'buyingIdea' => $buyingIdea,
             'myIdea' => $myIdea,
             'favIdea' => $favIdea,
-            'review' => $review
+            'review' => $review,
+            'userId' =>$userId
         ], 200);
     }
 
@@ -147,7 +148,7 @@ class InspirationController extends Controller
 
         $file_name = $file->getClientOriginalName();
 
-            $file->storeAs('public/',$file_name);
+            $file->storeAs('public/images',$file_name);
 
             $user = \App\User::find(1);
 
