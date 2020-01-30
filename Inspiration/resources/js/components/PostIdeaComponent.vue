@@ -19,8 +19,8 @@
                         <div class="profile-container-img-right">
                             <label>
                                 <input id="img" @change="onFileChange" v-bind="img" class ="c-input profile-container-img-none" type="file" />
-                                <i aria-hidden="true" v-show="!upLoadedImage" class="fas fa-plus fa-7x"></i>
-                                <img :src="upLoadedImage" v-show="upLoadedImage" alt="">
+                                <i aria-hidden="true" v-show="!ideaImage" class="fas fa-plus fa-7x"></i>
+                                <img :src="ideaImage" v-show="ideaImage" alt="">
                             </label>
                         </div>
                     </div>
@@ -68,19 +68,21 @@
                         <label class ="c-label" for="profile">概要</label>
                         <textarea name="" v-model="overflow"  id="profile" class ="c-textarea" cols="30" rows="10" placeholder="自己紹介を記入してください"></textarea>
                     </div>
+                    <p><span>{{overflowLength}}</span>/100文字</p>
 
                     <div class="profile-container-input">
                         <label class ="c-label" for="contents">内容</label>
                         <textarea name="" v-model="content" id="contents" class ="c-textarea" cols="30" rows="10" placeholder="あなたのアイデアをお待ちしてます"></textarea>
                     </div>
-
+                    <p><span>{{contentLength}}/100文字</span></p>
 
 
                     <div class="c-button">
 <!--                         v-on:click="confirmIdea(userId)"-->
 <!--                    >-->
                     <router-link  :to="{name:'postConfirm',params:{
-                     img: this.upLoadedImage,
+                     fileInfo: this.fileInfo,
+                     img: this.ideaImage,
                      title:this.title,
                      category_id:this.category_id,
                      price:this.price,
@@ -110,7 +112,7 @@
                 price:"",
                 overflow:'',
                 content:'',
-                upLoadedImage:"",
+                ideaImage:"",
                 fileInfo:""
             }
 
@@ -126,34 +128,9 @@
         },
 
         methods: {
-            confirm: function () {
-                this.$router.push({ name: 'postConfirm',params:{
-                        img: this.img,
-                        title:this.title,
-                        category_id:this.category_id,
-                        overflow:this.overflow,
-                        content:this.content,
-                        price:this.price }
-                })
-            },
 
-            confirmIdea:function(userId){
-                axios.post('/api/confirm',{
-                    img:this.img,
-                    title:this.title,
-                    category_id:this.category_id,
-                    overflow:this.overflow,
-                    content:this.content,
-                    price:this.price,
-                    user_id:userId,
-                })
-                    .then((response) =>{
-                        console.log(response);
-                        //投稿した後は詳細に飛びたい
-                    }).catch((error)=>{
-                        console.log(error);
-                });
-                },
+
+
 
 
 
@@ -168,7 +145,7 @@
                 //画像をプレビュー表示するロジック
                 let reader = new FileReader();
                 reader.onload = (e) => {
-                    this.upLoadedImage = e.target.result
+                    this.ideaImage = e.target.result
                 };
                 reader.readAsDataURL(this.fileInfo);
             },
@@ -181,19 +158,24 @@
                  console.log(this.fileInfo);
                  formData.append('file',this.fileInfo);
 
-                axios.post('/api/fileUpload',formData)
+                axios.post('/api/profileImgUpload',formData)
                     .then(response =>{
                         console.log(response)
                     }).catch((error)=>{
                     console.log(error)
                 })
-
             }
             },
         computed:{
            userId(){
                return this.$store.state.users.id
-           }
+           },
+            overflowLength(){
+               return this.overflow.length;
+            },
+            contentLength(){
+               return this.content.length;
+            }
         },
     }
 </script>

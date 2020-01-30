@@ -58,7 +58,7 @@
                                 }}" class ="ic-a" href="#">
                             <h4 class ="f-h4">{{favIdea.title}}</h4>
                             <div class="ic-img">
-                                <!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
+<!--                                <img :src="require(`../assets${favIdea.img}`)" alt="idea" class="ic-img-item">-->
                             </div>
                             <div class="ic-review">
                                 <span class ="ic-span">評価</span>
@@ -93,7 +93,7 @@
                                 }}" class ="ic-a" href="#">
                                 <h4 class ="f-h4">{{myIdea.title}}</h4>
                                 <div class="ic-img">
-                                    <!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
+                                    <img :src="require(`../assets${myIdea.img}`)" alt="idea" class="ic-img-item">
                                 </div>
                                 <div class="ic-review">
                                     <span class ="ic-span">評価</span>

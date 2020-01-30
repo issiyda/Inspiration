@@ -27,7 +27,7 @@
                     <div class="pd-container-img">
                         <div class="pd-container-img-right">
                             <label>
-<!--                                <img src="../images/staff6.jpg" alt="">-->
+                                <img :src="require(`../assets${detail.img}`)" alt="">
                                 <input id="img" class ="c-input pd-container-img-none" type="file" />
                                 <!-- hoverしたら画像をアップロードの文字が浮き上がって画像が薄暗く -->
                             </label>
@@ -44,7 +44,7 @@
 
 
                     <label for="category" class="c-label">カテゴリー</label>
-                    <div id="category" class="confirm-text">掲示板</div>
+                    <div id="category" class="confirm-text">{{checkCategory(detail.category_id)}}</div>
 
                     <label for="description" class="c-label">概要</label>
                     <div id="description" class="confirm-text">
@@ -224,7 +224,7 @@
 
 <script>
     export default {
-        name: "headerBeforeComponent",
+        name: "PostDetailComponent",
 
         data:function(){
             return {
@@ -235,7 +235,7 @@
                 favState:"",
                 contributorFlag:true,
                 userId:"",
-                deleteState:true
+                deleteState:true,
 
 
 
@@ -255,13 +255,13 @@
 
 
             /**
-             * 投稿詳細取得
+             * 投稿情報取得
              */
             axios.get('/api/detail/'+this.id, {
             })
                 .then((response) => {
                     console.log(response.data);
-                    this.detail = response.data
+                    this.detail = response.data;
                     this.contributorJudge();
                 }).catch((error) => {
                 console.log(error);
@@ -273,12 +273,14 @@
         mounted(){
             this.$emit('close-loading');
             this.getState();
+            this.checkCategory();
+            this.contributorJudge();
             console.log('PostDetailComponent mounted')
         },
 
-        beforeUpdate() {
-        },
+
         methods: {
+
 
             favSwitch: function (userId, ideaId) {
                 axios.post('/api/favorite/',
@@ -340,11 +342,32 @@
             appearForm:function(){
 
                 this.deleteState = false
+            },
+
+
+                //カテゴリーチェック
+            checkCategory: function (category_id) {
+                if (category_id === 1) {
+                    return 'マッチング'
+                } else if (category_id === 2) {
+                    return '掲示板'
+                }
+                if (category_id === 3) {
+                    return 'SNS'
+                }
+                if (category_id === 4) {
+                    return "ECサイト"
+                }
+                if (category_id === 5) {
+                    return "情報発信"
+                }
+                if (category_id === 6) {
+                    return 'その他'
+                }
             }
         },
 
         computed:{
-
 
             },
 

@@ -47,7 +47,19 @@
                                     詳細</router-link>
                             </div>
                             <div type="submit" class="c-mini-button" value="編集">
-                                <router-link to="postEdit">編集</router-link>
+                                <router-link :to="{name: 'postIdeaEdit',params:{
+                                id: myIdea.id,
+                                bought_flag: myIdea.bought_flag,
+                                category_id: myIdea.category_id,
+                                content: myIdea.content,
+                                delete_flag:myIdea.delete_flag,
+                                img:myIdea.img,
+                                overflow:myIdea.overflow,
+                                price:myIdea.price,
+                                title:myIdea.title,
+                                user_id:myIdea.user_id,
+
+                                }}">編集</router-link>
                             </div>
 <!--                            <input type="submit" class="c-mini-button" value="詳細">-->
 <!--                            <input type="submit" class="c-mini-button" value="編集">-->

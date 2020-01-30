@@ -4,7 +4,7 @@
         <div class="confirm">
             <h2 class="f-h2">アイデア投稿確認画面</h2>
 
-            <form class="confirm-container">
+            <form class="confirm-container" enctype="multipart/form-data">
 
 
 
@@ -80,6 +80,7 @@
 
         data:function(){
             return{
+                fileInfo:"",
                 img:'',
                 title:'',
                 category_id:'',
@@ -91,6 +92,7 @@
 
         created() {
             console.log('ConfirmIdeaComponent created.');
+            this.fileInfo = this.$route.params.fileInfo
             this.user = this.$store.dispatch('getUsers');
             this.title = this.$route.params.title;
             this.img = this.$route.params.img;
@@ -119,14 +121,20 @@
 
             //投稿保存
             saveIdea: function(userId) {
-                axios.post('/api/saveIdea', {
-                    img: this.img,
-                    title: this.title,
-                    category_id: this.category_id,
-                    overflow: this.overflow,
-                    content: this.content,
-                    price: this.price,
-                    user_id: userId,
+                //画像を保存の形式に
+                const formData = new FormData();
+                formData.append('file',this.fileInfo);
+                formData.append('title',this.title);
+                formData.append('category_id',this.category_id);
+                formData.append('overflow',this.overflow);
+                formData.append('content',this.content);
+                formData.append('price',this.price);
+                formData.append('user_id',userId);
+
+                axios.post('/api/saveIdea',formData,{
+                    headers: {
+                        'content-type': 'multipart/form-data'
+                    },
                 })
                     .then((response) => {
                         console.log(response);

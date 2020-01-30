@@ -49,20 +49,18 @@ Route::post('/post','IdeaPostController@post');
 Route::get('/review','InspirationController@review');
 
 
+
+/**
+ * アイデア投稿保存
+ */
+Route::post('/saveIdea','postIdeaController@saveIdea');
+
+
 /**
  * アイデア編集機能ルーティング
  */
-Route::get('/ideaEdit','InspirationController@ideaEdit');
+Route::post('/ideaEdit','postIdeaController@editIdea');
 
-/**
- * アイデア削除機能ルーティング
- */
-Route::get('/ideaEdit','InspirationController@ideaDelete');
-
-/**
- * 投稿保存
- */
-Route::post('/saveIdea','inspirationController@ideaSave');
 
 
 /**
@@ -145,7 +143,9 @@ Route::patch('/setting/{id}',function($id,Request $request){
 /**
  * プロフィール画像アップロード
  */
-Route::post('/fileUpload',function(){
+Route::post('/profileImgUpload',function(){
+
+
 
     $file_name = request()->file->getClientOriginalName();
 

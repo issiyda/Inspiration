@@ -12,7 +12,7 @@ import allFavorite from './components/AllFavoriteComponent';
 import allReview from './components/AllReviewComponent';
 import post from './components/PostIdeaComponent';
 import postConfirm from './components/PostIdeaConfirmComponent';
-import postEdit from './components/EditIdeaComponent';
+import postIdeaEdit from './components/postIdeaEditComponent';
 import postDetail from './components/PostDetailComponent';
 import allIdea from './components/AllIdeaComponent';
 import postComplete from './components/PostCompletedComponent';
@@ -114,9 +114,9 @@ export default new Router({
         },
 
         {
-            path: '/postEdit',
-            name: 'postEdit',
-            component: postEdit
+            path: '/postIdeaEdit',
+            name: 'postIdeaEdit',
+            component: postIdeaEdit
         },
 
 

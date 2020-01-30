@@ -165,7 +165,6 @@
                     this.profileImg = e.target.result
                 };
                 reader.readAsDataURL(this.fileInfo);
-
             },
 
             saveImage() {
@@ -179,7 +178,6 @@
                         this.user = response.data;
                         this.user = this.$store.dispatch('getUsers');
                         this.ImgChangeState = true;
-                        if (response.data.img) this.selectedImg = true;
                     }).catch((error) => {
                     console.log(error);
                 });

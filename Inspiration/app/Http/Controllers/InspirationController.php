@@ -135,20 +135,20 @@ class InspirationController extends Controller
     }
 
 
-    /**
-     *
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function post(Request $request)
-    {
-        $idea = \App\Idea::create($request->all());
-
-        return response()->json([
-            'idea' => $idea
-        ]);
-    }
+//    /**
+//     *
+//     *
+//     * @param Request $request
+//     * @return \Illuminate\Http\JsonResponse
+//     */
+//    public function post(Request $request)
+//    {
+//        $idea = \App\Idea::create($request->all());
+//
+//        return response()->json([
+//            'idea' => $idea
+//        ]);
+//    }
 
     /**
      * @param Request $request
@@ -166,10 +166,6 @@ class InspirationController extends Controller
             $user = \App\User::find(1);
 
             $user->update(['img' =>'/images/'.$file_name]);
-
-//            return $user;
-
-
     }
 
     /**

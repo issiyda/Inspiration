@@ -2508,6 +2508,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllPostComponent",
   computed: {
@@ -2537,119 +2549,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllReviewComponent",
-  beforeUpdate: function beforeUpdate() {
-    this.$emit('close-loading');
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditIdeaComponent.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditIdeaComponent.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "EditIdeaComponent",
   beforeUpdate: function beforeUpdate() {
     this.$emit('close-loading');
   }
@@ -3369,7 +3268,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "headerBeforeComponent",
+  name: "PostDetailComponent",
   data: function data() {
     return {
       id: '',
@@ -3391,7 +3290,7 @@ __webpack_require__.r(__webpack_exports__);
     this.id = this.$route.params.id;
     this.userId = this.$route.params.ideaUserId;
     /**
-     * 投稿詳細取得
+     * 投稿情報取得
      */
 
     axios.get('/api/detail/' + this.id, {}).then(function (response) {
@@ -3406,9 +3305,10 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.$emit('close-loading');
     this.getState();
+    this.checkCategory();
+    this.contributorJudge();
     console.log('PostDetailComponent mounted');
   },
-  beforeUpdate: function beforeUpdate() {},
   methods: {
     favSwitch: function favSwitch(userId, ideaId) {
       axios.post('/api/favorite/', {
@@ -3465,6 +3365,30 @@ __webpack_require__.r(__webpack_exports__);
     },
     appearForm: function appearForm() {
       this.deleteState = false;
+    },
+    //カテゴリーチェック
+    checkCategory: function checkCategory(category_id) {
+      if (category_id === 1) {
+        return 'マッチング';
+      } else if (category_id === 2) {
+        return '掲示板';
+      }
+
+      if (category_id === 3) {
+        return 'SNS';
+      }
+
+      if (category_id === 4) {
+        return "ECサイト";
+      }
+
+      if (category_id === 5) {
+        return "情報発信";
+      }
+
+      if (category_id === 6) {
+        return 'その他';
+      }
     }
   },
   computed: {},
@@ -3585,6 +3509,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostIdeaComponent",
@@ -3596,7 +3522,7 @@ __webpack_require__.r(__webpack_exports__);
       price: "",
       overflow: '',
       content: '',
-      upLoadedImage: "",
+      ideaImage: "",
       fileInfo: ""
     };
   },
@@ -3608,34 +3534,6 @@ __webpack_require__.r(__webpack_exports__);
     this.$emit('close-loading');
   },
   methods: {
-    confirm: function confirm() {
-      this.$router.push({
-        name: 'postConfirm',
-        params: {
-          img: this.img,
-          title: this.title,
-          category_id: this.category_id,
-          overflow: this.overflow,
-          content: this.content,
-          price: this.price
-        }
-      });
-    },
-    confirmIdea: function confirmIdea(userId) {
-      axios.post('/api/confirm', {
-        img: this.img,
-        title: this.title,
-        category_id: this.category_id,
-        overflow: this.overflow,
-        content: this.content,
-        price: this.price,
-        user_id: userId
-      }).then(function (response) {
-        console.log(response); //投稿した後は詳細に飛びたい
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
     onFileChange: function onFileChange(event) {
       this.fileInfo = event.target.files[0];
       this.saveImage();
@@ -3648,7 +3546,7 @@ __webpack_require__.r(__webpack_exports__);
       var reader = new FileReader();
 
       reader.onload = function (e) {
-        _this.upLoadedImage = e.target.result;
+        _this.ideaImage = e.target.result;
       };
 
       reader.readAsDataURL(this.fileInfo);
@@ -3658,7 +3556,7 @@ __webpack_require__.r(__webpack_exports__);
       var formData = new FormData();
       console.log(this.fileInfo);
       formData.append('file', this.fileInfo);
-      axios.post('/api/fileUpload', formData).then(function (response) {
+      axios.post('/api/profileImgUpload', formData).then(function (response) {
         console.log(response);
       })["catch"](function (error) {
         console.log(error);
@@ -3668,6 +3566,12 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     userId: function userId() {
       return this.$store.state.users.id;
+    },
+    overflowLength: function overflowLength() {
+      return this.overflow.length;
+    },
+    contentLength: function contentLength() {
+      return this.content.length;
     }
   }
 });
@@ -3763,6 +3667,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "PostConfirmComponent",
   data: function data() {
     return {
+      fileInfo: "",
       img: '',
       title: '',
       category_id: '',
@@ -3773,6 +3678,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     console.log('ConfirmIdeaComponent created.');
+    this.fileInfo = this.$route.params.fileInfo;
     this.user = this.$store.dispatch('getUsers');
     this.title = this.$route.params.title;
     this.img = this.$route.params.img;
@@ -3789,14 +3695,19 @@ __webpack_require__.r(__webpack_exports__);
     editIdea: function editIdea() {},
     //投稿保存
     saveIdea: function saveIdea(userId) {
-      axios.post('/api/saveIdea', {
-        img: this.img,
-        title: this.title,
-        category_id: this.category_id,
-        overflow: this.overflow,
-        content: this.content,
-        price: this.price,
-        user_id: userId
+      //画像を保存の形式に
+      var formData = new FormData();
+      formData.append('file', this.fileInfo);
+      formData.append('title', this.title);
+      formData.append('category_id', this.category_id);
+      formData.append('overflow', this.overflow);
+      formData.append('content', this.content);
+      formData.append('price', this.price);
+      formData.append('user_id', userId);
+      axios.post('/api/saveIdea', formData, {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
       }).then(function (response) {
         console.log(response); //投稿した後は詳細に飛びたい
       })["catch"](function (error) {
@@ -4003,7 +3914,6 @@ __webpack_require__.r(__webpack_exports__);
         _this2.user = response.data;
         _this2.user = _this2.$store.dispatch('getUsers');
         _this2.ImgChangeState = true;
-        if (response.data.img) _this2.selectedImg = true;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -4425,6 +4335,216 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SideBarComponent"
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/postIdeaEditComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/postIdeaEditComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "PostIdeaEditComponent",
+  data: function data() {
+    return {
+      id: "",
+      bought_flag: "",
+      category_id: "",
+      content: "",
+      isContentEdit: "",
+      delete_flag: "",
+      img: "",
+      overflow: "",
+      isOverflowEdit: "",
+      price: "",
+      isPriceEdit: "",
+      title: "",
+      isTitleEdit: true,
+      user_id: "",
+      category: {
+        matching: "",
+        board: "",
+        sns: "",
+        ecSite: "",
+        infoPlaner: "",
+        other: ""
+      },
+      EditResultMessage: false,
+      fileInfo: "",
+      newImage: ""
+    };
+  },
+  computed: {
+    overflowLength: function overflowLength() {
+      return this.overflow.length;
+    },
+    contentLength: function contentLength() {
+      return this.content.length;
+    }
+  },
+  created: function created() {
+    this.id = this.$route.params.id, this.bought_flag = this.$route.params.bought_flag, this.category_id = this.$route.params.category_id, this.content = this.$route.params.content, this.delete_flag = this.$route.params.delete_flag, this.img = this.$route.params.img, this.overflow = this.$route.params.overflow, this.price = this.$route.params.price, this.title = this.$route.params.title, this.user_id = this.$route.params.user_id, this.categoryCheck();
+  },
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
+  },
+  methods: {
+    categoryCheck: function categoryCheck() {
+      if (this.category_id === 1) {
+        this.category.matching = true;
+      } else if (this.category_id === 2) {
+        this.category.board = true;
+      }
+
+      if (this.category_id === 3) {
+        this.category.sns = true;
+      }
+
+      if (this.category_id === 4) {
+        this.category.ecSite = true;
+      }
+
+      if (this.category_id === 5) {
+        this.category.infoPlaner = true;
+      }
+
+      if (this.category_id === 6) {
+        this.category.other = true;
+      }
+    },
+    onFileChange: function onFileChange(event) {
+      this.fileInfo = event.target.files[0];
+      this.createImage();
+    },
+    createImage: function createImage() {
+      var _this = this;
+
+      //画像をプレビュー表示するロジック
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        _this.newImage = e.target.result;
+      };
+
+      reader.readAsDataURL(this.fileInfo);
+    },
+    editIdeaSave: function editIdeaSave() {
+      var _this2 = this;
+
+      var formData = new FormData();
+      formData.append('file', this.fileInfo);
+      formData.append('idea_id', this.id);
+      formData.append('category_id', this.category_id);
+      formData.append('overflow', this.overflow);
+      formData.append('content', this.content);
+      formData.append('price', this.price);
+      formData.append('title', this.title);
+      axios.post('/api/ideaEdit', formData, {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        console.log(response);
+        _this2.ideas = _this2.$store.dispatch('getUserIdeas');
+        _this2.EditResultMessage = "編集に成功しました";
+      })["catch"](function (error) {
+        console.log(error);
+        _this2.EditResultMessage = "編集に失敗しました。\n" + "時間を置いてお試し下さい";
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -7051,9 +7171,29 @@ var render = function() {
                     attrs: { type: "submit", value: "編集" }
                   },
                   [
-                    _c("router-link", { attrs: { to: "postEdit" } }, [
-                      _vm._v("編集")
-                    ])
+                    _c(
+                      "router-link",
+                      {
+                        attrs: {
+                          to: {
+                            name: "postIdeaEdit",
+                            params: {
+                              id: myIdea.id,
+                              bought_flag: myIdea.bought_flag,
+                              category_id: myIdea.category_id,
+                              content: myIdea.content,
+                              delete_flag: myIdea.delete_flag,
+                              img: myIdea.img,
+                              overflow: myIdea.overflow,
+                              price: myIdea.price,
+                              title: myIdea.title,
+                              user_id: myIdea.user_id
+                            }
+                          }
+                        }
+                      },
+                      [_vm._v("編集")]
+                    )
                   ],
                   1
                 )
@@ -7114,235 +7254,6 @@ var render = function() {
   return _c("div")
 }
 var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditIdeaComponent.vue?vue&type=template&id=7f6cc501&scoped=true&":
-/*!********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditIdeaComponent.vue?vue&type=template&id=7f6cc501&scoped=true& ***!
-  \********************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("main", [
-      _c("div", { staticClass: "profile" }, [
-        _c("h2", { staticClass: "f-h2" }, [_vm._v("アイデア編集")]),
-        _vm._v(" "),
-        _c("form", { staticClass: "profile-container" }, [
-          _c("div", { staticClass: "profile-container-input" }, [
-            _c("div", { staticClass: "profile-container-img" }, [
-              _c("div", { staticClass: "profile-container-img-left" }, [
-                _c("label", { staticClass: "c-label", attrs: { for: "img" } }, [
-                  _vm._v("アイデアイメージ画像")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "profile-container-img-right" }, [
-                _c("label", [
-                  _c("input", {
-                    staticClass: "c-input profile-container-img-none",
-                    attrs: { id: "img", type: "file" }
-                  })
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "profile-container-input" }, [
-              _c("label", { staticClass: "c-label", attrs: { for: "name" } }, [
-                _vm._v("アイデア名")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "c-input",
-                attrs: {
-                  id: "name",
-                  type: "text",
-                  placeholder: "（例）info@.com",
-                  value: ""
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "profile-container-input" }, [
-              _c(
-                "label",
-                { staticClass: "c-label", attrs: { for: "category" } },
-                [_vm._v("カテゴリー")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "c-radio-container" }, [
-                _c("input", {
-                  attrs: {
-                    id: "matching",
-                    name: "category",
-                    type: "radio",
-                    value: "マッチング",
-                    checked: ""
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  { staticClass: "c-radio", attrs: { for: "matching" } },
-                  [_vm._v("マッチング")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  attrs: {
-                    id: "board",
-                    name: "category",
-                    type: "radio",
-                    value: "掲示板"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  { staticClass: "c-radio", attrs: { for: "board" } },
-                  [_vm._v("掲示板")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  attrs: {
-                    id: "sns",
-                    name: "category",
-                    type: "radio",
-                    value: "SNS"
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "c-radio", attrs: { for: "sns" } }, [
-                  _vm._v("SNS")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  attrs: {
-                    id: "EC",
-                    name: "category",
-                    type: "radio",
-                    value: "ECサイト"
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "c-radio", attrs: { for: "EC" } }, [
-                  _vm._v("ECサイト")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  attrs: {
-                    id: "infoplaner",
-                    name: "category",
-                    type: "radio",
-                    value: "情報発信"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  { staticClass: "c-radio", attrs: { for: "infoplaner" } },
-                  [_vm._v("情報発信")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  attrs: {
-                    id: "other",
-                    name: "category",
-                    type: "radio",
-                    value: "その他"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  { staticClass: "c-radio", attrs: { for: "other" } },
-                  [_vm._v("その他")]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "profile-container-input" }, [
-              _c(
-                "label",
-                { staticClass: "c-label", attrs: { for: "profile" } },
-                [_vm._v("概要")]
-              ),
-              _vm._v(" "),
-              _c(
-                "textarea",
-                {
-                  staticClass: "c-textarea",
-                  attrs: {
-                    name: "",
-                    id: "profile",
-                    cols: "30",
-                    rows: "10",
-                    placeholder: "自己紹介を記入してください"
-                  }
-                },
-                [
-                  _vm._v(
-                    "みんなで早起きをするためのグループメンバーを今回募集します。\n                    "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("span", [_vm._v("50/100文字")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "profile-container-input" }, [
-              _c(
-                "label",
-                { staticClass: "c-label", attrs: { for: "contents" } },
-                [_vm._v("内容")]
-              ),
-              _vm._v(" "),
-              _c(
-                "textarea",
-                {
-                  staticClass: "c-textarea",
-                  attrs: {
-                    name: "",
-                    id: "contents",
-                    cols: "30",
-                    rows: "10",
-                    placeholder: "あなたのアイデアをお待ちしてます"
-                  }
-                },
-                [
-                  _vm._v(
-                    "みんなで早起きをするためのグループメンバーを今回募集します。\n\n                        チームメンバーは10人募集します。\n                        朝6時から勤務時間前までみんなで勉強します。\n                        非常にストイックなメンバーが集まると予想されるため\n                        一日でも参加報告が遅れた場合強制退会となります。\n                        ご了承くださいませ。\n                        aaaaaaaaaaaaaaaaaaaaaaaa\n                        aaaaaaaaaaaaaaaaaaaaaa\n                        aaaaaaaaaaaaaaaaaaaaa\n                    "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("span", [_vm._v("50/100文字")])
-            ]),
-            _vm._v(" "),
-            _c("input", { staticClass: "c-button", attrs: { type: "submit" } })
-          ])
-        ])
-      ])
-    ])
-  }
-]
 render._withStripped = true
 
 
@@ -7549,7 +7460,15 @@ var render = function() {
                       _vm._v(_vm._s(myIdea.title))
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-img" }),
+                    _c("div", { staticClass: "ic-img" }, [
+                      _c("img", {
+                        staticClass: "ic-img-item",
+                        attrs: {
+                          src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + myIdea.img),
+                          alt: "idea"
+                        }
+                      })
+                    ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "ic-review" }, [
                       _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
@@ -8047,7 +7966,22 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("div", { staticClass: "pd-container-input" }, [
-              _vm._m(1, true),
+              _c("div", { staticClass: "pd-container-img" }, [
+                _c("div", { staticClass: "pd-container-img-right" }, [
+                  _c("label", [
+                    _c("img", {
+                      attrs: { src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + detail.img), alt: "" }
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "c-input pd-container-img-none",
+                      attrs: { id: "img", type: "file" }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(1, true)
+              ]),
               _vm._v(
                 "\n\n                    平均の評価を計算するロジック記入\n\n\n\n                    "
               ),
@@ -8060,7 +7994,7 @@ var render = function() {
               _c(
                 "div",
                 { staticClass: "confirm-text", attrs: { id: "category" } },
-                [_vm._v("掲示板")]
+                [_vm._v(_vm._s(_vm.checkCategory(detail.category_id)))]
               ),
               _vm._v(" "),
               _c(
@@ -8240,22 +8174,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "pd-container-img" }, [
-      _c("div", { staticClass: "pd-container-img-right" }, [
-        _c("label", [
-          _c("input", {
-            staticClass: "c-input pd-container-img-none",
-            attrs: { id: "img", type: "file" }
-          })
-        ])
+    return _c("div", { staticClass: "pd-container-img-left" }, [
+      _c("label", { staticClass: "c-label", attrs: { for: "img" } }, [
+        _vm._v("平均評価")
       ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "pd-container-img-left" }, [
-        _c("label", { staticClass: "c-label", attrs: { for: "img" } }, [
-          _vm._v("平均評価")
-        ]),
-        _vm._v("\n                            ★3.3\n                        ")
-      ])
+      _vm._v("\n                            ★3.3\n                        ")
     ])
   },
   function() {
@@ -8511,8 +8434,8 @@ var render = function() {
                       {
                         name: "show",
                         rawName: "v-show",
-                        value: !_vm.upLoadedImage,
-                        expression: "!upLoadedImage"
+                        value: !_vm.ideaImage,
+                        expression: "!ideaImage"
                       }
                     ],
                     staticClass: "fas fa-plus fa-7x",
@@ -8524,11 +8447,11 @@ var render = function() {
                       {
                         name: "show",
                         rawName: "v-show",
-                        value: _vm.upLoadedImage,
-                        expression: "upLoadedImage"
+                        value: _vm.ideaImage,
+                        expression: "ideaImage"
                       }
                     ],
-                    attrs: { src: _vm.upLoadedImage, alt: "" }
+                    attrs: { src: _vm.ideaImage, alt: "" }
                   })
                 ])
               ])
@@ -8811,6 +8734,11 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
+            _c("p", [
+              _c("span", [_vm._v(_vm._s(_vm.overflowLength))]),
+              _vm._v("/100文字")
+            ]),
+            _vm._v(" "),
             _c("div", { staticClass: "profile-container-input" }, [
               _c(
                 "label",
@@ -8847,6 +8775,10 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
+            _c("p", [
+              _c("span", [_vm._v(_vm._s(_vm.contentLength) + "/100文字")])
+            ]),
+            _vm._v(" "),
             _c(
               "div",
               { staticClass: "c-button" },
@@ -8858,7 +8790,8 @@ var render = function() {
                       to: {
                         name: "postConfirm",
                         params: {
-                          img: this.upLoadedImage,
+                          fileInfo: this.fileInfo,
+                          img: this.ideaImage,
                           title: this.title,
                           category_id: this.category_id,
                           price: this.price,
@@ -8916,138 +8849,155 @@ var render = function() {
     _c("div", { staticClass: "confirm" }, [
       _c("h2", { staticClass: "f-h2" }, [_vm._v("アイデア投稿確認画面")]),
       _vm._v(" "),
-      _c("form", { staticClass: "confirm-container" }, [
-        _c("label", { staticClass: "c-label", attrs: { for: "ideaImg" } }, [
-          _vm._v("アイデア画像")
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "confirm-container-img", attrs: { id: "ideaImg" } },
-          [_c("img", { attrs: { src: this.img, alt: "" } })]
-        ),
-        _vm._v(" "),
-        _c("label", { staticClass: "c-label", attrs: { for: "ideaName" } }, [
-          _vm._v("アイデア名")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "confirm-text", attrs: { id: "ideaName" } }, [
-          _vm._v(_vm._s(_vm.$route.params.title))
-        ]),
-        _vm._v(" "),
-        _c("label", { staticClass: "c-label", attrs: { for: "category" } }, [
-          _vm._v("カテゴリー名")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "confirm-text", attrs: { id: "category" } }, [
-          _vm._v(_vm._s(_vm.categoryName))
-        ]),
-        _vm._v(" "),
-        _c("label", { staticClass: "c-label", attrs: { for: "category" } }, [
-          _vm._v("お値段")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "confirm-text", attrs: { id: "prica" } }, [
-          _vm._v(_vm._s(_vm.$route.params.price) + " ")
-        ]),
-        _vm._v(" "),
-        _c("label", { staticClass: "c-label", attrs: { for: "description" } }, [
-          _vm._v("概要")
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "confirm-text", attrs: { id: "description" } },
-          [
-            _vm._v(
-              "\n                " +
-                _vm._s(_vm.$route.params.overflow) +
-                "\n            "
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("label", { staticClass: "c-label", attrs: { for: "contents" } }, [
-          _vm._v("内容")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "confirm-text", attrs: { id: "contents" } }, [
-          _vm._v(
-            "\n                " +
-              _vm._s(_vm.$route.params.content) +
-              "\n            "
+      _c(
+        "form",
+        {
+          staticClass: "confirm-container",
+          attrs: { enctype: "multipart/form-data" }
+        },
+        [
+          _c("label", { staticClass: "c-label", attrs: { for: "ideaImg" } }, [
+            _vm._v("アイデア画像")
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "confirm-container-img", attrs: { id: "ideaImg" } },
+            [_c("img", { attrs: { src: this.img, alt: "" } })]
+          ),
+          _vm._v(" "),
+          _c("label", { staticClass: "c-label", attrs: { for: "ideaName" } }, [
+            _vm._v("アイデア名")
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "confirm-text", attrs: { id: "ideaName" } },
+            [_vm._v(_vm._s(_vm.$route.params.title))]
+          ),
+          _vm._v(" "),
+          _c("label", { staticClass: "c-label", attrs: { for: "category" } }, [
+            _vm._v("カテゴリー名")
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "confirm-text", attrs: { id: "category" } },
+            [_vm._v(_vm._s(_vm.categoryName))]
+          ),
+          _vm._v(" "),
+          _c("label", { staticClass: "c-label", attrs: { for: "category" } }, [
+            _vm._v("お値段")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "confirm-text", attrs: { id: "prica" } }, [
+            _vm._v(_vm._s(_vm.$route.params.price) + " ")
+          ]),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "c-label", attrs: { for: "description" } },
+            [_vm._v("概要")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "confirm-text", attrs: { id: "description" } },
+            [
+              _vm._v(
+                "\n                " +
+                  _vm._s(_vm.$route.params.overflow) +
+                  "\n            "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("label", { staticClass: "c-label", attrs: { for: "contents" } }, [
+            _vm._v("内容")
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "confirm-text", attrs: { id: "contents" } },
+            [
+              _vm._v(
+                "\n                " +
+                  _vm._s(_vm.$route.params.content) +
+                  "\n            "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "c-button confirm-post",
+              on: {
+                click: function($event) {
+                  return _vm.editIdea()
+                }
+              }
+            },
+            [
+              _c(
+                "router-link",
+                {
+                  attrs: {
+                    to: {
+                      name: "post",
+                      params: {
+                        img: this.img,
+                        title: this.title,
+                        category_id: this.category_id,
+                        overflow: this.overflow,
+                        content: this.content,
+                        price: this.price
+                      }
+                    }
+                  }
+                },
+                [_vm._v("編集する")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "arrow" }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "c-button confirm-post",
+              on: {
+                click: function($event) {
+                  return _vm.saveIdea(_vm.userId)
+                }
+              }
+            },
+            [
+              _c(
+                "router-link",
+                {
+                  attrs: {
+                    to: {
+                      name: "postComplete",
+                      params: {
+                        title: this.title
+                      }
+                    }
+                  }
+                },
+                [_vm._v("投稿する")]
+              )
+            ],
+            1
           )
-        ]),
-        _vm._v(" "),
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "c-button confirm-post",
-            on: {
-              click: function($event) {
-                return _vm.editIdea()
-              }
-            }
-          },
-          [
-            _c(
-              "router-link",
-              {
-                attrs: {
-                  to: {
-                    name: "post",
-                    params: {
-                      img: this.img,
-                      title: this.title,
-                      category_id: this.category_id,
-                      overflow: this.overflow,
-                      content: this.content,
-                      price: this.price
-                    }
-                  }
-                }
-              },
-              [_vm._v("編集する")]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _c("div", { staticClass: "arrow" }),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "c-button confirm-post",
-            on: {
-              click: function($event) {
-                return _vm.saveIdea(_vm.userId)
-              }
-            }
-          },
-          [
-            _c(
-              "router-link",
-              {
-                attrs: {
-                  to: {
-                    name: "postComplete",
-                    params: {
-                      title: this.title
-                    }
-                  }
-                }
-              },
-              [_vm._v("投稿する")]
-            )
-          ],
-          1
-        )
-      ])
+        ]
+      )
     ])
   ])
 }
@@ -9826,6 +9776,407 @@ var staticRenderFns = [
             ])
           ])
         ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/postIdeaEditComponent.vue?vue&type=template&id=45613f3e&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/postIdeaEditComponent.vue?vue&type=template&id=45613f3e&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("main", [
+    _c("div", { staticClass: "profile" }, [
+      _c("h2", { staticClass: "f-h2" }, [_vm._v("アイデア編集")]),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          staticClass: "profile-container",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.editIdeaSave()
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "profile-container-input" }, [
+            _c("div", { staticClass: "profile-container-img" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "profile-container-img-right" }, [
+                _c("label", [
+                  _c("input", {
+                    staticClass: "c-input profile-container-img-none",
+                    attrs: { id: "img", type: "file" },
+                    on: { change: _vm.onFileChange }
+                  }),
+                  _vm._v(" "),
+                  _c("img", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.newImage,
+                        expression: "!newImage"
+                      }
+                    ],
+                    attrs: { src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + _vm.img), alt: "" }
+                  }),
+                  _vm._v(" "),
+                  _c("img", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.newImage,
+                        expression: "newImage"
+                      }
+                    ],
+                    attrs: { src: _vm.newImage, alt: "profileImg" }
+                  })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "profile-container-input" }, [
+              _c("label", { staticClass: "c-label", attrs: { for: "title" } }, [
+                _vm._v("アイデア名")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.title,
+                    expression: "title"
+                  }
+                ],
+                staticClass: "c-input",
+                attrs: {
+                  id: "title",
+                  type: "text",
+                  placeholder: "（例）だーいし"
+                },
+                domProps: { value: _vm.title },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.title = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "profile-container-input" }, [
+              _c(
+                "label",
+                { staticClass: "c-label", attrs: { for: "category" } },
+                [_vm._v("カテゴリー")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "c-radio-container", attrs: { id: "category" } },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.category_id,
+                        expression: "category_id"
+                      }
+                    ],
+                    attrs: { id: "matching", type: "radio", value: "1" },
+                    domProps: {
+                      checked: _vm.category.matching,
+                      checked: _vm._q(_vm.category_id, "1")
+                    },
+                    on: {
+                      change: function($event) {
+                        _vm.category_id = "1"
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    { staticClass: "c-radio", attrs: { for: "matching" } },
+                    [_vm._v("マッチング")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.category_id,
+                        expression: "category_id"
+                      }
+                    ],
+                    attrs: { id: "board", type: "radio", value: "2" },
+                    domProps: {
+                      checked: _vm.category.board,
+                      checked: _vm._q(_vm.category_id, "2")
+                    },
+                    on: {
+                      change: function($event) {
+                        _vm.category_id = "2"
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    { staticClass: "c-radio", attrs: { for: "board" } },
+                    [_vm._v("掲示板")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.category_id,
+                        expression: "category_id"
+                      }
+                    ],
+                    attrs: { id: "sns", type: "radio", value: "3" },
+                    domProps: {
+                      checked: _vm.category.sns,
+                      checked: _vm._q(_vm.category_id, "3")
+                    },
+                    on: {
+                      change: function($event) {
+                        _vm.category_id = "3"
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    { staticClass: "c-radio", attrs: { for: "sns" } },
+                    [_vm._v("SNS")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.category_id,
+                        expression: "category_id"
+                      }
+                    ],
+                    attrs: { id: "EC", type: "radio", value: "4" },
+                    domProps: {
+                      checked: _vm.category.ecSite,
+                      checked: _vm._q(_vm.category_id, "4")
+                    },
+                    on: {
+                      change: function($event) {
+                        _vm.category_id = "4"
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    { staticClass: "c-radio", attrs: { for: "EC" } },
+                    [_vm._v("ECサイト")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.category_id,
+                        expression: "category_id"
+                      }
+                    ],
+                    attrs: { id: "infoplaner", type: "radio", value: "5" },
+                    domProps: {
+                      checked: _vm.category.infoPlaner,
+                      checked: _vm._q(_vm.category_id, "5")
+                    },
+                    on: {
+                      change: function($event) {
+                        _vm.category_id = "5"
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    { staticClass: "c-radio", attrs: { for: "infoplaner" } },
+                    [_vm._v("情報発信")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.category_id,
+                        expression: "category_id"
+                      }
+                    ],
+                    attrs: { id: "other", type: "radio", value: "6" },
+                    domProps: {
+                      checked: _vm.category.other,
+                      checked: _vm._q(_vm.category_id, "6")
+                    },
+                    on: {
+                      change: function($event) {
+                        _vm.category_id = "6"
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    { staticClass: "c-radio", attrs: { for: "other" } },
+                    [_vm._v("その他")]
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "profile-container-input" }, [
+              _c(
+                "label",
+                { staticClass: "c-label", attrs: { for: "profile" } },
+                [_vm._v("概要")]
+              ),
+              _vm._v(" "),
+              _c(
+                "textarea",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.overflow,
+                      expression: "overflow"
+                    }
+                  ],
+                  staticClass: "c-textarea",
+                  attrs: {
+                    name: "",
+                    id: "profile",
+                    cols: "30",
+                    rows: "10",
+                    placeholder: "自己紹介を記入してください"
+                  },
+                  domProps: { value: _vm.overflow },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.overflow = $event.target.value
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.overflow) + "\n                    ")]
+              ),
+              _vm._v(" "),
+              _c("p", [
+                _c("span", [_vm._v(_vm._s(_vm.overflowLength))]),
+                _vm._v("/100文字")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "profile-container-input" }, [
+              _c(
+                "label",
+                { staticClass: "c-label", attrs: { for: "contents" } },
+                [_vm._v("内容")]
+              ),
+              _vm._v(" "),
+              _c(
+                "textarea",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.content,
+                      expression: "content"
+                    }
+                  ],
+                  staticClass: "c-textarea",
+                  attrs: {
+                    id: "contents",
+                    cols: "30",
+                    rows: "10",
+                    placeholder: "あなたのアイデアをお待ちしてます"
+                  },
+                  domProps: { value: _vm.content },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.content = $event.target.value
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.content) + "\n                    ")]
+              ),
+              _vm._v(" "),
+              _c("p", [
+                _c("span", [_vm._v(_vm._s(_vm.contentLength))]),
+                _vm._v("/100文字")
+              ])
+            ]),
+            _vm._v(" "),
+            _vm.EditResultMessage
+              ? _c("div", { staticClass: "profile-container-img-message" }, [
+                  _vm._v(_vm._s(_vm.EditResultMessage))
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "c-button",
+              attrs: { type: "submit", value: "編集する" }
+            })
+          ])
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "profile-container-img-left" }, [
+      _c("label", { staticClass: "c-label", attrs: { for: "img" } }, [
+        _vm._v("アイデアイメージ画像")
       ])
     ])
   }
@@ -26004,11 +26355,26 @@ module.exports = g;
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./assets/ideaImages/repezen.jpeg": "./storage/app/public/ideaImages/repezen.jpeg",
+	"./assets/ideaImages/twitter.jpg": "./storage/app/public/ideaImages/twitter.jpg",
+	"./assets/ideaImages/スクリーンショット 2019-12-29 14.47.31.png": "./storage/app/public/ideaImages/スクリーンショット 2019-12-29 14.47.31.png",
+	"./assets/ideaImages/スクリーンショット 2019-12-31 11.51.03.png": "./storage/app/public/ideaImages/スクリーンショット 2019-12-31 11.51.03.png",
+	"./assets/ideaImages/スクリーンショット 2020-01-18 9.26.59.png": "./storage/app/public/ideaImages/スクリーンショット 2020-01-18 9.26.59.png",
+	"./assets/ideaImages/スクリーンショット 2020-01-18 9.26.59（2）.png": "./storage/app/public/ideaImages/スクリーンショット 2020-01-18 9.26.59（2）.png",
+	"./assets/ideaImages/スクリーンショット 2020-01-19 21.54.46.png": "./storage/app/public/ideaImages/スクリーンショット 2020-01-19 21.54.46.png",
+	"./assets/images/twitter.jpg": "./storage/app/public/images/twitter.jpg",
 	"./assets/images/スクリーンショット 2019-12-29 14.47.31.png": "./storage/app/public/images/スクリーンショット 2019-12-29 14.47.31.png",
 	"./assets/images/スクリーンショット 2019-12-31 11.51.03.png": "./storage/app/public/images/スクリーンショット 2019-12-31 11.51.03.png",
 	"./assets/images/スクリーンショット 2019-12-31 11.55.15.png": "./storage/app/public/images/スクリーンショット 2019-12-31 11.55.15.png",
+	"./assets/images/スクリーンショット 2019-12-31 11.56.43.png": "./storage/app/public/images/スクリーンショット 2019-12-31 11.56.43.png",
+	"./assets/images/スクリーンショット 2020-01-18 9.26.59.png": "./storage/app/public/images/スクリーンショット 2020-01-18 9.26.59.png",
+	"./assets/images/スクリーンショット 2020-01-18 9.26.59（2）.png": "./storage/app/public/images/スクリーンショット 2020-01-18 9.26.59（2）.png",
+	"./assets/images/スクリーンショット 2020-01-19 10.35.09.png": "./storage/app/public/images/スクリーンショット 2020-01-19 10.35.09.png",
+	"./assets/images/スクリーンショット 2020-01-19 10.38.43.png": "./storage/app/public/images/スクリーンショット 2020-01-19 10.38.43.png",
 	"./assets/images/スクリーンショット 2020-01-19 21.20.33.png": "./storage/app/public/images/スクリーンショット 2020-01-19 21.20.33.png",
-	"./assets/images/スクリーンショット 2020-01-19 21.54.46.png": "./storage/app/public/images/スクリーンショット 2020-01-19 21.54.46.png"
+	"./assets/images/スクリーンショット 2020-01-19 21.54.46.png": "./storage/app/public/images/スクリーンショット 2020-01-19 21.54.46.png",
+	"./assets/profileImages/スクリーンショット 2019-12-29 14.47.31.png": "./storage/app/public/profileImages/スクリーンショット 2019-12-29 14.47.31.png",
+	"./assets/profileImages/スクリーンショット 2019-12-31 11.51.03.png": "./storage/app/public/profileImages/スクリーンショット 2019-12-31 11.51.03.png"
 };
 
 
@@ -26476,75 +26842,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AllReviewComponent_vue_vue_type_template_id_8e52af62_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AllReviewComponent_vue_vue_type_template_id_8e52af62_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/EditIdeaComponent.vue":
-/*!*******************************************************!*\
-  !*** ./resources/js/components/EditIdeaComponent.vue ***!
-  \*******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _EditIdeaComponent_vue_vue_type_template_id_7f6cc501_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditIdeaComponent.vue?vue&type=template&id=7f6cc501&scoped=true& */ "./resources/js/components/EditIdeaComponent.vue?vue&type=template&id=7f6cc501&scoped=true&");
-/* harmony import */ var _EditIdeaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditIdeaComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/EditIdeaComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _EditIdeaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _EditIdeaComponent_vue_vue_type_template_id_7f6cc501_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _EditIdeaComponent_vue_vue_type_template_id_7f6cc501_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  "7f6cc501",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/EditIdeaComponent.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/EditIdeaComponent.vue?vue&type=script&lang=js&":
-/*!********************************************************************************!*\
-  !*** ./resources/js/components/EditIdeaComponent.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditIdeaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./EditIdeaComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditIdeaComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditIdeaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/EditIdeaComponent.vue?vue&type=template&id=7f6cc501&scoped=true&":
-/*!**************************************************************************************************!*\
-  !*** ./resources/js/components/EditIdeaComponent.vue?vue&type=template&id=7f6cc501&scoped=true& ***!
-  \**************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditIdeaComponent_vue_vue_type_template_id_7f6cc501_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./EditIdeaComponent.vue?vue&type=template&id=7f6cc501&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditIdeaComponent.vue?vue&type=template&id=7f6cc501&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditIdeaComponent_vue_vue_type_template_id_7f6cc501_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditIdeaComponent_vue_vue_type_template_id_7f6cc501_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -27396,6 +27693,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/postIdeaEditComponent.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/postIdeaEditComponent.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _postIdeaEditComponent_vue_vue_type_template_id_45613f3e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./postIdeaEditComponent.vue?vue&type=template&id=45613f3e&scoped=true& */ "./resources/js/components/postIdeaEditComponent.vue?vue&type=template&id=45613f3e&scoped=true&");
+/* harmony import */ var _postIdeaEditComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./postIdeaEditComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/postIdeaEditComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _postIdeaEditComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _postIdeaEditComponent_vue_vue_type_template_id_45613f3e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _postIdeaEditComponent_vue_vue_type_template_id_45613f3e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "45613f3e",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/postIdeaEditComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/postIdeaEditComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/postIdeaEditComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_postIdeaEditComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./postIdeaEditComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/postIdeaEditComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_postIdeaEditComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/postIdeaEditComponent.vue?vue&type=template&id=45613f3e&scoped=true&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/postIdeaEditComponent.vue?vue&type=template&id=45613f3e&scoped=true& ***!
+  \******************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_postIdeaEditComponent_vue_vue_type_template_id_45613f3e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./postIdeaEditComponent.vue?vue&type=template&id=45613f3e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/postIdeaEditComponent.vue?vue&type=template&id=45613f3e&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_postIdeaEditComponent_vue_vue_type_template_id_45613f3e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_postIdeaEditComponent_vue_vue_type_template_id_45613f3e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/withdrawComponent.vue":
 /*!*******************************************************!*\
   !*** ./resources/js/components/withdrawComponent.vue ***!
@@ -27485,7 +27851,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_AllReviewComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/AllReviewComponent */ "./resources/js/components/AllReviewComponent.vue");
 /* harmony import */ var _components_PostIdeaComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/PostIdeaComponent */ "./resources/js/components/PostIdeaComponent.vue");
 /* harmony import */ var _components_PostIdeaConfirmComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/PostIdeaConfirmComponent */ "./resources/js/components/PostIdeaConfirmComponent.vue");
-/* harmony import */ var _components_EditIdeaComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/EditIdeaComponent */ "./resources/js/components/EditIdeaComponent.vue");
+/* harmony import */ var _components_postIdeaEditComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/postIdeaEditComponent */ "./resources/js/components/postIdeaEditComponent.vue");
 /* harmony import */ var _components_PostDetailComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/PostDetailComponent */ "./resources/js/components/PostDetailComponent.vue");
 /* harmony import */ var _components_AllIdeaComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/AllIdeaComponent */ "./resources/js/components/AllIdeaComponent.vue");
 /* harmony import */ var _components_PostCompletedComponent__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/PostCompletedComponent */ "./resources/js/components/PostCompletedComponent.vue");
@@ -27580,9 +27946,9 @@ __webpack_require__.r(__webpack_exports__);
     name: 'postComplete',
     component: _components_PostCompletedComponent__WEBPACK_IMPORTED_MODULE_14__["default"]
   }, {
-    path: '/postEdit',
-    name: 'postEdit',
-    component: _components_EditIdeaComponent__WEBPACK_IMPORTED_MODULE_11__["default"]
+    path: '/postIdeaEdit',
+    name: 'postIdeaEdit',
+    component: _components_postIdeaEditComponent__WEBPACK_IMPORTED_MODULE_11__["default"]
   }, {
     path: '/postDetail',
     name: "postDetail",
@@ -27770,6 +28136,94 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
 
 /***/ }),
 
+/***/ "./storage/app/public/ideaImages/repezen.jpeg":
+/*!****************************************************!*\
+  !*** ./storage/app/public/ideaImages/repezen.jpeg ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/repezen.jpeg?568a0308259b9de6f09584407af5de61";
+
+/***/ }),
+
+/***/ "./storage/app/public/ideaImages/twitter.jpg":
+/*!***************************************************!*\
+  !*** ./storage/app/public/ideaImages/twitter.jpg ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/twitter.jpg?ffee454b0ba947f7894e7687bfdf631b";
+
+/***/ }),
+
+/***/ "./storage/app/public/ideaImages/スクリーンショット 2019-12-29 14.47.31.png":
+/*!*************************************************************************!*\
+  !*** ./storage/app/public/ideaImages/スクリーンショット 2019-12-29 14.47.31.png ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2019-12-29 14.47.31.png?4111916df5447928afeb96425a45a4b2";
+
+/***/ }),
+
+/***/ "./storage/app/public/ideaImages/スクリーンショット 2019-12-31 11.51.03.png":
+/*!*************************************************************************!*\
+  !*** ./storage/app/public/ideaImages/スクリーンショット 2019-12-31 11.51.03.png ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2019-12-31 11.51.03.png?1df05bcd0570975f12342673ffb8e879";
+
+/***/ }),
+
+/***/ "./storage/app/public/ideaImages/スクリーンショット 2020-01-18 9.26.59.png":
+/*!************************************************************************!*\
+  !*** ./storage/app/public/ideaImages/スクリーンショット 2020-01-18 9.26.59.png ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2020-01-18 9.26.59.png?6f061b560a4f449d42cdb10cc281daaf";
+
+/***/ }),
+
+/***/ "./storage/app/public/ideaImages/スクリーンショット 2020-01-18 9.26.59（2）.png":
+/*!***************************************************************************!*\
+  !*** ./storage/app/public/ideaImages/スクリーンショット 2020-01-18 9.26.59（2）.png ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2020-01-18 9.26.59（2）.png?cb0166489446a39dc536c2ec4a340de0";
+
+/***/ }),
+
+/***/ "./storage/app/public/ideaImages/スクリーンショット 2020-01-19 21.54.46.png":
+/*!*************************************************************************!*\
+  !*** ./storage/app/public/ideaImages/スクリーンショット 2020-01-19 21.54.46.png ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2020-01-19 21.54.46.png?a1301b6c67d6a47fce771acbe8268f4d";
+
+/***/ }),
+
+/***/ "./storage/app/public/images/twitter.jpg":
+/*!***********************************************!*\
+  !*** ./storage/app/public/images/twitter.jpg ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/twitter.jpg?ffee454b0ba947f7894e7687bfdf631b";
+
+/***/ }),
+
 /***/ "./storage/app/public/images/スクリーンショット 2019-12-29 14.47.31.png":
 /*!*********************************************************************!*\
   !*** ./storage/app/public/images/スクリーンショット 2019-12-29 14.47.31.png ***!
@@ -27803,6 +28257,61 @@ module.exports = "/images/スクリーンショット 2019-12-31 11.55.15.png?fa
 
 /***/ }),
 
+/***/ "./storage/app/public/images/スクリーンショット 2019-12-31 11.56.43.png":
+/*!*********************************************************************!*\
+  !*** ./storage/app/public/images/スクリーンショット 2019-12-31 11.56.43.png ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2019-12-31 11.56.43.png?a09d69215157a6e810ab14ef8240f70c";
+
+/***/ }),
+
+/***/ "./storage/app/public/images/スクリーンショット 2020-01-18 9.26.59.png":
+/*!********************************************************************!*\
+  !*** ./storage/app/public/images/スクリーンショット 2020-01-18 9.26.59.png ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2020-01-18 9.26.59.png?6f061b560a4f449d42cdb10cc281daaf";
+
+/***/ }),
+
+/***/ "./storage/app/public/images/スクリーンショット 2020-01-18 9.26.59（2）.png":
+/*!***********************************************************************!*\
+  !*** ./storage/app/public/images/スクリーンショット 2020-01-18 9.26.59（2）.png ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2020-01-18 9.26.59（2）.png?cb0166489446a39dc536c2ec4a340de0";
+
+/***/ }),
+
+/***/ "./storage/app/public/images/スクリーンショット 2020-01-19 10.35.09.png":
+/*!*********************************************************************!*\
+  !*** ./storage/app/public/images/スクリーンショット 2020-01-19 10.35.09.png ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2020-01-19 10.35.09.png?918172e9d602a45dc1b36b22963a1222";
+
+/***/ }),
+
+/***/ "./storage/app/public/images/スクリーンショット 2020-01-19 10.38.43.png":
+/*!*********************************************************************!*\
+  !*** ./storage/app/public/images/スクリーンショット 2020-01-19 10.38.43.png ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2020-01-19 10.38.43.png?6ab4f271c94a3ded3f73e6a831c82e40";
+
+/***/ }),
+
 /***/ "./storage/app/public/images/スクリーンショット 2020-01-19 21.20.33.png":
 /*!*********************************************************************!*\
   !*** ./storage/app/public/images/スクリーンショット 2020-01-19 21.20.33.png ***!
@@ -27822,6 +28331,28 @@ module.exports = "/images/スクリーンショット 2020-01-19 21.20.33.png?b6
 /***/ (function(module, exports) {
 
 module.exports = "/images/スクリーンショット 2020-01-19 21.54.46.png?a1301b6c67d6a47fce771acbe8268f4d";
+
+/***/ }),
+
+/***/ "./storage/app/public/profileImages/スクリーンショット 2019-12-29 14.47.31.png":
+/*!****************************************************************************!*\
+  !*** ./storage/app/public/profileImages/スクリーンショット 2019-12-29 14.47.31.png ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2019-12-29 14.47.31.png?4111916df5447928afeb96425a45a4b2";
+
+/***/ }),
+
+/***/ "./storage/app/public/profileImages/スクリーンショット 2019-12-31 11.51.03.png":
+/*!****************************************************************************!*\
+  !*** ./storage/app/public/profileImages/スクリーンショット 2019-12-31 11.51.03.png ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2019-12-31 11.51.03.png?1df05bcd0570975f12342673ffb8e879";
 
 /***/ }),
 
