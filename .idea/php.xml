@@ -90,6 +90,16 @@
       <path value="$PROJECT_DIR$/Inspiration/vendor/erusev/parsedown" />
       <path value="$PROJECT_DIR$/Inspiration/vendor/laravel/ui" />
       <path value="$PROJECT_DIR$/Inspiration/vendor/laravel/helpers" />
+      <path value="$PROJECT_DIR$/Inspiration/vendor/sabberworm/php-css-parser" />
+      <path value="$PROJECT_DIR$/Inspiration/vendor/symfony/intl" />
+      <path value="$PROJECT_DIR$/Inspiration/vendor/symfony/polyfill-intl-icu" />
+      <path value="$PROJECT_DIR$/Inspiration/vendor/stripe/stripe-php" />
+      <path value="$PROJECT_DIR$/Inspiration/vendor/moneyphp/money" />
+      <path value="$PROJECT_DIR$/Inspiration/vendor/dompdf/dompdf" />
+      <path value="$PROJECT_DIR$/Inspiration/vendor/phenx/php-font-lib" />
+      <path value="$PROJECT_DIR$/Inspiration/vendor/phenx/php-svg-lib" />
+      <path value="$PROJECT_DIR$/Inspiration/vendor/laravel/cashier" />
+      <path value="$PROJECT_DIR$/Inspiration/vendor/payjp/payjp-php" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

@@ -1,0 +1,304 @@
+-- MySQL dump 10.13  Distrib 5.7.27, for Linux (x86_64)
+--
+-- Host: localhost    Database: inspiration
+-- ------------------------------------------------------
+-- Server version	5.7.27-0ubuntu0.18.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `buy_users`
+--
+
+DROP TABLE IF EXISTS `buy_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `buy_users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `idea_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `buy_users`
+--
+
+LOCK TABLES `buy_users` WRITE;
+/*!40000 ALTER TABLE `buy_users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `buy_users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `buying`
+--
+
+DROP TABLE IF EXISTS `buying`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `buying` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `buying`
+--
+
+LOCK TABLES `buying` WRITE;
+/*!40000 ALTER TABLE `buying` DISABLE KEYS */;
+/*!40000 ALTER TABLE `buying` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categories` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `category` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categories`
+--
+
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+DROP TABLE IF EXISTS `failed_jobs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `failed_jobs`
+--
+
+LOCK TABLES `failed_jobs` WRITE;
+/*!40000 ALTER TABLE `failed_jobs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `failed_jobs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `favorites`
+--
+
+DROP TABLE IF EXISTS `favorites`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `favorites` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `idea_id` int(11) NOT NULL,
+  `fav_flag` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `favorites`
+--
+
+LOCK TABLES `favorites` WRITE;
+/*!40000 ALTER TABLE `favorites` DISABLE KEYS */;
+INSERT INTO `favorites` VALUES (1,1,2,0,'2020-01-14 00:11:23','2020-01-19 02:25:00'),(2,1,1,0,'2020-01-25 07:33:32','2020-01-25 07:36:36'),(3,1,5,0,'2020-01-25 07:38:52','2020-01-25 14:12:14'),(4,1,16,1,'2020-01-25 18:32:31','2020-01-25 18:36:05'),(5,5,23,1,'2020-01-31 07:49:14','2020-01-31 07:49:39');
+/*!40000 ALTER TABLE `favorites` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ideas`
+--
+
+DROP TABLE IF EXISTS `ideas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ideas` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `overflow` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` int(11) NOT NULL,
+  `bought_flag` tinyint(1) NOT NULL DEFAULT '0',
+  `delete_flag` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ideas`
+--
+
+LOCK TABLES `ideas` WRITE;
+/*!40000 ALTER TABLE `ideas` DISABLE KEYS */;
+INSERT INTO `ideas` VALUES (1,1,2,NULL,'joy','aaaa','aaa',10000,0,0,NULL,NULL),(4,1,2,'https://lorempixel.com/640/480/?24610','Mr.','Nulla nemo rem nulla porro quo rem numquam. Officia laborum omnis reiciendis. Ex ipsa quae aspernatur et harum itaque veritatis. Blanditiis possimus debitis ipsa et labore.','Qui ducimus vel voluptas. Aliquam in tenetur consequatur repellat molestias sed blanditiis. Consequuntur ea enim velit ea nihil maiores exercitationem.',1826195753,1,0,'2020-01-13 08:28:10','2020-01-13 08:28:10'),(5,1,2,'https://lorempixel.com/640/480/?72349','Dr.','Error eum aut voluptatem magni aut. Ipsa ullam officia ducimus. Doloremque corrupti aliquid tempore facilis tempore. Esse quidem error id maiores ut ea.','Distinctio maiores consequatur labore repudiandae rerum. Iste non veniam ipsam sapiente. Esse officiis ex laborum. Ut quis tempore illo tenetur.',2033551958,1,1,'2020-01-13 08:28:10','2020-01-13 08:28:10'),(6,1,2,'https://lorempixel.com/640/480/?40661','Miss','Totam natus beatae autem sed fugit itaque. Et ea ea et odio in sit labore fuga.','Nemo asperiores voluptatem et aut totam. Veritatis voluptatem ducimus distinctio doloremque sunt ex. Autem dolores possimus labore ab perferendis.',1633997678,0,0,'2020-01-13 08:28:10','2020-01-13 08:28:10'),(7,1,2,'https://lorempixel.com/640/480/?91945','Miss','Et sed sint tempora nostrum est ea. Et quaerat rerum voluptatem et ratione est praesentium. Ea et laudantium doloribus et praesentium.','Dolorum nulla quidem possimus placeat hic saepe. Voluptatem nam voluptatem sunt. Quia fugiat quis consequatur.',825665563,1,0,'2020-01-13 08:28:10','2020-01-13 08:28:10'),(8,1,2,'https://lorempixel.com/640/480/?36771','Dr.','Dolores dignissimos adipisci numquam tenetur amet ut. Provident commodi suscipit aut et in tempore dicta. Repudiandae ex optio libero vel aut quod placeat.','Cumque ipsum maiores est ut eos. Iste iste natus eum autem ipsa doloribus qui. Et ut aspernatur iure. Optio consequatur doloremque nulla sint sed dolor.',2070924659,0,0,'2020-01-13 08:28:10','2020-01-13 08:28:10'),(9,1,2,'https://lorempixel.com/640/480/?91277','Dr.','Quasi non consequuntur nobis et dolor. Voluptatem enim a consequatur eum voluptatibus ex commodi et. Ut quisquam mollitia harum qui. Corrupti quod ipsum est mollitia dolore facilis et.','Impedit voluptatum minima modi quam qui iure. A deserunt sequi facilis vel sequi consequatur. Possimus quaerat est magni molestias id. In est cumque porro accusamus alias.',1639008141,0,1,'2020-01-13 08:28:10','2020-01-13 08:28:10'),(10,1,2,'https://lorempixel.com/640/480/?36700','Prof.','Eligendi velit voluptas quia quo. Et a excepturi velit dolorem debitis blanditiis quo. Consequuntur similique maiores id cumque.','Libero porro iusto eum non architecto velit non. A eos eligendi est nesciunt ex dolorem. Harum nobis ipsam debitis eos est. Ut necessitatibus maxime reiciendis minus veritatis corrupti iure.',1155428834,1,1,'2020-01-13 08:28:10','2020-01-13 08:28:10'),(11,1,2,'https://lorempixel.com/640/480/?12889','Miss','Aliquam est et rerum laborum. Deserunt harum velit quo impedit quam.','Dolores mollitia sunt perspiciatis culpa aut nam. Excepturi est magnam dolor deserunt sit consequatur. Quidem et qui magni. Ad rem quod rerum natus.',1651333728,1,0,'2020-01-13 08:28:10','2020-01-13 08:28:10'),(12,1,5,NULL,'issiy','baonbhao','hboash',1000,0,0,'2020-01-22 13:23:11','2020-01-22 13:23:11'),(13,1,3,NULL,'test','angbahbahipn','bapinbhaipn',100000,0,0,'2020-01-25 11:25:17','2020-01-25 11:25:17'),(14,1,2,NULL,'gapj','baossbip','bnsi',10000,0,0,'2020-01-25 14:51:49','2020-01-25 14:51:49'),(15,1,2,NULL,'gapj','baossbip','bnsi',10000,0,0,'2020-01-25 14:51:50','2020-01-25 14:51:50'),(16,1,3,NULL,'issiy','bjajnpa','jnapnjagp',1000,0,0,'2020-01-25 15:22:22','2020-01-25 15:22:22'),(17,1,1,NULL,'aaa','gjhpabnhtaps','jbaspjtasp;',1000,0,0,'2020-01-25 16:08:24','2020-01-25 16:08:24'),(18,1,1,NULL,'issiy','ganb','bjaip',1000,0,0,'2020-01-25 16:18:26','2020-01-25 16:18:26'),(19,1,3,'/ideaImages/スクリーンショット 2019-12-29 14.47.31.png','isssiy','hboshbso','bhaobha',1000,0,0,'2020-01-27 22:27:17','2020-01-27 22:27:17'),(20,1,3,'/ideaImages/スクリーンショット 2019-12-29 14.47.31.png','100','bahbaouh','hsobh',100,0,0,'2020-01-27 22:37:54','2020-01-27 22:37:54'),(21,1,1,'/ideaImages/スクリーンショット 2020-01-18 9.26.59.png','issiy','nbsohb','bosbj',100,0,0,'2020-01-27 22:38:23','2020-01-27 22:38:23'),(22,1,3,'/ideaImages/スクリーンショット 2019-12-29 14.47.31.png','isiy','fhfishvojkl','jklfds',1000,0,0,'2020-01-27 22:39:09','2020-01-27 22:39:09'),(23,1,1,'/ideaImages/スクリーンショット 2020-01-19 21.54.46.png','test','boanhbsaaa','bsonbhaipaaaaa',10000,0,0,'2020-01-27 22:41:27','2020-01-30 08:34:54');
+/*!40000 ALTER TABLE `ideas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `migrations`
+--
+
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `migrations`
+--
+
+LOCK TABLES `migrations` WRITE;
+/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+INSERT INTO `migrations` VALUES (108,'2014_10_12_000000_create_users_table',1),(109,'2014_10_12_100000_create_password_resets_table',1),(110,'2019_08_19_000000_create_failed_jobs_table',1),(111,'2020_01_04_102621_create_ideas_table',1),(112,'2020_01_04_102835_create_buy_users_table',1),(113,'2020_01_04_102905_create_categories_table',1),(114,'2020_01_04_102932_create_favorites_table',1),(115,'2020_01_04_103012_create_reviews_table',1),(116,'2020_01_11_020958_create_buying_table',1);
+/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `password_resets`
+--
+
+DROP TABLE IF EXISTS `password_resets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `password_resets`
+--
+
+LOCK TABLES `password_resets` WRITE;
+/*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `reviews`
+--
+
+DROP TABLE IF EXISTS `reviews`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `reviews` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `idea_id` int(11) NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `star` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reviews`
+--
+
+LOCK TABLES `reviews` WRITE;
+/*!40000 ALTER TABLE `reviews` DISABLE KEYS */;
+/*!40000 ALTER TABLE `reviews` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `introduction` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'だーいし','issiy@gmail.com',NULL,'$2y$10$9ZBvp.QFmdIae2ru96DgneMXUFxhMkj8UbL/0rATY5UHbqnqC0lva','aaaaaaaaaaaaaaああああ','/images/スクリーンショット 2020-01-18 9.26.59（2）.png',NULL,NULL,'2020-01-13 08:28:09','2020-01-30 00:09:55'),(2,NULL,'test@gmail.com',NULL,'$2y$10$Pjt1hX45QVkO/HwOpa50lumHTP4CP9ZDVuyGojOTsEnEmKOuZTP2C',NULL,'/storage/スクリーンショット 2019-12-29 14.47.31.png',NULL,NULL,'2020-01-19 03:42:18','2020-01-26 11:46:38'),(3,NULL,'testtest@gmail.com',NULL,'$2y$10$oW9nNSCJPW0ZvP10H23mZ.GqMWVKwW55N3.f8lHbO9LD4T8KTRXty',NULL,'/storage/staff6.jpg',NULL,NULL,'2020-01-19 03:43:03','2020-01-19 03:43:03'),(4,NULL,'issiysansan@gmail.com',NULL,'$2y$10$emN2YvcB5LxUVEkr3A.sf.gr656.T8R/eY1RdJ/WRsFevbfOORHNC',NULL,NULL,NULL,NULL,'2020-01-31 07:27:12','2020-01-31 07:27:12'),(5,NULL,'ishida@life-innovation.com',NULL,'$2y$10$FkmkC3lyOrJxodc.x/KLvuzm8cM/VK5jfW1GtUsiBLHH4JGdo7yhG',NULL,NULL,NULL,NULL,'2020-01-31 07:28:43','2020-01-31 07:28:43');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2020-01-30 23:16:53

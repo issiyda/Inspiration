@@ -4,8 +4,18 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/Inspiration/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/Inspiration/app" isTestSource="false" packagePrefix="App\" />
+      <excludeFolder url="file://$MODULE_DIR$/Inspiration/vendor/dompdf/dompdf" />
+      <excludeFolder url="file://$MODULE_DIR$/Inspiration/vendor/laravel/cashier" />
       <excludeFolder url="file://$MODULE_DIR$/Inspiration/vendor/laravel/helpers" />
       <excludeFolder url="file://$MODULE_DIR$/Inspiration/vendor/laravel/ui" />
+      <excludeFolder url="file://$MODULE_DIR$/Inspiration/vendor/moneyphp/money" />
+      <excludeFolder url="file://$MODULE_DIR$/Inspiration/vendor/payjp/payjp-php" />
+      <excludeFolder url="file://$MODULE_DIR$/Inspiration/vendor/phenx/php-font-lib" />
+      <excludeFolder url="file://$MODULE_DIR$/Inspiration/vendor/phenx/php-svg-lib" />
+      <excludeFolder url="file://$MODULE_DIR$/Inspiration/vendor/sabberworm/php-css-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/Inspiration/vendor/stripe/stripe-php" />
+      <excludeFolder url="file://$MODULE_DIR$/Inspiration/vendor/symfony/intl" />
+      <excludeFolder url="file://$MODULE_DIR$/Inspiration/vendor/symfony/polyfill-intl-icu" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -3267,6 +3267,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostDetailComponent",
   data: function data() {
@@ -3391,7 +3404,13 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  computed: {},
+  computed: {
+    checkBuying: function checkBuying() {// buy_usersっていうテーブルに値があるから
+      //  そこに二つの値がある投稿があればfalseを返す
+      //
+      //  return false;
+    }
+  },
   watch: {
     favState: function favState() {
       if (this.favState.favState === 1) this.favActive = true;else if (this.favState.favState === 0) this.favActive = false;
@@ -7931,14 +7950,14 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", [
-    _c("div", { staticClass: "pd" }, [
+    _c("div", { staticClass: "postDetail" }, [
       _c("h2", { staticClass: "f-h2" }, [_vm._v("アイデア詳細")]),
       _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),
       _c(
         "form",
-        { staticClass: "pd-container" },
+        { staticClass: "postDetail-container" },
         _vm._l(this.detail.idea, function(detail) {
           return _c("div", [
             _c(
@@ -7965,16 +7984,16 @@ var render = function() {
               [_vm._v(_vm._s(detail.price))]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "pd-container-input" }, [
-              _c("div", { staticClass: "pd-container-img" }, [
-                _c("div", { staticClass: "pd-container-img-right" }, [
+            _c("div", { staticClass: "postDetail-container-input" }, [
+              _c("div", { staticClass: "postDetail-container-img" }, [
+                _c("div", { staticClass: "postDetail-container-img-right" }, [
                   _c("label", [
                     _c("img", {
                       attrs: { src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + detail.img), alt: "" }
                     }),
                     _vm._v(" "),
                     _c("input", {
-                      staticClass: "c-input pd-container-img-none",
+                      staticClass: "c-input postDetail-container-img-none",
                       attrs: { id: "img", type: "file" }
                     })
                   ])
@@ -8174,7 +8193,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "pd-container-img-left" }, [
+    return _c("div", { staticClass: "postDetail-container-img-left" }, [
       _c("label", { staticClass: "c-label", attrs: { for: "img" } }, [
         _vm._v("平均評価")
       ]),

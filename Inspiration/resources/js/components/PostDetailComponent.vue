@@ -3,14 +3,14 @@
 
     <main>
 
-        <div class="pd">
+        <div class="postDetail">
             <h2 class="f-h2">アイデア詳細</h2>
 
             <div class="c-heading">
                 <h3 class ="f-h3">アイデア</h3>
             </div>
 
-            <form class="pd-container">
+            <form class="postDetail-container">
 
                 <div v-for="detail in this.detail.idea">
 
@@ -20,19 +20,19 @@
                 <label for="ideaPrice" class="c-label">金額</label>
                 <div id="ideaPrice" class="confirm-text">{{detail.price}}</div>
 
-                <div class="pd-container-input">
+                <div class="postDetail-container-input">
 
 
 
-                    <div class="pd-container-img">
-                        <div class="pd-container-img-right">
+                    <div class="postDetail-container-img">
+                        <div class="postDetail-container-img-right">
                             <label>
                                 <img :src="require(`../assets${detail.img}`)" alt="">
-                                <input id="img" class ="c-input pd-container-img-none" type="file" />
+                                <input id="img" class ="c-input postDetail-container-img-none" type="file" />
                                 <!-- hoverしたら画像をアップロードの文字が浮き上がって画像が薄暗く -->
                             </label>
                         </div>
-                        <div class="pd-container-img-left">
+                        <div class="postDetail-container-img-left">
                             <label class ="c-label" for="img">平均評価</label>
                             ★3.3
                         </div>
@@ -51,11 +51,24 @@
                         {{detail.overflow}}
                     </div>
 
-
                     <label for="contents" class="c-label">内容</label>
+
                     <div id="contents" class="confirm-text">
                         {{detail.content}}
                     </div>
+
+<!--                    <div class="postDetail-content">-->
+<!--                        <div v-if="checkBuying">-->
+<!--                            <div id="contents" class="confirm-text">-->
+<!--                                {{detail.content}}-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div v-else>-->
+<!--                            <div id="contents" class="confirm-text">-->
+<!--                                購入者にのみ開放されます-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
 <!--                    未購入の場合は購入後に表示されますの表記-->
 
@@ -368,6 +381,13 @@
         },
 
         computed:{
+
+            checkBuying:function(){
+               // buy_usersっていうテーブルに値があるから
+               //  そこに二つの値がある投稿があればfalseを返す
+               //
+               //  return false;
+            }
 
             },
 

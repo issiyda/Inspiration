@@ -1157,18 +1157,18 @@ confirm とdetailの共通部分　
           transform: scaleY(0.5);
 }
 
-.pd {
+.postDetail {
   margin: 0 auto 12%;
   width: 50%;
 }
 
 @media screen and (max-width: 414px) {
-  .pd {
+  .postDetail {
     width: 80%;
   }
 }
 
-.pd-container {
+.postDetail-container {
   background: #F5F5F5;
   border-radius: 1%;
   display: -webkit-box;
@@ -1179,17 +1179,17 @@ confirm とdetailの共通部分　
   text-align: center;
 }
 
-.pd-container-input {
+.postDetail-container-input {
   margin-bottom: 10%;
 }
 
-.pd-container-input-label {
+.postDetail-container-input-label {
   display: block;
   font-size: 24px;
   margin: 3%;
 }
 
-.pd-container-img {
+.postDetail-container-img {
   display: -webkit-box;
   display: flex;
   margin: 10% auto;
@@ -1197,7 +1197,7 @@ confirm とdetailの共通部分　
 }
 
 @media screen and (max-width: 414px) {
-  .pd-container-img {
+  .postDetail-container-img {
     display: -webkit-box;
     display: flex;
     -webkit-box-orient: vertical;
@@ -1207,7 +1207,7 @@ confirm とdetailの共通部分　
   }
 }
 
-.pd-container-img-left {
+.postDetail-container-img-left {
   -webkit-box-align: center;
           align-items: center;
   display: -webkit-box;
@@ -1219,29 +1219,29 @@ confirm とdetailの共通部分　
 }
 
 @media screen and (max-width: 414px) {
-  .pd-container-img-left {
+  .postDetail-container-img-left {
     margin: 0 auto;
     width: 60%;
     word-wrap: break-word;
   }
 }
 
-.pd-container-img-right {
+.postDetail-container-img-right {
   width: 60%;
   margin: 5%;
 }
 
 @media screen and (max-width: 414px) {
-  .pd-container-img-right {
+  .postDetail-container-img-right {
     margin: 5% auto;
   }
 }
 
-.pd-container-img-right img {
+.postDetail-container-img-right img {
   width: 100%;
 }
 
-.pd-container-img-none {
+.postDetail-container-img-none {
   display: none;
 }
 
