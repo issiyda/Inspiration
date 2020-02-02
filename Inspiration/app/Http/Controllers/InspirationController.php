@@ -55,15 +55,7 @@ class InspirationController extends Controller
         return view('layouts.index');
     }
 
-    public function detail($id)
-    {
-        $idea = Idea::where('id', $id)->get();
 
-        return response()->json([
-            'idea' => $idea
-        ], 200);
-
-    }
 
     public function myself(Request $request)
     {

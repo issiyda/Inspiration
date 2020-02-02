@@ -172,7 +172,7 @@
                 console.log(this.fileInfo);
                 formData.append('file', this.fileInfo);
 
-                axios.post('/api/fileUpload', formData)
+                axios.post('/api/profileImgUpload', formData)
                     .then((response) => {
                         console.log(response);
                         this.user = response.data;

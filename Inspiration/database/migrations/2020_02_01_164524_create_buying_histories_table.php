@@ -1,10 +1,12 @@
+
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBuyUsersTable extends Migration
+class CreateBuyingHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,9 +18,10 @@ class CreateBuyUsersTable extends Migration
         Schema::create('buying_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
-            $table->integer('idea_id');
+            $table->integer('post_id');
             $table->integer('price');
             $table->timestamps();
+
         });
     }
 
@@ -29,6 +32,6 @@ class CreateBuyUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('buy_users');
+        Schema::dropIfExists('buying_histories');
     }
 }

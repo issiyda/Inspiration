@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DetailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -66,7 +67,12 @@ Route::post('/ideaEdit','postIdeaController@editIdea');
 /**
  *アイデア詳細ルーティング
  */
-Route::get('/detail/{id}','InspirationController@detail');
+Route::get('/detail/{id}','DetailController@detail');
+
+/**
+ * 購入者かどうか判定するためのルーティング
+ */
+Route::get('/buyingJudge','DetailController@buyingJudge');
 
 /**
  * カテゴリー検索
@@ -176,10 +182,6 @@ ROUTE::get('/favState','InspirationController@favState');
  */
 ROUTE::post('/favorite','InspirationController@favSwitch');
 
-/**
- * 決済機能のルーティング
- */
-ROUTE::get('/pay','InspirationController@pay');
 
 /**
  * メール送信機能のルーティング

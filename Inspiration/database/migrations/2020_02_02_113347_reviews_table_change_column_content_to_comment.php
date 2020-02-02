@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBuyUsersTable extends Migration
+class ReviewsTableChangeColumnContentToComment extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateBuyUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('buying_histories', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->integer('idea_id');
-            $table->integer('price');
-            $table->timestamps();
+        Schema::table('comment', function (Blueprint $table) {
+            //
         });
     }
 
@@ -29,6 +25,8 @@ class CreateBuyUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('buy_users');
+        Schema::table('comment', function (Blueprint $table) {
+            //
+        });
     }
 }

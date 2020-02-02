@@ -4,6 +4,9 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/Inspiration/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/Inspiration/app" isTestSource="false" packagePrefix="App\" />
+      <excludeFolder url="file://$MODULE_DIR$/Inspiration/vendor/doctrine/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/Inspiration/vendor/doctrine/dbal" />
+      <excludeFolder url="file://$MODULE_DIR$/Inspiration/vendor/doctrine/event-manager" />
       <excludeFolder url="file://$MODULE_DIR$/Inspiration/vendor/dompdf/dompdf" />
       <excludeFolder url="file://$MODULE_DIR$/Inspiration/vendor/laravel/cashier" />
       <excludeFolder url="file://$MODULE_DIR$/Inspiration/vendor/laravel/helpers" />

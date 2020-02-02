@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <router-link to="/allBuy" class ="p-mypage-more">もっと見る</router-link>
+            <router-link to="/allBuy" class ="p-mypage-more">全件表示</router-link>
 
 
 
@@ -78,7 +78,7 @@
                     </div>
                 </div>
 
-            <router-link to="/allFavorite" class ="p-mypage-more">もっと見る</router-link>
+            <router-link to="/allFavorite" class ="p-mypage-more">全件表示</router-link>
 
 
             <h3 class ="f-h3">投稿したアイデア</h3>
@@ -117,7 +117,7 @@
                         </div>
                     </div>
 
-            <router-link to="/allPost" class ="p-mypage-more">もっと見る</router-link>
+            <router-link to="/allPost" class ="p-mypage-more">全件表示</router-link>
 
 
 
@@ -152,7 +152,7 @@
 
                         </div>
 
-            <router-link to="/allReview" class ="p-mypage-more">もっと見る</router-link>
+            <router-link to="/allReview" class ="p-mypage-more">全件表示</router-link>
 
 
             <div class ="c-button">
@@ -194,10 +194,12 @@
             this.$emit('open-loading');
             console.log('MypageComponent mounted.');
             // this.user = this.$store.dispatch('getUsers');
-            this.ideas = this.$store.dispatch('getUserIdeas')
-
-
         },
+
+        mounted(){
+            this.ideas = this.$store.dispatch('getUserIdeas')
+        },
+
         beforeUpdate() {
             this.$emit('close-loading');
         },

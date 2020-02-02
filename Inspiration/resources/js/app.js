@@ -4,6 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+var PayjpCheckout = require('vue-payjp-checkout')
 require('./components');
 window.Vue = require('vue');
 window.axios = require('axios');
@@ -12,8 +13,7 @@ import VueRouter from 'vue-router'
 import store from './store'
 import VCalendar from 'v-calendar';
 
-
-
+Vue.use(PayjpCheckout)
 Vue.use(VueRouter);
 Vue.use(window.vuelidate.default);
 Vue.use(VCalendar);

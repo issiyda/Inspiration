@@ -47,6 +47,8 @@ Route::post('/home',function(){
 
 Route::get('/users','UserController@getUserData');
 
+Route::post('/mypage','StripeController@charge');
+
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
