@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DetailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -66,7 +67,25 @@ Route::post('/ideaEdit','postIdeaController@editIdea');
 /**
  *アイデア詳細ルーティング
  */
-Route::get('/detail/{id}','InspirationController@detail');
+Route::get('/detail/{id}','DetailController@detail');
+
+/**
+ * レビュー取得ルーティング
+ */
+Route::get('/getReviews','ReviewController@getReviews');
+
+/**
+ * レビューされているか確認するためのルーティング
+ */
+Route::get('/reviewedJudge','ReviewController@reviewJudge');
+
+Route::post('/reviewPost','ReviewController@reviewPost');
+
+
+/**
+ * 購入者かどうか判定するためのルーティング
+ */
+Route::get('/buyingJudge','DetailController@buyingJudge');
 
 /**
  * カテゴリー検索
@@ -143,20 +162,26 @@ Route::patch('/setting/{id}',function($id,Request $request){
 /**
  * プロフィール画像アップロード
  */
-Route::post('/profileImgUpload',function(){
+Route::post('/profileImgUpload',function(Request $request){
 
 
+    $userId = $request->input('user_id');
 
     $file_name = request()->file->getClientOriginalName();
 
     request()->file->storeAs('public/images',$file_name);
 
-    $user = App\User::find(1);
+    $user = App\User::find($userId);
 
     $user->update(['img' =>'/images/'.$file_name]);
 
     return $user;
 });
+
+/**
+ * プロフィール詳細画面表示
+ */
+Route::get('/profileDetail','ProfileController@showProfileDetail');
 /**
  * パスワードアップデート用ルーティング
  */
@@ -176,10 +201,6 @@ ROUTE::get('/favState','InspirationController@favState');
  */
 ROUTE::post('/favorite','InspirationController@favSwitch');
 
-/**
- * 決済機能のルーティング
- */
-ROUTE::get('/pay','InspirationController@pay');
 
 /**
  * メール送信機能のルーティング

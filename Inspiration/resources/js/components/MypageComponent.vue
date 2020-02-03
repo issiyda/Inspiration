@@ -13,8 +13,8 @@
 
                 <div class="ic-card" v-for="buyingIdea in buyingIdeas">
                     <router-link v-bind:to="{name:'postDetail',params:{
-                     id: buyingIdea.id,
-                     ideaUserId: buyingIdea.user_id
+                     ideaId: buyingIdea.id,
+                     userId: buyingIdea.user_id
                      }}" class ="ic-a" href="#">
 
                         <h4 class ="f-h4">{{buyingIdea.title}}</h4>
@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <router-link to="/allBuy" class ="p-mypage-more">もっと見る</router-link>
+            <router-link to="/allBuy" class ="p-mypage-more">全件表示</router-link>
 
 
 
@@ -53,12 +53,12 @@
 
                     <div class="ic-card" v-for="favIdea in favIdeas.slice(0,5)">
                         <router-link v-bind:to="{name:'postDetail',params:{
-                                id: favIdea.id,
-                                ideaUserId: favIdea.user_id
+                                ideaId: favIdea.id,
+                                userId: favIdea.user_id
                                 }}" class ="ic-a" href="#">
                             <h4 class ="f-h4">{{favIdea.title}}</h4>
                             <div class="ic-img">
-<!--                                <img :src="require(`../assets${favIdea.img}`)" alt="idea" class="ic-img-item">-->
+                                <img :src="require(`../assets${favIdea.img}`)" alt="idea" class="ic-img-item">
                             </div>
                             <div class="ic-review">
                                 <span class ="ic-span">評価</span>
@@ -78,7 +78,7 @@
                     </div>
                 </div>
 
-            <router-link to="/allFavorite" class ="p-mypage-more">もっと見る</router-link>
+            <router-link to="/allFavorite" class ="p-mypage-more">全件表示</router-link>
 
 
             <h3 class ="f-h3">投稿したアイデア</h3>
@@ -88,8 +88,8 @@
 
                         <div class="ic-card" v-for="myIdea in myIdeas.slice(0,5)">
                             <router-link v-bind:to="{name:'postDetail',params:{
-                                id: myIdea.id,
-                                ideaUserId: myIdea.user_id
+                                ideaId: myIdea.id,
+                                userId: myIdea.user_id
                                 }}" class ="ic-a" href="#">
                                 <h4 class ="f-h4">{{myIdea.title}}</h4>
                                 <div class="ic-img">
@@ -117,7 +117,7 @@
                         </div>
                     </div>
 
-            <router-link to="/allPost" class ="p-mypage-more">もっと見る</router-link>
+            <router-link to="/allPost" class ="p-mypage-more">全件表示</router-link>
 
 
 
@@ -152,7 +152,7 @@
 
                         </div>
 
-            <router-link to="/allReview" class ="p-mypage-more">もっと見る</router-link>
+            <router-link to="/allReview" class ="p-mypage-more">全件表示</router-link>
 
 
             <div class ="c-button">
@@ -194,10 +194,12 @@
             this.$emit('open-loading');
             console.log('MypageComponent mounted.');
             // this.user = this.$store.dispatch('getUsers');
-            this.ideas = this.$store.dispatch('getUserIdeas')
-
-
         },
+
+        mounted(){
+            this.ideas = this.$store.dispatch('getUserIdeas')
+        },
+
         beforeUpdate() {
             this.$emit('close-loading');
         },

@@ -100,6 +100,9 @@
       <path value="$PROJECT_DIR$/Inspiration/vendor/phenx/php-svg-lib" />
       <path value="$PROJECT_DIR$/Inspiration/vendor/laravel/cashier" />
       <path value="$PROJECT_DIR$/Inspiration/vendor/payjp/payjp-php" />
+      <path value="$PROJECT_DIR$/Inspiration/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/Inspiration/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/Inspiration/vendor/doctrine/cache" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

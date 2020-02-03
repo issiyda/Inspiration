@@ -81,7 +81,7 @@
 //====================================
 //Review部分のcss
 //====================================
-.voice{
+.review{
   margin:5% auto;
 
 
@@ -149,6 +149,8 @@
       width:80%;
       margin:0 auto;
 
+
+
       @include mq{
         padding: 7%;
       }
@@ -196,6 +198,8 @@
     }
 
 
+
+
   }
 
   &-img{
@@ -225,20 +229,62 @@
     }
   }
 
+  &-container{
+
+  }
+
+  &-container-restriction{
+      opacity:0.7;
+  }
+
   &-comment{
-    @extend .voice;
+    @extend .review;
     background: $color_bg;
     padding:5%;
+
+      &-check{
+          margin:auto 3% 10%;
+          text-align:center;
+          width:60%;
+      }
+
+      &-result{
+          display: flex;
+          flex-direction:column;
+          width:30%;
+      }
+
+      &-stars{
+          display:flex;
+          width:100%;
+          justify-content:center;
+
+          &-select{
+              color:$color_base;
+          }
+      }
+
+      &-error{
+          color:$color_attention;
+          font-weight:bold;
+          text-align:center;
+          margin:10%;
+      }
+
+    &-restriction{
+        color:$color_base;
+        font-weight:bolder;
+    }
 
     label{
       align-items: center;
       background: $color_sub;
-      @extend .voice-posted-name;
+      @extend .review-posted-name;
       margin:5% auto;
     }
 
     textarea{
-      @extend .voice-posted-comment;
+      @extend .review-posted-comment;
       margin:auto 3%;
       width:74%;
 
@@ -251,9 +297,10 @@
     &-container{
       align-items: center;
       display:flex;
+        flex-direction:column;
       justify-content: center;
       width:95%;
-      margin: 0 auto;
+      margin: 0 auto 5%;
 
 
       @include mq{
@@ -283,10 +330,22 @@
     padding:1.5%;
     width:10%;
 
+      &-restriction{
+          @extend .review-button;
+          pointer-events:none;
+      }
+
     @include mq{
       margin:8% 0 3% 62%;
       width:20%;
 
     }
   }
+}
+
+//==========================
+//その他
+//==========================
+.fa-star{
+    cursor:pointer;
 }

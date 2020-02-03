@@ -63,7 +63,9 @@
                     <div class="profile-container-input">
                         <label class="c-label" for="profileDetail">プロフィール詳細</label>
                         <div id="profileDetail" class="c-button profile-withdraw">
-                            <router-link to="/profileDetail">詳細画面へ</router-link>
+                            <router-link :to="{name:'profileDetail',params:{
+                            userId:this.$store.state.users.id
+                            }}">詳細画面へ</router-link>
                         </div>
                     </div>
 
@@ -171,8 +173,9 @@
                 const formData = new FormData();
                 console.log(this.fileInfo);
                 formData.append('file', this.fileInfo);
+                formData.append('user_id', this.$store.state.users.id);
 
-                axios.post('/api/fileUpload', formData)
+                axios.post('/api/profileImgUpload', formData)
                     .then((response) => {
                         console.log(response);
                         this.user = response.data;
