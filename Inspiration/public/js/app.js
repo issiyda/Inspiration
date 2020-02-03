@@ -3040,9 +3040,705 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PostDetailComponent.vue?vue&type=script&lang=js& ***!
   \******************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/ishidashogo/code/Inspiration/Inspiration/resources/js/components/PostDetailComponent.vue: Unexpected token, expected \",\" (481:49)\n\n\u001b[0m \u001b[90m 479 | \u001b[39m        \u001b[90m//既にレビューしているか確認\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 480 | \u001b[39m        reviewedJudge\u001b[33m:\u001b[39m \u001b[36mfunction\u001b[39m(){\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 481 | \u001b[39m            axios\u001b[33m.\u001b[39mget(\u001b[32m'/api/reviewdJudge'\u001b[39m\u001b[33m,\u001b[39m{params{\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m                                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 482 | \u001b[39m                    userId\u001b[33m:\u001b[39m\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39muserId\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 483 | \u001b[39m                    ideaId\u001b[33m:\u001b[39m\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mid\u001b[0m\n\u001b[0m \u001b[90m 484 | \u001b[39m            }\u001b[0m\n    at Parser.raise (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:7012:17)\n    at Parser.unexpected (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:8405:16)\n    at Parser.expect (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:8391:28)\n    at Parser.parseObj (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9973:14)\n    at Parser.parseExprAtom (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9604:28)\n    at Parser.parseExprSubscripts (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9237:23)\n    at Parser.parseMaybeUnary (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9217:21)\n    at Parser.parseExprOps (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9083:23)\n    at Parser.parseMaybeConditional (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9056:23)\n    at Parser.parseMaybeAssign (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9015:21)\n    at Parser.parseExprListItem (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:10331:18)\n    at Parser.parseCallExpressionArguments (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9434:22)\n    at Parser.parseSubscript (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9342:29)\n    at Parser.parseSubscripts (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9258:19)\n    at Parser.parseExprSubscripts (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9247:17)\n    at Parser.parseMaybeUnary (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9217:21)\n    at Parser.parseExprOps (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9083:23)\n    at Parser.parseMaybeConditional (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9056:23)\n    at Parser.parseMaybeAssign (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9015:21)\n    at Parser.parseExpression (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:8965:23)\n    at Parser.parseStatementContent (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:10819:23)\n    at Parser.parseStatement (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:10690:17)\n    at Parser.parseBlockOrModuleBlockBody (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:11266:25)\n    at Parser.parseBlockBody (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:11253:10)\n    at Parser.parseBlock (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:11237:10)\n    at Parser.parseFunctionBody (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:10256:24)\n    at Parser.parseFunctionBodyAndFinish (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:10226:10)\n    at /Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:11398:12\n    at Parser.withTopicForbiddingContext (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:10565:14)\n    at Parser.parseFunction (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:11397:10)\n    at Parser.parseFunctionExpression (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9697:17)\n    at Parser.parseExprAtom (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9610:21)\n    at Parser.parseExprSubscripts (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9237:23)\n    at Parser.parseMaybeUnary (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9217:21)\n    at Parser.parseExprOps (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9083:23)\n    at Parser.parseMaybeConditional (/Users/ishidashogo/code/Inspiration/Inspiration/node_modules/@babel/parser/lib/index.js:9056:23)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "PostDetailComponent",
+  data: function data() {
+    return {
+      ideaId: '',
+      detail: {},
+      title: "",
+      favActive: "",
+      user: {},
+      favState: "",
+      contributorFlag: true,
+      reviewed: false,
+      ideaReviews: {},
+      ideaUserId: "",
+      userId: "",
+      deleteState: true,
+      buying: false,
+      stars: {
+        oneStar: false,
+        twoStars: false,
+        threeStars: false,
+        fourStars: false,
+        fiveStars: false
+      },
+      reviewComment: "",
+      reviewNumber: "",
+      reviewErrorMessage: false,
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    this.$emit('close-loading');
+    this.user = this.$store.dispatch('getUsers');
+    this.ideaId = this.$route.params.ideaId;
+    this.ideaUserId = this.$route.params.userId;
+    /**
+     * 投稿情報取得
+     */
+
+    axios.get('/api/detail/' + this.ideaId, {}).then(function (response) {
+      console.log(response.data);
+      _this.detail = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  },
+  mounted: function mounted() {
+    this.$nextTick(function () {
+      this.$emit('close-loading');
+      this.getState();
+      this.checkCategory();
+      this.contributorJudge();
+      this.checkBuying;
+      this.reviewedJudge();
+      this.getReviews();
+      console.log('PostDetailComponent mounted');
+    });
+  },
+  methods: {
+    favSwitch: function favSwitch(userId, ideaId) {
+      axios.post('/api/favorite/', {
+        userId: userId,
+        ideaId: ideaId
+      }).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      this.getState();
+    },
+
+    /**
+     * お気に入り状態取得
+     */
+    getState: function getState() {
+      var _this2 = this;
+
+      axios.get('/api/favState', {
+        params: {
+          userId: this.$store.state.users.id,
+          ideaId: this.ideaId
+        }
+      }).then(function (response) {
+        _this2.favState = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    //カテゴリーチェック
+    checkCategory: function checkCategory(category_id) {
+      if (category_id === 1) {
+        return 'マッチング';
+      } else if (category_id === 2) {
+        return '掲示板';
+      }
+
+      if (category_id === 3) {
+        return 'SNS';
+      }
+
+      if (category_id === 4) {
+        return "ECサイト";
+      }
+
+      if (category_id === 5) {
+        return "情報発信";
+      }
+
+      if (category_id === 6) {
+        return 'その他';
+      }
+    },
+    //投稿者の投稿か確認
+    contributorJudge: function contributorJudge() {
+      if (this.$store.state.users.id === this.ideaUserId) {
+        console.log(this.$store.state.users.id === this.ideaUserId);
+        this.contributorFlag = false;
+      }
+    },
+    //既にレビューしているか確認
+    reviewedJudge: function reviewedJudge() {
+      var _this3 = this;
+
+      axios.get('/api/reviewedJudge', {
+        params: {
+          userId: this.$store.state.users.id,
+          ideaId: this.ideaId
+        }
+      }).then(function (response) {
+        console.log(response); //投稿がある場合はtrue ない場合はデフォルト値false
+
+        _this3.reviewed = response.data.judge;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    //レビュー取得
+    getReviews: function getReviews() {
+      var _this4 = this;
+
+      axios.get('/api/getReviews', {
+        params: {
+          ideaId: this.ideaId
+        }
+      }).then(function (response) {
+        console.log(response);
+        _this4.ideaReviews = response.data.reviews;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+
+    /**
+     * 投稿削除のためのルーティング
+     */
+    postDelete: function postDelete() {
+      axios["delete"]('/api/ideaDelete', {
+        params: {
+          ideaId: this.ideaId
+        }
+      }).then(function (response) {
+        console.log(response);
+        alert("削除完了しました");
+      })["catch"](function (error) {
+        console.log(error);
+        alert("削除失敗しました");
+      });
+    },
+    appearForm: function appearForm() {
+      this.deleteState = false;
+    },
+    starJudge: function starJudge($starNumber) {
+      this.stars.oneStar = false, this.stars.twoStars = false, this.stars.threeStars = false, this.stars.fourStars = false, this.stars.fiveStars = false;
+
+      if ($starNumber === 1) {
+        this.stars.oneStar = true;
+        this.reviewNumber = 1;
+      }
+
+      if ($starNumber === 2) {
+        this.stars.twoStars = true;
+        this.reviewNumber = 2;
+      }
+
+      if ($starNumber === 3) {
+        this.stars.threeStars = true;
+        this.reviewNumber = 3;
+      }
+
+      if ($starNumber === 4) {
+        this.stars.fourStars = true;
+        this.reviewNumber = 4;
+      }
+
+      if ($starNumber === 5) {
+        this.stars.fiveStars = true;
+        this.reviewNumber = 5;
+      }
+    },
+    reviewPost: function reviewPost() {
+      var _this5 = this;
+
+      //すでに投稿しているか確認
+      if (this.reviewed === true) {
+        this.reviewErrorMessage = '既にレビューが投稿されています'; //レビュー投稿処理
+      } else if (this.reviewNumber !== "" && this.reviewComment !== "") {
+        //投稿処理
+        axios.post('/api/reviewPost', {
+          userId: this.$store.state.users.id,
+          ideaId: this.ideaId,
+          star: this.reviewNumber,
+          comment: this.reviewComment
+        }).then(function (response) {
+          console.log(response);
+
+          _this5.$router.push({
+            name: 'reviewCompleted',
+            params: {
+              ideaId: _this5.ideaId,
+              userId: _this5.ideaUserId,
+              title: _this5.title
+            }
+          });
+        })["catch"](function (error) {
+          console.log(error);
+          _this5.reviewErrorMessage = '時間を置いてお試し下さい';
+        });
+      } //入力がされていない
+      else {
+          this.reviewErrorMessage = '全てのレビュー入力がされていません';
+        }
+    }
+  },
+  computed: {
+    //購入しているか確認
+    checkBuying: function checkBuying() {
+      var _this6 = this;
+
+      axios.get('/api/buyingJudge', {
+        params: {
+          userId: this.$store.state.users.id,
+          postId: this.ideaId
+        }
+      }).then(function (response) {
+        console.log(response);
+        _this6.buying = response.data.judge;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getReviewAverage: function getReviewAverage() {},
+    reviewRegurationMessage: function reviewRegurationMessage() {
+      if (this.buying === false && this.reviewed === false) {
+        return 'レビューは購入者のみ可能です';
+      } else if (this.buying === true && this.reviewed === true) {
+        return 'レビューは一度のみ可能です';
+      }
+    }
+  },
+  watch: {
+    favState: function favState() {
+      if (this.favState.favState === 1) this.favActive = true;else if (this.favState.favState === 0) this.favActive = false;
+    },
+    detail: function detail() {
+      this.title = this.detail.idea[0].title;
+      this.userId = this.$store.state.users.id;
+    }
+  }
+});
 
 /***/ }),
 
@@ -3490,6 +4186,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ProfileComponent",
   data: function data() {
@@ -3554,6 +4252,7 @@ __webpack_require__.r(__webpack_exports__);
       var formData = new FormData();
       console.log(this.fileInfo);
       formData.append('file', this.fileInfo);
+      formData.append('user_id', this.$store.state.users.id);
       axios.post('/api/profileImgUpload', formData).then(function (response) {
         console.log(response);
         _this2.user = response.data;
@@ -3664,139 +4363,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ProfileDetailComponent",
   data: function data() {
     return {
-      isNameEdit: false,
-      isEmailEdit: false,
-      // isPasswordEdit: false,
-      isIntroductionEdit: false,
-      upLoadedImage: "",
-      user: [],
-      selectedImg: false,
-      fileInfo: "",
-      profileImg: false
+      profile: {}
     };
   },
   created: function created() {
     this.user = this.$store.dispatch('getUsers'); // this.user = this.$store.state.users
 
-    console.log('created'); // this.img_src = require(this.profileImg);
-
-    this.getImg();
+    console.log('created');
   },
   mounted: function mounted() {
-    // this.profileImg = require(this.$store.state.users.img);
-    // this.$store.state.users.password
-    // がnullやったら白抜き
-    // 値アレば$store.state.users.password
+    var _this = this;
+
+    axios.get('/api/profileDetail', {
+      params: {
+        userId: this.$route.params.userId
+      }
+    }).then(function (response) {
+      console.log(response);
+      _this.profile = response.data.profile;
+    })["catch"](function (error) {
+      console.log(error);
+    });
     console.log('mounted');
   },
   beforeUpdate: function beforeUpdate() {
     this.$emit('close-loading');
   },
   computed: {},
-  methods: {
-    /**
-     * DBから画像取得
-     */
-    getImg: function getImg() {},
-    onFileChange: function onFileChange(event) {
-      this.fileInfo = event.target.files[0];
-      this.fileUpload();
-      this.createImage();
-    },
-    createImage: function createImage() {
-      var _this = this;
-
-      //画像をプレビュー表示するロジック
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        _this.profileImg = e.target.result;
-      };
-
-      reader.readAsDataURL(this.fileInfo);
-    },
-    fileUpload: function fileUpload() {
-      var _this2 = this;
-
-      var formData = new FormData();
-      formData.append('file', this.fileInfo);
-      axios.post('/api/fileUpload', formData).then(function (response) {
-        console.log(response);
-        _this2.user = response.data;
-        if (response.data.img) _this2.selectedImg = true;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    updateEmail: function updateEmail(id, email) {
-      var _this3 = this;
-
-      axios.patch('/api/setting/' + id, {
-        id: id,
-        email: email
-      }).then(function (response) {
-        _this3.isEmailEdit = false;
-        console.log(response);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    updateName: function updateName(id, name) {
-      var _this4 = this;
-
-      axios.patch('/api/setting/' + id, {
-        id: id,
-        name: name
-      }).then(function (response) {
-        _this4.isNameEdit = false;
-        console.log(response);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    // updatePass: function(id,password) {
-    //     axios.patch('/api/setting/' + id, {id: id, password: password})
-    //         .then((response) => {
-    //         this.isPasswordnEdit = false;
-    //         console.log(response);
-    //     }).catch((error) => {
-    //         console.log(error);
-    //     });
-    // },
-    //
-    updateIntroduction: function updateIntroduction(id, introduction) {
-      var _this5 = this;
-
-      axios.patch('/api/setting/' + id, {
-        id: id,
-        introduction: introduction
-      }).then(function (response) {
-        _this5.isIntroductionEdit = false;
-        console.log(response);
-      })["catch"](function (error) {
-        console.log(error);
-      });
+  methods: {},
+  watch: {
+    profile: function profile() {
+      this.profileImg = __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets".concat(this.profile.img));
     }
-  } // beforeUpdate() {
-  //     this.profileImg this.$store.state.users.img;
-  // }
-
+  }
 });
 
 /***/ }),
@@ -4188,6 +4791,102 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
         _this2.EditResultMessage = "編集に失敗しました。\n" + "時間を置いてお試し下さい";
       });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reviewCompletedComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reviewCompletedComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "reviewCompletedComponent",
+  data: function data() {
+    return {
+      reviewedIdea: {},
+      ideaId: "",
+      userId: "",
+      ideas: "",
+      title: ""
+    };
+  },
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
+  },
+  created: function created() {
+    this.ideaId = this.$route.params.ideaId;
+    this.userId = this.$route.params.userId;
+    this.ideas = this.$store.dispatch('getUserIdeas');
+    this.title = this.$route.params.title;
+  },
+  mounted: function mounted() {},
+  methods: {
+    //routerで渡されたIdea取得
+    //Twittershare用のリンクへ飛ばす
+    twitterShare: function twitterShare() {
+      var $url = "https://twitter.com/intent/tweet?text=\u65B0\u898F\u30EC\u30D3\u30E5\u30FC\n\u300C".concat(this.title, "\u300D\n%20%23Inspiration&url=https://code.ameneko.com/twitter-share");
+      window.open($url, null, 'top=100,left=100,width=300,height=400');
     }
   }
 });
@@ -8221,8 +8920,8 @@ var render = function() {
                           to: {
                             name: "postDetail",
                             params: {
-                              id: myIdea.id,
-                              ideaUserId: myIdea.user_id
+                              ideaId: myIdea.id,
+                              userId: myIdea.user_id
                             }
                           }
                         }
@@ -8369,8 +9068,8 @@ var render = function() {
                       to: {
                         name: "postDetail",
                         params: {
-                          id: buyingIdea.id,
-                          ideaUserId: buyingIdea.user_id
+                          ideaId: buyingIdea.id,
+                          userId: buyingIdea.user_id
                         }
                       },
                       href: "#"
@@ -8443,8 +9142,8 @@ var render = function() {
                       to: {
                         name: "postDetail",
                         params: {
-                          id: favIdea.id,
-                          ideaUserId: favIdea.user_id
+                          ideaId: favIdea.id,
+                          userId: favIdea.user_id
                         }
                       },
                       href: "#"
@@ -8455,7 +9154,15 @@ var render = function() {
                       _vm._v(_vm._s(favIdea.title))
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-img" }),
+                    _c("div", { staticClass: "ic-img" }, [
+                      _c("img", {
+                        staticClass: "ic-img-item",
+                        attrs: {
+                          src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + favIdea.img),
+                          alt: "idea"
+                        }
+                      })
+                    ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "ic-review" }, [
                       _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
@@ -8517,8 +9224,8 @@ var render = function() {
                       to: {
                         name: "postDetail",
                         params: {
-                          id: myIdea.id,
-                          ideaUserId: myIdea.user_id
+                          ideaId: myIdea.id,
+                          userId: myIdea.user_id
                         }
                       },
                       href: "#"
@@ -9276,11 +9983,153 @@ var render = function() {
       _vm._v(" "),
       _vm._m(2),
       _vm._v(" "),
-      _vm._m(3),
+      _c(
+        "div",
+        { staticClass: "review review-container" },
+        [
+          _vm._l(this.ideaReviews, function(review) {
+            return _c("div", { staticClass: "review-posted" }, [
+              _c(
+                "div",
+                { staticClass: "review-posted-name" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      attrs: {
+                        to: {
+                          name: "profileDetail",
+                          params: {
+                            userId: review.user_id
+                          }
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "review-img" }, [
+                        _c("img", {
+                          attrs: {
+                            src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + review.img),
+                            alt: "reviewUserImg"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "review-img-name",
+                            attrs: { id: "userName" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(review.name) +
+                                "\n                                "
+                            ),
+                            _c("p", [_vm._v("さん")])
+                          ]
+                        )
+                      ])
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "review-posted-star" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "review-posted-comment-label",
+                    attrs: { for: "reviewComment" }
+                  },
+                  [_vm._v("評価")]
+                ),
+                _vm._v(" "),
+                review.star === 1
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "review-posted-comment-star",
+                        attrs: { id: "reviewComment" }
+                      },
+                      [_vm._m(3, true), _vm._v(" "), _vm._m(4, true)]
+                    )
+                  : review.star === 2
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "review-posted-comment-star",
+                        attrs: { id: "reviewComment" }
+                      },
+                      [_vm._m(5, true), _vm._v(" "), _vm._m(6, true)]
+                    )
+                  : review.star === 3
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "review-posted-comment-star",
+                        attrs: { id: "reviewComment" }
+                      },
+                      [_vm._m(7, true), _vm._v(" "), _vm._m(8, true)]
+                    )
+                  : review.star === 4
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "review-posted-comment-star",
+                        attrs: { id: "reviewComment" }
+                      },
+                      [_vm._m(9, true), _vm._v(" "), _vm._m(10, true)]
+                    )
+                  : review.star === 5
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "review-posted-comment-star",
+                        attrs: { id: "reviewComment" }
+                      },
+                      [_vm._m(11, true), _vm._v(" "), _vm._m(12, true)]
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "review-posted-comment" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "review-posted-comment-label",
+                    attrs: { for: "voiceComment" }
+                  },
+                  [_vm._v("レビュー")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "review-posted-comment-content",
+                    attrs: { id: "voiceComment" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                             " +
+                        _vm._s(review.comment) +
+                        "\n                        "
+                    )
+                  ]
+                )
+              ])
+            ])
+          }),
+          _vm._v(" "),
+          _vm._m(13)
+        ],
+        2
+      ),
       _vm._v(" "),
-      _vm.buying
+      !_vm.reviewed && _vm.buying
         ? _c("div", { staticClass: "review-container" }, [
-            _vm._m(4),
+            _vm._m(14),
             _vm._v(" "),
             _c("div", { staticClass: "review-comment" }, [
               _c(
@@ -9360,7 +10209,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(5), _vm._v(" "), _vm._m(6)]
+                        [_vm._m(15), _vm._v(" "), _vm._m(16)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -9375,7 +10224,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(7), _vm._v(" "), _vm._m(8)]
+                        [_vm._m(17), _vm._v(" "), _vm._m(18)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -9390,7 +10239,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(9), _vm._v(" "), _vm._m(10)]
+                        [_vm._m(19), _vm._v(" "), _vm._m(20)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -9405,7 +10254,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(11), _vm._v(" "), _vm._m(12)]
+                        [_vm._m(21), _vm._v(" "), _vm._m(22)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -9420,7 +10269,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(13), _vm._v(" "), _vm._m(14)]
+                        [_vm._m(23), _vm._v(" "), _vm._m(24)]
                       )
                     ])
                   ]),
@@ -9459,6 +10308,12 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
+                  _vm.reviewErrorMessage
+                    ? _c("div", { staticClass: "review-comment-error" }, [
+                        _vm._v(_vm._s(_vm.reviewErrorMessage))
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
                   _c("input", {
                     staticClass: "c-mini-button review-button",
                     attrs: { type: "submit", value: "送信" }
@@ -9468,9 +10323,15 @@ var render = function() {
             ])
           ])
         : _c("div", { staticClass: "review-container-restriction" }, [
-            _vm._m(15),
+            _vm._m(25),
             _vm._v(" "),
-            _vm._m(16)
+            _c("div", { staticClass: "review-comment" }, [
+              _vm._m(26),
+              _vm._v(" "),
+              _c("div", { staticClass: "review-comment-restriction" }, [
+                _vm._v(_vm._s(_vm.reviewRegurationMessage))
+              ])
+            ])
           ])
     ])
   ])
@@ -9507,151 +10368,229 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review review-container" }, [
-      _c("div", { staticClass: "review-posted" }, [
-        _c("div", { staticClass: "review-posted-name" }, [
-          _c("div", { staticClass: "review-img" }, [
-            _c(
-              "div",
-              { staticClass: "review-img-name", attrs: { id: "userName" } },
-              [
-                _vm._v(
-                  "\n                                だーいし\n                                "
-                ),
-                _c("p", [_vm._v("さん")])
-              ]
-            )
+    return _c("div", { staticClass: "review-posted-comment-star-top" }, [
+      _c("i", {
+        staticClass:
+          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+      }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "review-posted-comment-star-bottom" }, [
+      _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "review-posted-comment-star-top" }, [
+      _c("i", {
+        staticClass:
+          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+      }),
+      _vm._v(" "),
+      _c("i", {
+        staticClass:
+          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "review-posted-comment-star-bottom" }, [
+      _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "review-posted-comment-star-top" }, [
+      _c("i", {
+        staticClass:
+          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+      }),
+      _vm._v(" "),
+      _c("i", {
+        staticClass:
+          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "review-posted-comment-star-bottom" }, [
+      _c("i", {
+        staticClass:
+          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+      }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "review-posted-comment-star-top" }, [
+      _c("i", {
+        staticClass:
+          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+      }),
+      _vm._v(" "),
+      _c("i", {
+        staticClass:
+          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "review-posted-comment-star-bottom" }, [
+      _c("i", {
+        staticClass:
+          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+      }),
+      _vm._v(" "),
+      _c("i", {
+        staticClass:
+          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+      }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "review-posted-comment-star-top" }, [
+      _c("i", {
+        staticClass:
+          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+      }),
+      _vm._v(" "),
+      _c("i", {
+        staticClass:
+          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "review-posted-comment-star-bottom" }, [
+      _c("i", {
+        staticClass:
+          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+      }),
+      _vm._v(" "),
+      _c("i", {
+        staticClass:
+          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+      }),
+      _vm._v(" "),
+      _c("i", {
+        staticClass:
+          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "review-posted" }, [
+      _c("div", { staticClass: "review-posted-name" }, [
+        _c("div", { staticClass: "review-img" }, [
+          _c("div", { staticClass: "review-img-name" }, [
+            _vm._v(
+              "\n                                だーいし\n                                "
+            ),
+            _c("p", [_vm._v("さん")])
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "review-posted-star" }, [
-          _c(
-            "label",
-            {
-              staticClass: "review-posted-comment-label",
-              attrs: { for: "reviewComment" }
-            },
-            [_vm._v("評価")]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "review-posted-comment-star",
-              attrs: { id: "reviewComment" }
-            },
-            [
-              _c("div", { staticClass: "review-posted-comment-star-top" }, [
-                _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-                _vm._v(" "),
-                _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "review-posted-comment-star-bottom" }, [
-                _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-                _vm._v(" "),
-                _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-                _vm._v(" "),
-                _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
-              ])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "review-posted-comment" }, [
-          _c(
-            "label",
-            {
-              staticClass: "review-posted-comment-label",
-              attrs: { for: "voiceComment" }
-            },
-            [_vm._v("レビュー")]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "review-posted-comment-content",
-              attrs: { id: "voiceComment" }
-            },
-            [
-              _vm._v(
-                "\n                            このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n\n                        "
-              )
-            ]
-          )
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "review-posted" }, [
-        _c("div", { staticClass: "review-posted-name" }, [
-          _c("div", { staticClass: "review-img" }, [
-            _c("div", { staticClass: "review-img-name" }, [
-              _vm._v(
-                "\n                                だーいし\n                                "
-              ),
-              _c("p", [_vm._v("さん")])
-            ])
-          ])
-        ]),
+      _c("div", { staticClass: "review-posted-star" }, [
+        _c(
+          "label",
+          {
+            staticClass: "review-posted-comment-label",
+            attrs: { for: "voiceComment" }
+          },
+          [_vm._v("評価")]
+        ),
         _vm._v(" "),
-        _c("div", { staticClass: "review-posted-star" }, [
-          _c(
-            "label",
-            {
-              staticClass: "review-posted-comment-label",
-              attrs: { for: "voiceComment" }
-            },
-            [_vm._v("評価")]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "review-posted-comment-star",
-              attrs: { id: "voiceComment" }
-            },
-            [
-              _c("div", { staticClass: "review-posted-comment-star-top" }, [
-                _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-                _vm._v(" "),
-                _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
-              ]),
+        _c(
+          "div",
+          {
+            staticClass: "review-posted-comment-star",
+            attrs: { id: "voiceComment" }
+          },
+          [
+            _c("div", { staticClass: "review-posted-comment-star-top" }, [
+              _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
               _vm._v(" "),
-              _c("div", { staticClass: "review-posted-comment-star-bottom" }, [
-                _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-                _vm._v(" "),
-                _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-                _vm._v(" "),
-                _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
-              ])
-            ]
-          )
-        ]),
+              _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "review-posted-comment-star-bottom" }, [
+              _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "review-posted-comment" }, [
+        _c(
+          "label",
+          {
+            staticClass: "review-posted-comment-label",
+            attrs: { for: "voiceComment" }
+          },
+          [_vm._v("レビュー")]
+        ),
         _vm._v(" "),
-        _c("div", { staticClass: "review-posted-comment" }, [
-          _c(
-            "label",
-            {
-              staticClass: "review-posted-comment-label",
-              attrs: { for: "voiceComment" }
-            },
-            [_vm._v("レビュー")]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "review-posted-comment-content",
-              attrs: { id: "voiceComment" }
-            },
-            [
-              _vm._v(
-                "\n                            このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n\n                        "
-              )
-            ]
-          )
-        ])
+        _c(
+          "div",
+          {
+            staticClass: "review-posted-comment-content",
+            attrs: { id: "voiceComment" }
+          },
+          [
+            _vm._v(
+              "\n                            このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n\n                        "
+            )
+          ]
+        )
       ])
     ])
   },
@@ -9830,8 +10769,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-comment" }, [
-      _c("form", { attrs: { action: "" } }, [
+    return _c("form", { attrs: { action: "" } }, [
+      _c("div", { staticClass: "review-comment-container" }, [
+        _c("label", { attrs: { for: "review-comment" } }, [_vm._v("評価")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "review-comment-check" }, [
+          _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
+          _vm._v(" "),
+          _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
+          _vm._v(" "),
+          _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
+          _vm._v(" "),
+          _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
+          _vm._v(" "),
+          _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
+        ]),
+        _vm._v(" "),
         _c("div", { staticClass: "review-comment-container" }, [
           _c("label", { attrs: { for: "review-comment" } }, [
             _vm._v("レビュー")
@@ -9848,17 +10801,13 @@ var staticRenderFns = [
               placeholder: "レビューを記入"
             }
           })
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "c-mini-button review-button-restriction",
-          attrs: { type: "text", value: "送信" }
-        })
+        ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "review-comment-restriction" }, [
-        _vm._v("購入者のみレビュー可能です")
-      ])
+      _c("input", {
+        staticClass: "c-mini-button review-button-restriction",
+        attrs: { type: "text", value: "送信" }
+      })
     ])
   }
 ]
@@ -10810,9 +11759,20 @@ var render = function() {
                 attrs: { id: "profileDetail" }
               },
               [
-                _c("router-link", { attrs: { to: "/profileDetail" } }, [
-                  _vm._v("詳細画面へ")
-                ])
+                _c(
+                  "router-link",
+                  {
+                    attrs: {
+                      to: {
+                        name: "profileDetail",
+                        params: {
+                          userId: this.$store.state.users.id
+                        }
+                      }
+                    }
+                  },
+                  [_vm._v("詳細画面へ")]
+                )
               ],
               1
             )
@@ -10908,40 +11868,7 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "profile-container-img-right" }, [
               _c("label", [
-                _c("i", {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: this.profileImg,
-                      expression: "this.profileImg"
-                    }
-                  ],
-                  staticClass: "fas fa-plus fa-7x",
-                  attrs: { "aria-hidden": "true" }
-                }),
-                _vm._v(" "),
-                _c("img", {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: !this.profileImg,
-                      expression: "!this.profileImg"
-                    }
-                  ],
-                  attrs: { src: _vm.profileImg, alt: "" }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "c-input profile-container-img-none",
-                  attrs: { id: "img", type: "file" },
-                  on: {
-                    change: function($event) {
-                      return _vm.onFileChange()
-                    }
-                  }
-                })
+                _c("img", { attrs: { src: _vm.profileImg, alt: "profileImg" } })
               ])
             ])
           ]),
@@ -10959,19 +11886,7 @@ var render = function() {
             _c(
               "div",
               { staticClass: "c-input", attrs: { id: "name", type: "text" } },
-              [_vm._v(_vm._s(_vm.$store.state.users.name))]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "profile-container-input" }, [
-            _c("label", { staticClass: "c-label", attrs: { for: "mail" } }, [
-              _vm._v("e-mail")
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "c-input", attrs: { id: "mail", type: "text" } },
-              [_vm._v(_vm._s(_vm.$store.state.users.email))]
+              [_vm._v(_vm._s(_vm.profile.name))]
             )
           ]),
           _vm._v(" "),
@@ -10988,7 +11903,7 @@ var render = function() {
                 staticClass: "c-input profile-container-textarea",
                 attrs: { id: "introduction", type: "text" }
               },
-              [_vm._v(_vm._s(_vm.$store.state.users.introduction))]
+              [_vm._v(_vm._s(_vm.profile.introduction))]
             )
           ])
         ])
@@ -11320,7 +12235,7 @@ var render = function() {
                         expression: "!newImage"
                       }
                     ],
-                    attrs: { src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + _vm.img), alt: "" }
+                    attrs: { src: _vm.profileImg, alt: "" }
                   }),
                   _vm._v(" "),
                   _c("img", {
@@ -11660,6 +12575,112 @@ var staticRenderFns = [
       _c("label", { staticClass: "c-label", attrs: { for: "img" } }, [
         _vm._v("アイデアイメージ画像")
       ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reviewCompletedComponent.vue?vue&type=template&id=e6052296&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reviewCompletedComponent.vue?vue&type=template&id=e6052296&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("main", [
+    _c("h2", { staticClass: "f-h2" }, [_vm._v("レビュー投稿完了")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "c-form" }, [
+      _c("div", { staticClass: "c-form-container" }, [
+        _c("div", { staticClass: "completed" }, [
+          _c("p", { staticClass: "completed-header" }, [
+            _vm._v("〜投稿完了〜")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "completed-paragraph" }, [
+            _vm._v(
+              "\n                    新規レビュー投稿しました\n                "
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "completed-share", on: { click: _vm.twitterShare } },
+            [
+              _c("i", {
+                staticClass: "fab fa-twitter completed-share-twitter"
+              }),
+              _c("span", [_vm._v("ツイートする")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "completed-container" }, [
+          _c(
+            "div",
+            { staticClass: "c-button completed-button column-button" },
+            [
+              _c("router-link", { attrs: { to: "/mypage" } }, [
+                _vm._v("Mypageへ")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "c-button completed-button column-button" },
+            [
+              _c(
+                "router-link",
+                {
+                  attrs: {
+                    to: {
+                      name: "postDetail",
+                      params: {
+                        ideaId: this.ideaId,
+                        userId: this.userId
+                      }
+                    }
+                  }
+                },
+                [_vm._v("投稿詳細へ")]
+              )
+            ],
+            1
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "completed-paragraph" }, [
+      _vm._v(
+        "\n                    レビュー投稿が新た無いアイデアをもたらします。"
+      ),
+      _c("br"),
+      _vm._v(
+        "\n                    今後も貴重なお待ちしてます。\n                "
+      )
     ])
   }
 ]
@@ -28119,6 +29140,7 @@ module.exports = g;
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./assets/ideaImages/jazz.jpg": "./storage/app/public/ideaImages/jazz.jpg",
 	"./assets/ideaImages/repezen.jpeg": "./storage/app/public/ideaImages/repezen.jpeg",
 	"./assets/ideaImages/twitter.jpg": "./storage/app/public/ideaImages/twitter.jpg",
 	"./assets/ideaImages/スクリーンショット 2019-12-29 14.47.31.png": "./storage/app/public/ideaImages/スクリーンショット 2019-12-29 14.47.31.png",
@@ -28126,7 +29148,10 @@ var map = {
 	"./assets/ideaImages/スクリーンショット 2020-01-18 9.26.59.png": "./storage/app/public/ideaImages/スクリーンショット 2020-01-18 9.26.59.png",
 	"./assets/ideaImages/スクリーンショット 2020-01-18 9.26.59（2）.png": "./storage/app/public/ideaImages/スクリーンショット 2020-01-18 9.26.59（2）.png",
 	"./assets/ideaImages/スクリーンショット 2020-01-19 21.54.46.png": "./storage/app/public/ideaImages/スクリーンショット 2020-01-19 21.54.46.png",
+	"./assets/ideaImages/名称未設定プロジェクト.jpg": "./storage/app/public/ideaImages/名称未設定プロジェクト.jpg",
+	"./assets/images/jazz.jpg": "./storage/app/public/images/jazz.jpg",
 	"./assets/images/twitter.jpg": "./storage/app/public/images/twitter.jpg",
+	"./assets/images/アイコン.jpg": "./storage/app/public/images/アイコン.jpg",
 	"./assets/images/スクリーンショット 2019-12-29 14.47.31.png": "./storage/app/public/images/スクリーンショット 2019-12-29 14.47.31.png",
 	"./assets/images/スクリーンショット 2019-12-31 11.51.03.png": "./storage/app/public/images/スクリーンショット 2019-12-31 11.51.03.png",
 	"./assets/images/スクリーンショット 2019-12-31 11.55.15.png": "./storage/app/public/images/スクリーンショット 2019-12-31 11.55.15.png",
@@ -28137,6 +29162,8 @@ var map = {
 	"./assets/images/スクリーンショット 2020-01-19 10.38.43.png": "./storage/app/public/images/スクリーンショット 2020-01-19 10.38.43.png",
 	"./assets/images/スクリーンショット 2020-01-19 21.20.33.png": "./storage/app/public/images/スクリーンショット 2020-01-19 21.20.33.png",
 	"./assets/images/スクリーンショット 2020-01-19 21.54.46.png": "./storage/app/public/images/スクリーンショット 2020-01-19 21.54.46.png",
+	"./assets/images/ブリ大根　サムネイル.jpg": "./storage/app/public/images/ブリ大根　サムネイル.jpg",
+	"./assets/images/名称未設定プロジェクト.jpg": "./storage/app/public/images/名称未設定プロジェクト.jpg",
 	"./assets/profileImages/スクリーンショット 2019-12-29 14.47.31.png": "./storage/app/public/profileImages/スクリーンショット 2019-12-29 14.47.31.png",
 	"./assets/profileImages/スクリーンショット 2019-12-31 11.51.03.png": "./storage/app/public/profileImages/スクリーンショット 2019-12-31 11.51.03.png"
 };
@@ -29529,6 +30556,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/reviewCompletedComponent.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/reviewCompletedComponent.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _reviewCompletedComponent_vue_vue_type_template_id_e6052296_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./reviewCompletedComponent.vue?vue&type=template&id=e6052296&scoped=true& */ "./resources/js/components/reviewCompletedComponent.vue?vue&type=template&id=e6052296&scoped=true&");
+/* harmony import */ var _reviewCompletedComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reviewCompletedComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/reviewCompletedComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _reviewCompletedComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _reviewCompletedComponent_vue_vue_type_template_id_e6052296_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _reviewCompletedComponent_vue_vue_type_template_id_e6052296_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "e6052296",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/reviewCompletedComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/reviewCompletedComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/reviewCompletedComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_reviewCompletedComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./reviewCompletedComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reviewCompletedComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_reviewCompletedComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/reviewCompletedComponent.vue?vue&type=template&id=e6052296&scoped=true&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/reviewCompletedComponent.vue?vue&type=template&id=e6052296&scoped=true& ***!
+  \*********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_reviewCompletedComponent_vue_vue_type_template_id_e6052296_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./reviewCompletedComponent.vue?vue&type=template&id=e6052296&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reviewCompletedComponent.vue?vue&type=template&id=e6052296&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_reviewCompletedComponent_vue_vue_type_template_id_e6052296_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_reviewCompletedComponent_vue_vue_type_template_id_e6052296_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/withdrawComponent.vue":
 /*!*******************************************************!*\
   !*** ./resources/js/components/withdrawComponent.vue ***!
@@ -29620,11 +30716,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_PostIdeaConfirmComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/PostIdeaConfirmComponent */ "./resources/js/components/PostIdeaConfirmComponent.vue");
 /* harmony import */ var _components_postIdeaEditComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/postIdeaEditComponent */ "./resources/js/components/postIdeaEditComponent.vue");
 /* harmony import */ var _components_PostDetailComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/PostDetailComponent */ "./resources/js/components/PostDetailComponent.vue");
-/* harmony import */ var _components_AllIdeaComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/AllIdeaComponent */ "./resources/js/components/AllIdeaComponent.vue");
-/* harmony import */ var _components_PostCompletedComponent__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/PostCompletedComponent */ "./resources/js/components/PostCompletedComponent.vue");
-/* harmony import */ var _components_withdrawComponent__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/withdrawComponent */ "./resources/js/components/withdrawComponent.vue");
-/* harmony import */ var _components_PasswordEdit__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/PasswordEdit */ "./resources/js/components/PasswordEdit.vue");
+/* harmony import */ var _components_reviewCompletedComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/reviewCompletedComponent */ "./resources/js/components/reviewCompletedComponent.vue");
+/* harmony import */ var _components_AllIdeaComponent__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/AllIdeaComponent */ "./resources/js/components/AllIdeaComponent.vue");
+/* harmony import */ var _components_PostCompletedComponent__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/PostCompletedComponent */ "./resources/js/components/PostCompletedComponent.vue");
+/* harmony import */ var _components_withdrawComponent__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/withdrawComponent */ "./resources/js/components/withdrawComponent.vue");
+/* harmony import */ var _components_PasswordEdit__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/PasswordEdit */ "./resources/js/components/PasswordEdit.vue");
  // コンポーネントをインポート
+
 
 
 
@@ -29711,7 +30809,7 @@ __webpack_require__.r(__webpack_exports__);
   }, {
     path: '/postComplete',
     name: 'postComplete',
-    component: _components_PostCompletedComponent__WEBPACK_IMPORTED_MODULE_14__["default"]
+    component: _components_PostCompletedComponent__WEBPACK_IMPORTED_MODULE_15__["default"]
   }, {
     path: '/postIdeaEdit',
     name: 'postIdeaEdit',
@@ -29721,17 +30819,21 @@ __webpack_require__.r(__webpack_exports__);
     name: "postDetail",
     component: _components_PostDetailComponent__WEBPACK_IMPORTED_MODULE_12__["default"]
   }, {
+    path: '/reviewComplete',
+    name: "reviewCompleted",
+    component: _components_reviewCompletedComponent__WEBPACK_IMPORTED_MODULE_13__["default"]
+  }, {
     path: '/allidea',
     name: 'allIdea',
-    component: _components_AllIdeaComponent__WEBPACK_IMPORTED_MODULE_13__["default"]
+    component: _components_AllIdeaComponent__WEBPACK_IMPORTED_MODULE_14__["default"]
   }, {
     path: '/withdraw',
     name: 'withdraw',
-    component: _components_withdrawComponent__WEBPACK_IMPORTED_MODULE_15__["default"]
+    component: _components_withdrawComponent__WEBPACK_IMPORTED_MODULE_16__["default"]
   }, {
     path: '/passEdit',
     name: 'passEdit',
-    component: _components_PasswordEdit__WEBPACK_IMPORTED_MODULE_16__["default"]
+    component: _components_PasswordEdit__WEBPACK_IMPORTED_MODULE_17__["default"]
   }]
 }));
 
@@ -29850,7 +30952,12 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
       }
 
       return getUserIdeas;
-    }()
+    }() // getIdeaReviews: async function({commit,dispatch})
+    // {
+    //     await dispatch('getUserIdeas')
+    //     axios.get
+    // }
+
   },
   // actions: {
   //     /**
@@ -29900,6 +31007,17 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./storage/app/public/ideaImages/jazz.jpg":
+/*!************************************************!*\
+  !*** ./storage/app/public/ideaImages/jazz.jpg ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/jazz.jpg?94128c5589db2acc0f5971ff634b1abf";
 
 /***/ }),
 
@@ -29980,6 +31098,28 @@ module.exports = "/images/スクリーンショット 2020-01-19 21.54.46.png?a1
 
 /***/ }),
 
+/***/ "./storage/app/public/ideaImages/名称未設定プロジェクト.jpg":
+/*!*******************************************************!*\
+  !*** ./storage/app/public/ideaImages/名称未設定プロジェクト.jpg ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/名称未設定プロジェクト.jpg?2e7186316dcbd5f87bf908075ea1f37d";
+
+/***/ }),
+
+/***/ "./storage/app/public/images/jazz.jpg":
+/*!********************************************!*\
+  !*** ./storage/app/public/images/jazz.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/jazz.jpg?94128c5589db2acc0f5971ff634b1abf";
+
+/***/ }),
+
 /***/ "./storage/app/public/images/twitter.jpg":
 /*!***********************************************!*\
   !*** ./storage/app/public/images/twitter.jpg ***!
@@ -29988,6 +31128,17 @@ module.exports = "/images/スクリーンショット 2020-01-19 21.54.46.png?a1
 /***/ (function(module, exports) {
 
 module.exports = "/images/twitter.jpg?ffee454b0ba947f7894e7687bfdf631b";
+
+/***/ }),
+
+/***/ "./storage/app/public/images/アイコン.jpg":
+/*!********************************************!*\
+  !*** ./storage/app/public/images/アイコン.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/アイコン.jpg?f62fc8340b7defa682ebc7e7a7765cdd";
 
 /***/ }),
 
@@ -30098,6 +31249,28 @@ module.exports = "/images/スクリーンショット 2020-01-19 21.20.33.png?b6
 /***/ (function(module, exports) {
 
 module.exports = "/images/スクリーンショット 2020-01-19 21.54.46.png?a1301b6c67d6a47fce771acbe8268f4d";
+
+/***/ }),
+
+/***/ "./storage/app/public/images/ブリ大根　サムネイル.jpg":
+/*!**************************************************!*\
+  !*** ./storage/app/public/images/ブリ大根　サムネイル.jpg ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/ブリ大根　サムネイル.jpg?1bc345a7dbbd86d59c8188974a93394e";
+
+/***/ }),
+
+/***/ "./storage/app/public/images/名称未設定プロジェクト.jpg":
+/*!***************************************************!*\
+  !*** ./storage/app/public/images/名称未設定プロジェクト.jpg ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/名称未設定プロジェクト.jpg?2e7186316dcbd5f87bf908075ea1f37d";
 
 /***/ }),
 

@@ -70,6 +70,19 @@ Route::post('/ideaEdit','postIdeaController@editIdea');
 Route::get('/detail/{id}','DetailController@detail');
 
 /**
+ * レビュー取得ルーティング
+ */
+Route::get('/getReviews','ReviewController@getReviews');
+
+/**
+ * レビューされているか確認するためのルーティング
+ */
+Route::get('/reviewedJudge','ReviewController@reviewJudge');
+
+Route::post('/reviewPost','ReviewController@reviewPost');
+
+
+/**
  * 購入者かどうか判定するためのルーティング
  */
 Route::get('/buyingJudge','DetailController@buyingJudge');
@@ -149,20 +162,26 @@ Route::patch('/setting/{id}',function($id,Request $request){
 /**
  * プロフィール画像アップロード
  */
-Route::post('/profileImgUpload',function(){
+Route::post('/profileImgUpload',function(Request $request){
 
 
+    $userId = $request->input('user_id');
 
     $file_name = request()->file->getClientOriginalName();
 
     request()->file->storeAs('public/images',$file_name);
 
-    $user = App\User::find(1);
+    $user = App\User::find($userId);
 
     $user->update(['img' =>'/images/'.$file_name]);
 
     return $user;
 });
+
+/**
+ * プロフィール詳細画面表示
+ */
+Route::get('/profileDetail','ProfileController@showProfileDetail');
 /**
  * パスワードアップデート用ルーティング
  */

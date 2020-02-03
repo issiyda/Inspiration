@@ -87,9 +87,8 @@ class InspirationController extends Controller
         /**
          *ログイン中のユーザ投稿に対するレビュー
          */
-        $review = Review::with(['ideas' => function ($q) {
-            $q->where('user_id', 1);
-        }])->latest()->get();
+        $review = Review::where('user_id',$userId)
+            ->latest()->get();
 
 
         return response()->json([

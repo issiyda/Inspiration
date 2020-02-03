@@ -14,6 +14,7 @@ import post from './components/PostIdeaComponent';
 import postConfirm from './components/PostIdeaConfirmComponent';
 import postIdeaEdit from './components/postIdeaEditComponent';
 import postDetail from './components/PostDetailComponent';
+import reviewCompleted from './components/reviewCompletedComponent'
 import allIdea from './components/AllIdeaComponent';
 import postComplete from './components/PostCompletedComponent';
 import withdraw from "./components/withdrawComponent";
@@ -125,6 +126,14 @@ export default new Router({
             name: "postDetail",
             component: postDetail
         },
+
+        {
+            path: '/reviewComplete',
+            name: "reviewCompleted",
+            component: reviewCompleted
+        },
+
+
 
         {
             path: '/allidea',

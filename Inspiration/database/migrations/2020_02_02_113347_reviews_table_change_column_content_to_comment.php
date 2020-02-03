@@ -13,8 +13,8 @@ class ReviewsTableChangeColumnContentToComment extends Migration
      */
     public function up()
     {
-        Schema::table('comment', function (Blueprint $table) {
-            //
+        Schema::table('reviews', function (Blueprint $table) {
+            $table->renameColumn('content','comment');
         });
     }
 
@@ -25,8 +25,8 @@ class ReviewsTableChangeColumnContentToComment extends Migration
      */
     public function down()
     {
-        Schema::table('comment', function (Blueprint $table) {
-            //
+        Schema::table('reviews', function (Blueprint $table) {
+            $table->renameColumn('comment','content');
         });
     }
 }

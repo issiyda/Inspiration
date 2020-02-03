@@ -243,7 +243,7 @@
     padding:5%;
 
       &-check{
-          margin:auto 3%;
+          margin:auto 3% 10%;
           text-align:center;
           width:60%;
       }
@@ -262,6 +262,13 @@
           &-select{
               color:$color_base;
           }
+      }
+
+      &-error{
+          color:$color_attention;
+          font-weight:bold;
+          text-align:center;
+          margin:10%;
       }
 
     &-restriction{
@@ -290,6 +297,7 @@
     &-container{
       align-items: center;
       display:flex;
+        flex-direction:column;
       justify-content: center;
       width:95%;
       margin: 0 auto 5%;
@@ -333,4 +341,11 @@
 
     }
   }
+}
+
+//==========================
+//その他
+//==========================
+.fa-star{
+    cursor:pointer;
 }

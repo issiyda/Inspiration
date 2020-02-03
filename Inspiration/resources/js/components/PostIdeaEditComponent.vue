@@ -18,7 +18,7 @@
                         <div class="profile-container-img-right">
                             <label>
                                 <input id="img" @change="onFileChange" class ="c-input profile-container-img-none" type="file" />
-                                <img :src="require(`../assets${img}`)" v-show="!newImage" alt="">
+                                <img :src="profileImg" v-show="!newImage" alt="">
                                 <img :src="newImage" v-show="newImage" alt="profileImg">
                             </label>
                         </div>
@@ -205,6 +205,8 @@
                     this.EditResultMessage = "編集に失敗しました。\n" +
                         "時間を置いてお試し下さい"
                 })
+
+
             }
         }
     }

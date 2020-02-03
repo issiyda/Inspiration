@@ -8,7 +8,7 @@ class Review extends Model
 {
     //
     protected $fillable = [
-        'user_id', 'idea_id', 'content','star',
+        'user_id', 'idea_id','comment','star',
     ];
 
 
@@ -16,5 +16,12 @@ class Review extends Model
     {
        return $this->belongsTo('App\Idea');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('User','id','user_id');
+    }
+
+
 
 }

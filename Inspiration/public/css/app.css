@@ -1413,7 +1413,7 @@ confirm とdetailの共通部分　
 }
 
 .review-comment-check {
-  margin: auto 3%;
+  margin: auto 3% 10%;
   text-align: center;
   width: 60%;
 }
@@ -1437,6 +1437,13 @@ confirm とdetailの共通部分　
 
 .review-comment-stars-select {
   color: #FFBEDA;
+}
+
+.review-comment-error {
+  color: #FF00FF;
+  font-weight: bold;
+  text-align: center;
+  margin: 10%;
 }
 
 .review-comment-restriction {
@@ -1467,6 +1474,9 @@ confirm とdetailの共通部分　
           align-items: center;
   display: -webkit-box;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
   -webkit-box-pack: center;
           justify-content: center;
   width: 95%;
@@ -1514,6 +1524,10 @@ confirm とdetailの共通部分　
     margin: 8% 0 3% 62%;
     width: 20%;
   }
+}
+
+.fa-star {
+  cursor: pointer;
 }
 
 .withdraw-ul {

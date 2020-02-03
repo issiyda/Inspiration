@@ -75,6 +75,12 @@ export default new Vuex.Store({
             });
         },
 
+        // getIdeaReviews: async function({commit,dispatch})
+        // {
+        //     await dispatch('getUserIdeas')
+        //     axios.get
+        // }
+
 
     },
 
