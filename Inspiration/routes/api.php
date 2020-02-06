@@ -30,7 +30,7 @@ Route::get('/checkPass','InspirationController@checkPass');
 /**
  * 投稿取得/表示ルーティング
  */
-Route::get('/mypage/','InspirationController@myself');
+Route::get('/getIdeas/','InspirationController@getIdeas');
 
 
 /**
@@ -200,6 +200,11 @@ ROUTE::get('/favState','InspirationController@favState');
  * お気に入り機能のルーティング
  */
 ROUTE::post('/favorite','InspirationController@favSwitch');
+
+/**
+ * お気に入り機能のルーティング
+ */
+ROUTE::post('/favDelete','InspirationController@favDelete');
 
 
 /**

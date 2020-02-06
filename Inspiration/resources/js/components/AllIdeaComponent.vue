@@ -116,10 +116,11 @@
                 <div class="ic">
 
 
-                    <div class="ic-card" v-for="allIdea in this.ideas">
-                        <router-link :to="{name:'postDetail', params:{
-                        id:allIdea.id,
-                        ideaUserId:allIdea.user_id
+                    <paginate name="paginate-log" :list="this.ideas" :per="15">
+                        <div v-for="allIdea in paginated('paginate-log')" class="ic-card">
+                            <router-link :to="{name:'postDetail', params:{
+                        ideaId:allIdea.id,
+                        userId:allIdea.user_id
                         }}" class ="ic-a" href="#">
 
                             <h4 class ="f-h4">{{allIdea.title}}</h4>
@@ -151,15 +152,12 @@
                             <div>{{allIdea.created_at}}</div>
                         </router-link>
                     </div>
+                    </paginate>
                 </div>
 
-
-
-
-
-
-
-
+                <div class="pagination">
+                    <paginate-links for="paginate-log" class="pagination-container" :show-step-links="true"></paginate-links>
+                </div>
 
             </div>
         </main>
@@ -199,7 +197,9 @@
                 month: "",
                 day: "",
                 before: "",
-                after: ""
+                after: "",
+                //paginate用
+                paginate: ['paginate-log']
 
 
             }
@@ -211,7 +211,6 @@
 
         created() {
             this.ideas = this.$store.dispatch('getUserIdeas');
-
         },
 
         filters: {
@@ -459,6 +458,12 @@
                 this.message = "検索する"
             }
 
+            //
+            // allPosts(){
+            //     this.allIdeaLists = this.$store.state.ideas.allIdea;
+            // }
+
+
         },
 
 
@@ -506,5 +511,26 @@
 
 <style scoped>
 
+    .ic >>> ul{
+        display:flex;
+        width:100%;
+        margin:5% auto;
+        flex-wrap:wrap;
+    }
+
+    .pagination >>> ul{
+        display: flex;
+        font-size:24px;
+        justify-content:center;
+        list-style:none;
+    }
+
+    .pagination >>> li{
+        margin: 0 2%;
+    }
+
+    .pagination-container >>> a{
+        color:black;
+    }
 
 </style>

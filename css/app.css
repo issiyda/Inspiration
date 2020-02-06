@@ -890,7 +890,7 @@ input[type="radio"] {
   .ic-card {
     background: #f6f5f4;
     border-radius: 2%;
-    height: 110%;
+    height: 100%;
     margin: 1% auto;
     position: relative;
     text-align: center;

@@ -9,12 +9,15 @@
 
             <h3 class ="f-h3">投稿したアイデア</h3>
 
-            <div class="ic" >
+            <div class="ic">
 
 
-                <div class="ic-card" v-for="myIdea in myIdeas">
-                    <a class ="ic-a" href="#">
-
+                <paginate name="paginate-log" :list="myIdeaLists" :per="15">
+                    <div v-for="myIdea in paginated('paginate-log')" class="ic-card">
+                        <router-link :to="{name:'postDetail', params:{
+                        ideaId:myIdea.id,
+                        userId:myIdea.user_id
+                        }}" class ="ic-a" href="#">
                         <h4 class ="f-h4">{{myIdea.title}}</h4>
                         <div class="ic-img">
                             <!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
@@ -46,7 +49,7 @@
                                 }}">
                                     詳細</router-link>
                             </div>
-                            <div type="submit" class="c-mini-button" value="編集">
+                            <div class="c-mini-button">
                                 <router-link :to="{name: 'postIdeaEdit',params:{
                                 id: myIdea.id,
                                 bought_flag: myIdea.bought_flag,
@@ -64,17 +67,17 @@
 <!--                            <input type="submit" class="c-mini-button" value="詳細">-->
 <!--                            <input type="submit" class="c-mini-button" value="編集">-->
                         </div>
-                    </a>
-                </div>
+                        </router-link>
+                    </div>
+                </paginate>
+
+
 
             </div>
 
-
-
-
-
-
-
+            <div class="pagination">
+            <paginate-links for="paginate-log" class="pagination-container" :show-step-links="true"></paginate-links>
+            </div>
 
 
         </div>
@@ -87,15 +90,37 @@
     export default {
         name: "AllPostComponent",
 
-        computed:{
+        created:function()
+        {
+            this.myIdeas()
+        },
+
+        data:function(){
+            return {
+                myIdeaLists:[],
+                paginate: ['paginate-log']
+
+            }
+        },
+
+        methods:{
+            clickCallback:function(pageNum){
+                this.currrentPage = Number(pageNum);
+            },
 
             myIdeas(){
-                return this.$store.state.ideas.myIdea;
+                this.myIdeaLists = this.$store.state.ideas.myIdea;
             },
+        },
+
+        computed:{
+
 
             beforeUpdate() {
                 this.$emit('close-loading');
             },
+
+
 
         },
 
@@ -103,5 +128,30 @@
 </script>
 
 <style scoped>
+
+    .ic >>> ul{
+        display:flex;
+        width:100%;
+        margin:5% auto;
+        flex-wrap:wrap;
+    }
+
+     .pagination >>> ul{
+         display: flex;
+         font-size:24px;
+         justify-content:center;
+         list-style:none;
+    }
+
+    .pagination >>> li{
+        margin: 0 2%;
+    }
+
+    .pagination-container >>> a{
+        color:black;
+    }
+
+
+
 
 </style>

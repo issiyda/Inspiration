@@ -1,3 +1,4 @@
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -12,11 +13,14 @@ import router from './router';
 import VueRouter from 'vue-router'
 import store from './store'
 import VCalendar from 'v-calendar';
+import VuePaginate from 'vue-paginate';
 
 Vue.use(PayjpCheckout)
 Vue.use(VueRouter);
 Vue.use(window.vuelidate.default);
 Vue.use(VCalendar);
+Vue.use(VuePaginate);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -29,8 +33,6 @@ Vue.use(VCalendar);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 const loadImg = new Vue();
-
-
 
 const app = new Vue({
     el: '#app',

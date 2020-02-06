@@ -57,7 +57,7 @@ class InspirationController extends Controller
 
 
 
-    public function myself(Request $request)
+    public function getIdeas(Request $request)
     {
 
         $userId = $request->Input('userId');
@@ -74,9 +74,9 @@ class InspirationController extends Controller
         /**
          * ログイン中のユーザがお気に入りにしたアイデアデータ取得
          */
-        $favIdea = Idea::wherehas('favorites' ,function($q){
-            $q->where('fav_flag',1);
-        })->latest()->get();
+        $favIdea = Idea::join('favorites','ideas.id','favorites.idea_id')
+            ->where('favorites.user_id',$userId)
+            ->where('fav_flag',1)->latest('favorites.updated_at')->get();
 
         /**
          * ログイン中のユーザが投稿したアイデアデータ取得
@@ -87,8 +87,9 @@ class InspirationController extends Controller
         /**
          *ログイン中のユーザ投稿に対するレビュー
          */
-        $review = Review::where('user_id',$userId)
-            ->latest()->get();
+        $review = Review::join('ideas','reviews.idea_id','ideas.id')
+            ->where('ideas.user_id',$userId)
+            ->latest('reviews.created_at')->get();
 
 
         return response()->json([
@@ -266,6 +267,23 @@ class InspirationController extends Controller
 
 
     }
+
+
+    //お気に入り一覧でお気に入りから削除するための機能
+    public function favDelete(Request $request)
+    {
+
+        $userId = $request->input('userId');
+        $ideaId = $request->input('ideaId');
+
+        Favorite::where('user_id',$userId)->
+        where('idea_id',$ideaId)->delete();
+
+        return response()->json([
+            'favorite' => 'delete Success'
+        ]);
+    }
+
 
 
 }

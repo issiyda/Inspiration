@@ -809,7 +809,6 @@ input[type="radio"]:checked + .c-radio {
 .ic-card {
   background: #f6f5f4;
   border-radius: 2%;
-  height: 110%;
   margin: 1% auto;
   position: relative;
   text-align: center;

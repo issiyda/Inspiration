@@ -11,7 +11,7 @@
             <div class="ic">
 
 
-                <div class="ic-card" v-for="buyingIdea in buyingIdeas">
+                <div class="ic-card" v-for="buyingIdea in buyingIdeas.slice(0,5)">
                     <router-link v-bind:to="{name:'postDetail',params:{
                      ideaId: buyingIdea.id,
                      userId: buyingIdea.user_id
@@ -87,7 +87,7 @@
 
 
                         <div class="ic-card" v-for="myIdea in myIdeas.slice(0,5)">
-                            <router-link v-bind:to="{name:'postDetail',params:{
+                            <router-link :to="{name:'postDetail',params:{
                                 ideaId: myIdea.id,
                                 userId: myIdea.user_id
                                 }}" class ="ic-a" href="#">
@@ -127,11 +127,13 @@
 
 
                             <div class="ic-card" v-for="review in reviews.slice(0,5)">
-                                <a class ="ic-a" href="#">
-
+                                <router-link :to="{name:'postDetail',params:{
+                                ideaId: review.id,
+                                userId: review.user_id
+                                }}" class ="ic-a">
                                     <h4 class ="f-h4">{{review.title}}</h4>
                                     <div class="ic-img">
-                                        <!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
+                                        <img :src="require(`../assets${review.img}`)" alt="idea" class="ic-img-item">
                                     </div>
                                     <div class="ic-review">
                                         <span class ="ic-span">評価</span>
@@ -142,14 +144,13 @@
                                         <i class="fas fa-star ic-star"></i>
                                     </div>
                                     <div class="ic-desc">
-                                        <div class ="ic-desc-overflow">概要</div>
+                                        <div class ="ic-desc-overflow">コメント</div>
                                         <div class="ic-desc-text">
-                                            {{review.overflow}}
+                                            {{review.comment}}
                                         </div>
                                     </div>
-                                </a>
+                                </router-link>
                             </div>
-
                         </div>
 
             <router-link to="/allReview" class ="p-mypage-more">全件表示</router-link>

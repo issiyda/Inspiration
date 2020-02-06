@@ -62,19 +62,7 @@
                         </div>
                     </div>
 
-<!--                    <div class="postDetail-content">-->
-<!--                        <div v-if="checkBuying">-->
-<!--                            <div id="contents" class="confirm-text">-->
-<!--                                {{detail.content}}-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div v-else>-->
-<!--                            <div id="contents" class="confirm-text">-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-<!--                    未購入の場合は購入後に表示されますの表記-->
+<
 
                     <label for="contents" class="c-label">お気に入り</label>
                     <div for="fav" class="confirm-text">

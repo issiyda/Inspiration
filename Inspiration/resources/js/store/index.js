@@ -63,7 +63,7 @@ export default new Vuex.Store({
          */
         getUserIdeas: async function({commit,dispatch}){
             await dispatch('getUsers')
-            axios.get('/api/mypage/',{
+            axios.get('/api/getIdeas/',{
                     params:{
                 userId:this.state.users.id
                         }
