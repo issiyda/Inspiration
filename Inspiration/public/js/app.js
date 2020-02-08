@@ -3035,7 +3035,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _name$data$created$be;
+var _name$data$created$mo;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -3096,7 +3096,7 @@ var _window$validators = window.validators,
     required = _window$validators.required,
     minLength = _window$validators.minLength,
     sameAs = _window$validators.sameAs;
-/* harmony default export */ __webpack_exports__["default"] = (_name$data$created$be = {
+/* harmony default export */ __webpack_exports__["default"] = (_name$data$created$mo = {
   name: "passwordEdit",
   data: function data() {
     return {
@@ -3112,7 +3112,7 @@ var _window$validators = window.validators,
   created: function created() {
     this.$emit('open-loading');
   },
-  beforeUpdate: function beforeUpdate() {
+  mounted: function mounted() {
     this.$emit('close-loading');
   },
   methods: {
@@ -3162,14 +3162,13 @@ var _window$validators = window.validators,
     stateMessage: function stateMessage() {
       return 'Pass変更完了しました';
     }
-  },
-  mounted: function mounted() {
-    console.log('PostIdeaComponent mounted.');
-    this.user = this.$store.dispatch('getUsers');
   }
-}, _defineProperty(_name$data$created$be, "beforeUpdate", function beforeUpdate() {
+}, _defineProperty(_name$data$created$mo, "mounted", function mounted() {
+  console.log('PostIdeaComponent mounted.');
+  this.user = this.$store.dispatch('getUsers');
+}), _defineProperty(_name$data$created$mo, "beforeUpdate", function beforeUpdate() {
   this.$emit('close-loading');
-}), _defineProperty(_name$data$created$be, "validations", {
+}), _defineProperty(_name$data$created$mo, "validations", {
   currentPass: {
     required: required
   },
@@ -3182,7 +3181,7 @@ var _window$validators = window.validators,
     required: required,
     sameAsPassword: sameAs('newPass')
   }
-}), _name$data$created$be);
+}), _name$data$created$mo);
 
 /***/ }),
 
@@ -3932,10 +3931,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-var _name$data$created$be;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -4037,7 +4032,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = (_name$data$created$be = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostIdeaComponent",
   data: function data() {
     return {
@@ -4054,55 +4049,56 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     this.$emit('open-loading');
   },
-  beforeUpdate: function beforeUpdate() {
-    this.$emit('close-loading');
-  },
   mounted: function mounted() {
     console.log('PostIdeaComponent mounted.');
     this.user = this.$store.dispatch('getUsers');
-  }
-}, _defineProperty(_name$data$created$be, "beforeUpdate", function beforeUpdate() {
-  this.$emit('close-loading');
-}), _defineProperty(_name$data$created$be, "methods", {
-  onFileChange: function onFileChange(event) {
-    this.fileInfo = event.target.files[0];
-    this.saveImage();
-    this.createImage();
+    this.$emit('close-loading');
   },
-  createImage: function createImage() {
-    var _this = this;
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
+  },
+  methods: {
+    onFileChange: function onFileChange(event) {
+      this.fileInfo = event.target.files[0];
+      this.saveImage();
+      this.createImage();
+    },
+    createImage: function createImage() {
+      var _this = this;
 
-    //画像をプレビュー表示するロジック
-    var reader = new FileReader();
+      //画像をプレビュー表示するロジック
+      var reader = new FileReader();
 
-    reader.onload = function (e) {
-      _this.ideaImage = e.target.result;
-    };
+      reader.onload = function (e) {
+        _this.ideaImage = e.target.result;
+      };
 
-    reader.readAsDataURL(this.fileInfo);
+      reader.readAsDataURL(this.fileInfo);
+    },
+    //画像をDBに保存してパスを保存するロジック
+    saveImage: function saveImage() {
+      var formData = new FormData();
+      console.log(this.fileInfo);
+      formData.append('file', this.fileInfo);
+      axios.post('/api/profileImgUpload', formData).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
   },
-  //画像をDBに保存してパスを保存するロジック
-  saveImage: function saveImage() {
-    var formData = new FormData();
-    console.log(this.fileInfo);
-    formData.append('file', this.fileInfo);
-    axios.post('/api/profileImgUpload', formData).then(function (response) {
-      console.log(response);
-    })["catch"](function (error) {
-      console.log(error);
-    });
+  computed: {
+    userId: function userId() {
+      return this.$store.state.users.id;
+    },
+    overflowLength: function overflowLength() {
+      return this.overflow.length;
+    },
+    contentLength: function contentLength() {
+      return this.content.length;
+    }
   }
-}), _defineProperty(_name$data$created$be, "computed", {
-  userId: function userId() {
-    return this.$store.state.users.id;
-  },
-  overflowLength: function overflowLength() {
-    return this.overflow.length;
-  },
-  contentLength: function contentLength() {
-    return this.content.length;
-  }
-}), _name$data$created$be);
+});
 
 /***/ }),
 
@@ -4216,7 +4212,7 @@ __webpack_require__.r(__webpack_exports__);
     this.content = this.$route.params.content;
     console.log('ConfirmIdeaComponent created.');
   },
-  beforeUpdate: function beforeUpdate() {
+  mounted: function mounted() {
     this.$emit('close-loading');
   },
   methods: {
@@ -5132,7 +5128,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "headerBeforeComponent",
   created: function created() {
@@ -5140,8 +5135,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     console.log('withdrawComponent mounted');
-  },
-  beforeUpdate: function beforeUpdate() {
     this.$emit('close-loading');
   },
   methods: {
@@ -13519,8 +13512,7 @@ var render = function() {
             attrs: { type: "submit", value: "退会する" }
           })
         ]
-      ),
-      _vm._v("\n        " + _vm._s(_vm.$store.state.users.id) + "\n    ")
+      )
     ])
   ])
 }
@@ -30539,6 +30531,7 @@ var map = {
 	"./assets/ideaImages/maxresdefault.jpg": "./storage/app/public/ideaImages/maxresdefault.jpg",
 	"./assets/ideaImages/repezen.jpeg": "./storage/app/public/ideaImages/repezen.jpeg",
 	"./assets/ideaImages/twitter.jpg": "./storage/app/public/ideaImages/twitter.jpg",
+	"./assets/ideaImages/アイコン.jpg": "./storage/app/public/ideaImages/アイコン.jpg",
 	"./assets/ideaImages/スクリーンショット 2019-12-29 14.47.31.png": "./storage/app/public/ideaImages/スクリーンショット 2019-12-29 14.47.31.png",
 	"./assets/ideaImages/スクリーンショット 2019-12-31 11.51.03.png": "./storage/app/public/ideaImages/スクリーンショット 2019-12-31 11.51.03.png",
 	"./assets/ideaImages/スクリーンショット 2020-01-18 9.26.59.png": "./storage/app/public/ideaImages/スクリーンショット 2020-01-18 9.26.59.png",
@@ -32542,6 +32535,17 @@ module.exports = "/images/repezen.jpeg?568a0308259b9de6f09584407af5de61";
 /***/ (function(module, exports) {
 
 module.exports = "/images/twitter.jpg?ffee454b0ba947f7894e7687bfdf631b";
+
+/***/ }),
+
+/***/ "./storage/app/public/ideaImages/アイコン.jpg":
+/*!************************************************!*\
+  !*** ./storage/app/public/ideaImages/アイコン.jpg ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/アイコン.jpg?f62fc8340b7defa682ebc7e7a7765cdd";
 
 /***/ }),
 

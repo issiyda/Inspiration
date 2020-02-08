@@ -123,13 +123,10 @@
             this.$emit('open-loading');
         },
 
-        beforeUpdate() {
-            this.$emit('close-loading');
-        },
-
         mounted() {
             console.log('PostIdeaComponent mounted.');
             this.user = this.$store.dispatch('getUsers');
+            this.$emit('close-loading');
         },
 
         beforeUpdate() {
