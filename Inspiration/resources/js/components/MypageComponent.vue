@@ -13,7 +13,7 @@
 
                 <div class="ic-card" v-for="buyingIdea in buyingIdeas.slice(0,5)">
                     <router-link v-bind:to="{name:'postDetail',params:{
-                     ideaId: buyingIdea.id,
+                     ideaId: buyingIdea.post_id,
                      userId: buyingIdea.user_id
                      }}" class ="ic-a" href="#">
 
@@ -53,7 +53,7 @@
 
                     <div class="ic-card" v-for="favIdea in favIdeas.slice(0,5)">
                         <router-link v-bind:to="{name:'postDetail',params:{
-                                ideaId: favIdea.id,
+                                ideaId: favIdea.idea_id,
                                 userId: favIdea.user_id
                                 }}" class ="ic-a" href="#">
                             <h4 class ="f-h4">{{favIdea.title}}</h4>
@@ -199,6 +199,7 @@
 
         mounted(){
             this.ideas = this.$store.dispatch('getUserIdeas')
+
         },
 
         beforeUpdate() {

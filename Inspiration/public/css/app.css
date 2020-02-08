@@ -557,7 +557,7 @@ a {
   margin: 5% auto;
 }
 
-.gif-container {
+.loading-container {
   height: 700px;
   width: 100%;
   z-index: 2;
@@ -570,7 +570,7 @@ a {
           justify-content: center;
 }
 
-.loading {
+.loading-img {
   width: 20%;
 }
 
