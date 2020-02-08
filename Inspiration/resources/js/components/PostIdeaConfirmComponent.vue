@@ -104,7 +104,7 @@
         },
 
 
-        beforeUpdate() {
+        mounted:function() {
             this.$emit('close-loading');
         },
 

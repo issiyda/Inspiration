@@ -78,7 +78,7 @@
 
         },
 
-        beforeUpdate() {
+        mounted() {
             this.$emit('close-loading');
         },
 
