@@ -73,9 +73,6 @@
     export default {
         name: "AllReviewComponent",
 
-        beforeUpdate() {
-            this.$emit('close-loading');
-        },
 
         data:function()
         {
@@ -84,6 +81,16 @@
 
             }
         },
+
+        created:function(){
+            this.$emit('open-loading');
+
+        },
+
+        beforeUpdate() {
+            this.$emit('close-loading');
+        },
+
 
         computed:{
 

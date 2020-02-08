@@ -72,23 +72,21 @@
         },
 
         created(){
+            this.$emit('open-loading');
             this.ideaId = this.$route.params.ideaId;
             this.userId = this.$route.params.userId;
             this.ideas = this.$store.dispatch('getUserIdeas');
             this.title = this.$route.params.title;
         },
 
-        mounted(){
+
+
+        beforeUpdate() {
+            this.$emit('close-loading');
         },
 
 
         methods:{
-
-
-
-
-            //routerで渡されたIdea取得
-
 
             //Twittershare用のリンクへ飛ばす
             twitterShare(){

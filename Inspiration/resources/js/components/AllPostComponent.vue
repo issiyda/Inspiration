@@ -90,17 +90,22 @@
     export default {
         name: "AllPostComponent",
 
-        created:function()
-        {
-            this.myIdeas()
-        },
-
         data:function(){
             return {
                 myIdeaLists:[],
                 paginate: ['paginate-log']
 
             }
+        },
+
+        created:function()
+        {
+            this.$emit('open-loading');
+            this.myIdeas()
+        },
+
+        beforeUpdate() {
+            this.$emit('close-loading');
         },
 
         methods:{

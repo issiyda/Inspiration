@@ -91,7 +91,7 @@
         },
 
         created() {
-            console.log('ConfirmIdeaComponent created.');
+            this.$emit('open-loading');
             this.fileInfo = this.$route.params.fileInfo
             this.user = this.$store.dispatch('getUsers');
             this.title = this.$route.params.title;
@@ -100,12 +100,9 @@
             this.price = this.$route.params.price;
             this.overflow = this.$route.params.overflow;
             this.content = this.$route.params.content;
+            console.log('ConfirmIdeaComponent created.');
         },
 
-
-        mounted() {
-
-        },
 
         beforeUpdate() {
             this.$emit('close-loading');

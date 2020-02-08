@@ -210,7 +210,12 @@
         },
 
         created() {
+            this.$emit('open-loading');
             this.ideas = this.$store.dispatch('getUserIdeas');
+        },
+
+        beforeUpdate() {
+            this.$emit('close-loading');
         },
 
         filters: {

@@ -115,6 +115,7 @@
         },
 
         created() {
+            this.$emit('open-loading');
             this.user = this.$store.dispatch('getUsers')
                 .then(this.user = this.$store.state.users)
                 .then(this.getImg())

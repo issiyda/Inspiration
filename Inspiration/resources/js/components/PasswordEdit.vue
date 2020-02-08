@@ -72,6 +72,18 @@
             }
         },
 
+        created:function()
+        {
+            this.$emit('open-loading');
+
+        },
+
+        beforeUpdate() {
+            this.$emit('close-loading');
+        },
+
+
+
         methods:{
             checkPass:function(){
                 axios.get('/api/checkPass',{

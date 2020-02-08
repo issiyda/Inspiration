@@ -39,6 +39,11 @@
     export default {
         name: "headerBeforeComponent",
 
+        created:function()
+        {
+            this.$emit('open-loading');
+        },
+
 
         mounted() {
             console.log('withdrawComponent mounted');

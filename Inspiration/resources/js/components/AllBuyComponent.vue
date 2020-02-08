@@ -83,9 +83,9 @@
 
 
         created(){
-            console.log('AllBuyComponent mounted.');
+            this.$emit('open-loading');
             this.ideas = this.$store.dispatch('getUserIdeas');
-
+            console.log('AllBuyComponent mounted.');
         },
 
         beforeUpdate() {

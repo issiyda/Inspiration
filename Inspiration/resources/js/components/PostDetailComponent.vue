@@ -397,7 +397,7 @@
 
 
         created() {
-            this.$emit('close-loading');
+            this.$emit('open-loading');
             this.user = this.$store.dispatch('getUsers');
             this.ideaId = this.$route.params.ideaId;
             this.ideaUserId = this.$route.params.userId;
@@ -429,6 +429,10 @@
             this.getReviews();
             console.log('PostDetailComponent mounted')
             })
+        },
+
+        beforeUpdate() {
+            this.$emit('close-loading');
         },
 
 

@@ -85,20 +85,18 @@
         {
             return{
                 ideas:{},
-                errorMessage:""
+                errorMessage:"",
+                paginate: ['paginate-log']
+
             }
+        },
+
+        created:function(){
+            this.$emit('open-loading');
         },
 
         beforeUpdate() {
             this.$emit('close-loading');
-        },
-
-        data:function()
-        {
-            return{
-                paginate: ['paginate-log']
-
-            }
         },
 
         methods:{

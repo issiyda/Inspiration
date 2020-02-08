@@ -1929,8 +1929,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    console.log('AllBuyComponent mounted.');
+    this.$emit('open-loading');
     this.ideas = this.$store.dispatch('getUserIdeas');
+    console.log('AllBuyComponent mounted.');
   },
   beforeUpdate: function beforeUpdate() {
     this.$emit('close-loading');
@@ -1953,10 +1954,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _name$data$beforeUpda;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -2036,42 +2033,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = (_name$data$beforeUpda = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllFavoriteComponent",
   data: function data() {
     return {
       ideas: {},
-      errorMessage: ""
+      errorMessage: "",
+      paginate: ['paginate-log']
     };
+  },
+  created: function created() {
+    this.$emit('open-loading');
   },
   beforeUpdate: function beforeUpdate() {
     this.$emit('close-loading');
-  }
-}, _defineProperty(_name$data$beforeUpda, "data", function data() {
-  return {
-    paginate: ['paginate-log']
-  };
-}), _defineProperty(_name$data$beforeUpda, "methods", {
-  favDelete: function favDelete(userId, ideaId) {
-    var _this = this;
+  },
+  methods: {
+    favDelete: function favDelete(userId, ideaId) {
+      var _this = this;
 
-    this.errorMessage = "";
-    axios.post('/api/favDelete', {
-      userId: userId,
-      ideaId: ideaId
-    }).then(function (response) {
-      console.log(response);
-      _this.ideas = _this.$store.dispatch('getUserIdeas');
-    })["catch"](function (error) {
-      console.log(error);
-      _this.errorMessage = "お気に入り解除できませんでした" + "時間を置いてお試し下さい";
-    });
+      this.errorMessage = "";
+      axios.post('/api/favDelete', {
+        userId: userId,
+        ideaId: ideaId
+      }).then(function (response) {
+        console.log(response);
+        _this.ideas = _this.$store.dispatch('getUserIdeas');
+      })["catch"](function (error) {
+        console.log(error);
+        _this.errorMessage = "お気に入り解除できませんでした" + "時間を置いてお試し下さい";
+      });
+    }
+  },
+  computed: {
+    favoriteIdeas: function favoriteIdeas() {
+      return this.$store.state.ideas.favIdea;
+    }
   }
-}), _defineProperty(_name$data$beforeUpda, "computed", {
-  favoriteIdeas: function favoriteIdeas() {
-    return this.$store.state.ideas.favIdea;
-  }
-}), _name$data$beforeUpda);
+});
 
 /***/ }),
 
@@ -2289,7 +2288,11 @@ __webpack_require__.r(__webpack_exports__);
     this.ideas = this.$store.state.ideas.allIdea;
   },
   created: function created() {
+    this.$emit('open-loading');
     this.ideas = this.$store.dispatch('getUserIdeas');
+  },
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
   },
   filters: {
     customformat: function customformat(value) {
@@ -2654,14 +2657,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllPostComponent",
-  created: function created() {
-    this.myIdeas();
-  },
   data: function data() {
     return {
       myIdeaLists: [],
       paginate: ['paginate-log']
     };
+  },
+  created: function created() {
+    this.$emit('open-loading');
+    this.myIdeas();
+  },
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
   },
   methods: {
     clickCallback: function clickCallback(pageNum) {
@@ -2762,13 +2769,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllReviewComponent",
-  beforeUpdate: function beforeUpdate() {
-    this.$emit('close-loading');
-  },
   data: function data() {
     return {
       paginate: ['paginate-log']
     };
+  },
+  created: function created() {
+    this.$emit('open-loading');
+  },
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
   },
   computed: {
     reviewedIdeas: function reviewedIdeas() {
@@ -3025,6 +3035,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+var _name$data$created$be;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3082,7 +3096,7 @@ var _window$validators = window.validators,
     required = _window$validators.required,
     minLength = _window$validators.minLength,
     sameAs = _window$validators.sameAs;
-/* harmony default export */ __webpack_exports__["default"] = ({
+/* harmony default export */ __webpack_exports__["default"] = (_name$data$created$be = {
   name: "passwordEdit",
   data: function data() {
     return {
@@ -3094,6 +3108,12 @@ var _window$validators = window.validators,
       isMatched: false,
       posted: false
     };
+  },
+  created: function created() {
+    this.$emit('open-loading');
+  },
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
   },
   methods: {
     checkPass: function checkPass() {
@@ -3146,33 +3166,23 @@ var _window$validators = window.validators,
   mounted: function mounted() {
     console.log('PostIdeaComponent mounted.');
     this.user = this.$store.dispatch('getUsers');
-  },
-  beforeUpdate: function beforeUpdate() {
-    this.$emit('close-loading');
-  },
-  // watch:{
-  //     currentPass:{
-  //         if(this.dbCurrentPass !== this.currentPass)
-  //     {
-  //         this.isMatched = true
-  //     }
-  //     }
-  // }
-  validations: {
-    currentPass: {
-      required: required
-    },
-    newPass: {
-      required: required,
-      minLength: minLength(8) // notSamePassword: !sameAs('currentPass')
-
-    },
-    reNewPass: {
-      required: required,
-      sameAsPassword: sameAs('newPass')
-    }
   }
-});
+}, _defineProperty(_name$data$created$be, "beforeUpdate", function beforeUpdate() {
+  this.$emit('close-loading');
+}), _defineProperty(_name$data$created$be, "validations", {
+  currentPass: {
+    required: required
+  },
+  newPass: {
+    required: required,
+    minLength: minLength(8) // notSamePassword: !sameAs('currentPass')
+
+  },
+  reNewPass: {
+    required: required,
+    sameAsPassword: sameAs('newPass')
+  }
+}), _name$data$created$be);
 
 /***/ }),
 
@@ -3663,7 +3673,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    this.$emit('close-loading');
+    this.$emit('open-loading');
     this.user = this.$store.dispatch('getUsers');
     this.ideaId = this.$route.params.ideaId;
     this.ideaUserId = this.$route.params.userId;
@@ -3689,6 +3699,9 @@ __webpack_require__.r(__webpack_exports__);
       this.getReviews();
       console.log('PostDetailComponent mounted');
     });
+  },
+  beforeUpdate: function beforeUpdate() {
+    this.$emit('close-loading');
   },
   methods: {
     favSwitch: function favSwitch(userId, ideaId) {
@@ -3919,6 +3932,10 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+var _name$data$created$be;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -4020,7 +4037,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+/* harmony default export */ __webpack_exports__["default"] = (_name$data$created$be = {
   name: "PostIdeaComponent",
   data: function data() {
     return {
@@ -4034,55 +4051,58 @@ __webpack_require__.r(__webpack_exports__);
       fileInfo: ""
     };
   },
-  mounted: function mounted() {
-    console.log('PostIdeaComponent mounted.');
-    this.user = this.$store.dispatch('getUsers');
+  created: function created() {
+    this.$emit('open-loading');
   },
   beforeUpdate: function beforeUpdate() {
     this.$emit('close-loading');
   },
-  methods: {
-    onFileChange: function onFileChange(event) {
-      this.fileInfo = event.target.files[0];
-      this.saveImage();
-      this.createImage();
-    },
-    createImage: function createImage() {
-      var _this = this;
-
-      //画像をプレビュー表示するロジック
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        _this.ideaImage = e.target.result;
-      };
-
-      reader.readAsDataURL(this.fileInfo);
-    },
-    //画像をDBに保存してパスを保存するロジック
-    saveImage: function saveImage() {
-      var formData = new FormData();
-      console.log(this.fileInfo);
-      formData.append('file', this.fileInfo);
-      axios.post('/api/profileImgUpload', formData).then(function (response) {
-        console.log(response);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    }
-  },
-  computed: {
-    userId: function userId() {
-      return this.$store.state.users.id;
-    },
-    overflowLength: function overflowLength() {
-      return this.overflow.length;
-    },
-    contentLength: function contentLength() {
-      return this.content.length;
-    }
+  mounted: function mounted() {
+    console.log('PostIdeaComponent mounted.');
+    this.user = this.$store.dispatch('getUsers');
   }
-});
+}, _defineProperty(_name$data$created$be, "beforeUpdate", function beforeUpdate() {
+  this.$emit('close-loading');
+}), _defineProperty(_name$data$created$be, "methods", {
+  onFileChange: function onFileChange(event) {
+    this.fileInfo = event.target.files[0];
+    this.saveImage();
+    this.createImage();
+  },
+  createImage: function createImage() {
+    var _this = this;
+
+    //画像をプレビュー表示するロジック
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      _this.ideaImage = e.target.result;
+    };
+
+    reader.readAsDataURL(this.fileInfo);
+  },
+  //画像をDBに保存してパスを保存するロジック
+  saveImage: function saveImage() {
+    var formData = new FormData();
+    console.log(this.fileInfo);
+    formData.append('file', this.fileInfo);
+    axios.post('/api/profileImgUpload', formData).then(function (response) {
+      console.log(response);
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  }
+}), _defineProperty(_name$data$created$be, "computed", {
+  userId: function userId() {
+    return this.$store.state.users.id;
+  },
+  overflowLength: function overflowLength() {
+    return this.overflow.length;
+  },
+  contentLength: function contentLength() {
+    return this.content.length;
+  }
+}), _name$data$created$be);
 
 /***/ }),
 
@@ -4185,7 +4205,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    console.log('ConfirmIdeaComponent created.');
+    this.$emit('open-loading');
     this.fileInfo = this.$route.params.fileInfo;
     this.user = this.$store.dispatch('getUsers');
     this.title = this.$route.params.title;
@@ -4194,8 +4214,8 @@ __webpack_require__.r(__webpack_exports__);
     this.price = this.$route.params.price;
     this.overflow = this.$route.params.overflow;
     this.content = this.$route.params.content;
+    console.log('ConfirmIdeaComponent created.');
   },
-  mounted: function mounted() {},
   beforeUpdate: function beforeUpdate() {
     this.$emit('close-loading');
   },
@@ -4373,6 +4393,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
+    this.$emit('open-loading');
     this.user = this.$store.dispatch('getUsers').then(this.user = this.$store.state.users).then(this.getImg());
     console.log('created'); // this.img_src = require(this.profileImg);
   },
@@ -4538,6 +4559,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
+    this.$emit('open-loading');
     this.user = this.$store.dispatch('getUsers'); // this.user = this.$store.state.users
 
     console.log('created');
@@ -4890,6 +4912,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
+    this.$emit('open-loading');
     this.id = this.$route.params.id, this.bought_flag = this.$route.params.bought_flag, this.category_id = this.$route.params.category_id, this.content = this.$route.params.content, this.delete_flag = this.$route.params.delete_flag, this.img = this.$route.params.img, this.overflow = this.$route.params.overflow, this.price = this.$route.params.price, this.title = this.$route.params.title, this.user_id = this.$route.params.user_id, this.categoryCheck();
   },
   beforeUpdate: function beforeUpdate() {
@@ -4973,6 +4996,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+var _name$data$beforeUpda;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -5027,7 +5054,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({
+/* harmony default export */ __webpack_exports__["default"] = (_name$data$beforeUpda = {
   name: "reviewCompletedComponent",
   data: function data() {
     return {
@@ -5042,21 +5069,21 @@ __webpack_require__.r(__webpack_exports__);
     this.$emit('close-loading');
   },
   created: function created() {
+    this.$emit('open-loading');
     this.ideaId = this.$route.params.ideaId;
     this.userId = this.$route.params.userId;
     this.ideas = this.$store.dispatch('getUserIdeas');
     this.title = this.$route.params.title;
-  },
-  mounted: function mounted() {},
-  methods: {
-    //routerで渡されたIdea取得
-    //Twittershare用のリンクへ飛ばす
-    twitterShare: function twitterShare() {
-      var $url = "https://twitter.com/intent/tweet?text=\u65B0\u898F\u30EC\u30D3\u30E5\u30FC\n\u300C".concat(this.title, "\u300D\n%20%23Inspiration&url=https://code.ameneko.com/twitter-share");
-      window.open($url, null, 'top=100,left=100,width=300,height=400');
-    }
   }
-});
+}, _defineProperty(_name$data$beforeUpda, "beforeUpdate", function beforeUpdate() {
+  this.$emit('close-loading');
+}), _defineProperty(_name$data$beforeUpda, "methods", {
+  //Twittershare用のリンクへ飛ばす
+  twitterShare: function twitterShare() {
+    var $url = "https://twitter.com/intent/tweet?text=\u65B0\u898F\u30EC\u30D3\u30E5\u30FC\n\u300C".concat(this.title, "\u300D\n%20%23Inspiration&url=https://code.ameneko.com/twitter-share");
+    window.open($url, null, 'top=100,left=100,width=300,height=400');
+  }
+}), _name$data$beforeUpda);
 
 /***/ }),
 
@@ -5108,6 +5135,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "headerBeforeComponent",
+  created: function created() {
+    this.$emit('open-loading');
+  },
   mounted: function mounted() {
     console.log('withdrawComponent mounted');
   },

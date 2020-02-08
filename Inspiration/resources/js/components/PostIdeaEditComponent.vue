@@ -129,6 +129,8 @@
         },
 
         created:function(){
+            this.$emit('open-loading');
+
             this.id = this.$route.params.id,
             this.bought_flag = this.$route.params.bought_flag,
                 this.category_id =  this.$route.params.category_id,

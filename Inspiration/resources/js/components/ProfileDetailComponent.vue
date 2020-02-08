@@ -57,6 +57,7 @@
         },
 
         created() {
+            this.$emit('open-loading');
             this.user = this.$store.dispatch('getUsers')
             // this.user = this.$store.state.users
             console.log('created');
