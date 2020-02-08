@@ -71,8 +71,10 @@
 
     <div class="nav-height"></div>
 
-    <div class ="gif-container" v-if="show">
-        <img class ="loading" src="/images/ajax-loader.gif">
+    <div class="loading loading-overlay" v-if="show">
+    <div class="loading-container">
+        <img class ="loading-img" src="/images/ajax-loader.gif">
+    </div>
     </div>
 {{--    <loading-component></loading-component>--}}
 

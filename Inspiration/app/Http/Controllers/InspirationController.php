@@ -67,9 +67,9 @@ class InspirationController extends Controller
         /**
          * ログイン中のユーザが購入したアイデアデータ取得
          */
-        $buyingIdea = \App\Idea::where('bought_flag',1)
-            ->where('user_id',$userId)
-            ->latest()->get();
+        $buyingIdea = Idea::join('buying_histories','buying_histories.post_id','ideas.id')
+            ->where('buying_histories.user_id',$userId)
+           ->get();
 
         /**
          * ログイン中のユーザがお気に入りにしたアイデアデータ取得

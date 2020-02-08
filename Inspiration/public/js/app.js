@@ -3629,57 +3629,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostDetailComponent",
   data: function data() {
@@ -3707,7 +3656,8 @@ __webpack_require__.r(__webpack_exports__);
       reviewComment: "",
       reviewNumber: "",
       reviewErrorMessage: false,
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+      processing: false
     };
   },
   created: function created() {
@@ -3884,31 +3834,36 @@ __webpack_require__.r(__webpack_exports__);
     reviewPost: function reviewPost() {
       var _this5 = this;
 
-      //すでに投稿しているか確認
+      this.processing = true; //すでに投稿しているか確認
+
       if (this.reviewed === true) {
         this.reviewErrorMessage = '既にレビューが投稿されています'; //レビュー投稿処理
       } else if (this.reviewNumber !== "" && this.reviewComment !== "") {
         //投稿処理
-        axios.post('/api/reviewPost', {
-          userId: this.$store.state.users.id,
-          ideaId: this.ideaId,
-          star: this.reviewNumber,
-          comment: this.reviewComment
-        }).then(function (response) {
-          console.log(response);
+        setTimeout(function () {
+          axios.post('/api/reviewPost', {
+            userId: _this5.$store.state.users.id,
+            ideaId: _this5.ideaId,
+            ideaUserId: _this5.ideaUserId,
+            star: _this5.reviewNumber,
+            comment: _this5.reviewComment
+          }).then(function (response) {
+            console.log(response);
+            _this5.processing = false;
 
-          _this5.$router.push({
-            name: 'reviewCompleted',
-            params: {
-              ideaId: _this5.ideaId,
-              userId: _this5.ideaUserId,
-              title: _this5.title
-            }
+            _this5.$router.push({
+              name: 'reviewCompleted',
+              params: {
+                ideaId: _this5.ideaId,
+                userId: _this5.ideaUserId,
+                title: _this5.title
+              }
+            });
+          })["catch"](function (error) {
+            console.log(error);
+            _this5.reviewErrorMessage = '時間を置いてお試し下さい';
           });
-        })["catch"](function (error) {
-          console.log(error);
-          _this5.reviewErrorMessage = '時間を置いてお試し下さい';
-        });
+        }, 2000);
       } //入力がされていない
       else {
           this.reviewErrorMessage = '全てのレビュー入力がされていません';
@@ -9926,7 +9881,7 @@ var render = function() {
                       to: {
                         name: "postDetail",
                         params: {
-                          ideaId: buyingIdea.id,
+                          ideaId: buyingIdea.post_id,
                           userId: buyingIdea.user_id
                         }
                       },
@@ -10000,7 +9955,7 @@ var render = function() {
                       to: {
                         name: "postDetail",
                         params: {
-                          ideaId: favIdea.id,
+                          ideaId: favIdea.idea_id,
                           userId: favIdea.user_id
                         }
                       },
@@ -10638,7 +10593,7 @@ var render = function() {
                 _vm._m(1, true)
               ]),
               _vm._v(
-                "\n\n                    平均の評価を計算するロジック記入\n\n\n\n                    "
+                "\n\n                平均の評価を計算するロジック記入\n\n\n\n                "
               ),
               _c(
                 "label",
@@ -10663,9 +10618,9 @@ var render = function() {
                 { staticClass: "confirm-text", attrs: { id: "description" } },
                 [
                   _vm._v(
-                    "\n                        " +
+                    "\n                    " +
                       _vm._s(detail.overflow) +
-                      "\n                    "
+                      "\n                "
                   )
                 ]
               ),
@@ -10683,19 +10638,19 @@ var render = function() {
                   _vm.buying
                     ? _c("div", [
                         _vm._v(
-                          "\n                            " +
+                          "\n                        " +
                             _vm._s(detail.content) +
-                            "\n                        "
+                            "\n                    "
                         )
                       ])
                     : _c("div", [
                         _vm._v(
-                          "\n                            購入者にのみ開放されます\n                        "
+                          "\n                        購入者にのみ開放されます\n                    "
                         )
                       ])
                 ]
               ),
-              _vm._v("\n\n<\n\n                    "),
+              _vm._v(" "),
               _c(
                 "label",
                 { staticClass: "c-label", attrs: { for: "contents" } },
@@ -10707,7 +10662,7 @@ var render = function() {
                 { staticClass: "confirm-text", attrs: { for: "fav" } },
                 [
                   _vm._v(
-                    "\n                        ハートClickでお気に入り切り替え\n                        "
+                    "\n                    ハートClickでお気に入り切り替え\n                    "
                   ),
                   _c("i", {
                     class: {
@@ -10742,7 +10697,7 @@ var render = function() {
                       { staticClass: "c-button", attrs: { id: "purchase" } },
                       [
                         _vm._v(
-                          "\n                        購入する\n                    "
+                          "\n                    購入する\n                "
                         )
                       ]
                     ),
@@ -10821,7 +10776,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                        アイデア削除\n                    "
+                          "\n                    アイデア削除\n                "
                         )
                       ]
                     )
@@ -10865,150 +10820,146 @@ var render = function() {
       _c(
         "div",
         { staticClass: "review review-container" },
-        [
-          _vm._l(this.ideaReviews, function(review) {
-            return _c("div", { staticClass: "review-posted" }, [
-              _c(
-                "div",
-                { staticClass: "review-posted-name" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      attrs: {
-                        to: {
-                          name: "profileDetail",
-                          params: {
-                            userId: review.user_id
-                          }
+        _vm._l(this.ideaReviews, function(review) {
+          return _c("div", { staticClass: "review-posted" }, [
+            _c(
+              "div",
+              { staticClass: "review-posted-name" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    attrs: {
+                      to: {
+                        name: "profileDetail",
+                        params: {
+                          userId: review.user_id
                         }
                       }
-                    },
-                    [
-                      _c("div", { staticClass: "review-img" }, [
-                        _c("img", {
-                          attrs: {
-                            src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + review.img),
-                            alt: "reviewUserImg"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "review-img-name",
-                            attrs: { id: "userName" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(review.name) +
-                                "\n                                "
-                            ),
-                            _c("p", [_vm._v("さん")])
-                          ]
-                        )
-                      ])
-                    ]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "review-posted-star" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "review-posted-comment-label",
-                    attrs: { for: "reviewComment" }
-                  },
-                  [_vm._v("評価")]
-                ),
-                _vm._v(" "),
-                review.star === 1
-                  ? _c(
-                      "div",
-                      {
-                        staticClass: "review-posted-comment-star",
-                        attrs: { id: "reviewComment" }
-                      },
-                      [_vm._m(3, true), _vm._v(" "), _vm._m(4, true)]
-                    )
-                  : review.star === 2
-                  ? _c(
-                      "div",
-                      {
-                        staticClass: "review-posted-comment-star",
-                        attrs: { id: "reviewComment" }
-                      },
-                      [_vm._m(5, true), _vm._v(" "), _vm._m(6, true)]
-                    )
-                  : review.star === 3
-                  ? _c(
-                      "div",
-                      {
-                        staticClass: "review-posted-comment-star",
-                        attrs: { id: "reviewComment" }
-                      },
-                      [_vm._m(7, true), _vm._v(" "), _vm._m(8, true)]
-                    )
-                  : review.star === 4
-                  ? _c(
-                      "div",
-                      {
-                        staticClass: "review-posted-comment-star",
-                        attrs: { id: "reviewComment" }
-                      },
-                      [_vm._m(9, true), _vm._v(" "), _vm._m(10, true)]
-                    )
-                  : review.star === 5
-                  ? _c(
-                      "div",
-                      {
-                        staticClass: "review-posted-comment-star",
-                        attrs: { id: "reviewComment" }
-                      },
-                      [_vm._m(11, true), _vm._v(" "), _vm._m(12, true)]
-                    )
-                  : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "review-posted-comment" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "review-posted-comment-label",
-                    attrs: { for: "voiceComment" }
-                  },
-                  [_vm._v("レビュー")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "review-posted-comment-content",
-                    attrs: { id: "voiceComment" }
+                    }
                   },
                   [
-                    _vm._v(
-                      "\n                             " +
-                        _vm._s(review.comment) +
-                        "\n                        "
-                    )
+                    _c("div", { staticClass: "review-img" }, [
+                      _c("img", {
+                        attrs: {
+                          src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + review.img),
+                          alt: "reviewUserImg"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "review-img-name",
+                          attrs: { id: "userName" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(review.name) +
+                              "\n                            "
+                          ),
+                          _c("p", [_vm._v("さん")])
+                        ]
+                      )
+                    ])
                   ]
                 )
-              ])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "review-posted-star" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "review-posted-comment-label",
+                  attrs: { for: "reviewComment" }
+                },
+                [_vm._v("評価")]
+              ),
+              _vm._v(" "),
+              review.star === 1
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "review-posted-comment-star",
+                      attrs: { id: "reviewComment" }
+                    },
+                    [_vm._m(3, true), _vm._v(" "), _vm._m(4, true)]
+                  )
+                : review.star === 2
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "review-posted-comment-star",
+                      attrs: { id: "reviewComment" }
+                    },
+                    [_vm._m(5, true), _vm._v(" "), _vm._m(6, true)]
+                  )
+                : review.star === 3
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "review-posted-comment-star",
+                      attrs: { id: "reviewComment" }
+                    },
+                    [_vm._m(7, true), _vm._v(" "), _vm._m(8, true)]
+                  )
+                : review.star === 4
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "review-posted-comment-star",
+                      attrs: { id: "reviewComment" }
+                    },
+                    [_vm._m(9, true), _vm._v(" "), _vm._m(10, true)]
+                  )
+                : review.star === 5
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "review-posted-comment-star",
+                      attrs: { id: "reviewComment" }
+                    },
+                    [_vm._m(11, true), _vm._v(" "), _vm._m(12, true)]
+                  )
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "review-posted-comment" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "review-posted-comment-label",
+                  attrs: { for: "voiceComment" }
+                },
+                [_vm._v("レビュー")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "review-posted-comment-content",
+                  attrs: { id: "voiceComment" }
+                },
+                [
+                  _vm._v(
+                    "\n                         " +
+                      _vm._s(review.comment) +
+                      "\n                    "
+                  )
+                ]
+              )
             ])
-          }),
-          _vm._v(" "),
-          _vm._m(13)
-        ],
-        2
+          ])
+        }),
+        0
       ),
       _vm._v(" "),
       !_vm.reviewed && _vm.buying
         ? _c("div", { staticClass: "review-container" }, [
-            _vm._m(14),
+            _vm._m(13),
             _vm._v(" "),
             _c("div", { staticClass: "review-comment" }, [
               _c(
@@ -11088,7 +11039,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(15), _vm._v(" "), _vm._m(16)]
+                        [_vm._m(14), _vm._v(" "), _vm._m(15)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -11103,7 +11054,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(17), _vm._v(" "), _vm._m(18)]
+                        [_vm._m(16), _vm._v(" "), _vm._m(17)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -11118,7 +11069,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(19), _vm._v(" "), _vm._m(20)]
+                        [_vm._m(18), _vm._v(" "), _vm._m(19)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -11133,7 +11084,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(21), _vm._v(" "), _vm._m(22)]
+                        [_vm._m(20), _vm._v(" "), _vm._m(21)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -11148,7 +11099,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(23), _vm._v(" "), _vm._m(24)]
+                        [_vm._m(22), _vm._v(" "), _vm._m(23)]
                       )
                     ])
                   ]),
@@ -11195,17 +11146,32 @@ var render = function() {
                   _vm._v(" "),
                   _c("input", {
                     staticClass: "c-mini-button review-button",
-                    attrs: { type: "submit", value: "送信" }
+                    attrs: {
+                      type: "submit",
+                      disabled: _vm.processing,
+                      value: "送信"
+                    }
                   })
                 ]
               )
             ])
           ])
         : _c("div", { staticClass: "review-container-restriction" }, [
-            _vm._m(25),
+            _vm._m(24),
             _vm._v(" "),
             _c("div", { staticClass: "review-comment" }, [
-              _vm._m(26),
+              _c("form", { attrs: { action: "" } }, [
+                _vm._m(25),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "c-mini-button review-button-restriction",
+                  attrs: {
+                    type: "text",
+                    disabled: _vm.processing,
+                    value: "送信"
+                  }
+                })
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "review-comment-restriction" }, [
                 _vm._v(_vm._s(_vm.reviewRegurationMessage))
@@ -11232,7 +11198,7 @@ var staticRenderFns = [
       _c("label", { staticClass: "c-label", attrs: { for: "img" } }, [
         _vm._v("平均評価")
       ]),
-      _vm._v("\n                            ★3.3\n                        ")
+      _vm._v("\n                        ★3.3\n                    ")
     ])
   },
   function() {
@@ -11402,81 +11368,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted" }, [
-      _c("div", { staticClass: "review-posted-name" }, [
-        _c("div", { staticClass: "review-img" }, [
-          _c("div", { staticClass: "review-img-name" }, [
-            _vm._v(
-              "\n                                だーいし\n                                "
-            ),
-            _c("p", [_vm._v("さん")])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "review-posted-star" }, [
-        _c(
-          "label",
-          {
-            staticClass: "review-posted-comment-label",
-            attrs: { for: "voiceComment" }
-          },
-          [_vm._v("評価")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "review-posted-comment-star",
-            attrs: { id: "voiceComment" }
-          },
-          [
-            _c("div", { staticClass: "review-posted-comment-star-top" }, [
-              _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-              _vm._v(" "),
-              _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "review-posted-comment-star-bottom" }, [
-              _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-              _vm._v(" "),
-              _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-              _vm._v(" "),
-              _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "review-posted-comment" }, [
-        _c(
-          "label",
-          {
-            staticClass: "review-posted-comment-label",
-            attrs: { for: "voiceComment" }
-          },
-          [_vm._v("レビュー")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "review-posted-comment-content",
-            attrs: { id: "voiceComment" }
-          },
-          [
-            _vm._v(
-              "\n                            このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。\n\n                        "
-            )
-          ]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "c-heading" }, [
       _c("h3", { staticClass: "f-h3" }, [_vm._v("レビュー")])
     ])
@@ -11648,45 +11539,36 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("form", { attrs: { action: "" } }, [
+    return _c("div", { staticClass: "review-comment-container" }, [
+      _c("label", { attrs: { for: "review-comment" } }, [_vm._v("評価")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "review-comment-check" }, [
+        _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "review-comment-container" }, [
-        _c("label", { attrs: { for: "review-comment" } }, [_vm._v("評価")]),
+        _c("label", { attrs: { for: "review-comment" } }, [_vm._v("レビュー")]),
         _vm._v(" "),
-        _c("div", { staticClass: "review-comment-check" }, [
-          _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-          _vm._v(" "),
-          _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-          _vm._v(" "),
-          _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-          _vm._v(" "),
-          _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-          _vm._v(" "),
-          _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "review-comment-container" }, [
-          _c("label", { attrs: { for: "review-comment" } }, [
-            _vm._v("レビュー")
-          ]),
-          _vm._v(" "),
-          _c("textarea", {
-            staticClass: "c-input review-comment-input",
-            attrs: {
-              disabled: "",
-              name: "",
-              id: "review-comment",
-              cols: "30",
-              rows: "10",
-              placeholder: "レビューを記入"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "c-mini-button review-button-restriction",
-        attrs: { type: "text", value: "送信" }
-      })
+        _c("textarea", {
+          staticClass: "c-input review-comment-input",
+          attrs: {
+            disabled: "",
+            name: "",
+            id: "review-comment",
+            cols: "30",
+            rows: "10",
+            placeholder: "レビューを記入"
+          }
+        })
+      ])
     ])
   }
 ]

@@ -62,7 +62,6 @@
                         </div>
                     </div>
 
-<
 
                     <label for="contents" class="c-label">お気に入り</label>
                     <div for="fav" class="confirm-text">
@@ -218,56 +217,6 @@
 
                 </div>
 
-
-
-                <div class="review-posted">
-                    <div class ="review-posted-name">
-                        <div class="review-img">
-<!--                            <img src="../images/staff2.jpeg" alt="">-->
-                            <div class ="review-img-name">
-                                だーいし
-                                <p>さん</p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="review-posted-star">
-
-                        <label for="voiceComment" class ="review-posted-comment-label">評価</label>
-                        <div id="voiceComment" class ="review-posted-comment-star">
-                            <div class="review-posted-comment-star-top">
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                            </div>
-                            <div class="review-posted-comment-star-bottom">
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class ="review-posted-comment">
-
-                        <label for="voiceComment" class ="review-posted-comment-label">レビュー</label>
-                        <div id="voiceComment" class ="review-posted-comment-content">
-                            このアイデアは非常に素敵でしたね。
-                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
-                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
-                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
-                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
-                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
-                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
-                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
-                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
-                            日々の怠慢から開放されるためのアイデアです このアイデアは非常に素敵でしたね。
-
-                        </div>
-                    </div>
-
-                </div>
-
             </div>
 
 
@@ -362,7 +311,7 @@
                         <textarea v-model="reviewComment" class ="c-input review-comment-input" name="review" id="review-comment" cols="30" rows="10" placeholder="レビューを記入"></textarea>
                     </div>
                     <div v-if="reviewErrorMessage" class="review-comment-error">{{reviewErrorMessage}}</div>
-                    <input type="submit" class="c-mini-button review-button" value="送信">
+                    <input type="submit" class="c-mini-button review-button" :disabled="processing" value="送信">
                 </form>
             </div>
             </div>
@@ -393,7 +342,7 @@
                             <textarea disabled class ="c-input review-comment-input" name="" id="review-comment" cols="30" rows="10" placeholder="レビューを記入"></textarea>
                             </div>
                         </div>
-                        <input type="text" class="c-mini-button review-button-restriction" value="送信">
+                        <input type="text" class="c-mini-button review-button-restriction" :disabled="processing" value="送信">
                     </form>
 
                     <div class="review-comment-restriction">{{reviewRegurationMessage}}</div>
@@ -439,7 +388,9 @@
                 reviewComment:"",
                 reviewNumber:"",
                 reviewErrorMessage:false,
-                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+
+                processing:false
 
         }
         },
@@ -643,6 +594,7 @@
             },
 
             reviewPost: function() {
+                this.processing = true;
                 //すでに投稿しているか確認
                 if (this.reviewed === true) {
                     this.reviewErrorMessage = '既にレビューが投稿されています'
@@ -650,14 +602,17 @@
                     //レビュー投稿処理
                 } else if (this.reviewNumber !== "" && this.reviewComment !== "") {
                     //投稿処理
+                    setTimeout(()=>{
                     axios.post('/api/reviewPost', {
                                     userId: this.$store.state.users.id,
                                     ideaId: this.ideaId,
+                                    ideaUserId: this.ideaUserId,
                                     star: this.reviewNumber,
                                     comment: this.reviewComment
                         }).then((response)=>{
                             console.log(response);
-                            this.$router.push({ name: 'reviewCompleted',params:
+                        this.processing = false;
+                        this.$router.push({ name: 'reviewCompleted',params:
                                     {
                                         ideaId:this.ideaId,
                                         userId:this.ideaUserId,
@@ -667,6 +622,7 @@
                             console.log(error);
                             this.reviewErrorMessage = '時間を置いてお試し下さい'
                     });
+                    },2000)
                 }
                 //入力がされていない
                 else {
