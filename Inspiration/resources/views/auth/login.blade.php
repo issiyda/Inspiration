@@ -117,9 +117,11 @@
             </div>
 
             @if (Route::has('password.request'))
-            <a href="{{ route('password.request') }}" class ="c-form-reminder">
-                メールアドレスorパスワード<br>
-                をお忘れの方</a>
+                <div class="c-form-reminder">
+                    <a href="{{ route('password.request') }}" >
+                    メールアドレスorパスワード<br>
+                    をお忘れの方</a>
+                </div>
             @endif
 
 

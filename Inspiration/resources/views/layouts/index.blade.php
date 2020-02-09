@@ -33,7 +33,7 @@
             Inspiration
         </div>
 
-        <div class="nav-trigger js-toggle-sp-menu">
+        <div class="nav-trigger js-toggle-sp-menu"  @touchStart="sidebarSwitch">
             <span></span>
             <span></span>
             <span></span>
@@ -85,7 +85,7 @@
     <router-view v-on:close-loading="closeMethod()" v-on:open-loading="openMethod()"></router-view>
 
 
-<side-bar-component></side-bar-component>
+<side-bar-component v-if="sidebarShow" @call-sidebar-switch="sidebarSwitch"></side-bar-component>
 
 <footer-component></footer-component>
 

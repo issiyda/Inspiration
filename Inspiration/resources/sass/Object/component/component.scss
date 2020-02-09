@@ -276,13 +276,17 @@ input[type="radio"] {
   }
 
   &-reminder{
-    color:$color_accent;
     display: flex;
+      text-align: center;
     text-decoration: none;
     font-weight: bolder;
     margin-bottom: 3%;
     transition:0.6s;
     word-wrap: break-word;
+
+      a{
+          color:$color_accent;
+      }
   }
 
   &-text-attention{
