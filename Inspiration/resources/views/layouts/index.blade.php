@@ -50,6 +50,7 @@
                 <li class ="nav-item"><router-link to="/mypage">Mypage</router-link></li>
                 <li class ="nav-item"><router-link to="/post">Post</router-link></li>
                 <li class ="nav-item"><router-link to="/profile">Profile</router-link></li>
+                <li class ="nav-item"><router-link to="/contact">Contact</router-link></li>
                 <li class ="nav-item"><a href="{{route('logout')}}">Logout</a></li>
             </ul>
 
