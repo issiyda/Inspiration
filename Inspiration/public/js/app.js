@@ -3176,6 +3176,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 var _window$validators = window.validators,
     required = _window$validators.required,
     minLength = _window$validators.minLength,
@@ -3193,10 +3194,12 @@ var _window$validators = window.validators,
       posted: false
     };
   },
-  created: function created() {
-    this.$emit('open-loading');
-  },
+  created: function created() {},
   mounted: function mounted() {
+    console.log('PostIdeaComponent mounted.');
+    this.user = this.$store.dispatch('getUsers');
+  },
+  beforeUpdate: function beforeUpdate() {
     this.$emit('close-loading');
   },
   methods: {
@@ -3247,12 +3250,7 @@ var _window$validators = window.validators,
       return 'Pass変更完了しました';
     }
   }
-}, _defineProperty(_name$data$created$mo, "mounted", function mounted() {
-  console.log('PostIdeaComponent mounted.');
-  this.user = this.$store.dispatch('getUsers');
-}), _defineProperty(_name$data$created$mo, "beforeUpdate", function beforeUpdate() {
-  this.$emit('close-loading');
-}), _defineProperty(_name$data$created$mo, "validations", {
+}, _defineProperty(_name$data$created$mo, "mounted", function mounted() {}), _defineProperty(_name$data$created$mo, "validations", {
   currentPass: {
     required: required
   },
@@ -10535,185 +10533,205 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", [
-    _c("h2", { staticClass: "f-h2" }, [_vm._v("パスワード変更")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "c-form" }, [
-      _c(
-        "form",
-        {
-          staticClass: "c-form-container register",
-          on: {
-            submit: function($event) {
-              $event.preventDefault()
-              return _vm.updatePass($event)
-            }
-          }
-        },
-        [
-          _c("div", { staticClass: "c-form-container-input register-input" }, [
-            _c("label", { staticClass: "c-label", attrs: { for: "mail" } }, [
-              _vm._v("現在のpassword")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.currentPass,
-                  expression: "currentPass"
-                }
-              ],
-              staticClass: "c-input",
-              attrs: {
-                id: "mail",
-                type: "text",
-                placeholder: "（例）info@.com"
-              },
-              domProps: { value: _vm.currentPass },
-              on: {
-                input: [
-                  function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.currentPass = $event.target.value
-                  },
-                  function($event) {
-                    return _vm.$v.currentPass.$touch()
-                  }
-                ],
-                blur: function($event) {
-                  return _vm.checkPass()
-                }
+    _c("div", { staticClass: "c-container" }, [
+      _c("h2", { staticClass: "f-h2" }, [_vm._v("パスワード変更")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "c-form" }, [
+        _c(
+          "form",
+          {
+            staticClass: "c-form-container register",
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.updatePass($event)
               }
-            }),
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "c-form-container-input register-input" },
+              [
+                _c(
+                  "label",
+                  { staticClass: "c-label", attrs: { for: "mail" } },
+                  [_vm._v("現在のpassword")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.currentPass,
+                      expression: "currentPass"
+                    }
+                  ],
+                  staticClass: "c-input",
+                  attrs: {
+                    id: "mail",
+                    type: "text",
+                    placeholder: "（例）info@.com"
+                  },
+                  domProps: { value: _vm.currentPass },
+                  on: {
+                    input: [
+                      function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.currentPass = $event.target.value
+                      },
+                      function($event) {
+                        return _vm.$v.currentPass.$touch()
+                      }
+                    ],
+                    blur: function($event) {
+                      return _vm.checkPass()
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.$v.currentPass.$error
+                  ? _c("div", { staticClass: "error" }, [
+                      !_vm.$v.currentPass.required
+                        ? _c("span", [_vm._v("入力必須です")])
+                        : _vm._e()
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.isMatched
+                  ? _c("span", { staticClass: "error" }, [
+                      _vm._v(_vm._s(_vm.currentPassMessage))
+                    ])
+                  : _vm._e()
+              ]
+            ),
             _vm._v(" "),
-            _vm.$v.currentPass.$error
+            _c(
+              "div",
+              { staticClass: "c-form-container-input register-input" },
+              [
+                _c(
+                  "label",
+                  { staticClass: "c-label", attrs: { for: "pass" } },
+                  [_vm._v("新規password")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.newPass,
+                      expression: "newPass"
+                    }
+                  ],
+                  staticClass: "c-input",
+                  attrs: {
+                    id: "pass",
+                    type: "password",
+                    placeholder: "（例）Jkl439fu"
+                  },
+                  domProps: { value: _vm.newPass },
+                  on: {
+                    input: [
+                      function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.newPass = $event.target.value
+                      },
+                      function($event) {
+                        return _vm.$v.newPass.$touch()
+                      }
+                    ]
+                  }
+                }),
+                _vm._v(" "),
+                _vm.$v.newPass.$error
+                  ? _c("div", { staticClass: "error" }, [
+                      !_vm.$v.newPass.required
+                        ? _c("span", [_vm._v("入力必須です")])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.$v.newPass.minLength
+                        ? _c("span", [_vm._v("8文字以上で記入してください")])
+                        : _vm._e()
+                    ])
+                  : _vm._e()
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "c-form-container-input register-input" },
+              [
+                _c(
+                  "label",
+                  { staticClass: "c-label", attrs: { for: "repass" } },
+                  [_vm._v("確認用新規password")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.reNewPass,
+                      expression: "reNewPass"
+                    }
+                  ],
+                  staticClass: "c-input",
+                  attrs: {
+                    id: "repass",
+                    type: "password",
+                    placeholder: "パスワード再入力"
+                  },
+                  domProps: { value: _vm.reNewPass },
+                  on: {
+                    input: [
+                      function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.reNewPass = $event.target.value
+                      },
+                      function($event) {
+                        return _vm.$v.reNewPass.$touch()
+                      }
+                    ]
+                  }
+                }),
+                _vm._v(" "),
+                _vm.$v.reNewPass.$error
+                  ? _c("div", { staticClass: "error" }, [
+                      !_vm.$v.reNewPass.required
+                        ? _c("span", [_vm._v("入力必須です")])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.$v.reNewPass.sameAsPassword
+                        ? _c("span", [_vm._v("パスワードが一致しません")])
+                        : _vm._e()
+                    ])
+                  : _vm._e()
+              ]
+            ),
+            _vm._v(" "),
+            _vm.posted
               ? _c("div", { staticClass: "error" }, [
-                  !_vm.$v.currentPass.required
-                    ? _c("span", [_vm._v("入力必須です")])
-                    : _vm._e()
+                  _vm._v(_vm._s(_vm.stateMessage))
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _vm.isMatched
-              ? _c("span", { staticClass: "error" }, [
-                  _vm._v(_vm._s(_vm.currentPassMessage))
-                ])
-              : _vm._e()
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "c-form-container-input register-input" }, [
-            _c("label", { staticClass: "c-label", attrs: { for: "pass" } }, [
-              _vm._v("新規password")
-            ]),
-            _vm._v(" "),
             _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.newPass,
-                  expression: "newPass"
-                }
-              ],
-              staticClass: "c-input",
-              attrs: {
-                id: "pass",
-                type: "password",
-                placeholder: "（例）Jkl439fu"
-              },
-              domProps: { value: _vm.newPass },
-              on: {
-                input: [
-                  function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.newPass = $event.target.value
-                  },
-                  function($event) {
-                    return _vm.$v.newPass.$touch()
-                  }
-                ]
-              }
-            }),
-            _vm._v(" "),
-            _vm.$v.newPass.$error
-              ? _c("div", { staticClass: "error" }, [
-                  !_vm.$v.newPass.required
-                    ? _c("span", [_vm._v("入力必須です")])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  !_vm.$v.newPass.minLength
-                    ? _c("span", [_vm._v("8文字以上で記入してください")])
-                    : _vm._e()
-                ])
-              : _vm._e()
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "c-form-container-input register-input" }, [
-            _c("label", { staticClass: "c-label", attrs: { for: "repass" } }, [
-              _vm._v("確認用新規password")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.reNewPass,
-                  expression: "reNewPass"
-                }
-              ],
-              staticClass: "c-input",
-              attrs: {
-                id: "repass",
-                type: "password",
-                placeholder: "パスワード再入力"
-              },
-              domProps: { value: _vm.reNewPass },
-              on: {
-                input: [
-                  function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.reNewPass = $event.target.value
-                  },
-                  function($event) {
-                    return _vm.$v.reNewPass.$touch()
-                  }
-                ]
-              }
-            }),
-            _vm._v(" "),
-            _vm.$v.reNewPass.$error
-              ? _c("div", { staticClass: "error" }, [
-                  !_vm.$v.reNewPass.required
-                    ? _c("span", [_vm._v("入力必須です")])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  !_vm.$v.reNewPass.sameAsPassword
-                    ? _c("span", [_vm._v("パスワードが一致しません")])
-                    : _vm._e()
-                ])
-              : _vm._e()
-          ]),
-          _vm._v(" "),
-          _vm.posted
-            ? _c("div", { staticClass: "error" }, [
-                _vm._v(_vm._s(_vm.stateMessage))
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "c-button",
-            attrs: { type: "submit", disabled: _vm.$v.$invalid }
-          })
-        ]
-      )
+              staticClass: "c-button",
+              attrs: { type: "submit", disabled: _vm.$v.$invalid }
+            })
+          ]
+        )
+      ])
     ])
   ])
 }

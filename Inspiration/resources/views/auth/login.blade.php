@@ -73,11 +73,14 @@
 
 <main>
 
+    <div class="c-container">
+
     <h2 class ="f-h2">ログイン</h2>
 
     <div class="c-form">
 
-        <form method="post" class="c-form-container">
+
+    <form method="post" class="c-form-container">
             @csrf
             <div class="c-form-container-input">
                 <label class ="c-label" for="email">email</label>
@@ -131,6 +134,6 @@
             <input type="submit" class="c-button" value="ログイン">
         </form>
     </div>
-
+    </div>
 </main>
 @endsection

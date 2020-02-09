@@ -230,11 +230,15 @@ input[type="radio"] {
 //インプットフォーム
 //==========================
 
+.c-container{
+    width:50%;
+    margin:0 auto 5%;
+
+}
+
 .c-form{
   background: $color_bg;
-  margin:0 auto 5%;
   text-align: center;
-  width:50%;
 
   @include mq{
 

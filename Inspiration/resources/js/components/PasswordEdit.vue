@@ -3,6 +3,7 @@
 
     <main>
 
+        <div class="c-container">
 
         <h2 class="f-h2">パスワード変更</h2>
 
@@ -46,7 +47,7 @@
                 <input type="submit" class="c-button" :disabled ="$v.$invalid">
             </form>
         </div>
-
+        </div>
     </main>
 
 </template>
@@ -74,11 +75,15 @@
 
         created:function()
         {
-            this.$emit('open-loading');
 
         },
 
         mounted() {
+            console.log('PostIdeaComponent mounted.');
+            this.user = this.$store.dispatch('getUsers');
+        },
+
+        beforeUpdate() {
             this.$emit('close-loading');
         },
 
@@ -139,13 +144,10 @@
         },
 
         mounted() {
-            console.log('PostIdeaComponent mounted.');
-            this.user = this.$store.dispatch('getUsers');
+
         },
 
-        beforeUpdate() {
-            this.$emit('close-loading');
-        },
+
 
         // watch:{
         //     currentPass:{

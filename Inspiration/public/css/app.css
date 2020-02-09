@@ -788,11 +788,14 @@ input[type="radio"]:checked + .c-radio {
   margin: 3%;
 }
 
+.c-container {
+  width: 50%;
+  margin: 0 auto 5%;
+}
+
 .c-form {
   background: #f6f5f4;
-  margin: 0 auto 5%;
   text-align: center;
-  width: 50%;
 }
 
 @media screen and (max-width: 414px) {
@@ -1963,6 +1966,10 @@ confirm とdetailの共通部分　
   margin: 3%;
 }
 
+.contact-container-input:first-child {
+  margin-top: 5%;
+}
+
 .contact-container-textarea {
   height: 100%;
 }
@@ -2040,5 +2047,7 @@ confirm とdetailの共通部分　
 
 .contact-resultMessage {
   color: #A16EFF;
+  font-size: 18px;
+  font-weight: bold;
 }
 
