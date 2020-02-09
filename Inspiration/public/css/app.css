@@ -209,7 +209,7 @@ a {
 .f-h2 {
   color: #A16EFF;
   font-size: 30px;
-  padding: 5%;
+  padding: 10%;
   text-align: center;
 }
 
@@ -1929,5 +1929,116 @@ confirm とdetailの共通部分　
   display: flex;
   flex-wrap: wrap;
   width: 20%;
+}
+
+.contact {
+  margin: 0 auto 12%;
+  width: 50%;
+}
+
+@media screen and (max-width: 414px) {
+  .contact {
+    width: 80%;
+  }
+}
+
+.contact-container {
+  background: #F5F5F5;
+  border-radius: 1%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+  text-align: center;
+}
+
+.contact-container-input {
+  margin-bottom: 10%;
+}
+
+.contact-container-input-label {
+  display: block;
+  font-size: 24px;
+  margin: 3%;
+}
+
+.contact-container-textarea {
+  height: 100%;
+}
+
+.contact-container-img {
+  display: -webkit-box;
+  display: flex;
+  margin: 10% auto;
+  width: 100%;
+}
+
+@media screen and (max-width: 414px) {
+  .contact-container-img {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+            flex-direction: column;
+    justify-content: space-around;
+  }
+}
+
+.contact-container-img-left {
+  -webkit-box-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  width: 40%;
+  margin: 5%;
+}
+
+@media screen and (max-width: 414px) {
+  .contact-container-img-left {
+    margin: 0 auto;
+    width: 60%;
+    word-wrap: break-word;
+  }
+}
+
+.contact-container-img-right {
+  width: 60%;
+  margin: 5%;
+}
+
+@media screen and (max-width: 414px) {
+  .contact-container-img-right {
+    margin: 5% auto;
+  }
+}
+
+.contact-container-img-right img {
+  width: 100%;
+}
+
+.contact-container-img-none {
+  display: none;
+}
+
+.contact-container-img-message {
+  font-weight: bolder;
+  color: #FFBEDA;
+  font-size: 24px;
+  margin-bottom: 15%;
+}
+
+.contact-withdraw {
+  margin: 0 auto;
+}
+
+.contact-textarea {
+  height: 200px;
+}
+
+.contact-resultMessage {
+  color: #A16EFF;
 }
 

@@ -206,15 +206,8 @@ ROUTE::post('/favorite','InspirationController@favSwitch');
  */
 ROUTE::post('/favDelete','InspirationController@favDelete');
 
-
 /**
- * メール送信機能のルーティング
+ * お問い合わせ送信ルーティング
  */
-ROUTE::get('/mail','InspirationController@mail');
-
-/**
- * Twitter機能のルーティング
- */
-ROUTE::get('/twitter/share','InspirationController@share');
-
+Route::post('/contactPost','contactController@contactPost');
 

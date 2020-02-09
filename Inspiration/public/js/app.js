@@ -2802,8 +2802,73 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "ContactComponent"
+  name: "ContactComponent",
+  data: function data() {
+    return {
+      contactSubject: "",
+      contactTexts: "",
+      resultMessage: false
+    };
+  },
+  mounted: function mounted() {
+    console.log('ContactComponent mounted');
+    this.$emit('close-loading');
+  },
+  methods: {
+    contactSubmit: function contactSubmit() {
+      var _this = this;
+
+      //送信わたし
+      axios.post('api/contactPost', {
+        userEmail: this.$store.state.users.email,
+        userName: this.$store.state.users.name,
+        subject: this.contactSubject,
+        contents: this.contactTexts
+      }).then(function (response) {
+        console.log(response);
+        _this.resultMessage = 'お問い合わせ完了しました';
+      })["catch"](function (error) {
+        _this.resultMessage = "時間を置いてお試し下さい";
+        console.log(error);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -9960,7 +10025,101 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("main", [
+    _c("div", { staticClass: "contact" }, [
+      _c("h2", { staticClass: "f-h2" }, [_vm._v("お問い合わせ")]),
+      _vm._v(" "),
+      _c("form", { staticClass: "contact-container" }, [
+        _c("div", { staticClass: "contact-container-input" }, [
+          _c("div", { staticClass: "contact-container-input" }, [
+            _c("label", { staticClass: "c-label", attrs: { for: "subject" } }, [
+              _vm._v("件名")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.contactSubject,
+                  expression: "contactSubject"
+                }
+              ],
+              staticClass: "c-input",
+              attrs: {
+                id: "subject",
+                type: "text",
+                placeholder: "（例）アカウントに関して"
+              },
+              domProps: { value: _vm.contactSubject },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.contactSubject = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "contact-container-input" }, [
+            _c(
+              "label",
+              { staticClass: "c-label", attrs: { for: "contactTexts" } },
+              [_vm._v("内容")]
+            ),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.contactTexts,
+                  expression: "contactTexts"
+                }
+              ],
+              staticClass: "c-input contact-textarea",
+              attrs: {
+                id: "contactTexts",
+                type: "text",
+                placeholder: "お問い合わせ内容記入"
+              },
+              domProps: { value: _vm.contactTexts },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.contactTexts = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _vm.resultMessage
+            ? _c("div", { staticClass: "contact-resultMessage" }, [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.resultMessage) +
+                    "\n                "
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "c-button",
+              attrs: { id: "submit" },
+              on: { click: _vm.contactSubmit }
+            },
+            [_c("div", [_vm._v("送信する")])]
+          )
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
