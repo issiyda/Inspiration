@@ -75,6 +75,8 @@
     <main>
 
 
+        <div class="c-container">
+
         <h2 class="f-h2">新規登録</h2>
 
         <div class="c-form">
@@ -113,6 +115,7 @@
 
                 <input type="submit" class="c-button" >
             </form>
+        </div>
         </div>
 
     </main>

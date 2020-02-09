@@ -19,6 +19,8 @@ import allIdea from './components/AllIdeaComponent';
 import postComplete from './components/PostCompletedComponent';
 import withdraw from "./components/withdrawComponent";
 import passwordEdit from "./components/PasswordEdit";
+import contact from "./components/ContactComponent"
+
 
 // bladeで行う
 // import withdraw from './components/withdrawComponent';
@@ -153,10 +155,10 @@ export default new Router({
             component: passwordEdit
         },
 
-
-
-
-
-
+        {
+            path: '/contact',
+            name: 'contact',
+            component: contact
+        },
     ]
 });

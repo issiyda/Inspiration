@@ -5,22 +5,20 @@
             <div class="l-footer-container">
 
                 <div class="l-footer-content">
-                    <h3>Inspiration</h3>
-                    <p><a href="">Top</a></p>
-                    <p><a href="">Mypage</a></p>
-                    <p><a href="">Idea一覧</a></p>
+                    <div class="l-footer-content-items">
+                        <h3>Inspiration</h3>
+                        <p><router-link to="/mypage">Mypage</router-link></p>
+                        <p><router-link to="/allIdea">Idea一覧</router-link></p>
+                        <p><router-link to="/profile">プロフィール編集</router-link></p>
+                    </div>
                 </div>
+
                 <div class="l-footer-content">
-                    <h3>Inspiration</h3>
-                    <p><a href="">Top</a></p>
-                    <p><a href="">Mypage</a></p>
-                    <p><a href="">Idea一覧</a></p>
-                </div>
-                <div class="l-footer-content">
-                    <h3>Inspiration</h3>
-                    <p><a href="">Top</a></p>
-                    <p><a href="">Mypage</a></p>
-                    <p><a href="">Idea一覧</a></p>
+                    <div class="l-footer-content-items">
+                        <h3>Inspiration</h3>
+                        <p><a href="/">Topへ戻る</a></p>
+                        <p><a href="logout">ログアウトする</a></p>
+                    </div>
                 </div>
 
             </div>

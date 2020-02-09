@@ -33,7 +33,7 @@
             Inspiration
         </div>
 
-        <div class="nav-trigger js-toggle-sp-menu">
+        <div class="nav-trigger js-toggle-sp-menu"  @touchStart="sidebarSwitch">
             <span></span>
             <span></span>
             <span></span>
@@ -50,6 +50,7 @@
                 <li class ="nav-item"><router-link to="/mypage">Mypage</router-link></li>
                 <li class ="nav-item"><router-link to="/post">Post</router-link></li>
                 <li class ="nav-item"><router-link to="/profile">Profile</router-link></li>
+                <li class ="nav-item"><router-link to="/contact">Contact</router-link></li>
                 <li class ="nav-item"><a href="{{route('logout')}}">Logout</a></li>
             </ul>
 
@@ -85,7 +86,7 @@
     <router-view v-on:close-loading="closeMethod()" v-on:open-loading="openMethod()"></router-view>
 
 
-<side-bar-component></side-bar-component>
+<side-bar-component v-if="sidebarShow" @call-sidebar-switch="sidebarSwitch"></side-bar-component>
 
 <footer-component></footer-component>
 

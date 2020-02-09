@@ -73,11 +73,14 @@
 
 <main>
 
+    <div class="c-container">
+
     <h2 class ="f-h2">ログイン</h2>
 
     <div class="c-form">
 
-        <form method="post" class="c-form-container">
+
+    <form method="post" class="c-form-container">
             @csrf
             <div class="c-form-container-input">
                 <label class ="c-label" for="email">email</label>
@@ -117,9 +120,11 @@
             </div>
 
             @if (Route::has('password.request'))
-            <a href="{{ route('password.request') }}" class ="c-form-reminder">
-                メールアドレスorパスワード<br>
-                をお忘れの方</a>
+                <div class="c-form-reminder">
+                    <a href="{{ route('password.request') }}" >
+                    メールアドレスorパスワード<br>
+                    をお忘れの方</a>
+                </div>
             @endif
 
 
@@ -129,6 +134,6 @@
             <input type="submit" class="c-button" value="ログイン">
         </form>
     </div>
-
+    </div>
 </main>
 @endsection
