@@ -194,28 +194,28 @@
 //サイドバー(スマホの場合のみ）
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 .sidebar{
-  align-items: center;
-  background: $color_base;
-  display:flex;
-  height:100%;
-  margin:0 0 0  75%;
-  position:fixed;
-  width:100%;
+    @include mq {
+        background: rgba(255, 190, 218, 0.4);
+        display: flex;
+        left:0;
+        position:fixed;
+        top:100px;
+        width: 100%;
+        z-index:5;
+    }
 
   @include mq {
     &-h2 {
-      padding: 5%!important;
+      padding:0;
     }
   }
 
   &-container{
-    background:$color_base;
     border-radius:1%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height:60%;
-    padding:5%;
+    padding:0 5%;
     width:100%;
 
     a {
@@ -242,14 +242,20 @@
       transform: scale(1, 1);
     }
 
+      h2{
+          color:$color_w;
+          text-shadow: black 0 0 5px;
+      }
+
   }
 
   &-item{
-    color:$color_w;
-    display:flex;
-    margin:10% auto;
-    transition:0.8s;
-    width:100%;
+      color:$color_w;
+      display:flex;
+      margin:10% auto;
+      transition:0.8s;
+      text-shadow: black 0 0 5px;
+      width:100%;
 
 
 

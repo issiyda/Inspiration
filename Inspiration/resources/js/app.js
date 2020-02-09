@@ -45,6 +45,7 @@ const app = new Vue({
 
             show: true,
             mode: 'single',
+            sidebarShow:false,
             formats: {
                 input: ['YYYY-MM-DD'],
             },
@@ -60,14 +61,16 @@ const app = new Vue({
 
     methods:{
 
-
-
         openMethod: function(){
             this.show = true
         },
 
         closeMethod: function(){
             this.show = false
+        },
+
+        sidebarSwitch: function(){
+            this.sidebarShow = !this.sidebarShow;
         }
     },
 
