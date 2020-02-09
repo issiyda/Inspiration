@@ -79,6 +79,8 @@
         },
 
         mounted() {
+            console.log('PostIdeaComponent mounted.');
+            this.user = this.$store.dispatch('getUsers');
             this.$emit('close-loading');
         },
 
@@ -138,14 +140,8 @@
 
         },
 
-        mounted() {
-            console.log('PostIdeaComponent mounted.');
-            this.user = this.$store.dispatch('getUsers');
-        },
 
-        beforeUpdate() {
-            this.$emit('close-loading');
-        },
+
 
         // watch:{
         //     currentPass:{
