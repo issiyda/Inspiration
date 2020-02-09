@@ -1944,6 +1944,10 @@ confirm とdetailの共通部分　
   margin: 3%;
 }
 
+.contact-container-input:first-child {
+  margin-top: 5%;
+}
+
 .contact-container-textarea {
   height: 100%;
 }
@@ -2021,5 +2025,7 @@ confirm とdetailの共通部分　
 
 .contact-resultMessage {
   color: #A16EFF;
+  font-size: 18px;
+  font-weight: bold;
 }
 

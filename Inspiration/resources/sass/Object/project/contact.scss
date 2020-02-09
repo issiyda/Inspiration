@@ -33,6 +33,10 @@
 
         }
 
+        &-input:first-child{
+            margin-top:5%;
+        }
+
         &-textarea{
             height:100%;
         }
@@ -105,6 +109,8 @@
 
     &-resultMessage{
         color:$color_accent;
+        font-size:$font-size_l;
+        font-weight:bold;
     }
 
 }

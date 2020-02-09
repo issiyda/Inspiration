@@ -21,7 +21,7 @@
                         <textarea v-model="contactTexts" id="contactTexts" class="c-input contact-textarea" type="text" placeholder="お問い合わせ内容記入"></textarea>
                     </div>
 
-                    <div class ="contact-resultMessage" v-if="resultMessage">
+                    <div class="contact-resultMessage" v-if="resultMessage">
                         {{resultMessage}}
                     </div>
 
