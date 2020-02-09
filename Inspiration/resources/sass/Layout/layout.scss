@@ -151,6 +151,13 @@
   &-content{
     margin-top:10%;
 
+      &-items{
+          display:flex;
+          flex-direction:column;
+          height:100%;
+          justify-content:space-around;
+      }
+
     h3{
       color:$color_accent;
       font-weight: bolder;
@@ -193,84 +200,87 @@
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 //サイドバー(スマホの場合のみ）
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-.sidebar{
-  align-items: center;
-  background: $color_base;
-  display:flex;
-  height:100%;
-  margin:0 0 0  75%;
-  position:fixed;
-  width:100%;
+    .sidebar {
+        align-items: center;
+        background: $color_base;
+        display: none;
+        height: 100%;
+        margin: 0 0 0 75%;
+        position: fixed;
+        width: 100%;
 
-  @include mq {
-    &-h2 {
-      padding: 5%!important;
+        @include mq {
+
+            display:flex;
+
+            &-h2 {
+                padding: 5% !important;
+            }
+        }
+
+        &-container {
+            background: $color_base;
+            border-radius: 1%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height: 60%;
+            padding: 5%;
+            width: 100%;
+
+            a {
+                color: $color_default;
+                position: relative;
+                text-decoration: none;
+            }
+
+            a::after {
+                position: absolute;
+                bottom: 5px;
+                left: 0;
+                content: '';
+                width: 80%;
+                height: 2px;
+                background: $color_w;
+                margin-left: 10%;
+                transform: scale(0, 1);
+                transform-origin: right top;
+                transition: transform .3s;
+
+            }
+
+            a:hover::after {
+                transform-origin: left top;
+                transform: scale(1, 1);
+            }
+
+        }
+
+        &-item {
+            color: $color_w;
+            display: flex;
+            margin: 10% auto;
+            transition: 0.8s;
+            width: 100%;
+
+
+            &:hover {
+                opacity: 0.8;
+                transition: 0.8s;
+            }
+
+            &-logo {
+                color: $color_w;
+                width: 40%;
+                text-align: center;
+            }
+
+            &-text {
+                font-size: $font-size_xl;
+                font-weight: bolder;
+                text-align: center;
+                width: 60%;
+
+            }
+        }
     }
-  }
-
-  &-container{
-    background:$color_base;
-    border-radius:1%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height:60%;
-    padding:5%;
-    width:100%;
-
-    a {
-      color:$color_default;
-      position: relative;
-      text-decoration: none;
-    }
-    a::after {
-      position: absolute;
-      bottom: 5px;
-      left: 0;
-      content: '';
-      width: 80%;
-      height: 2px;
-      background: $color_w;
-      margin-left: 10%;
-      transform: scale(0, 1);
-      transform-origin: right top;
-      transition: transform .3s;
-
-    }
-    a:hover::after {
-      transform-origin: left top;
-      transform: scale(1, 1);
-    }
-
-  }
-
-  &-item{
-    color:$color_w;
-    display:flex;
-    margin:10% auto;
-    transition:0.8s;
-    width:100%;
-
-
-
-
-    &:hover{
-      opacity: 0.8;
-      transition:0.8s;
-  }
-
-    &-logo{
-      color:$color_w;
-      width:40%;
-      text-align: center;
-    }
-
-    &-text{
-      font-size:$font-size_xl;
-      font-weight:bolder;
-      text-align:center;
-      width:60%;
-
-    }
-  }
-  }

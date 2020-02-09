@@ -4634,8 +4634,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "FooterComponent",
   mounted: function mounted() {
@@ -12728,54 +12726,78 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("footer", [
+    _c("div", { staticClass: "l-footer" }, [
+      _c("div", { staticClass: "l-footer-container" }, [
+        _c("div", { staticClass: "l-footer-content" }, [
+          _c("div", { staticClass: "l-footer-content-items" }, [
+            _c("h3", [_vm._v("Inspiration")]),
+            _vm._v(" "),
+            _c(
+              "p",
+              [
+                _c("router-link", { attrs: { to: "/mypage" } }, [
+                  _vm._v("Mypage")
+                ])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "p",
+              [
+                _c("router-link", { attrs: { to: "/allIdea" } }, [
+                  _vm._v("Idea一覧")
+                ])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "p",
+              [
+                _c("router-link", { attrs: { to: "/profile" } }, [
+                  _vm._v("プロフィール編集")
+                ])
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
+      _vm._v(" "),
+      _vm._m(1)
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("footer", [
-      _c("div", { staticClass: "l-footer" }, [
-        _c("div", { staticClass: "l-footer-container" }, [
-          _c("div", { staticClass: "l-footer-content" }, [
-            _c("h3", [_vm._v("Inspiration")]),
-            _vm._v(" "),
-            _c("p", [_c("a", { attrs: { href: "" } }, [_vm._v("Top")])]),
-            _vm._v(" "),
-            _c("p", [_c("a", { attrs: { href: "" } }, [_vm._v("Mypage")])]),
-            _vm._v(" "),
-            _c("p", [_c("a", { attrs: { href: "" } }, [_vm._v("Idea一覧")])])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "l-footer-content" }, [
-            _c("h3", [_vm._v("Inspiration")]),
-            _vm._v(" "),
-            _c("p", [_c("a", { attrs: { href: "" } }, [_vm._v("Top")])]),
-            _vm._v(" "),
-            _c("p", [_c("a", { attrs: { href: "" } }, [_vm._v("Mypage")])]),
-            _vm._v(" "),
-            _c("p", [_c("a", { attrs: { href: "" } }, [_vm._v("Idea一覧")])])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "l-footer-content" }, [
-            _c("h3", [_vm._v("Inspiration")]),
-            _vm._v(" "),
-            _c("p", [_c("a", { attrs: { href: "" } }, [_vm._v("Top")])]),
-            _vm._v(" "),
-            _c("p", [_c("a", { attrs: { href: "" } }, [_vm._v("Mypage")])]),
-            _vm._v(" "),
-            _c("p", [_c("a", { attrs: { href: "" } }, [_vm._v("Idea一覧")])])
-          ])
-        ]),
+    return _c("div", { staticClass: "l-footer-content" }, [
+      _c("div", { staticClass: "l-footer-content-items" }, [
+        _c("h3", [_vm._v("Inspiration")]),
         _vm._v(" "),
-        _c("div", { staticClass: "l-footer-bootm" }, [
-          _c("div", { staticClass: "l-footer-copyRight" }, [
-            _vm._v(
-              "\n                Copyright © 2019 Inspiration. All rights reserved.\n            "
-            )
-          ])
+        _c("p", [_c("a", { attrs: { href: "/" } }, [_vm._v("Topへ戻る")])]),
+        _vm._v(" "),
+        _c("p", [
+          _c("a", { attrs: { href: "logout" } }, [_vm._v("ログアウトする")])
         ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "l-footer-bootm" }, [
+      _c("div", { staticClass: "l-footer-copyRight" }, [
+        _vm._v(
+          "\n                Copyright © 2019 Inspiration. All rights reserved.\n            "
+        )
       ])
     ])
   }

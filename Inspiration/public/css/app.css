@@ -421,6 +421,16 @@ a {
   margin-top: 10%;
 }
 
+.l-footer-content-items {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+}
+
 .l-footer-content h3 {
   color: #A16EFF;
   font-weight: bolder;
@@ -464,15 +474,19 @@ a {
   -webkit-box-align: center;
           align-items: center;
   background: #FFBEDA;
-  display: -webkit-box;
-  display: flex;
+  display: none;
   height: 100%;
-  margin: 0 0 0  75%;
+  margin: 0 0 0 75%;
   position: fixed;
   width: 100%;
 }
 
 @media screen and (max-width: 414px) {
+  .sidebar {
+    display: -webkit-box;
+    display: flex;
+  }
+
   .sidebar-h2 {
     padding: 5% !important;
   }
