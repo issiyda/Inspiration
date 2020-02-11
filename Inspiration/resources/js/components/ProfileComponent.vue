@@ -11,7 +11,7 @@
                 <div class="profile-container-input">
                     <div class="profile-container-img">
                         <div class="profile-container-img-left">
-                            <label class="c-label" for="img">プロフィール画像</label>
+                            <label class="c-label" for="img">プロフィール<br>画像</label>
                         </div>
                         <div v-cloak class="profile-container-img-right">
                             <label>
@@ -21,6 +21,9 @@
                                 <!-- hoverしたら画像をアップロードの文字が浮き上がって画像が薄暗く -->
                             </label>
                         </div>
+
+                        <div class="error" v-if="errorMessages.imgErrorMessage">{{errorMessages.imgErrorMessage}}</div>
+
 
 
                     </div>
@@ -39,26 +42,36 @@
 
                     <div class="profile-container-input">
                         <label class ="c-label profile-container-input-label" for="name">名前</label>
-                        <div v-if="!isNameEdit" @dblclick="isNameEdit = true" class="c-input" type="text" placeholder="（例）だーいし" value="{$store.state.users.name}">{{$store.state.users.name}}</div>
-                        <input v-else id="name" @blur="updateName($store.state.users.id, $store.state.users.name)" v-model="$store.state.users.name" class="c-input" type="text" placeholder="（例）だーいし" value="{$store.state.users.name}">
+                        <div v-if="!isNameEdit" @dblclick="isNameEdit = true" class="c-input">{{$store.state.users.name}}</div>
+                        <input v-else id="name" @blur="updateName($store.state.users.id,$store.state.users.name)" v-model="$store.state.users.name" class="c-input" type="text" placeholder="（例）だーいし">
                     </div>
 
+                    <div class="error" v-if="errorMessages.nameErrorMessage">{{errorMessages.nameErrorMessage}}</div>
+
+
                     <div class="profile-container-input">
-                        <label class ="c-label" for="mail">e-mail</label>
-                        <div v-if="!isEmailEdit" @dblclick="isEmailEdit = true" class="c-input" type="text" placeholder="（例）info@.com" value="{$store.state.users.email}">{{$store.state.users.email}}</div>
+                        <label class="c-label" for="mail">e-mail</label>
+                        <div v-if="!isEmailEdit" @dblclick="isEmailEdit = true" class="c-input">{{$store.state.users.email}}</div>
                         <input v-else id="mail" @blur="updateEmail($store.state.users.id, $store.state.users.email)" v-model="$store.state.users.email" class="c-input" type="text" placeholder="（例）info@.com" value="{$store.state.users.email}">
                     </div>
 
+                    <div class="error" v-if="errorMessages.emailErrorMessage">{{errorMessages.emailErrorMessage}}</div>
 
 
 
 
                     <div class="profile-container-input">
                         <label class="c-label" for="introduction">プロフィール文</label>
+                        下枠をクリックして編集して下さい
 <!--                        <textarea name="" id="profile" class ="c-textarea" cols="30" rows="10" placeholder="自己紹介を記入してください"></textarea>-->
-                        <div v-if="!isIntroductionEdit" @dblclick="isIntroductionEdit = true" class="c-input profile-container-textarea" type="text" placeholder="（例）お取引よろしくお願いいたします" value="{$store.state.users.introduction}">{{$store.state.users.introduction}}</div>
-                        <textarea v-else id="introduction" @blur="updateIntroduction($store.state.users.id, $store.state.users.introduction)" v-model="$store.state.users.introduction" class="c-input" type="text" placeholder="（例）お取引よろしくお願いいたします">{$store.state.users.introduction}</textarea>
+                        <div v-if="!isIntroductionEdit" @dblclick="isIntroductionEdit = true" class="c-input profile-container-textarea">{{$store.state.users.introduction}}</div>
+                        <textarea v-else id="introduction" @blur="updateIntroduction($store.state.users.id, $store.state.users.introduction)" v-model="$store.state.users.introduction" class="c-input" type="text" placeholder="（例）お取引よろしくお願いいたします"></textarea>
                     </div>
+
+                    <div class="error" v-if="errorMessages.introductionErrorMessage">{{errorMessages.introductionErrorMessage}}</div>
+
+                    <p><span :class="{'profile-container-validation':this.introductionChangeColor}">{{introductionLength}}</span>/300文字</p>
+
 
                     <div class="profile-container-input">
                         <label class="c-label" for="profileDetail">プロフィール詳細</label>
@@ -106,8 +119,29 @@
                 selectedImg: false,
                 fileInfo: "",
                 profileImg: false,
-                profImgChangeMessage:"変更完了しました",
-                ImgChangeState:false
+                profImgChangeMessage: "変更完了しました",
+                ImgChangeState: false,
+
+                name: "",
+                email: "",
+                introduction: "",
+
+                validations: {
+                    imgValidation: "",
+                    nameValidation: "",
+                    emailValidation: "",
+                    introductionValidation: "",
+                },
+
+                errorMessages: {
+                    imgErrorMessage: false,
+                    nameErrorMessage: false,
+                    emailErrorMessage: false,
+                    introductionErrorMessage: false,
+                },
+
+                introductionChangeColor:false,
+
 
 
             }
@@ -119,7 +153,7 @@
             this.user = this.$store.dispatch('getUsers')
                 .then(this.user = this.$store.state.users)
                 .then(this.getImg())
-                console.log('created');
+            console.log('created');
 
             // this.img_src = require(this.profileImg);
 
@@ -139,17 +173,15 @@
             this.$emit('close-loading');
         },
 
-        computed:{
-
-        },
+        computed: {},
 
         methods: {
 
             /**
              * DBから画像取得
              */
-            getImg(){
-                if(this.user.img !== null) {
+            getImg() {
+                if (this.user.img !== null) {
                     this.profileImg = require(`../assets${this.user.img}`)
                 }
             },
@@ -171,61 +203,178 @@
             },
 
             saveImage() {
-                const formData = new FormData();
-                console.log(this.fileInfo);
-                formData.append('file', this.fileInfo);
-                formData.append('user_id', this.$store.state.users.id);
+                this.imgValidation();
 
-                axios.post('/api/profileImgUpload', formData)
-                    .then((response) => {
-                        console.log(response);
-                        this.user = response.data;
-                        this.user = this.$store.dispatch('getUsers');
-                        this.ImgChangeState = true;
-                    }).catch((error) => {
-                    console.log(error);
-                });
+                if (this.validation.imgValidation === true) {
+
+                    const formData = new FormData();
+                    console.log(this.fileInfo);
+                    formData.append('file', this.fileInfo);
+                    formData.append('user_id', this.$store.state.users.id);
+
+                    axios.post('/api/profileImgUpload', formData)
+                        .then((response) => {
+                            console.log(response);
+                            this.user = response.data;
+                            this.user = this.$store.dispatch('getUsers');
+                            this.ImgChangeState = true;
+                        }).catch((error) => {
+                        console.log(error);
+                    });
+                }
+            },
+
+            //画像バリデーション
+            imgValidation: function () {
+                if (this.profileImg === "") {
+                    this.validations.imgValidation = false;
+                    this.errorMessages.imgErrorMessage = "画像を選択して下さい"
+                } else {
+                    this.validations.imgValidation = true;
+                    this.errorMessages.imgErrorMessage = false
+                }
+            },
+
+            updateName: function (id, name) {
+
+                this.nameValidation();
+
+                //名前のバリデーションが通ってれば保存処理
+                if (this.validations.nameValidation === true) {
+
+                    axios.patch('/api/setting/' + id, {id: id, name: name})
+                        .then((response) => {
+                            this.isNameEdit = false;
+                            console.log(response)
+                        }).catch((error) => {
+                        console.log(error);
+                    })
+                }
+            },
+
+            //名前のバリデーション
+            nameValidation: function () {
+
+                if (this.$store.state.users.name === "") {
+                    this.validations.nameValidation = false;
+                    this.errorMessages.nameErrorMessage = "入力必須です";
+                    this.overflowChangeColor = true;
+
+                } else if (this.$store.state.users.name.length > 20) {
+                    this.validations.nameValidation = false;
+                    this.errorMessages.nameErrorMessage = "20文字以下で入力して下さい"
+
+                } else if (this.$store.state.users.name !== "" && this.$store.state.users.name.length <= 20) {
+                    this.validations.nameValidation = true;
+                    this.errorMessages.nameErrorMessage = false;
+                    this.errorMessages.nameErrorMessage = "変更に成功しました"
+
+                }
             },
 
 
             updateEmail: function (id, email) {
-                axios.patch('/api/setting/' + id, {id: id, email: email})
-                    .then((response) => {
-                        this.isEmailEdit = false;
-                        console.log(response);
-                    }).catch((error) => {
-                    console.log(error);
-                });
+
+                this.emailValidation();
+
+                if (this.validations.emailValidation === true) {
+
+                    axios.patch('/api/setting/' + id, {id: id, email: email})
+                        .then((response) => {
+                            this.isEmailEdit = false;
+                            console.log(response);
+                        }).catch((error) => {
+                        console.log(error);
+                    });
+                }
             },
 
-            updateName: function (id, name) {
-                axios.patch('/api/setting/' + id, {id: id, name: name})
-                    .then((response) => {
-                        this.isNameEdit = false;
-                        console.log(response)
-                    }).catch((error) => {
-                    console.log(error);
-                })
+            emailValidation: function () {
+                if (this.$store.state.users.email === "") {
+                    this.validations.nameValidation = false;
+                    this.errorMessages.nameErrorMessage = "入力必須です";
+                } else if (this.$store.state.users.email.length > 50) {
+                    this.validations.emailValidation = false;
+                    this.errorMessages.emailErrorMessage = "50文字以下で入力して下さい"
+
+                } else if (this.$store.state.users.email.match(/.+@.+\..+/) == null) {
+                    this.validations.emailValidation = false;
+                    this.errorMessages.emailErrorMessage = "Emailの形式で入力して下さい"
+
+                } else if (this.$store.state.users.email !== "" && this.$store.state.users.email.length <= 50 && this.$store.state.users.email.match(/.+@.+\..+/) !== null) {
+                    this.validations.emailValidation = true;
+                    this.errorMessages.emailErrorMessage = false;
+                    this.errorMessages.emailErrorMessage = "変更に成功しました"
+
+                }
             },
 
 
             updateIntroduction: function (id, introduction) {
-                axios.patch('/api/setting/' + id, {id: id, introduction: introduction})
-                    .then((response) => {
-                        this.isIntroductionEdit = false;
-                        console.log(response)
-                    }).catch((error) => {
-                    console.log(error);
-                });
-            }
+
+                this.introductionValidation();
+
+                if (this.validations.introductionValidation === true) {
+
+                    axios.patch('/api/setting/' + id, {id: id, introduction: introduction})
+                        .then((response) => {
+                            this.isIntroductionEdit = false;
+                            console.log(response)
+                        }).catch((error) => {
+                        console.log(error);
+                    });
+                }
+            },
+
+            //自己紹介のバリデーション
+            introductionValidation() {
+                if (this.$store.state.users.introduction === "") {
+                    this.validations.introductionValidation = false;
+                    this.errorMessages.introductionErrorMessage = "入力必須です";
+                    this.introductionChangeColor = true
+
+
+                } else if(this.$store.state.users.introduction.length > 300) {
+                    this.validations.introductionValidation = false;
+                    this.errorMessages.introductionErrorMessage = "300文字以下で入力して下さい"
+                    this.introductionChangeColor = true
+
+                } else if (this.$store.state.users.introduction !== "" && this.$store.state.users.introduction.length <= 300) {
+                    this.validations.introductionValidation = true;
+                    this.errorMessages.introductionErrorMessage = false;
+                    this.errorMessages.introductionErrorMessage = "変更に成功しました"
+                    this.introductionChangeColor = false
+
+
+                }
+            },
+
+
+            // beforeUpdate() {
+            //     this.profileImg this.$store.state.users.img;
+            // }
+
+
         },
 
+        computed: {
 
 
-        // beforeUpdate() {
-        //     this.profileImg this.$store.state.users.img;
-        // }
+            titleLength() {
+                return this.title.length
+            },
+            overflowLength() {
+                return this.overflow.length;
+            },
+            introductionLength() {
+                if(this.$store.state.users.introduction == null) {
+                    return 0;
+                }else if(this.$store.state.users.introduction){
+                    return this.$store.state.users.introduction.length;
+                }
+            },
 
+        }
 
     }
 </script>

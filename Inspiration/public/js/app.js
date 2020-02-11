@@ -2837,13 +2837,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ContactComponent",
   data: function data() {
     return {
       contactSubject: "",
-      contactTexts: "",
-      resultMessage: false
+      contactText: "",
+      resultMessage: false,
+      processing: false,
+      validations: {
+        contactSubjectValidation: "",
+        contactTextValidation: ""
+      },
+      errorMessages: {
+        contactSubjectErrorMessage: false,
+        contactTextErrorMessage: false
+      },
+      contactSubjectChangeColor: false,
+      contactTextChangeColor: false
     };
   },
   mounted: function mounted() {
@@ -2851,22 +2870,59 @@ __webpack_require__.r(__webpack_exports__);
     this.$emit('close-loading');
   },
   methods: {
+    subjectValidation: function subjectValidation() {
+      if (this.contactSubject === "") {
+        this.validations.contactSubjectValidation = false;
+        this.errorMessages.contactSubjectErrorMessage = "入力必須です";
+        this.contactSubjectChangeColor = true;
+      } else if (this.contactSubject.length > 30) {
+        this.validations.contactsubjectValidation = false;
+        this.errorMessages.contactSubjectErrorMessage = "30文字以内で入力して下さい";
+        this.contactSubjectChangeColor = true;
+      } else if (this.contactSubject !== "" && this.contactSubject.length <= 30) {
+        this.validations.contactSubjectValidation = true;
+        this.errorMessages.contactSubjectErrorMessage = false;
+        this.contactSubjectChangeColor = false;
+      }
+    },
+    textValidation: function textValidation() {
+      if (this.contactText === "") {
+        this.validations.contactTextValidation = false;
+        this.errorMessages.contactTextErrorMessage = "入力必須です";
+        this.contactTextChangeColor = true;
+      } else if (this.contactText.length > 500) {
+        this.validations.contactTextValidation = false;
+        this.errorMessages.contactTextErrorMessage = "500文字以内で入力して下さい";
+        this.contactTextChangeColor = true;
+      } else if (this.contactText !== "" && this.contactText.length <= 500) {
+        this.validations.contactTextValidation = true;
+        this.errorMessages.contactTextErrorMessage = false;
+        this.contactTextChangeColor = false;
+      }
+    },
     contactSubmit: function contactSubmit() {
       var _this = this;
 
-      //送信わたし
-      axios.post('api/contactPost', {
-        userEmail: this.$store.state.users.email,
-        userName: this.$store.state.users.name,
-        subject: this.contactSubject,
-        contents: this.contactTexts
-      }).then(function (response) {
-        console.log(response);
-        _this.resultMessage = 'お問い合わせ完了しました';
-      })["catch"](function (error) {
-        _this.resultMessage = "時間を置いてお試し下さい";
-        console.log(error);
-      });
+      this.subjectValidation();
+      this.textValidation();
+
+      if (this.validations.contactSubjectValidation === true && this.validations.contactTextValidation === true) {
+        this.processing = true; //送信
+
+        axios.post('api/contactPost', {
+          userEmail: this.$store.state.users.email,
+          userName: this.$store.state.users.name,
+          subject: this.contactSubject,
+          contents: this.contactText
+        }).then(function (response) {
+          console.log(response);
+          _this.resultMessage = 'お問い合わせ完了しました';
+          _this.processing = false;
+        })["catch"](function (error) {
+          _this.resultMessage = "時間を置いてお試し下さい";
+          console.log(error);
+        });
+      }
     }
   }
 });
@@ -3330,6 +3386,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "postCompletedComponent",
   data: function data() {
@@ -3337,11 +3395,12 @@ __webpack_require__.r(__webpack_exports__);
       title: ""
     };
   },
-  beforeUpdate: function beforeUpdate() {
-    this.$emit('close-loading');
+  created: function created() {
+    this.$emit('open-loading');
   },
   mounted: function mounted() {
     this.title = this.$route.params.title;
+    this.$emit('close-loading');
   },
   methods: {
     twitterShare: function twitterShare() {
@@ -3774,7 +3833,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.$nextTick(function () {
-      this.$emit('close-loading');
       this.getState();
       this.checkCategory();
       this.contributorJudge();
@@ -3931,12 +3989,15 @@ __webpack_require__.r(__webpack_exports__);
     reviewPost: function reviewPost() {
       var _this5 = this;
 
-      this.processing = true; //すでに投稿しているか確認
-
+      //すでに投稿しているか確認
       if (this.reviewed === true) {
-        this.reviewErrorMessage = '既にレビューが投稿されています'; //レビュー投稿処理
+        this.reviewErrorMessage = '既にレビューが投稿されています';
+      } else if (this.reviewComment.length > 500) {
+        this.reviewErrorMessage = '500文字以下で入力して下さい'; //レビュー投稿処理
       } else if (this.reviewNumber !== "" && this.reviewComment !== "") {
-        //投稿処理
+        //二度送信できないようにする処理
+        this.processing = true; //投稿処理
+
         setTimeout(function () {
           axios.post('/api/reviewPost', {
             userId: _this5.$store.state.users.id,
@@ -4116,6 +4177,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostIdeaComponent",
@@ -4128,7 +4199,28 @@ __webpack_require__.r(__webpack_exports__);
       overflow: '',
       content: '',
       ideaImage: "",
-      fileInfo: ""
+      fileInfo: "",
+      validations: {
+        imgValidation: "",
+        titleValidation: "",
+        categoryValidation: "",
+        priceValidation: "",
+        overflowValidation: "",
+        contentValidation: ""
+      },
+      errorMessages: {
+        imgErrorMessage: false,
+        titleErrorMessage: false,
+        categoryErrorMessage: false,
+        priceErrorMessage: false,
+        overflowErrorMessage: false,
+        contentErrorMessage: false,
+        submitErrorMessage: ""
+      },
+      titleChangeColor: false,
+      overflowChangeColor: false,
+      contentChangeColor: false,
+      validationOk: false
     };
   },
   created: function created() {
@@ -4145,8 +4237,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     onFileChange: function onFileChange(event) {
       this.fileInfo = event.target.files[0];
-      this.saveImage();
       this.createImage();
+      this.imgValidation();
+      this.saveImage();
     },
     createImage: function createImage() {
       var _this = this;
@@ -4170,17 +4263,148 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    //文字数にバリデーションかけるロジック
+    // title	24文字以下
+    // カテゴリ	必須
+    // 価格	0 < 1000000
+    // 概要	100文字以下
+    // 内容	10000文字以下
+    //画像バリデーション
+    imgValidation: function imgValidation() {
+      if (this.ideaImage === "") {
+        this.validations.imgValidation = false;
+        this.errorMessages.imgErrorMessage = "＋をクリックして画像を選択して下さい";
+      } else {
+        this.validations.imgValidation = true;
+        this.errorMessages.imgErrorMessage = false;
+      }
+    },
+    //
+    titleValidation: function titleValidation() {
+      if (this.title === "") {
+        this.validations.titleValidation = false;
+        this.errorMessages.titleErrorMessage = "入力必須です";
+        this.titleChangeColor = true;
+      } else if (this.titleLength > 24) {
+        this.validations.titleValidation = false;
+        this.errorMessages.titleErrorMessage = "24文字以下で記入して下さい";
+        this.titleChangeColor = true;
+      } else if (this.titleLength <= 24 && this.title !== "") {
+        this.validations.titleValidation = true;
+        this.errorMessages.titleErrorMessage = false;
+        this.titleChangeColor = false;
+      }
+    },
+    //カテゴリーのバリデーション
+    categoryValidation: function categoryValidation() {
+      if (this.category_id === "") {
+        this.validations.categoryValidation = false;
+        this.errorMessages.categoryErrorMessage = "入力必須です";
+      } else {
+        this.validations.categoryValidation = true;
+        this.errorMessages.categoryErrorMessage = false;
+      }
+    },
+    //価格のバリデーション
+    priceValidation: function priceValidation() {
+      if (this.price === "") {
+        this.validations.priceValidation = false;
+        this.errorMessages.priceErrorMessage = "入力必須です";
+      } else if (this.price > 1000000) {
+        this.validations.priceValidation = false;
+        this.errorMessages.priceErrorMessage = "100万円以下で設定して下さい";
+      } else if (this.price <= 1000000 && this.price !== "") {
+        this.validations.priceValidation = true;
+        this.errorMessages.priceErrorMessage = false;
+      }
+    },
+    //概要のバリデーション
+    overflowValidation: function overflowValidation() {
+      if (this.overflow === "") {
+        this.validations.overflowValidation = false;
+        this.errorMessages.overflowErrorMessage = "入力必須です";
+        this.overflowChangeColor = true;
+      } else if (this.overflowLength > 100) {
+        this.validations.overflowValidation = false;
+        this.errorMessages.overflowErrorMessage = "100文字以下で入力して下さい";
+        this.overflowChangeColor = true;
+      } else if (this.overflowLength <= 100 && this.overflow !== "") {
+        this.validations.overflowValidation = true;
+        this.errorMessages.overflowErrorMessage = false;
+        this.overflowChangeColor = false;
+      }
+    },
+    //内容のバリデーション
+    contentValidation: function contentValidation() {
+      if (this.content === "") {
+        this.validations.contentValidation = false;
+        this.errorMessages.contentErrorMessage = "入力必須です";
+        this.contentChangeColor = true;
+      } else if (this.contentLength > 10000) {
+        this.validations.contentValidation = false;
+        this.errorMessages.contentErrorMessage = "10000文字以下で入力して下さい";
+        this.contentChangeColor = true;
+      } else if (this.contentLength <= 10000 && this.content !== "") {
+        this.validations.contentValidation = true;
+        this.errorMessages.contentErrorMessage = false;
+        this.contentChangeColor = false;
+      }
+    },
+    //確認用バリデーション
+    checkValidation: function checkValidation() {
+      this.imgValidation();
+      this.titleValidation();
+      this.priceValidation();
+      this.categoryValidation();
+      this.overflowValidation();
+      this.contentValidation(); //submitOkメソッドでエラーがないか確認
+
+      if (this.submitOk === true) {
+        this.formSubmit(); //エラーがあればメッセージ
+      } else {
+        this.errorMessages.submitErrorMessage = "エラーがあります";
+      }
+    },
+    //Form送信のためのメソッド
+    formSubmit: function formSubmit() {
+      this.$router.push({
+        name: 'postConfirm',
+        params: {
+          fileInfo: this.fileInfo,
+          img: this.ideaImage,
+          title: this.title,
+          category_id: this.category_id,
+          price: this.price,
+          overflow: this.overflow,
+          content: this.content
+        }
+      });
     }
   },
   computed: {
     userId: function userId() {
       return this.$store.state.users.id;
     },
+    titleLength: function titleLength() {
+      return this.title.length;
+    },
     overflowLength: function overflowLength() {
       return this.overflow.length;
     },
     contentLength: function contentLength() {
       return this.content.length;
+    },
+    submitOk: function submitOk() {
+      if (this.validations.imgValidation === true && this.validations.categoryValidation === true && this.validations.contentValidation === true && this.validations.overflowValidation === true && this.validations.imgValidation === true && this.validations.contentValidation === true) return true;
+    }
+  },
+  watch: {
+    ideaImage: function ideaImage() {
+      if (this.ideaImages !== "") {
+        this.validations.imgValidation = true;
+        this.errorMessages.imgErrorMessage = "";
+      }
     }
   }
 });
@@ -4363,6 +4587,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -4456,7 +4682,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
   name: "ProfileComponent",
   data: function data() {
     return {
@@ -4470,7 +4709,23 @@ __webpack_require__.r(__webpack_exports__);
       fileInfo: "",
       profileImg: false,
       profImgChangeMessage: "変更完了しました",
-      ImgChangeState: false
+      ImgChangeState: false,
+      name: "",
+      email: "",
+      introduction: "",
+      validations: {
+        imgValidation: "",
+        nameValidation: "",
+        emailValidation: "",
+        introductionValidation: ""
+      },
+      errorMessages: {
+        imgErrorMessage: false,
+        nameErrorMessage: false,
+        emailErrorMessage: false,
+        introductionErrorMessage: false
+      },
+      introductionChangeColor: false
     };
   },
   created: function created() {
@@ -4518,63 +4773,151 @@ __webpack_require__.r(__webpack_exports__);
     saveImage: function saveImage() {
       var _this2 = this;
 
-      var formData = new FormData();
-      console.log(this.fileInfo);
-      formData.append('file', this.fileInfo);
-      formData.append('user_id', this.$store.state.users.id);
-      axios.post('/api/profileImgUpload', formData).then(function (response) {
-        console.log(response);
-        _this2.user = response.data;
-        _this2.user = _this2.$store.dispatch('getUsers');
-        _this2.ImgChangeState = true;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    updateEmail: function updateEmail(id, email) {
-      var _this3 = this;
+      this.imgValidation();
 
-      axios.patch('/api/setting/' + id, {
-        id: id,
-        email: email
-      }).then(function (response) {
-        _this3.isEmailEdit = false;
-        console.log(response);
-      })["catch"](function (error) {
-        console.log(error);
-      });
+      if (this.validation.imgValidation === true) {
+        var formData = new FormData();
+        console.log(this.fileInfo);
+        formData.append('file', this.fileInfo);
+        formData.append('user_id', this.$store.state.users.id);
+        axios.post('/api/profileImgUpload', formData).then(function (response) {
+          console.log(response);
+          _this2.user = response.data;
+          _this2.user = _this2.$store.dispatch('getUsers');
+          _this2.ImgChangeState = true;
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+    },
+    //画像バリデーション
+    imgValidation: function imgValidation() {
+      if (this.profileImg === "") {
+        this.validations.imgValidation = false;
+        this.errorMessages.imgErrorMessage = "画像を選択して下さい";
+      } else {
+        this.validations.imgValidation = true;
+        this.errorMessages.imgErrorMessage = false;
+      }
     },
     updateName: function updateName(id, name) {
+      var _this3 = this;
+
+      this.nameValidation(); //名前のバリデーションが通ってれば保存処理
+
+      if (this.validations.nameValidation === true) {
+        axios.patch('/api/setting/' + id, {
+          id: id,
+          name: name
+        }).then(function (response) {
+          _this3.isNameEdit = false;
+          console.log(response);
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+    },
+    //名前のバリデーション
+    nameValidation: function nameValidation() {
+      if (this.$store.state.users.name === "") {
+        this.validations.nameValidation = false;
+        this.errorMessages.nameErrorMessage = "入力必須です";
+        this.overflowChangeColor = true;
+      } else if (this.$store.state.users.name.length > 20) {
+        this.validations.nameValidation = false;
+        this.errorMessages.nameErrorMessage = "20文字以下で入力して下さい";
+      } else if (this.$store.state.users.name !== "" && this.$store.state.users.name.length <= 20) {
+        this.validations.nameValidation = true;
+        this.errorMessages.nameErrorMessage = false;
+        this.errorMessages.nameErrorMessage = "変更に成功しました";
+      }
+    },
+    updateEmail: function updateEmail(id, email) {
       var _this4 = this;
 
-      axios.patch('/api/setting/' + id, {
-        id: id,
-        name: name
-      }).then(function (response) {
-        _this4.isNameEdit = false;
-        console.log(response);
-      })["catch"](function (error) {
-        console.log(error);
-      });
+      this.emailValidation();
+
+      if (this.validations.emailValidation === true) {
+        axios.patch('/api/setting/' + id, {
+          id: id,
+          email: email
+        }).then(function (response) {
+          _this4.isEmailEdit = false;
+          console.log(response);
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+    },
+    emailValidation: function emailValidation() {
+      if (this.$store.state.users.email === "") {
+        this.validations.nameValidation = false;
+        this.errorMessages.nameErrorMessage = "入力必須です";
+      } else if (this.$store.state.users.email.length > 50) {
+        this.validations.emailValidation = false;
+        this.errorMessages.emailErrorMessage = "50文字以下で入力して下さい";
+      } else if (this.$store.state.users.email.match(/.+@.+\..+/) == null) {
+        this.validations.emailValidation = false;
+        this.errorMessages.emailErrorMessage = "Emailの形式で入力して下さい";
+      } else if (this.$store.state.users.email !== "" && this.$store.state.users.email.length <= 50 && this.$store.state.users.email.match(/.+@.+\..+/) !== null) {
+        this.validations.emailValidation = true;
+        this.errorMessages.emailErrorMessage = false;
+        this.errorMessages.emailErrorMessage = "変更に成功しました";
+      }
     },
     updateIntroduction: function updateIntroduction(id, introduction) {
       var _this5 = this;
 
-      axios.patch('/api/setting/' + id, {
-        id: id,
-        introduction: introduction
-      }).then(function (response) {
-        _this5.isIntroductionEdit = false;
-        console.log(response);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    }
-  } // beforeUpdate() {
-  //     this.profileImg this.$store.state.users.img;
-  // }
+      this.introductionValidation();
 
-});
+      if (this.validations.introductionValidation === true) {
+        axios.patch('/api/setting/' + id, {
+          id: id,
+          introduction: introduction
+        }).then(function (response) {
+          _this5.isIntroductionEdit = false;
+          console.log(response);
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+    },
+    //自己紹介のバリデーション
+    introductionValidation: function introductionValidation() {
+      if (this.$store.state.users.introduction === "") {
+        this.validations.introductionValidation = false;
+        this.errorMessages.introductionErrorMessage = "入力必須です";
+        this.introductionChangeColor = true;
+      } else if (this.$store.state.users.introduction.length > 300) {
+        this.validations.introductionValidation = false;
+        this.errorMessages.introductionErrorMessage = "300文字以下で入力して下さい";
+        this.introductionChangeColor = true;
+      } else if (this.$store.state.users.introduction !== "" && this.$store.state.users.introduction.length <= 300) {
+        this.validations.introductionValidation = true;
+        this.errorMessages.introductionErrorMessage = false;
+        this.errorMessages.introductionErrorMessage = "変更に成功しました";
+        this.introductionChangeColor = false;
+      }
+    } // beforeUpdate() {
+    //     this.profileImg this.$store.state.users.img;
+    // }
+
+  }
+}, "computed", {
+  titleLength: function titleLength() {
+    return this.title.length;
+  },
+  overflowLength: function overflowLength() {
+    return this.overflow.length;
+  },
+  introductionLength: function introductionLength() {
+    if (this.$store.state.users.introduction == null) {
+      return 0;
+    } else if (this.$store.state.users.introduction) {
+      return this.$store.state.users.introduction.length;
+    }
+  }
+}));
 
 /***/ }),
 
@@ -4966,6 +5309,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostIdeaEditComponent",
   data: function data() {
@@ -4994,22 +5350,36 @@ __webpack_require__.r(__webpack_exports__);
       },
       EditResultMessage: false,
       fileInfo: "",
-      newImage: ""
+      newImage: "",
+      //バリデーション部分
+      validations: {
+        imgValidation: true,
+        titleValidation: true,
+        categoryValidation: true,
+        priceValidation: true,
+        overflowValidation: true,
+        contentValidation: true
+      },
+      errorMessages: {
+        imgErrorMessage: false,
+        titleErrorMessage: false,
+        categoryErrorMessage: false,
+        priceErrorMessage: false,
+        overflowErrorMessage: false,
+        contentErrorMessage: false,
+        submitErrorMessage: false
+      },
+      titleChangeColor: false,
+      overflowChangeColor: false,
+      contentChangeColor: false,
+      validationOk: false
     };
-  },
-  computed: {
-    overflowLength: function overflowLength() {
-      return this.overflow.length;
-    },
-    contentLength: function contentLength() {
-      return this.content.length;
-    }
   },
   created: function created() {
     this.$emit('open-loading');
     this.id = this.$route.params.id, this.bought_flag = this.$route.params.bought_flag, this.category_id = this.$route.params.category_id, this.content = this.$route.params.content, this.delete_flag = this.$route.params.delete_flag, this.img = this.$route.params.img, this.overflow = this.$route.params.overflow, this.price = this.$route.params.price, this.title = this.$route.params.title, this.user_id = this.$route.params.user_id, this.categoryCheck();
   },
-  beforeUpdate: function beforeUpdate() {
+  mounted: function mounted() {
     this.$emit('close-loading');
   },
   methods: {
@@ -5039,6 +5409,8 @@ __webpack_require__.r(__webpack_exports__);
     onFileChange: function onFileChange(event) {
       this.fileInfo = event.target.files[0];
       this.createImage();
+      this.imgValidation();
+      this.saveImage();
     },
     createImage: function createImage() {
       var _this = this;
@@ -5051,6 +5423,112 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       reader.readAsDataURL(this.fileInfo);
+    },
+    saveImage: function saveImage() {
+      var formData = new FormData();
+      console.log(this.fileInfo);
+      formData.append('file', this.fileInfo);
+      axios.post('/api/profileImgUpload', formData).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    //画像バリデーション
+    imgValidation: function imgValidation() {
+      if (this.ideaImage === "") {
+        this.validations.imgValidation = false;
+        this.errorMessages.imgErrorMessage = "＋をクリックして画像を選択して下さい";
+      } else {
+        this.validations.imgValidation = true;
+        this.errorMessages.imgErrorMessage = false;
+      }
+    },
+    //
+    titleValidation: function titleValidation() {
+      if (this.title === "") {
+        this.validations.titleValidation = false;
+        this.errorMessages.titleErrorMessage = "入力必須です";
+        this.titleChangeColor = true;
+      } else if (this.titleLength > 24) {
+        this.validations.titleValidation = false;
+        this.errorMessages.titleErrorMessage = "24文字以下で記入して下さい";
+        this.titleChangeColor = true;
+      } else if (this.titleLength <= 24 && this.title !== "") {
+        this.validations.titleValidation = true;
+        this.errorMessages.titleErrorMessage = false;
+        this.titleChangeColor = false;
+      }
+    },
+    //カテゴリーのバリデーション
+    categoryValidation: function categoryValidation() {
+      if (this.category_id === "") {
+        this.validations.categoryValidation = false;
+        this.errorMessages.categoryErrorMessage = "入力必須です";
+      } else {
+        this.validations.categoryValidation = true;
+        this.errorMessages.categoryErrorMessage = false;
+      }
+    },
+    //価格のバリデーション
+    priceValidation: function priceValidation() {
+      if (this.price === "") {
+        this.validations.priceValidation = false;
+        this.errorMessages.priceErrorMessage = "入力必須です";
+      } else if (this.price > 1000000) {
+        this.validations.priceValidation = false;
+        this.errorMessages.priceErrorMessage = "100万円以下で設定して下さい";
+      } else if (this.price <= 1000000 && this.price !== "") {
+        this.validations.priceValidation = true;
+        this.errorMessages.priceErrorMessage = false;
+      }
+    },
+    //概要のバリデーション
+    overflowValidation: function overflowValidation() {
+      if (this.overflow === "") {
+        this.validations.overflowValidation = false;
+        this.errorMessages.overflowErrorMessage = "入力必須です";
+        this.overflowChangeColor = true;
+      } else if (this.overflowLength > 100) {
+        this.validations.overflowValidation = false;
+        this.errorMessages.overflowErrorMessage = "100文字以下で入力して下さい";
+        this.overflowChangeColor = true;
+      } else if (this.overflowLength <= 100 && this.overflow !== "") {
+        this.validations.overflowValidation = true;
+        this.errorMessages.overflowErrorMessage = false;
+        this.overflowChangeColor = false;
+      }
+    },
+    //内容のバリデーション
+    contentValidation: function contentValidation() {
+      if (this.content === "") {
+        this.validations.contentValidation = false;
+        this.errorMessages.contentErrorMessage = "入力必須です";
+        this.contentChangeColor = true;
+      } else if (this.contentLength > 10000) {
+        this.validations.contentValidation = false;
+        this.errorMessages.contentErrorMessage = "10000文字以下で入力して下さい";
+        this.contentChangeColor = true;
+      } else if (this.contentLength <= 10000 && this.content !== "") {
+        this.validations.contentValidation = true;
+        this.errorMessages.contentErrorMessage = false;
+        this.contentChangeColor = false;
+      }
+    },
+    //確認用バリデーション
+    checkValidation: function checkValidation() {
+      this.imgValidation();
+      this.titleValidation();
+      this.priceValidation();
+      this.categoryValidation();
+      this.overflowValidation();
+      this.contentValidation(); //submitOkメソッドでエラーがないか確認
+
+      if (this.submitOk === true) {
+        this.editIdeaSave(); //エラーがあればメッセージ
+      } else {
+        this.errorMessages.submitErrorMessage = "エラーがあります";
+      }
     },
     editIdeaSave: function editIdeaSave() {
       var _this2 = this;
@@ -5076,6 +5554,33 @@ __webpack_require__.r(__webpack_exports__);
         _this2.EditResultMessage = "編集に失敗しました。\n" + "時間を置いてお試し下さい";
       });
     }
+  },
+  computed: {
+    titleLength: function titleLength() {
+      return this.title.length;
+    },
+    overflowLength: function overflowLength() {
+      return this.overflow.length;
+    },
+    contentLength: function contentLength() {
+      return this.content.length;
+    },
+    submitOk: function submitOk() {
+      if (this.validations.imgValidation === true && this.validations.categoryValidation === true && this.validations.contentValidation === true && this.validations.overflowValidation === true && this.validations.imgValidation === true && this.validations.contentValidation === true) return true;
+    }
+  },
+  watch: {
+    ideaImage: function ideaImage() {
+      if (this.ideaImages !== "") {
+        this.validations.imgValidation = true;
+        this.errorMessages.imgErrorMessage = "";
+      }
+    },
+    submitOk: function submitOk() {
+      if (this.submitOk === true) {
+        this.errorMessages.submitErrorMessage = false;
+      }
+    }
   }
 });
 
@@ -5090,10 +5595,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _name$data$beforeUpda;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -5148,7 +5649,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = (_name$data$beforeUpda = {
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
   name: "reviewCompletedComponent",
   data: function data() {
     return {
@@ -5159,25 +5663,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       title: ""
     };
   },
-  beforeUpdate: function beforeUpdate() {
-    this.$emit('close-loading');
-  },
   created: function created() {
     this.$emit('open-loading');
     this.ideaId = this.$route.params.ideaId;
     this.userId = this.$route.params.userId;
     this.ideas = this.$store.dispatch('getUserIdeas');
     this.title = this.$route.params.title;
+  },
+  mounted: function mounted() {
+    this.$emit('close-loading');
+  },
+  methods: {
+    //Twittershare用のリンクへ飛ばす
+    twitterShare: function twitterShare() {
+      var $url = "https://twitter.com/intent/tweet?text=\u65B0\u898F\u30EC\u30D3\u30E5\u30FC\n\u300C".concat(this.title, "\u300D\n%20%23Inspiration&url=https://code.ameneko.com/twitter-share");
+      window.open($url, null, 'top=100,left=100,width=300,height=400');
+    }
   }
-}, _defineProperty(_name$data$beforeUpda, "beforeUpdate", function beforeUpdate() {
-  this.$emit('close-loading');
-}), _defineProperty(_name$data$beforeUpda, "methods", {
-  //Twittershare用のリンクへ飛ばす
-  twitterShare: function twitterShare() {
-    var $url = "https://twitter.com/intent/tweet?text=\u65B0\u898F\u30EC\u30D3\u30E5\u30FC\n\u300C".concat(this.title, "\u300D\n%20%23Inspiration&url=https://code.ameneko.com/twitter-share");
-    window.open($url, null, 'top=100,left=100,width=300,height=400');
-  }
-}), _name$data$beforeUpda);
+});
 
 /***/ }),
 
@@ -8930,7 +9433,14 @@ var render = function() {
                         _vm._v(_vm._s(buyingIdea.title))
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "ic-img" }),
+                      _c("div", { staticClass: "ic-img" }, [
+                        _c("img", {
+                          attrs: {
+                            src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + buyingIdea.img),
+                            alt: ""
+                          }
+                        })
+                      ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "ic-review" }, [
                         _c("span", { staticClass: "ic-span" }, [
@@ -9729,7 +10239,14 @@ var render = function() {
                         _vm._v(_vm._s(myIdea.title))
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "ic-img" }),
+                      _c("div", { staticClass: "ic-img" }, [
+                        _c("img", {
+                          attrs: {
+                            src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + myIdea.img),
+                            alt: ""
+                          }
+                        })
+                      ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "ic-review" }, [
                         _c("span", { staticClass: "ic-span" }, [
@@ -10054,6 +10571,9 @@ var render = function() {
               },
               domProps: { value: _vm.contactSubject },
               on: {
+                blur: function($event) {
+                  return _vm.subjectValidation()
+                },
                 input: function($event) {
                   if ($event.target.composing) {
                     return
@@ -10063,6 +10583,25 @@ var render = function() {
               }
             })
           ]),
+          _vm._v(" "),
+          _c("p", [
+            _c(
+              "span",
+              {
+                class: {
+                  "profile-container-validation": this.contactSubjectChangeColor
+                }
+              },
+              [_vm._v(_vm._s(_vm.contactSubject.length))]
+            ),
+            _vm._v("/30文字")
+          ]),
+          _vm._v(" "),
+          _vm.errorMessages.contactSubjectErrorMessage
+            ? _c("div", { staticClass: "error" }, [
+                _vm._v(_vm._s(_vm.errorMessages.contactSubjectErrorMessage))
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _c("div", { staticClass: "contact-container-input" }, [
             _c(
@@ -10076,8 +10615,8 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.contactTexts,
-                  expression: "contactTexts"
+                  value: _vm.contactText,
+                  expression: "contactText"
                 }
               ],
               staticClass: "c-input contact-textarea",
@@ -10086,17 +10625,39 @@ var render = function() {
                 type: "text",
                 placeholder: "お問い合わせ内容記入"
               },
-              domProps: { value: _vm.contactTexts },
+              domProps: { value: _vm.contactText },
               on: {
+                blur: function($event) {
+                  return _vm.textValidation()
+                },
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.contactTexts = $event.target.value
+                  _vm.contactText = $event.target.value
                 }
               }
             })
           ]),
+          _vm._v(" "),
+          _c("p", [
+            _c(
+              "span",
+              {
+                class: {
+                  "profile-container-validation": this.contactTextChangeColor
+                }
+              },
+              [_vm._v(_vm._s(_vm.contactText.length))]
+            ),
+            _vm._v("/500文字")
+          ]),
+          _vm._v(" "),
+          _vm.errorMessages.contactTextErrorMessage
+            ? _c("div", { staticClass: "error" }, [
+                _vm._v(_vm._s(_vm.errorMessages.contactTextErrorMessage))
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _vm.resultMessage
             ? _c("div", { staticClass: "contact-resultMessage" }, [
@@ -10109,13 +10670,13 @@ var render = function() {
             : _vm._e(),
           _vm._v(" "),
           _c(
-            "div",
+            "button",
             {
               staticClass: "c-button",
-              attrs: { id: "submit" },
+              attrs: { id: "submit", disabled: _vm.processing },
               on: { click: _vm.contactSubmit }
             },
-            [_c("div", [_vm._v("送信する")])]
+            [_vm._v("\n                        送信する\n                    ")]
           )
         ])
       ])
@@ -10761,51 +11322,60 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", [
-    _c("h2", { staticClass: "f-h2" }, [_vm._v("投稿完了")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "c-form" }, [
-      _c("div", { staticClass: "c-form-container" }, [
-        _c("div", { staticClass: "completed" }, [
-          _c("p", { staticClass: "completed-header" }, [
-            _vm._v("〜投稿完了〜")
+    _c("div", { staticClass: "c-container" }, [
+      _c("h2", { staticClass: "f-h2" }, [_vm._v("投稿完了")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "c-form" }, [
+        _c("div", { staticClass: "c-form-container" }, [
+          _c("div", { staticClass: "completed" }, [
+            _c("p", { staticClass: "completed-header" }, [
+              _vm._v("〜投稿完了〜")
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "completed-paragraph" }, [
+              _vm._v("\n                    新規投稿しました\n                ")
+            ]),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "completed-share",
+                on: { click: _vm.twitterShare }
+              },
+              [
+                _c("i", {
+                  staticClass: "fab fa-twitter completed-share-twitter"
+                }),
+                _c("span", [_vm._v("ツイートする")])
+              ]
+            )
           ]),
           _vm._v(" "),
-          _c("p", { staticClass: "completed-paragraph" }, [
-            _vm._v("\n                    新規投稿しました\n                ")
-          ]),
-          _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "completed-share", on: { click: _vm.twitterShare } },
-            [
-              _c("i", {
-                staticClass: "fab fa-twitter completed-share-twitter"
-              }),
-              _c("span", [_vm._v("ツイートする")])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "completed-container" }, [
-          _c(
-            "div",
-            { staticClass: "c-button completed-button column-button" },
-            [
-              _c("router-link", { attrs: { to: "/mypage" } }, [
-                _vm._v("Mypageへ")
-              ])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "c-button completed-button column-button" },
-            [_c("router-link", { attrs: { to: "/post" } }, [_vm._v("再投稿")])],
-            1
-          )
+          _c("div", { staticClass: "completed-container" }, [
+            _c(
+              "div",
+              { staticClass: "c-button completed-button column-button" },
+              [
+                _c("router-link", { attrs: { to: "/mypage" } }, [
+                  _vm._v("Mypageへ")
+                ])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "c-button completed-button column-button" },
+              [
+                _c("router-link", { attrs: { to: "/post" } }, [
+                  _vm._v("再投稿")
+                ])
+              ],
+              1
+            )
+          ])
         ])
       ])
     ])
@@ -11469,7 +12039,48 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "review-comment" }, [
               _c("form", { attrs: { action: "" } }, [
-                _vm._m(25),
+                _c("div", { staticClass: "review-comment-container" }, [
+                  _c("label", { attrs: { for: "review-comment" } }, [
+                    _vm._v("評価")
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(25),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "review-comment-container" }, [
+                    _c("label", { attrs: { for: "review-comment" } }, [
+                      _vm._v("レビュー")
+                    ]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.reviewComment,
+                          expression: "reviewComment"
+                        }
+                      ],
+                      staticClass: "c-input review-comment-input",
+                      attrs: {
+                        disabled: "",
+                        name: "",
+                        id: "review-comment",
+                        cols: "30",
+                        rows: "10",
+                        placeholder: "レビューを記入"
+                      },
+                      domProps: { value: _vm.reviewComment },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.reviewComment = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ]),
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "c-mini-button review-button-restriction",
@@ -11847,36 +12458,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-comment-container" }, [
-      _c("label", { attrs: { for: "review-comment" } }, [_vm._v("評価")]),
+    return _c("div", { staticClass: "review-comment-check" }, [
+      _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
       _vm._v(" "),
-      _c("div", { staticClass: "review-comment-check" }, [
-        _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
-      ]),
+      _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
       _vm._v(" "),
-      _c("div", { staticClass: "review-comment-container" }, [
-        _c("label", { attrs: { for: "review-comment" } }, [_vm._v("レビュー")]),
-        _vm._v(" "),
-        _c("textarea", {
-          staticClass: "c-input review-comment-input",
-          attrs: {
-            disabled: "",
-            name: "",
-            id: "review-comment",
-            cols: "30",
-            rows: "10",
-            placeholder: "レビューを記入"
-          }
-        })
-      ])
+      _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
     ])
   }
 ]
@@ -11907,7 +12498,16 @@ var render = function() {
       _vm._v(" "),
       _c(
         "form",
-        { staticClass: "profile-container", attrs: { method: "post" } },
+        {
+          staticClass: "profile-container",
+          attrs: { method: "post" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.checkValidation()
+            }
+          }
+        },
         [
           _c("div", { staticClass: "profile-container-input" }, [
             _c("div", { staticClass: "profile-container-img" }, [
@@ -11957,6 +12557,12 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
+            _vm.errorMessages.imgErrorMessage
+              ? _c("div", { staticClass: "error" }, [
+                  _vm._v(_vm._s(_vm.errorMessages.imgErrorMessage))
+                ])
+              : _vm._e(),
+            _vm._v(" "),
             _c("div", { staticClass: "profile-container-input" }, [
               _c("label", { staticClass: "c-label", attrs: { for: "title" } }, [
                 _vm._v("アイデア名")
@@ -11976,10 +12582,13 @@ var render = function() {
                   id: "title",
                   name: "title",
                   type: "text",
-                  placeholder: "（例）info@.com"
+                  placeholder: "（例）黄金の1hを生み出す方法"
                 },
                 domProps: { value: _vm.title },
                 on: {
+                  blur: function($event) {
+                    return _vm.titleValidation()
+                  },
                   input: function($event) {
                     if ($event.target.composing) {
                       return
@@ -11987,7 +12596,26 @@ var render = function() {
                     _vm.title = $event.target.value
                   }
                 }
-              })
+              }),
+              _vm._v(" "),
+              _vm.errorMessages.titleErrorMessage
+                ? _c("div", { staticClass: "error" }, [
+                    _vm._v(_vm._s(_vm.errorMessages.titleErrorMessage))
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("p", [
+                _c(
+                  "span",
+                  {
+                    class: {
+                      "profile-container-validation": this.titleChangeColor
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.titleLength))]
+                ),
+                _vm._v("/24文字")
+              ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "profile-container-input" }, [
@@ -12015,9 +12643,12 @@ var render = function() {
                   },
                   domProps: { checked: _vm._q(_vm.category_id, "1") },
                   on: {
-                    change: function($event) {
-                      _vm.category_id = "1"
-                    }
+                    change: [
+                      function($event) {
+                        _vm.category_id = "1"
+                      },
+                      _vm.categoryValidation
+                    ]
                   }
                 }),
                 _vm._v(" "),
@@ -12044,9 +12675,12 @@ var render = function() {
                   },
                   domProps: { checked: _vm._q(_vm.category_id, "2") },
                   on: {
-                    change: function($event) {
-                      _vm.category_id = "2"
-                    }
+                    change: [
+                      function($event) {
+                        _vm.category_id = "2"
+                      },
+                      _vm.categoryValidation
+                    ]
                   }
                 }),
                 _vm._v(" "),
@@ -12073,9 +12707,12 @@ var render = function() {
                   },
                   domProps: { checked: _vm._q(_vm.category_id, "3") },
                   on: {
-                    change: function($event) {
-                      _vm.category_id = "3"
-                    }
+                    change: [
+                      function($event) {
+                        _vm.category_id = "3"
+                      },
+                      _vm.categoryValidation
+                    ]
                   }
                 }),
                 _vm._v(" "),
@@ -12100,9 +12737,12 @@ var render = function() {
                   },
                   domProps: { checked: _vm._q(_vm.category_id, "4") },
                   on: {
-                    change: function($event) {
-                      _vm.category_id = "4"
-                    }
+                    change: [
+                      function($event) {
+                        _vm.category_id = "4"
+                      },
+                      _vm.categoryValidation
+                    ]
                   }
                 }),
                 _vm._v(" "),
@@ -12127,9 +12767,12 @@ var render = function() {
                   },
                   domProps: { checked: _vm._q(_vm.category_id, "5") },
                   on: {
-                    change: function($event) {
-                      _vm.category_id = "5"
-                    }
+                    change: [
+                      function($event) {
+                        _vm.category_id = "5"
+                      },
+                      _vm.categoryValidation
+                    ]
                   }
                 }),
                 _vm._v(" "),
@@ -12156,9 +12799,12 @@ var render = function() {
                   },
                   domProps: { checked: _vm._q(_vm.category_id, "6") },
                   on: {
-                    change: function($event) {
-                      _vm.category_id = "6"
-                    }
+                    change: [
+                      function($event) {
+                        _vm.category_id = "6"
+                      },
+                      _vm.categoryValidation
+                    ]
                   }
                 }),
                 _vm._v(" "),
@@ -12167,7 +12813,13 @@ var render = function() {
                   { staticClass: "c-radio", attrs: { for: "other" } },
                   [_vm._v("その他")]
                 )
-              ])
+              ]),
+              _vm._v(" "),
+              _vm.errorMessages.categoryErrorMessage
+                ? _c("div", { staticClass: "error" }, [
+                    _vm._v(_vm._s(_vm.errorMessages.categoryErrorMessage))
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "profile-container-input" }, [
@@ -12179,23 +12831,42 @@ var render = function() {
                 directives: [
                   {
                     name: "model",
-                    rawName: "v-model",
+                    rawName: "v-model.number",
                     value: _vm.price,
-                    expression: "price"
+                    expression: "price",
+                    modifiers: { number: true }
                   }
                 ],
                 staticClass: "c-input",
-                attrs: { id: "price", type: "text", placeholder: "（例）1000" },
+                attrs: {
+                  id: "price",
+                  type: "number",
+                  placeholder: "1000000円以内で設定して下さい"
+                },
                 domProps: { value: _vm.price },
                 on: {
+                  blur: [
+                    function($event) {
+                      return _vm.priceValidation()
+                    },
+                    function($event) {
+                      return _vm.$forceUpdate()
+                    }
+                  ],
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.price = $event.target.value
+                    _vm.price = _vm._n($event.target.value)
                   }
                 }
-              })
+              }),
+              _vm._v(" "),
+              _vm.errorMessages.priceErrorMessage
+                ? _c("div", { staticClass: "error" }, [
+                    _vm._v(_vm._s(_vm.errorMessages.priceErrorMessage))
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "profile-container-input" }, [
@@ -12224,6 +12895,9 @@ var render = function() {
                 },
                 domProps: { value: _vm.overflow },
                 on: {
+                  blur: function($event) {
+                    return _vm.overflowValidation()
+                  },
                   input: function($event) {
                     if ($event.target.composing) {
                       return
@@ -12231,12 +12905,26 @@ var render = function() {
                     _vm.overflow = $event.target.value
                   }
                 }
-              })
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _c("span", [_vm._v(_vm._s(_vm.overflowLength))]),
-              _vm._v("/100文字")
+              }),
+              _vm._v(" "),
+              _vm.errorMessages.overflowErrorMessage
+                ? _c("div", { staticClass: "error" }, [
+                    _vm._v(_vm._s(_vm.errorMessages.overflowErrorMessage))
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("p", [
+                _c(
+                  "span",
+                  {
+                    class: {
+                      "profile-container-validation": this.overflowChangeColor
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.overflowLength))]
+                ),
+                _vm._v("/100文字")
+              ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "profile-container-input" }, [
@@ -12265,6 +12953,9 @@ var render = function() {
                 },
                 domProps: { value: _vm.content },
                 on: {
+                  blur: function($event) {
+                    return _vm.contentValidation()
+                  },
                   input: function($event) {
                     if ($event.target.composing) {
                       return
@@ -12272,40 +12963,38 @@ var render = function() {
                     _vm.content = $event.target.value
                   }
                 }
-              })
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _c("span", [_vm._v(_vm._s(_vm.contentLength) + "/100文字")])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "c-button" },
-              [
+              }),
+              _vm._v(" "),
+              _vm.errorMessages.contentErrorMessage
+                ? _c("div", { staticClass: "error" }, [
+                    _vm._v(_vm._s(_vm.errorMessages.contentErrorMessage))
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("p", [
                 _c(
-                  "router-link",
+                  "span",
                   {
-                    attrs: {
-                      to: {
-                        name: "postConfirm",
-                        params: {
-                          fileInfo: this.fileInfo,
-                          img: this.ideaImage,
-                          title: this.title,
-                          category_id: this.category_id,
-                          price: this.price,
-                          overflow: this.overflow,
-                          content: this.content
-                        }
-                      }
+                    class: {
+                      "profile-container-validation": this.contentChangeColor
                     }
                   },
-                  [_vm._v("投稿確認")]
-                )
-              ],
-              1
-            )
+                  [_vm._v(_vm._s(_vm.contentLength))]
+                ),
+                _vm._v("/10000文字")
+              ])
+            ]),
+            _vm._v(" "),
+            _vm.errorMessages.submitErrorMessage
+              ? _c("div", { staticClass: "error" }, [
+                  _vm._v(_vm._s(_vm.errorMessages.submitErrorMessage))
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "c-button",
+              attrs: { type: "submit", value: "確認画面へ" }
+            })
           ])
         ]
       )
@@ -12590,7 +13279,13 @@ var render = function() {
                   attrs: { src: _vm.profileImg, alt: "profileImg" }
                 })
               ])
-            ])
+            ]),
+            _vm._v(" "),
+            _vm.errorMessages.imgErrorMessage
+              ? _c("div", { staticClass: "error" }, [
+                  _vm._v(_vm._s(_vm.errorMessages.imgErrorMessage))
+                ])
+              : _vm._e()
           ]),
           _vm._v(" "),
           _vm.ImgChangeState
@@ -12636,11 +13331,6 @@ var render = function() {
                   "div",
                   {
                     staticClass: "c-input",
-                    attrs: {
-                      type: "text",
-                      placeholder: "（例）だーいし",
-                      value: "{$store.state.users.name}"
-                    },
                     on: {
                       dblclick: function($event) {
                         _vm.isNameEdit = true
@@ -12662,8 +13352,7 @@ var render = function() {
                   attrs: {
                     id: "name",
                     type: "text",
-                    placeholder: "（例）だーいし",
-                    value: "{$store.state.users.name}"
+                    placeholder: "（例）だーいし"
                   },
                   domProps: { value: _vm.$store.state.users.name },
                   on: {
@@ -12687,6 +13376,12 @@ var render = function() {
                 })
           ]),
           _vm._v(" "),
+          _vm.errorMessages.nameErrorMessage
+            ? _c("div", { staticClass: "error" }, [
+                _vm._v(_vm._s(_vm.errorMessages.nameErrorMessage))
+              ])
+            : _vm._e(),
+          _vm._v(" "),
           _c("div", { staticClass: "profile-container-input" }, [
             _c("label", { staticClass: "c-label", attrs: { for: "mail" } }, [
               _vm._v("e-mail")
@@ -12697,11 +13392,6 @@ var render = function() {
                   "div",
                   {
                     staticClass: "c-input",
-                    attrs: {
-                      type: "text",
-                      placeholder: "（例）info@.com",
-                      value: "{$store.state.users.email}"
-                    },
                     on: {
                       dblclick: function($event) {
                         _vm.isEmailEdit = true
@@ -12748,11 +13438,20 @@ var render = function() {
                 })
           ]),
           _vm._v(" "),
+          _vm.errorMessages.emailErrorMessage
+            ? _c("div", { staticClass: "error" }, [
+                _vm._v(_vm._s(_vm.errorMessages.emailErrorMessage))
+              ])
+            : _vm._e(),
+          _vm._v(" "),
           _c("div", { staticClass: "profile-container-input" }, [
             _c(
               "label",
               { staticClass: "c-label", attrs: { for: "introduction" } },
               [_vm._v("プロフィール文")]
+            ),
+            _vm._v(
+              "\n                        下枠をクリックして編集して下さい\n"
             ),
             _vm._v(" "),
             !_vm.isIntroductionEdit
@@ -12760,11 +13459,6 @@ var render = function() {
                   "div",
                   {
                     staticClass: "c-input profile-container-textarea",
-                    attrs: {
-                      type: "text",
-                      placeholder: "（例）お取引よろしくお願いいたします",
-                      value: "{$store.state.users.introduction}"
-                    },
                     on: {
                       dblclick: function($event) {
                         _vm.isIntroductionEdit = true
@@ -12773,45 +13467,60 @@ var render = function() {
                   },
                   [_vm._v(_vm._s(_vm.$store.state.users.introduction))]
                 )
-              : _c(
-                  "textarea",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.$store.state.users.introduction,
-                        expression: "$store.state.users.introduction"
-                      }
-                    ],
-                    staticClass: "c-input",
-                    attrs: {
-                      id: "introduction",
-                      type: "text",
-                      placeholder: "（例）お取引よろしくお願いいたします"
-                    },
-                    domProps: { value: _vm.$store.state.users.introduction },
-                    on: {
-                      blur: function($event) {
-                        return _vm.updateIntroduction(
-                          _vm.$store.state.users.id,
-                          _vm.$store.state.users.introduction
-                        )
-                      },
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.$store.state.users,
-                          "introduction",
-                          $event.target.value
-                        )
-                      }
+              : _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.$store.state.users.introduction,
+                      expression: "$store.state.users.introduction"
                     }
+                  ],
+                  staticClass: "c-input",
+                  attrs: {
+                    id: "introduction",
+                    type: "text",
+                    placeholder: "（例）お取引よろしくお願いいたします"
                   },
-                  [_vm._v("{$store.state.users.introduction}")]
-                )
+                  domProps: { value: _vm.$store.state.users.introduction },
+                  on: {
+                    blur: function($event) {
+                      return _vm.updateIntroduction(
+                        _vm.$store.state.users.id,
+                        _vm.$store.state.users.introduction
+                      )
+                    },
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.$store.state.users,
+                        "introduction",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+          ]),
+          _vm._v(" "),
+          _vm.errorMessages.introductionErrorMessage
+            ? _c("div", { staticClass: "error" }, [
+                _vm._v(_vm._s(_vm.errorMessages.introductionErrorMessage))
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("p", [
+            _c(
+              "span",
+              {
+                class: {
+                  "profile-container-validation": this.introductionChangeColor
+                }
+              },
+              [_vm._v(_vm._s(_vm.introductionLength))]
+            ),
+            _vm._v("/300文字")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "profile-container-input" }, [
@@ -12900,7 +13609,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "profile-container-img-left" }, [
       _c("label", { staticClass: "c-label", attrs: { for: "img" } }, [
-        _vm._v("プロフィール画像")
+        _vm._v("プロフィール"),
+        _c("br"),
+        _vm._v("画像")
       ])
     ])
   }
@@ -13380,10 +14091,11 @@ var render = function() {
         "form",
         {
           staticClass: "profile-container",
+          attrs: { method: "post" },
           on: {
             submit: function($event) {
               $event.preventDefault()
-              return _vm.editIdeaSave()
+              return _vm.checkValidation()
             }
           }
         },
@@ -13409,7 +14121,7 @@ var render = function() {
                         expression: "!newImage"
                       }
                     ],
-                    attrs: { src: _vm.profileImg, alt: "" }
+                    attrs: { src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + _vm.img), alt: "" }
                   }),
                   _vm._v(" "),
                   _c("img", {
@@ -13421,7 +14133,7 @@ var render = function() {
                         expression: "newImage"
                       }
                     ],
-                    attrs: { src: _vm.newImage, alt: "profileImg" }
+                    attrs: { src: _vm.newImage, alt: "ideaImg" }
                   })
                 ])
               ])
@@ -13449,6 +14161,9 @@ var render = function() {
                 },
                 domProps: { value: _vm.title },
                 on: {
+                  blur: function($event) {
+                    return _vm.titleValidation()
+                  },
                   input: function($event) {
                     if ($event.target.composing) {
                       return
@@ -13456,7 +14171,26 @@ var render = function() {
                     _vm.title = $event.target.value
                   }
                 }
-              })
+              }),
+              _vm._v(" "),
+              _vm.errorMessages.titleErrorMessage
+                ? _c("div", { staticClass: "error" }, [
+                    _vm._v(_vm._s(_vm.errorMessages.titleErrorMessage))
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("p", [
+                _c(
+                  "span",
+                  {
+                    class: {
+                      "profile-container-validation": this.titleChangeColor
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.titleLength))]
+                ),
+                _vm._v("/24文字")
+              ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "profile-container-input" }, [
@@ -13485,9 +14219,12 @@ var render = function() {
                       checked: _vm._q(_vm.category_id, "1")
                     },
                     on: {
-                      change: function($event) {
-                        _vm.category_id = "1"
-                      }
+                      change: [
+                        function($event) {
+                          _vm.category_id = "1"
+                        },
+                        _vm.categoryValidation
+                      ]
                     }
                   }),
                   _vm._v(" "),
@@ -13512,9 +14249,12 @@ var render = function() {
                       checked: _vm._q(_vm.category_id, "2")
                     },
                     on: {
-                      change: function($event) {
-                        _vm.category_id = "2"
-                      }
+                      change: [
+                        function($event) {
+                          _vm.category_id = "2"
+                        },
+                        _vm.categoryValidation
+                      ]
                     }
                   }),
                   _vm._v(" "),
@@ -13539,9 +14279,12 @@ var render = function() {
                       checked: _vm._q(_vm.category_id, "3")
                     },
                     on: {
-                      change: function($event) {
-                        _vm.category_id = "3"
-                      }
+                      change: [
+                        function($event) {
+                          _vm.category_id = "3"
+                        },
+                        _vm.categoryValidation
+                      ]
                     }
                   }),
                   _vm._v(" "),
@@ -13566,9 +14309,12 @@ var render = function() {
                       checked: _vm._q(_vm.category_id, "4")
                     },
                     on: {
-                      change: function($event) {
-                        _vm.category_id = "4"
-                      }
+                      change: [
+                        function($event) {
+                          _vm.category_id = "4"
+                        },
+                        _vm.categoryValidation
+                      ]
                     }
                   }),
                   _vm._v(" "),
@@ -13593,9 +14339,12 @@ var render = function() {
                       checked: _vm._q(_vm.category_id, "5")
                     },
                     on: {
-                      change: function($event) {
-                        _vm.category_id = "5"
-                      }
+                      change: [
+                        function($event) {
+                          _vm.category_id = "5"
+                        },
+                        _vm.categoryValidation
+                      ]
                     }
                   }),
                   _vm._v(" "),
@@ -13620,9 +14369,12 @@ var render = function() {
                       checked: _vm._q(_vm.category_id, "6")
                     },
                     on: {
-                      change: function($event) {
-                        _vm.category_id = "6"
-                      }
+                      change: [
+                        function($event) {
+                          _vm.category_id = "6"
+                        },
+                        _vm.categoryValidation
+                      ]
                     }
                   }),
                   _vm._v(" "),
@@ -13632,109 +14384,198 @@ var render = function() {
                     [_vm._v("その他")]
                   )
                 ]
-              )
+              ),
+              _vm._v(" "),
+              _vm.errorMessages.categoryErrorMessage
+                ? _c("div", { staticClass: "error" }, [
+                    _vm._v(_vm._s(_vm.errorMessages.categoryErrorMessage))
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "profile-container-input" }, [
-              _c(
-                "label",
-                { staticClass: "c-label", attrs: { for: "profile" } },
-                [_vm._v("概要")]
-              ),
+              _c("label", { staticClass: "c-label", attrs: { for: "price" } }, [
+                _vm._v("価格")
+              ]),
               _vm._v(" "),
-              _c(
-                "textarea",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.overflow,
-                      expression: "overflow"
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.number",
+                    value: _vm.price,
+                    expression: "price",
+                    modifiers: { number: true }
+                  }
+                ],
+                staticClass: "c-input",
+                attrs: {
+                  id: "price",
+                  type: "number",
+                  placeholder: "1000000円以内で設定して下さい"
+                },
+                domProps: { value: _vm.price },
+                on: {
+                  blur: [
+                    function($event) {
+                      return _vm.priceValidation()
+                    },
+                    function($event) {
+                      return _vm.$forceUpdate()
                     }
                   ],
-                  staticClass: "c-textarea",
-                  attrs: {
-                    name: "",
-                    id: "profile",
-                    cols: "30",
-                    rows: "10",
-                    placeholder: "自己紹介を記入してください"
-                  },
-                  domProps: { value: _vm.overflow },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.overflow = $event.target.value
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
                     }
+                    _vm.price = _vm._n($event.target.value)
                   }
-                },
-                [_vm._v(_vm._s(_vm.overflow) + "\n                    ")]
-              ),
+                }
+              }),
               _vm._v(" "),
-              _c("p", [
-                _c("span", [_vm._v(_vm._s(_vm.overflowLength))]),
-                _vm._v("/100文字")
-              ])
-            ]),
+              _vm.errorMessages.priceErrorMessage
+                ? _c("div", { staticClass: "error" }, [
+                    _vm._v(_vm._s(_vm.errorMessages.priceErrorMessage))
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "profile-container-input" }, [
+            _c("label", { staticClass: "c-label" }, [_vm._v("概要")]),
             _vm._v(" "),
-            _c("div", { staticClass: "profile-container-input" }, [
-              _c(
-                "label",
-                { staticClass: "c-label", attrs: { for: "contents" } },
-                [_vm._v("内容")]
-              ),
-              _vm._v(" "),
-              _c(
-                "textarea",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.content,
-                      expression: "content"
-                    }
-                  ],
-                  staticClass: "c-textarea",
-                  attrs: {
-                    id: "contents",
-                    cols: "30",
-                    rows: "10",
-                    placeholder: "あなたのアイデアをお待ちしてます"
-                  },
-                  domProps: { value: _vm.content },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.content = $event.target.value
-                    }
+            _c(
+              "textarea",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.overflow,
+                    expression: "overflow"
                   }
+                ],
+                staticClass: "c-textarea",
+                attrs: {
+                  name: "",
+                  id: "profile",
+                  cols: "30",
+                  rows: "10",
+                  placeholder: "自己紹介を記入してください"
                 },
-                [_vm._v(_vm._s(_vm.content) + "\n                    ")]
-              ),
-              _vm._v(" "),
-              _c("p", [
-                _c("span", [_vm._v(_vm._s(_vm.contentLength))]),
-                _vm._v("/100文字")
-              ])
-            ]),
+                domProps: { value: _vm.overflow },
+                on: {
+                  blur: function($event) {
+                    return _vm.overflowValidation()
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.overflow = $event.target.value
+                  }
+                }
+              },
+              [_vm._v(_vm._s(_vm.overflow))]
+            ),
             _vm._v(" "),
-            _vm.EditResultMessage
-              ? _c("div", { staticClass: "profile-container-img-message" }, [
-                  _vm._v(_vm._s(_vm.EditResultMessage))
+            _vm.errorMessages.overflowErrorMessage
+              ? _c("div", { staticClass: "error" }, [
+                  _vm._v(_vm._s(_vm.errorMessages.overflowErrorMessage))
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _c("input", {
-              staticClass: "c-button",
-              attrs: { type: "submit", value: "編集する" }
-            })
-          ])
+            _c("p", [
+              _c(
+                "span",
+                {
+                  class: {
+                    "profile-container-validation": this.overflowChangeColor
+                  }
+                },
+                [_vm._v(_vm._s(_vm.overflowLength))]
+              ),
+              _vm._v("/100文字")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "profile-container-input" }, [
+            _c(
+              "label",
+              { staticClass: "c-label", attrs: { for: "contents" } },
+              [_vm._v("内容")]
+            ),
+            _vm._v(" "),
+            _c(
+              "textarea",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.content,
+                    expression: "content"
+                  }
+                ],
+                staticClass: "c-textarea",
+                attrs: {
+                  id: "contents",
+                  cols: "30",
+                  rows: "10",
+                  placeholder: "あなたのアイデアをお待ちしてます"
+                },
+                domProps: { value: _vm.content },
+                on: {
+                  blur: function($event) {
+                    return _vm.contentValidation()
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.content = $event.target.value
+                  }
+                }
+              },
+              [_vm._v(_vm._s(_vm.content))]
+            ),
+            _vm._v(" "),
+            _vm.errorMessages.contentErrorMessage
+              ? _c("div", { staticClass: "error" }, [
+                  _vm._v(_vm._s(_vm.errorMessages.contentErrorMessage))
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("p", [
+              _c(
+                "span",
+                {
+                  class: {
+                    "profile-container-validation": this.contentChangeColor
+                  }
+                },
+                [_vm._v(_vm._s(_vm.contentLength))]
+              ),
+              _vm._v("/10000文字")
+            ])
+          ]),
+          _vm._v(" "),
+          _vm.errorMessages.submitErrorMessage
+            ? _c("div", { staticClass: "error" }, [
+                _vm._v(_vm._s(_vm.errorMessages.submitErrorMessage))
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.EditResultMessage
+            ? _c("div", { staticClass: "profile-container-img-message" }, [
+                _vm._v(_vm._s(_vm.EditResultMessage))
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "c-button",
+            attrs: { type: "submit", value: "編集する" }
+          })
         ]
       )
     ])
@@ -13774,69 +14615,74 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", [
-    _c("h2", { staticClass: "f-h2" }, [_vm._v("レビュー投稿完了")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "c-form" }, [
-      _c("div", { staticClass: "c-form-container" }, [
-        _c("div", { staticClass: "completed" }, [
-          _c("p", { staticClass: "completed-header" }, [
-            _vm._v("〜投稿完了〜")
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "completed-paragraph" }, [
-            _vm._v(
-              "\n                    新規レビュー投稿しました\n                "
+    _c("div", { staticClass: "c-container" }, [
+      _c("h2", { staticClass: "f-h2" }, [_vm._v("レビュー投稿完了")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "c-form" }, [
+        _c("div", { staticClass: "c-form-container" }, [
+          _c("div", { staticClass: "completed" }, [
+            _c("p", { staticClass: "completed-header" }, [
+              _vm._v("〜投稿完了〜")
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "completed-paragraph" }, [
+              _vm._v(
+                "\n                    新規レビュー投稿しました\n                "
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "completed-share",
+                on: { click: _vm.twitterShare }
+              },
+              [
+                _c("i", {
+                  staticClass: "fab fa-twitter completed-share-twitter"
+                }),
+                _c("span", [_vm._v("ツイートする")])
+              ]
             )
           ]),
           _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "completed-share", on: { click: _vm.twitterShare } },
-            [
-              _c("i", {
-                staticClass: "fab fa-twitter completed-share-twitter"
-              }),
-              _c("span", [_vm._v("ツイートする")])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "completed-container" }, [
-          _c(
-            "div",
-            { staticClass: "c-button completed-button column-button" },
-            [
-              _c("router-link", { attrs: { to: "/mypage" } }, [
-                _vm._v("Mypageへ")
-              ])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "c-button completed-button column-button" },
-            [
-              _c(
-                "router-link",
-                {
-                  attrs: {
-                    to: {
-                      name: "postDetail",
-                      params: {
-                        ideaId: this.ideaId,
-                        userId: this.userId
+          _c("div", { staticClass: "completed-container" }, [
+            _c(
+              "div",
+              { staticClass: "c-button completed-button column-button" },
+              [
+                _c("router-link", { attrs: { to: "/mypage" } }, [
+                  _vm._v("Mypageへ")
+                ])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "c-button completed-button column-button" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    attrs: {
+                      to: {
+                        name: "postDetail",
+                        params: {
+                          ideaId: this.ideaId,
+                          userId: this.userId
+                        }
                       }
                     }
-                  }
-                },
-                [_vm._v("投稿詳細へ")]
-              )
-            ],
-            1
-          )
+                  },
+                  [_vm._v("投稿詳細へ")]
+                )
+              ],
+              1
+            )
+          ])
         ])
       ])
     ])

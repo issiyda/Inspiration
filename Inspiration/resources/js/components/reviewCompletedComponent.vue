@@ -2,6 +2,9 @@
 
     <main>
 
+        <div class="c-container">
+
+
         <h2 class="f-h2">レビュー投稿完了</h2>
 
 
@@ -47,7 +50,7 @@
             </div>
 
         </div>
-
+        </div>
     </main>
 
 </template>
@@ -67,10 +70,6 @@
             }
         },
 
-        beforeUpdate() {
-            this.$emit('close-loading');
-        },
-
         created(){
             this.$emit('open-loading');
             this.ideaId = this.$route.params.ideaId;
@@ -79,9 +78,7 @@
             this.title = this.$route.params.title;
         },
 
-
-
-        beforeUpdate() {
+        mounted() {
             this.$emit('close-loading');
         },
 

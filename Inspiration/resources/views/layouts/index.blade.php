@@ -29,9 +29,9 @@
 
     <div class ="nav">
 
-        <div class="nav-title">
+        <a class="nav-title" href="/home">
             Inspiration
-        </div>
+        </a>
 
         <div class="nav-trigger js-toggle-sp-menu"  @touchStart="sidebarSwitch">
             <span></span>
