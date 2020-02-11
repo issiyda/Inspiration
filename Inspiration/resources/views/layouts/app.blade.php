@@ -47,9 +47,9 @@
     <div>
         <div class ="nav">
 
-            <div class="nav-title">
+            <a class="nav-title" href="/home">
                 Inspiration
-            </div>
+            </a>
 
             {{--                <div class ="nav">--}}
             {{--                    <ul class ="nav-container">--}}

@@ -3,6 +3,7 @@
 @section('content')
 
 <main>
+    <div class="c-container">
 
     <h2 class ="f-h2">パスワード再発行</h2>
 
@@ -37,6 +38,7 @@
 
             <input type="submit" class="c-button" value="送信">
         </form>
+    </div>
     </div>
 
 </main>

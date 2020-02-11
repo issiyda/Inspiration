@@ -2,6 +2,8 @@
 
     <main>
 
+        <div class="c-container">
+
         <h2 class="f-h2">投稿完了</h2>
 
 
@@ -44,7 +46,7 @@
             </div>
 
         </div>
-
+        </div>
     </main>
 
 </template>
@@ -59,12 +61,14 @@
             }
         },
 
-        beforeUpdate() {
-            this.$emit('close-loading');
+        created() {
+            this.$emit('open-loading');
         },
 
-        mounted(){
+        mounted()
+        {
             this.title = this.$route.params.title
+            this.$emit('close-loading');
         },
 
         methods:{

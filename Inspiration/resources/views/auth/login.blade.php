@@ -89,7 +89,7 @@
 {{--                                        <strong>{{ $errors->first('email') }}</strong>--}}
 {{--                                    </span>--}}
                 @error('email')
-                <span class="invalid-feedback" role="alert">
+                <span class="invalid-feedback error" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                 @enderror
@@ -105,7 +105,7 @@
 {{--                @enderror--}}
 
                 @error('password')
-                <span class="invalid-feedback" role="alert">
+                <span class="invalid-feedback error" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                 @enderror

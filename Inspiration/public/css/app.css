@@ -254,7 +254,7 @@ a {
 }
 
 .error {
-  color: #FFBEDA;
+  color: #FF00FF;
   font-weight: bolder;
   font-size: 18px;
   padding: 5%;
@@ -871,7 +871,6 @@ input[type="radio"]:checked + .c-radio {
   box-shadow: 2px 3px 5px gray;
   display: block;
   font-size: 18px;
-  height: 24px;
   margin: 5% auto;
   padding: 1%;
   resize: vertical;
@@ -1169,6 +1168,10 @@ input[type="radio"]:checked + .c-radio {
   color: #FFBEDA;
   font-size: 24px;
   margin-bottom: 15%;
+}
+
+.profile-container-validation {
+  color: #FF00FF;
 }
 
 .profile-withdraw {

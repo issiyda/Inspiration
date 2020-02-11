@@ -36,9 +36,9 @@
 
             <div class ="nav">
 
-                <div class="nav-title">
+                <a class="nav-title" href="/home">
                     Inspiration
-                </div>
+                </a>
 
 {{--                <div class ="nav">--}}
 {{--                    <ul class ="nav-container">--}}
@@ -75,6 +75,7 @@
 {{--                        ログインしてる時--}}
                         @auth
                             <li class ="nav-item"><a href="{{route('login')}}">Mypage</a></li>
+                            <li class ="nav-item"><a href="{{route('logout')}}">Logout</a></li>
                         @endauth
 {{--                        ログインしていない時--}}
                         @guest
@@ -107,15 +108,15 @@
 
                 <div class="home-what-container">
                     <div class="home-what-item">
-                        <img src="{{asset(('/img/staff2.jpeg'))}}" alt="">
+                        <img src="{{asset(('/img/ec.jpg'))}}" alt="">
                         <p>ECサイト</p>
                     </div>
                     <div class="home-what-item">
-                        <img src="{{asset(('/img/staff2.jpeg'))}}" alt="">
+                        <img src="{{asset(('/img/sns.jpg'))}}" alt="">
                         <p>SNS</p>
                     </div>
                     <div class="home-what-item">
-                        <img src="{{asset(('/img/staff2.jpeg'))}}" alt="">
+                        <img src="{{asset(('/img/matching.jpg'))}}" alt="">
 
                         <p>マッチング</p>
                     </div>
@@ -135,31 +136,31 @@
                 </div>
                 <div class="home-merit-container">
                     <div class="home-merit-item home-merit-item-left">
-                        <img src="{{asset(('/img/staff2.jpeg'))}}" alt="">
+                        <img src="{{asset(('/img/influencer.jpg'))}}" alt="">
                         <h3>影響力を持てる</h3>
                         <p>資本主義も成熟し今後は信用こそが本当の価値と言われる時代に発信力鍛えれます。</p>
                     </div>
 
                     <div class="home-merit-item home-merit-item-center">
-                        <img src="{{asset(('/img/staff2.jpeg'))}}" alt="">
+                        <img src="{{asset(('/img/partner.jpg'))}}" alt="">
                         <h3>仲間が見つかる</h3>
                         <p>アイデアを投稿していく中で、ともに成長しあえる仲間を見つけることができます。</p>
                     </div>
 
                     <div class="home-merit-item home-merit-item-right">
-                        <img src="{{asset(('/img/staff2.jpeg'))}}" alt="">
+                        <img src="{{asset(('/img/money.jpg'))}}" alt="">
                         <h3>アイデアがお金になる</h3>
                         <p>ただ頭の中にあるだけであればガラクタ同然。誰かの手に渡ることで価値となりお金になります。</p>
                     </div>
 
                     <div class="home-merit-item home-merit-item-left">
-                        <img src="{{asset(('/img/staff2.jpeg'))}}" alt="">
+                        <img src="{{asset(('/img/motivation.jpg'))}}" alt="">
                         <h3>自己肯定感高められる</h3>
                         <p>自分のアイデアが誰かに認められることでより一層モチベーションが上がります。</p>
                     </div>
 
                     <div class="home-merit-item home-merit-item-left">
-                        <img src="{{asset(('/img/staff2.jpeg'))}}" alt="">
+                        <img src="{{asset(('/img/logical.jpg'))}}" alt="">
                         <h3>論理的思考力Up</h3>
                         <p>どういう根拠でそのアイデアが上手くいくか論拠の提示で思考力上がります。</p>
                     </div>

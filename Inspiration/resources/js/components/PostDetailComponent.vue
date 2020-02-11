@@ -339,7 +339,7 @@
 
                             <div class ="review-comment-container">
                             <label for="review-comment">レビュー</label>
-                            <textarea disabled class ="c-input review-comment-input" name="" id="review-comment" cols="30" rows="10" placeholder="レビューを記入"></textarea>
+                            <textarea disabled class ="c-input review-comment-input" v-model="reviewComment" name="" id="review-comment" cols="30" rows="10" placeholder="レビューを記入"></textarea>
                             </div>
                         </div>
                         <input type="text" class="c-mini-button review-button-restriction" :disabled="processing" value="送信">
@@ -420,7 +420,6 @@
 
         mounted(){
             this.$nextTick(function(){
-            this.$emit('close-loading');
             this.getState();
             this.checkCategory();
             this.contributorJudge();
@@ -598,13 +597,16 @@
             },
 
             reviewPost: function() {
-                this.processing = true;
                 //すでに投稿しているか確認
                 if (this.reviewed === true) {
                     this.reviewErrorMessage = '既にレビューが投稿されています'
 
+                }else if(this.reviewComment.length > 500){
+                    this.reviewErrorMessage = '500文字以下で入力して下さい'
                     //レビュー投稿処理
                 } else if (this.reviewNumber !== "" && this.reviewComment !== "") {
+                    //二度送信できないようにする処理
+                    this.processing = true;
                     //投稿処理
                     setTimeout(()=>{
                     axios.post('/api/reviewPost', {
