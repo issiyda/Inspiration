@@ -19,15 +19,12 @@
 
                         <h4 class ="f-h4">{{buyingIdea.title}}</h4>
                         <div class="ic-img">
-<!--                            <img :src="buyingIdea.img" alt="idea" class="ic-img-item">-->
+                            <img :src="require(`../assets${buyingIdea.img}`)" alt="idea" class="ic-img-item">
                         </div>
                         <div class="ic-review">
                             <span class ="ic-span">評価</span>
-                            <i class="fas fa-star ic-star"></i>
-                            <i class="fas fa-star ic-star"></i>
-                            <i class="fas fa-star ic-star"></i>
-                            <i class="fas fa-star ic-star"></i>
-                            <i class="fas fa-star ic-star"></i>
+                            <span class ="ic-star-review" v-bind:class="star(buyingIdea.averageReview)"></span>
+                            <span class v-if="star(buyingIdea.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
                         </div>
                         <div class="ic-desc">
                             <div class ="ic-desc-overflow">概要</div>
@@ -62,11 +59,8 @@
                             </div>
                             <div class="ic-review">
                                 <span class ="ic-span">評価</span>
-                                <i class="fas fa-star ic-star"></i>
-                                <i class="fas fa-star ic-star"></i>
-                                <i class="fas fa-star ic-star"></i>
-                                <i class="fas fa-star ic-star"></i>
-                                <i class="fas fa-star ic-star"></i>
+                                <span class ="ic-star-review" v-bind:class="star(favIdea.averageReview)"></span>
+                                <span class v-if="star(favIdea.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
                             </div>
                             <div class="ic-desc">
                                 <div class ="ic-desc-overflow">概要</div>
@@ -97,15 +91,9 @@
                                 </div>
                                 <div class="ic-review">
                                     <span class ="ic-span">評価</span>
-                                    <div>
-                                    <i class="fas fa-star ic-star"></i>
-                                    <i class="fas fa-star ic-star"></i>
-                                    </div>
-                                    <div>
-                                    <i class="fas fa-star ic-star"></i>
-                                    <i class="fas fa-star ic-star"></i>
-                                    <i class="fas fa-star ic-star"></i>
-                                    </div>
+                                    <span class ="ic-star-review" v-bind:class="star(myIdea.averageReview)"></span>
+                                    <span class v-if="star(myIdea.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
+
                                 </div>
                                 <div class="ic-desc">
                                     <div class ="ic-desc-overflow">概要</div>
@@ -137,11 +125,7 @@
                                     </div>
                                     <div class="ic-review">
                                         <span class ="ic-span">評価</span>
-                                        <i class="fas fa-star ic-star"></i>
-                                        <i class="fas fa-star ic-star"></i>
-                                        <i class="fas fa-star ic-star"></i>
-                                        <i class="fas fa-star ic-star"></i>
-                                        <i class="fas fa-star ic-star"></i>
+                                        <span class ="ic-star-review" v-bind:class="star(review.averageReview)"></span>
                                     </div>
                                     <div class="ic-desc">
                                         <div class ="ic-desc-overflow">コメント</div>
@@ -176,11 +160,8 @@
 
         data:function(){
             return{
-                // user:{},
-                // buiedIdea: {},
-                // myIdea: {},
-                // favIdea :{} ,
-                // review : {}
+
+                notReviewedFlag:false
 
                 }
 
@@ -224,6 +205,42 @@
                 return this.$store.state.ideas.review;
 
             },
+
+            star:function(){
+
+
+                return function(stars) {
+
+                    var starReview = stars;
+
+                    if(starReview === 0)
+                    {
+                        return "ic-not-reviewed";
+                    }
+                    else if (starReview <= 0.5) {
+                        return "rate0-5"
+                    } else if (starReview > 0.5 && starReview <= 1) {
+                        return "rate1"
+                    } else if (starReview > 1 && starReview <= 1.5) {
+                        return "rate1-5"
+                    } else if (starReview > 1.5 && starReview <= 2) {
+                        return "rate2"
+                    } else if (starReview > 2 && starReview <= 2.5) {
+                        return "rate2-5"
+                    } else if (starReview > 2.5 && starReview <= 3) {
+                        return "rate3"
+                    } else if (starReview > 3 && starReview <= 3.5) {
+                        return "rate3-5"
+                    } else if (starReview > 3.5 && starReview <= 4) {
+                        return "rate4"
+                    } else if (starReview > 4 && starReview <= 4.5) {
+                        return "rate4-5"
+                    } else if (starReview > 4.5 && starReview <= 5) {
+                        return "rate5"
+                    }
+                }
+            },
+
         },
 
     }

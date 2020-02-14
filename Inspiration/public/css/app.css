@@ -1051,6 +1051,88 @@ input[type="radio"]:checked + .c-radio {
   height: 90%;
 }
 
+.ic-star-review {
+  position: relative;
+  display: inline-block;
+  width: 88px;
+  height: 16px;
+  font-size: 16px;
+}
+
+.ic-star-review:before,
+.ic-star-review:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '\2605\2605\2605\2605\2605';
+  display: inline-block;
+  height: 16px;
+  line-height: 16px;
+}
+
+.ic-star-review:before {
+  color: #ddd;
+}
+
+.ic-star-review:after {
+  color: #FFBEDA;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ic .rate0:after {
+  width: 0;
+}
+
+.ic .rate0-5:after {
+  width: 10%;
+}
+
+.ic .rate1:after {
+  width: 20%;
+}
+
+.ic .rate1-5:after {
+  width: 30%;
+}
+
+.ic .rate2:after {
+  width: 40%;
+}
+
+.ic .rate2-5:after {
+  width: 50%;
+}
+
+.ic .rate3:after {
+  width: 60%;
+}
+
+.ic .rate3-5:after {
+  width: 70%;
+}
+
+.ic .rate4:after {
+  width: 80%;
+}
+
+.ic .rate4-5:after {
+  width: 90%;
+}
+
+.ic .rate5:after {
+  width: 100%;
+}
+
+.ic-review {
+  width: 88px;
+  margin: 0 auto;
+}
+
+.ic-not-reviewed {
+  display: none;
+}
+
 .register {
   background: #F5F5F5;
   display: -webkit-box;

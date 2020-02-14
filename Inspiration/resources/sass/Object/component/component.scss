@@ -493,4 +493,81 @@ input[type="radio"] {
 
 
   }
+
+
+
+
+        &-star-review{
+            position: relative;
+            display: inline-block;
+            width: $starFull * 5 + 8;
+            height: $starFull;
+            font-size: $starFull;
+            &:before,&:after{
+                position: absolute;
+                top: 0;
+                left: 0;
+                content: '★★★★★';
+                display: inline-block;
+                height: $starFull;
+                line-height: $starFull;
+            }
+            &:before{
+                color: #ddd;
+            }
+            &:after{
+                color: $color_base;
+                overflow: hidden;
+                white-space: nowrap;//これがないと改行されて星の半分（0.5）が表現できなくなる
+            }
+        }
+        .rate0:after{//星0
+            width: 0;
+        }
+        .rate0-5:after{//星0.5
+            width: 10%;
+        }
+        .rate1:after{//星1
+            width: 20%;
+        }
+        .rate1-5:after{//星1.5
+            width: 30%;
+        }
+        .rate2:after{//星2
+            width: 40%;
+        }
+        .rate2-5:after{//星2.5
+            width: 50%;
+        }
+        .rate3:after{//星3
+            width: 60%;
+        }
+        .rate3-5:after{//星3.5
+            width: 70%;
+        }
+        .rate4:after{//星4
+            width: 80%;
+        }
+        .rate4-5:after{//星4.5
+            width: 90%;
+        }
+        .rate5:after{//星5
+            width: 100%;
+        }
+
+
+
+
+
+        &-review{
+            width: 88px;
+            margin: 0 auto;
+        }
+
+        &-not-reviewed{
+            display:none;
+        }
+
+
+
 }

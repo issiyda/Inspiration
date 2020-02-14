@@ -34,12 +34,11 @@
                         </div>
                         <div class="postDetail-container-img-left">
                             <label class ="c-label" for="img">平均評価</label>
-                            ★3.3
+                            <span class ="ic-star-review" v-bind:class="star(detail.averageReview)"></span>
+                            <span class v-if="star(detail.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
                         </div>
-
                     </div>
 
-                    平均の評価を計算するロジック記入
 
 
 
@@ -627,6 +626,7 @@
                             }).catch((error) =>{
                             console.log(error);
                             this.reviewErrorMessage = '時間を置いてお試し下さい'
+                            this.processing = false;
                     });
                     },2000)
                 }
@@ -671,7 +671,43 @@
                 {
                     return 'レビューは一度のみ可能です'
                 }
-            }
+            },
+
+            star:function(){
+
+
+                return function(stars) {
+
+                    var starReview = stars;
+
+                    if(starReview === 0)
+                    {
+                        return "ic-not-reviewed";
+                    }
+                    else if (starReview <= 0.5) {
+                        return "rate0-5"
+                    } else if (starReview > 0.5 && starReview <= 1) {
+                        return "rate1"
+                    } else if (starReview > 1 && starReview <= 1.5) {
+                        return "rate1-5"
+                    } else if (starReview > 1.5 && starReview <= 2) {
+                        return "rate2"
+                    } else if (starReview > 2 && starReview <= 2.5) {
+                        return "rate2-5"
+                    } else if (starReview > 2.5 && starReview <= 3) {
+                        return "rate3"
+                    } else if (starReview > 3 && starReview <= 3.5) {
+                        return "rate3-5"
+                    } else if (starReview > 3.5 && starReview <= 4) {
+                        return "rate4"
+                    } else if (starReview > 4 && starReview <= 4.5) {
+                        return "rate4-5"
+                    } else if (starReview > 4.5 && starReview <= 5) {
+                        return "rate5"
+                    }
+                }
+            },
+
             },
 
 
@@ -694,6 +730,8 @@
 
 
         },
+
+
 
 
 

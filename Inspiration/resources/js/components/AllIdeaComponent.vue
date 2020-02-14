@@ -133,14 +133,14 @@
 
                             <label>価格</label>
                             <div>{{allIdea.price}}</div>
-                            <div class="ic-review">
-                                <span class ="ic-span">評価</span>
-                                <i class="fas fa-star ic-star"></i>
-                                <i class="fas fa-star ic-star"></i>
-                                <i class="fas fa-star ic-star"></i>
-                                <i class="fas fa-star ic-star"></i>
-                                <i class="fas fa-star ic-star"></i>
-                            </div>
+                                <div class="ic-review" v-if="allIdea.averageReview === 0">
+                                    <label>平均評価</label>
+                                    未評価です
+                                </div>
+                                <div class="ic-review" v-if="allIdea.averageReview !== 0">
+                                    <label>平均評価</label>
+                                    {{allIdea.averageReview}}
+                                </div>
                             <div class="ic-desc">
                                 <div class ="ic-desc-overflow">概要</div>
                                 <div class="ic-desc-text">
@@ -467,6 +467,11 @@
             // allPosts(){
             //     this.allIdeaLists = this.$store.state.ideas.allIdea;
             // }
+
+
+        },
+
+        computed:{
 
 
         },

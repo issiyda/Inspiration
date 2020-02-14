@@ -2033,6 +2033,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllFavoriteComponent",
   data: function data() {
@@ -2519,6 +2520,7 @@ __webpack_require__.r(__webpack_exports__);
     // }
 
   },
+  computed: {},
   watch: {
     year: function year() {
       this.month = "";
@@ -3092,30 +3094,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MyPageComponent",
   data: function data() {
-    return {// user:{},
-      // buiedIdea: {},
-      // myIdea: {},
-      // favIdea :{} ,
-      // review : {}
+    return {
+      notReviewedFlag: false
     };
   },
   methods: {},
@@ -3141,6 +3124,35 @@ __webpack_require__.r(__webpack_exports__);
     },
     reviews: function reviews() {
       return this.$store.state.ideas.review;
+    },
+    star: function star() {
+      return function (stars) {
+        var starReview = stars;
+
+        if (starReview === 0) {
+          return "ic-not-reviewed";
+        } else if (starReview <= 0.5) {
+          return "rate0-5";
+        } else if (starReview > 0.5 && starReview <= 1) {
+          return "rate1";
+        } else if (starReview > 1 && starReview <= 1.5) {
+          return "rate1-5";
+        } else if (starReview > 1.5 && starReview <= 2) {
+          return "rate2";
+        } else if (starReview > 2 && starReview <= 2.5) {
+          return "rate2-5";
+        } else if (starReview > 2.5 && starReview <= 3) {
+          return "rate3";
+        } else if (starReview > 3 && starReview <= 3.5) {
+          return "rate3-5";
+        } else if (starReview > 3.5 && starReview <= 4) {
+          return "rate4";
+        } else if (starReview > 4 && starReview <= 4.5) {
+          return "rate4-5";
+        } else if (starReview > 4.5 && starReview <= 5) {
+          return "rate5";
+        }
+      };
     }
   }
 });
@@ -3781,7 +3793,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostDetailComponent",
   data: function data() {
@@ -4020,6 +4031,7 @@ __webpack_require__.r(__webpack_exports__);
           })["catch"](function (error) {
             console.log(error);
             _this5.reviewErrorMessage = '時間を置いてお試し下さい';
+            _this5.processing = false;
           });
         }, 2000);
       } //入力がされていない
@@ -4052,6 +4064,35 @@ __webpack_require__.r(__webpack_exports__);
       } else if (this.buying === true && this.reviewed === true) {
         return 'レビューは一度のみ可能です';
       }
+    },
+    star: function star() {
+      return function (stars) {
+        var starReview = stars;
+
+        if (starReview === 0) {
+          return "ic-not-reviewed";
+        } else if (starReview <= 0.5) {
+          return "rate0-5";
+        } else if (starReview > 0.5 && starReview <= 1) {
+          return "rate1";
+        } else if (starReview > 1 && starReview <= 1.5) {
+          return "rate1-5";
+        } else if (starReview > 1.5 && starReview <= 2) {
+          return "rate2";
+        } else if (starReview > 2 && starReview <= 2.5) {
+          return "rate2-5";
+        } else if (starReview > 2.5 && starReview <= 3) {
+          return "rate3";
+        } else if (starReview > 3 && starReview <= 3.5) {
+          return "rate3-5";
+        } else if (starReview > 3.5 && starReview <= 4) {
+          return "rate4";
+        } else if (starReview > 4 && starReview <= 4.5) {
+          return "rate4-5";
+        } else if (starReview > 4.5 && starReview <= 5) {
+          return "rate5";
+        }
+      };
     }
   },
   watch: {
@@ -9593,7 +9634,14 @@ var render = function() {
                           _vm._v(_vm._s(favoriteIdea.title))
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "ic-img" }),
+                        _c("div", { staticClass: "ic-img" }, [
+                          _c("img", {
+                            attrs: {
+                              src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + favoriteIdea.img),
+                              alt: ""
+                            }
+                          })
+                        ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "ic-review" }, [
                           _c("span", { staticClass: "ic-span" }, [
@@ -10120,21 +10168,25 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", [_vm._v(_vm._s(allIdea.price))]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "ic-review" }, [
-                        _c("span", { staticClass: "ic-span" }, [
-                          _vm._v("評価")
-                        ]),
-                        _vm._v(" "),
-                        _c("i", { staticClass: "fas fa-star ic-star" }),
-                        _vm._v(" "),
-                        _c("i", { staticClass: "fas fa-star ic-star" }),
-                        _vm._v(" "),
-                        _c("i", { staticClass: "fas fa-star ic-star" }),
-                        _vm._v(" "),
-                        _c("i", { staticClass: "fas fa-star ic-star" }),
-                        _vm._v(" "),
-                        _c("i", { staticClass: "fas fa-star ic-star" })
-                      ]),
+                      allIdea.averageReview === 0
+                        ? _c("div", { staticClass: "ic-review" }, [
+                            _c("label", [_vm._v("平均評価")]),
+                            _vm._v(
+                              "\n                                    未評価です\n                                "
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      allIdea.averageReview !== 0
+                        ? _c("div", { staticClass: "ic-review" }, [
+                            _c("label", [_vm._v("平均評価")]),
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(allIdea.averageReview) +
+                                "\n                                "
+                            )
+                          ])
+                        : _vm._e(),
                       _vm._v(" "),
                       _c("div", { staticClass: "ic-desc" }, [
                         _c("div", { staticClass: "ic-desc-overflow" }, [
@@ -10431,7 +10483,14 @@ var render = function() {
                         _vm._v(_vm._s(reviewedIdea.title))
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "ic-img" }),
+                      _c("div", { staticClass: "ic-img" }, [
+                        _c("img", {
+                          attrs: {
+                            src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + _vm.reviewIdea.img),
+                            alt: ""
+                          }
+                        })
+                      ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "ic-review" }, [
                         _c("span", { staticClass: "ic-span" }, [
@@ -10742,20 +10801,27 @@ var render = function() {
                       _vm._v(_vm._s(buyingIdea.title))
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-img" }),
+                    _c("div", { staticClass: "ic-img" }, [
+                      _c("img", {
+                        staticClass: "ic-img-item",
+                        attrs: {
+                          src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + buyingIdea.img),
+                          alt: "idea"
+                        }
+                      })
+                    ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "ic-review" }, [
                       _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
                       _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
+                      _c("span", {
+                        staticClass: "ic-star-review",
+                        class: _vm.star(buyingIdea.averageReview)
+                      }),
                       _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" })
+                      _vm.star(buyingIdea.averageReview) === "ic-not-reviewed"
+                        ? _c("span", {}, [_vm._v("未評価のアイデアです")])
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "ic-desc" }, [
@@ -10765,9 +10831,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "ic-desc-text" }, [
                         _vm._v(
-                          "\n                               " +
+                          "\n                           " +
                             _vm._s(buyingIdea.overflow) +
-                            "\n                            "
+                            "\n                        "
                         )
                       ])
                     ])
@@ -10829,15 +10895,14 @@ var render = function() {
                     _c("div", { staticClass: "ic-review" }, [
                       _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
                       _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
+                      _c("span", {
+                        staticClass: "ic-star-review",
+                        class: _vm.star(favIdea.averageReview)
+                      }),
                       _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" })
+                      _vm.star(favIdea.averageReview) === "ic-not-reviewed"
+                        ? _c("span", {}, [_vm._v("未評価のアイデアです")])
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "ic-desc" }, [
@@ -10847,9 +10912,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "ic-desc-text" }, [
                         _vm._v(
-                          "\n                                    " +
+                          "\n                                " +
                             _vm._s(favIdea.overflow) +
-                            "\n                                "
+                            "\n                            "
                         )
                       ])
                     ])
@@ -10911,19 +10976,14 @@ var render = function() {
                     _c("div", { staticClass: "ic-review" }, [
                       _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
                       _vm._v(" "),
-                      _c("div", [
-                        _c("i", { staticClass: "fas fa-star ic-star" }),
-                        _vm._v(" "),
-                        _c("i", { staticClass: "fas fa-star ic-star" })
-                      ]),
+                      _c("span", {
+                        staticClass: "ic-star-review",
+                        class: _vm.star(myIdea.averageReview)
+                      }),
                       _vm._v(" "),
-                      _c("div", [
-                        _c("i", { staticClass: "fas fa-star ic-star" }),
-                        _vm._v(" "),
-                        _c("i", { staticClass: "fas fa-star ic-star" }),
-                        _vm._v(" "),
-                        _c("i", { staticClass: "fas fa-star ic-star" })
-                      ])
+                      _vm.star(myIdea.averageReview) === "ic-not-reviewed"
+                        ? _c("span", {}, [_vm._v("未評価のアイデアです")])
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "ic-desc" }, [
@@ -10933,9 +10993,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "ic-desc-text" }, [
                         _vm._v(
-                          "\n                                        " +
+                          "\n                                    " +
                             _vm._s(myIdea.overflow) +
-                            "\n                                    "
+                            "\n                                "
                         )
                       ])
                     ])
@@ -10996,15 +11056,10 @@ var render = function() {
                     _c("div", { staticClass: "ic-review" }, [
                       _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
                       _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" })
+                      _c("span", {
+                        staticClass: "ic-star-review",
+                        class: _vm.star(review.averageReview)
+                      })
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "ic-desc" }, [
@@ -11014,9 +11069,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "ic-desc-text" }, [
                         _vm._v(
-                          "\n                                            " +
+                          "\n                                        " +
                             _vm._s(review.comment) +
-                            "\n                                        "
+                            "\n                                    "
                         )
                       ])
                     ])
@@ -11468,11 +11523,24 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(1, true)
+                _c("div", { staticClass: "postDetail-container-img-left" }, [
+                  _c(
+                    "label",
+                    { staticClass: "c-label", attrs: { for: "img" } },
+                    [_vm._v("平均評価")]
+                  ),
+                  _vm._v(" "),
+                  _c("span", {
+                    staticClass: "ic-star-review",
+                    class: _vm.star(detail.averageReview)
+                  }),
+                  _vm._v(" "),
+                  _vm.star(detail.averageReview) === "ic-not-reviewed"
+                    ? _c("span", {}, [_vm._v("未評価のアイデアです")])
+                    : _vm._e()
+                ])
               ]),
-              _vm._v(
-                "\n\n                平均の評価を計算するロジック記入\n\n\n\n                "
-              ),
+              _vm._v(" "),
               _c(
                 "label",
                 { staticClass: "c-label", attrs: { for: "category" } },
@@ -11693,7 +11761,7 @@ var render = function() {
         0
       ),
       _vm._v(" "),
-      _vm._m(2),
+      _vm._m(1),
       _vm._v(" "),
       _c(
         "div",
@@ -11764,7 +11832,7 @@ var render = function() {
                       staticClass: "review-posted-comment-star",
                       attrs: { id: "reviewComment" }
                     },
-                    [_vm._m(3, true), _vm._v(" "), _vm._m(4, true)]
+                    [_vm._m(2, true), _vm._v(" "), _vm._m(3, true)]
                   )
                 : review.star === 2
                 ? _c(
@@ -11773,7 +11841,7 @@ var render = function() {
                       staticClass: "review-posted-comment-star",
                       attrs: { id: "reviewComment" }
                     },
-                    [_vm._m(5, true), _vm._v(" "), _vm._m(6, true)]
+                    [_vm._m(4, true), _vm._v(" "), _vm._m(5, true)]
                   )
                 : review.star === 3
                 ? _c(
@@ -11782,7 +11850,7 @@ var render = function() {
                       staticClass: "review-posted-comment-star",
                       attrs: { id: "reviewComment" }
                     },
-                    [_vm._m(7, true), _vm._v(" "), _vm._m(8, true)]
+                    [_vm._m(6, true), _vm._v(" "), _vm._m(7, true)]
                   )
                 : review.star === 4
                 ? _c(
@@ -11791,7 +11859,7 @@ var render = function() {
                       staticClass: "review-posted-comment-star",
                       attrs: { id: "reviewComment" }
                     },
-                    [_vm._m(9, true), _vm._v(" "), _vm._m(10, true)]
+                    [_vm._m(8, true), _vm._v(" "), _vm._m(9, true)]
                   )
                 : review.star === 5
                 ? _c(
@@ -11800,7 +11868,7 @@ var render = function() {
                       staticClass: "review-posted-comment-star",
                       attrs: { id: "reviewComment" }
                     },
-                    [_vm._m(11, true), _vm._v(" "), _vm._m(12, true)]
+                    [_vm._m(10, true), _vm._v(" "), _vm._m(11, true)]
                   )
                 : _vm._e()
             ]),
@@ -11837,7 +11905,7 @@ var render = function() {
       _vm._v(" "),
       !_vm.reviewed && _vm.buying
         ? _c("div", { staticClass: "review-container" }, [
-            _vm._m(13),
+            _vm._m(12),
             _vm._v(" "),
             _c("div", { staticClass: "review-comment" }, [
               _c(
@@ -11917,7 +11985,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(14), _vm._v(" "), _vm._m(15)]
+                        [_vm._m(13), _vm._v(" "), _vm._m(14)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -11932,7 +12000,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(16), _vm._v(" "), _vm._m(17)]
+                        [_vm._m(15), _vm._v(" "), _vm._m(16)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -11947,7 +12015,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(18), _vm._v(" "), _vm._m(19)]
+                        [_vm._m(17), _vm._v(" "), _vm._m(18)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -11962,7 +12030,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(20), _vm._v(" "), _vm._m(21)]
+                        [_vm._m(19), _vm._v(" "), _vm._m(20)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -11977,7 +12045,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(22), _vm._v(" "), _vm._m(23)]
+                        [_vm._m(21), _vm._v(" "), _vm._m(22)]
                       )
                     ])
                   ]),
@@ -12035,7 +12103,7 @@ var render = function() {
             ])
           ])
         : _c("div", { staticClass: "review-container-restriction" }, [
-            _vm._m(24),
+            _vm._m(23),
             _vm._v(" "),
             _c("div", { staticClass: "review-comment" }, [
               _c("form", { attrs: { action: "" } }, [
@@ -12044,7 +12112,7 @@ var render = function() {
                     _vm._v("評価")
                   ]),
                   _vm._v(" "),
-                  _vm._m(25),
+                  _vm._m(24),
                   _vm._v(" "),
                   _c("div", { staticClass: "review-comment-container" }, [
                     _c("label", { attrs: { for: "review-comment" } }, [
@@ -12107,17 +12175,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "c-heading" }, [
       _c("h3", { staticClass: "f-h3" }, [_vm._v("アイデア")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "postDetail-container-img-left" }, [
-      _c("label", { staticClass: "c-label", attrs: { for: "img" } }, [
-        _vm._v("平均評価")
-      ]),
-      _vm._v("\n                        ★3.3\n                    ")
     ])
   },
   function() {
