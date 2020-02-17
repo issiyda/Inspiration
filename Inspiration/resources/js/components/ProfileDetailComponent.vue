@@ -15,7 +15,8 @@
                         </div>
                         <div v-cloak class="profile-container-img-right">
                             <label>
-                                <img :src="profileImg" alt="profileImg">
+                                <img v-if="profileImg" :src="profileImg" alt="profileImg">
+                                <img v-cloak v-else :src="require(`../assets/profileImages/account.jpeg`)" alt="profileImg">
                             </label>
                         </div>
                     </div>
@@ -87,6 +88,7 @@
         },
 
         computed:{
+
 
         },
 

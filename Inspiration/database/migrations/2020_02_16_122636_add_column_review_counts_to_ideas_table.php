@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnAverageReviewToIdeasTable extends Migration
+class AddColumnReviewCountsToIdeasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,8 @@ class AddColumnAverageReviewToIdeasTable extends Migration
     {
         Schema::table('ideas', function (Blueprint $table) {
             //
-            $table->float('averageReview')->default(0);
+            $table->integer('review_counts')->default(0);
+
         });
     }
 
@@ -28,7 +29,7 @@ class AddColumnAverageReviewToIdeasTable extends Migration
     {
         Schema::table('ideas', function (Blueprint $table) {
             //
-            $table->dropColumn('averageReview');
+            $table->dropColumn('review_counts');
         });
     }
 }

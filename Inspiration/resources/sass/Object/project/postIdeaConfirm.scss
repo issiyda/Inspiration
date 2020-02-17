@@ -43,7 +43,7 @@ confirm とdetailの共通部分　
       display: flex;
       justify-content: center;
       margin: 5% auto;
-      width:100%;
+      width:65%;
 
 
 
@@ -60,12 +60,6 @@ confirm とdetailの共通部分　
       }
     }
 
-
-
-
-
-
-
   &-post{
     margin:5% auto;
   }
@@ -76,30 +70,5 @@ confirm とdetailの共通部分　
     font-weight: bolder;
     margin:10% auto 5%;
   }
-
-
-  .arrow{
-    margin: 0 auto;
-    width: 200px;
-  }
-  .arrow::before{
-    content: "";
-    display: block;
-    margin: 0 auto;
-    width: 100px;
-    height: 70px;
-    background: $color_base;
-  }
-  .arrow::after{
-    content: "";
-    display:block;
-    border-top: 100px solid $color_base;
-    border-left: 100px solid transparent;
-    border-right: 100px solid transparent;
-    transform-origin: left top;
-    transform: scaleY(.5);
-  }
-
-
 
 }

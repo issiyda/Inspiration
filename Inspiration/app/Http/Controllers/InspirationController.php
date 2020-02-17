@@ -64,6 +64,11 @@ class InspirationController extends Controller
 
         $allIdea = Idea::get();
 
+
+
+
+
+
         /**
          * ログイン中のユーザが購入したアイデアデータ取得
          */

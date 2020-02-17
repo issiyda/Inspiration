@@ -25,6 +25,13 @@
 
 <div id="app">
 
+    <!-- フラッシュメッセージ -->
+    @if (session('flash_message'))
+        <div class="flash_message">
+            {{ session('flash_message') }}
+        </div>
+    @endif
+
     {{--<nav-bar-component></nav-bar-component>--}}
 
     <div class ="nav">
@@ -46,7 +53,7 @@
             </div>
 
             <ul class ="nav-container">
-                <li class ="nav-item"><a href="home">Home</a></li>
+                <li class ="nav-item"><a href="/home">Home</a></li>
                 <li class ="nav-item"><router-link to="/mypage">Mypage</router-link></li>
                 <li class ="nav-item"><router-link to="/post">Post</router-link></li>
                 <li class ="nav-item"><router-link to="/profile">Profile</router-link></li>

@@ -17,6 +17,7 @@ class   IdeaSearchController extends Controller
         $categoryIdea = Idea::where('category_id',$category_id)
             ->latest()->get();
 
+
         return response()->json([
             'categoryIdea' =>$categoryIdea
         ]);
@@ -30,7 +31,6 @@ class   IdeaSearchController extends Controller
         $priceIdea = Idea::where('price', '>=', $higherPrice)->get();
 
         return response()->json([
-            'a' =>$higherPrice,
             'higherIdea' =>$priceIdea
         ]);
 
@@ -42,7 +42,6 @@ class   IdeaSearchController extends Controller
         $priceIdea = Idea::where('price', '<=' , $lowerPrice)->get();
 
         return response()->json([
-            'a' =>$lowerPrice,
             'lowerIdea' =>$priceIdea
         ]);
 
@@ -72,7 +71,6 @@ class   IdeaSearchController extends Controller
                 ->get();
 
             return response()->json([
-                'term' =>$yearTerm,
                 'yearIdea' =>$yearIdea
             ]);
 
@@ -90,7 +88,6 @@ class   IdeaSearchController extends Controller
                 ->get();
 
             return response()->json([
-                'term' =>$monthTerm,
                 'monthIdea' =>$monthIdea
             ]);
 
@@ -109,7 +106,6 @@ class   IdeaSearchController extends Controller
                 ->get();
 
             return response()->json([
-                'term' =>$dayTerm,
                 'dayIdea' =>$dayIdea
             ]);
 
@@ -133,7 +129,6 @@ class   IdeaSearchController extends Controller
             $beforeIdea = Idea::where('created_at', '<=', $trueBeforeTerm)->get();
 
             return response()->json([
-                'a' => $beforeTerm,
                 'beforeIdea' => $beforeIdea
             ]);
         }
@@ -148,7 +143,6 @@ class   IdeaSearchController extends Controller
             $afterIdea = Idea::where('created_at', '>=', $afterTerm)->get();
 
             return response()->json([
-                'a' => $afterTerm,
                 'afterIdea' => $afterIdea
             ]);
 

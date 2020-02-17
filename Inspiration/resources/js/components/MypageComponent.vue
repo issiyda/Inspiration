@@ -22,9 +22,9 @@
                             <img :src="require(`../assets${buyingIdea.img}`)" alt="idea" class="ic-img-item">
                         </div>
                         <div class="ic-review">
-                            <span class ="ic-span">評価</span>
-                            <span class ="ic-star-review" v-bind:class="star(buyingIdea.averageReview)"></span>
+                            <span class="ic-span">評価</span>
                             <span class v-if="star(buyingIdea.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
+                            <span class="ic-star-review" v-bind:class="star(buyingIdea.averageReview)"></span>
                         </div>
                         <div class="ic-desc">
                             <div class ="ic-desc-overflow">概要</div>
@@ -93,7 +93,6 @@
                                     <span class ="ic-span">評価</span>
                                     <span class ="ic-star-review" v-bind:class="star(myIdea.averageReview)"></span>
                                     <span class v-if="star(myIdea.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
-
                                 </div>
                                 <div class="ic-desc">
                                     <div class ="ic-desc-overflow">概要</div>

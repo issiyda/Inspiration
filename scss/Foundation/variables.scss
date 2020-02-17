@@ -122,10 +122,13 @@ main{
 // h4
 // ==============================
 .f-h4{
-  color:$color_base;
-  font-size: $font-size_l;
-  font-weight:bold;
-  padding:8%;
+    align-items: center;
+    color:$color_base;
+    font-size: $font-size_l;
+    font-weight:bold;
+    height: 50px;
+    justify-content: center;
+    padding:8%;
 
   @include mq{
     padding:5%;

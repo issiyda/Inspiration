@@ -1,7 +1,7 @@
 <template>
-
-
     <main>
+
+        <div class="c-container">
 
         <h2 class ="f-h2">退会</h2>
 
@@ -30,6 +30,7 @@
             </form>
         </div>
 
+        </div>
     </main>
 
 </template>

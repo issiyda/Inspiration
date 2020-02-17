@@ -71,7 +71,7 @@
 
                     <div class="profile-container-input">
                         <label class ="c-label" for="price">価格</label>
-                        <input id="price" v-model.number="price" type="number" @blur="priceValidation()" class ="c-input" placeholder="1000000円以内で設定して下さい">
+                        <input id="price" v-model.number="price" type="number" @blur="priceValidation()" class ="c-input" placeholder="1000000円以内で設定して下さい">円
 
                         <div class="error" v-if="errorMessages.priceErrorMessage">{{errorMessages.priceErrorMessage}}</div>
 
@@ -155,6 +155,14 @@
         created:function()
         {
             this.$emit('open-loading');
+            this.fileInfo = this.$route.params.fileInfo
+            this.user = this.$store.dispatch('getUsers');
+            this.title = this.$route.params.title;
+            this.category_id = this.$route.params.category_id;
+            this.price = this.$route.params.price;
+            this.overflow = this.$route.params.overflow;
+            this.content = this.$route.params.content;
+            this.ideaImage = this.$route.params.img;
         },
 
         mounted() {
@@ -164,19 +172,15 @@
         },
 
         beforeUpdate() {
-            this.$emit('close-loading');
         },
 
         methods: {
 
 
             onFileChange(event){
+                this.$emit('open-loading');
                 this.fileInfo = event.target.files[0]
                 this.createImage()
-                this.imgValidation()
-                this.saveImage();
-
-
             },
 
             createImage() {
@@ -186,33 +190,12 @@
                     this.ideaImage = e.target.result
                 };
                 reader.readAsDataURL(this.fileInfo);
+                this.$emit('close-loading');
             },
-
-
-            //画像をDBに保存してパスを保存するロジック
-             saveImage(){
-
-                const formData = new FormData()
-                 console.log(this.fileInfo);
-                 formData.append('file',this.fileInfo);
-
-                axios.post('/api/profileImgUpload',formData)
-                    .then(response =>{
-                        console.log(response)
-                    }).catch((error)=>{
-                    console.log(error)
-                })
-            },
-
-            //文字数にバリデーションかけるロジック
-            // title	24文字以下
-            // カテゴリ	必須
-            // 価格	0 < 1000000
-            // 概要	100文字以下
-            // 内容	10000文字以下
 
             //画像バリデーション
             imgValidation:function(){
+                this.errorMessages.imgErrorMessage = false
                 if(this.ideaImage === ""){
                     this.validations.imgValidation = false;
                     this.errorMessages.imgErrorMessage ="＋をクリックして画像を選択して下さい"
@@ -224,6 +207,7 @@
 
             //
             titleValidation:function(){
+                this.errorMessages.titleErrorMessage = false;
                 if(this.title === ""){
                     this.validations.titleValidation = false;
                     this.errorMessages.titleErrorMessage ="入力必須です"
@@ -245,24 +229,25 @@
 
             //カテゴリーのバリデーション
             categoryValidation:function() {
-                if (this.category_id === "") {
 
+                this.errorMessages.categoryErrorMessage =false
+
+                if (this.category_id === "") {
                     this.validations.categoryValidation = false;
                     this.errorMessages.categoryErrorMessage ="入力必須です"
-
                 } else {
-
                     this.validations.categoryValidation = true;
                     this.errorMessages.categoryErrorMessage = false;
-
                 }
             },
             //価格のバリデーション
             priceValidation:function(){
 
+                this.errorMessages.priceErrorMessage = false;
+
                 if(this.price === "") {
                     this.validations.priceValidation = false;
-                    this.errorMessages.priceErrorMessage ="入力必須です"
+                    this.errorMessages.priceErrorMessage ="数値を入力して下さい"
                 }else if(this.price > 1000000){
                     this.validations.priceValidation = false;
                     this.errorMessages.priceErrorMessage ="100万円以下で設定して下さい"
@@ -275,6 +260,7 @@
             },
             //概要のバリデーション
             overflowValidation:function(){
+
                 if(this.overflow === "") {
                     this.validations.overflowValidation =false;
                     this.errorMessages.overflowErrorMessage ="入力必須です"
@@ -318,6 +304,8 @@
             //確認用バリデーション
             checkValidation:function()
             {
+                this.errorMessages.submitErrorMessage = "";
+
                 this.imgValidation();
                 this.titleValidation();
                 this.priceValidation();
@@ -331,7 +319,7 @@
                     this.formSubmit();
 
                 //エラーがあればメッセージ
-                }else{
+                }else if(this.submitOk === false){
                     this.errorMessages.submitErrorMessage = "エラーがあります"
                 }
 
@@ -359,12 +347,15 @@
            },
 
             titleLength(){
+               if(this.title !==undefined)
                return this.title.length
             },
             overflowLength(){
+                if(this.overflow !==undefined)
                return this.overflow.length;
             },
             contentLength(){
+                if(this.content !==undefined)
                return this.content.length;
             },
 
@@ -376,8 +367,11 @@
                     this.validations.overflowValidation === true &&
                     this.validations.imgValidation ===true &&
                     this.validations.contentValidation === true
-                )
+                ) {
                     return true
+                }else{
+                    return false
+                }
             },
         },
 

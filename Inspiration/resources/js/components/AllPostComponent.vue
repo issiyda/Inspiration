@@ -14,25 +14,15 @@
 
                 <paginate name="paginate-log" :list="myIdeaLists" :per="15">
                     <div v-for="myIdea in paginated('paginate-log')" class="ic-card">
-                        <router-link :to="{name:'postDetail', params:{
-                        ideaId:myIdea.id,
-                        userId:myIdea.user_id
-                        }}" class ="ic-a" href="#">
+                        <div class="ic-a">
                         <h4 class ="f-h4">{{myIdea.title}}</h4>
                         <div class="ic-img">
-                            <img :src="require(`../assets${myIdea.img}`)" alt="">
+                            <img :src="require(`../assets${myIdea.img}`)" alt="postIdeaImg" class="ic-img-item">
                         </div>
                         <div class="ic-review">
                             <span class ="ic-span">評価</span>
-                            <div>
-                                <i class="fas fa-star ic-star"></i>
-                                <i class="fas fa-star ic-star"></i>
-                            </div>
-                            <div>
-                                <i class="fas fa-star ic-star"></i>
-                                <i class="fas fa-star ic-star"></i>
-                                <i class="fas fa-star ic-star"></i>
-                            </div>
+                            <span class ="ic-star-review" v-bind:class="star(myIdea.averageReview)"></span>
+                            <span class v-if="star(myIdea.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
                         </div>
                         <div class="ic-desc">
                             <div class ="ic-desc-overflow">概要</div>
@@ -49,25 +39,23 @@
                                 }}">
                                     詳細</router-link>
                             </div>
-                            <div class="c-mini-button">
-                                <router-link :to="{name: 'postIdeaEdit',params:{
-                                id: myIdea.id,
-                                bought_flag: myIdea.bought_flag,
-                                category_id: myIdea.category_id,
-                                content: myIdea.content,
-                                delete_flag:myIdea.delete_flag,
-                                img:myIdea.img,
-                                overflow:myIdea.overflow,
-                                price:myIdea.price,
-                                title:myIdea.title,
-                                user_id:myIdea.user_id,
-
-                                }}">編集</router-link>
+                            <div class="c-mini-button"
+                                 @click="toEditPage(myIdea.id,
+                                        myIdea.bought_flag,
+                                        myIdea.category_id,
+                                        myIdea.content,
+                                        myIdea.delete_flag,
+                                        myIdea.img,
+                                        myIdea.overflow,
+                                        myIdea.price,
+                                        myIdea.title,
+                                        myIdea.user_id,)">
+                                編集
                             </div>
 <!--                            <input type="submit" class="c-mini-button" value="詳細">-->
 <!--                            <input type="submit" class="c-mini-button" value="編集">-->
                         </div>
-                        </router-link>
+                        </div>
                     </div>
                 </paginate>
 
@@ -89,7 +77,6 @@
 <script>
     export default {
         name: "AllPostComponent",
-
         data:function(){
             return {
                 myIdeaLists:[],
@@ -116,19 +103,74 @@
             myIdeas(){
                 this.myIdeaLists = this.$store.state.ideas.myIdea;
             },
+            toEditPage(id,bought_flag,
+                       category_id,
+                       content,
+                       delete_flag,
+                       img,
+                       overflow,
+                       price,
+                       title,
+                       user_id){
+                if(bought_flag === 0) {
+                    this.$router.push({
+                        name: 'postIdeaEdit', params: {
+                            id:id,
+                            bought_flag:  bought_flag,
+                            category_id: category_id,
+                            content:content,
+                            delete_flag:  delete_flag,
+                            img:img,
+                            overflow:overflow,
+                            price:price,
+                            title:title,
+                            user_id:user_id,
+                        }
+                    }).catch((error) =>{
+                        console.log(error)
+                    })
+                }
+                else if(bought_flag === 1)
+                {
+                    alert("購入されているので削除できません")
+                }
+            }
         },
 
-        computed:{
+        computed: {
+            star: function () {
 
 
-            beforeUpdate() {
-                this.$emit('close-loading');
+                return function (stars) {
+
+                    var starReview = stars;
+
+                    if (starReview === 0) {
+                        return "ic-not-reviewed";
+                    } else if (starReview <= 0.5) {
+                        return "rate0-5"
+                    } else if (starReview > 0.5 && starReview <= 1) {
+                        return "rate1"
+                    } else if (starReview > 1 && starReview <= 1.5) {
+                        return "rate1-5"
+                    } else if (starReview > 1.5 && starReview <= 2) {
+                        return "rate2"
+                    } else if (starReview > 2 && starReview <= 2.5) {
+                        return "rate2-5"
+                    } else if (starReview > 2.5 && starReview <= 3) {
+                        return "rate3"
+                    } else if (starReview > 3 && starReview <= 3.5) {
+                        return "rate3-5"
+                    } else if (starReview > 3.5 && starReview <= 4) {
+                        return "rate4"
+                    } else if (starReview > 4 && starReview <= 4.5) {
+                        return "rate4-5"
+                    } else if (starReview > 4.5 && starReview <= 5) {
+                        return "rate5"
+                    }
+                }
             },
-
-
-
-        },
-
+        }
     }
 </script>
 

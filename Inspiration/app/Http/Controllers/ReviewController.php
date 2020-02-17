@@ -85,17 +85,18 @@ class ReviewController extends Controller
 
         //        アイデアの平均点数計算ロジック
 
-        $reviewCount = Review::where('idea_id',$ideaId)->count();
+        $reviewCount = Review::where('idea_id',$ideaId)->count() + 1;
         $sumStars = Review::where('idea_id',$ideaId)->sum('star') + $star;
 
 
-        $averageReview = $sumStars / ($reviewCount + 1) ;
+        $averageReview = $sumStars / $reviewCount ;
         $averageReview = round($averageReview,1);
 
 
 
         $average = Idea::where('id',$ideaId)->first();
         $average->averageReview = $averageReview;
+        $average->review_counts = $reviewCount;
         $average->save();
 
 

@@ -14,7 +14,7 @@
 
                 <div class="c-form-container-input register-input">
                     <label class ="c-label" for="mail">現在のpassword</label>
-                    <input id="mail" v-model="currentPass" @input ="$v.currentPass.$touch()" @blur="checkPass()" class="c-input" type="text" placeholder="（例）info@.com">
+                    <input id="mail" v-model="currentPass" @input ="$v.currentPass.$touch()" @blur="checkPass()" class="c-input" type="text"placeholder="現在のパスワード">
                     <div v-if="$v.currentPass.$error" class ="error">
                         <span v-if="!$v.currentPass.required">入力必須です</span>
                     </div>
@@ -127,7 +127,7 @@
                     }).catch((error)=>{
                         console.log(error)
                 });
-            
+
             },
 
 

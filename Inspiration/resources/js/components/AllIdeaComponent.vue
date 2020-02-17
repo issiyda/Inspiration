@@ -6,19 +6,28 @@
 
                 <h2 class ="f-h2 allIdea">全アイデア</h2>
 
-                <div class ="c-button allIdea-button" v-show="this.search" @click="searching()">{{message}}</div>
-                <div class ="c-button allIdea-button" v-show="!this.search" @click="closeSearching()">{{message}}</div>
+                <div class ="c-button allIdea-button" v-show="this.search" @click="searching()">{{closingMessage}}</div>
+                <div class ="c-button allIdea-button" v-show="!this.search" @click="closeSearching()">{{openingMessage}}</div>
 
                 <div class="search" v-show="!this.search">
 
 
+
+
                     <h4>アイデア検索ボックス</h4>
+
                     <div class="search-container">
-                    <div class ="search-category">
+                        <div class ="search-subject allIdea-button-search" @click="categorySelect()">カテゴリ検索</div>
+                        <div class ="search-subject allIdea-button-search" @click="priceSelect()">価格検索</div>
+                        <div class ="search-subject allIdea-button-search" @click="dateSelect()">期間検索</div>
+                    </div>
+
+
+
+                    <div v-if="categorySelected" class="search-category">
                         <div class ="search-subject">カテゴリ検索</div>
 
-
-                        <input id="matching" name="category"  type="radio">
+                        <input id="matching" name="category"  type="radio" >
                         <label for="matching" class="c-radio search-category-radio" @click="searchCategory(1)">マッチング</label>
 
                         <input id="board" name="category" class ="" type="radio">
@@ -37,51 +46,65 @@
                         <label for="other" class="c-radio search-category-radio" @click="searchCategory(6)">その他</label>
                     </div>
 
-                    <div class ="search-price">
+                    <div v-if="priceSelected" class="search-price">
                         <div class ="search-subject">価格検索</div>
-                        <label for="down">以上</label>
                         <input class ="search-price-input"   @blur="priceSearch()" id="down" type="number" v-model.number="higher">
-                        <label for="top">以下</label>
+                        <label for="down">円以上</label>
                         <input class ="search-price-input"  @blur="priceSearch()" id="top" type="number" v-model.number="lower">
+                        <label for="top">円以下</label>
+
                         <input id="price"  name="category" class ="" type="radio">
                     </div>
 
-                    <div class ="search-date">
-                        <div class ="search-subject">期間検索</div>
-<!--                        　<input type="date" name="from" placeholder="〜から">-->
+                    <div v-if="dateSelected" class="search-date">
+                        <div class="search-subject">期間検索</div>
+                        <!--                        　<input type="date" name="from" placeholder="〜から">-->
 <!--                        　<input type="date" name="from" placeholder="〜まで">-->
 <!--                        <button type="submit" @click="dateSearch">日付検索</button>-->
                         <label for="down">年別</label>
                         <v-date-picker :mode="mode"
                                        :format="customFormatter"
+                                       @input="termYearSearch()"
                                        v-model="year"
                                        :language="ja"
-                                       minimum-view="year">
-                        </v-date-picker>
+                                       key="year"
+                                       clearable
+                                       minimum-view="`year`">
+                        </v-date-picker><br>
 
                         <label for="top">月別</label>
                         <v-date-picker :mode="mode"
                                        :format="customFormatter"
+                                       @input="termMonthSearch()"
                                        v-model="month"
-                                       minimum-view="month">
+                                       key="month"
+                                       clearable
+                                       minimum-view="`month`">
                         </v-date-picker>
 
                         <label for="top">日別</label>
                         <v-date-picker :mode="mode"
                                        :format="customFormatter"
-                                       v-model="day">
+                                       v-model="day"
+                                       @input="termDaySearch()"
+                                       key="day"
+                                       minimum-view="'day'">
                         </v-date-picker>
 
                         <label for="top">以降</label>
                         <v-date-picker :mode="mode"
                                        :format="customFormatter"
-                                       v-model="after">
+                                       v-model="after"
+                                       @input="termSearch()"
+                                       key="after">
                         </v-date-picker>
 
                         <label for="top">以前</label>
                         <v-date-picker :mode="mode"
                                        :format="customFormatter"
-                                       v-model="before">
+                                       v-model="before"
+                                       @input="termSearch()"
+                                       key="before">
                         </v-date-picker>
 
 
@@ -112,11 +135,15 @@
 
                 <h3 class ="f-h3">全アイデア</h3>
 
+            <div class ="error" v-if="errorMessage">{{noMatchMessage}}</div>
 
-                <div class="ic">
+
+            <div v-if="!errorMessage">
+
+                <div class="ic" v-if="this.ideas">
 
 
-                    <paginate name="paginate-log" :list="this.ideas" :per="15">
+                    <paginate name="paginate-log" :list="searchedIdeas" :per="15">
                         <div v-for="allIdea in paginated('paginate-log')" class="ic-card">
                             <router-link :to="{name:'postDetail', params:{
                         ideaId:allIdea.id,
@@ -125,7 +152,7 @@
 
                             <h4 class ="f-h4">{{allIdea.title}}</h4>
                             <div class="ic-img">
-                                <!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
+                                <img :src="require(`../assets${allIdea.img}`)" alt="idea" class="ic-img-item">
                             </div>
 
                             <label>カテゴリ</label>
@@ -133,14 +160,18 @@
 
                             <label>価格</label>
                             <div>{{allIdea.price}}</div>
-                                <div class="ic-review" v-if="allIdea.averageReview === 0">
+
+                                <div class="ic-review">
                                     <label>平均評価</label>
-                                    未評価です
+                                    <span class ="ic-star-review" v-bind:class="star(allIdea.averageReview)"></span>
+                                    <span class v-if="star(allIdea.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
+                                    <label>レビュー数</label>
+                                    <div>{{allIdea.review_counts}}件です</div>
                                 </div>
-                                <div class="ic-review" v-if="allIdea.averageReview !== 0">
-                                    <label>平均評価</label>
-                                    {{allIdea.averageReview}}
-                                </div>
+
+
+
+
                             <div class="ic-desc">
                                 <div class ="ic-desc-overflow">概要</div>
                                 <div class="ic-desc-text">
@@ -158,8 +189,9 @@
                 <div class="pagination">
                     <paginate-links for="paginate-log" class="pagination-container" :show-step-links="true"></paginate-links>
                 </div>
-
             </div>
+
+
         </main>
 
 </template>
@@ -174,7 +206,8 @@
                 ideas: {},
                 down: "",
                 top: "",
-                message: "検索する",
+                closingMessage: "検索する",
+                openingMessage: "検索タブ閉じる",
                 search: true,
                 higher: "",
                 lower: "",
@@ -199,23 +232,30 @@
                 before: "",
                 after: "",
                 //paginate用
-                paginate: ['paginate-log']
+                paginate: ['paginate-log'],
+                categorySelected:false,
+                priceSelected:false,
+                dateSelected:false,
 
-
+                errorMessage:false,
+                noMatchMessage:'条件に該当するアイデアがありませんでした'
             }
         },
 
-        mounted() {
-            this.ideas = this.$store.state.ideas.allIdea;
-        },
+
 
         created() {
             this.$emit('open-loading');
             this.ideas = this.$store.dispatch('getUserIdeas');
         },
 
-        beforeUpdate() {
+        mounted() {
+            this.ideas = this.$store.state.ideas.allIdea;
             this.$emit('close-loading');
+
+        },
+
+        updated() {
         },
 
         filters: {
@@ -228,6 +268,12 @@
         // },
 
         methods: {
+
+            reset:function()
+            {
+                this.year ="".
+                    thie.month=""
+            },
 
             customFormatter(date) {
                 return moment(date).format('YYYY-MM-DD');
@@ -256,8 +302,31 @@
 
             searching: function () {
                 this.search = !this.search;
-                this.message = "検索タブ閉じる"
+            },
 
+            closeSearching:function(){
+                this.search = !this.search;
+            },
+
+            //検索切り替え
+            categorySelect:function()
+            {
+                this.categorySelected = true;
+                this.priceSelected = false;
+                this.dateSelected = false;
+            },
+
+            priceSelect:function()
+            {
+                this.categorySelected = false;
+                this.priceSelected = true;
+                this.dateSelected = false;
+            },
+            dateSelect:function()
+            {
+                this.categorySelected = false;
+                this.priceSelected = false;
+                this.dateSelected = true;
             },
 
             /**
@@ -266,6 +335,8 @@
              * @returns {ideas|{}}
              */
             searchCategory: function (category_id) {
+                this.$emit('open-loading');
+
 
                 axios.get('/api/categorySearch', {
                     params: {
@@ -273,10 +344,17 @@
                     }
                 })
                     .then(response => {
-                        console.log(response)
-                        this.ideas = response.data.categoryIdea
+                        console.log(response.data.categoryIdea)
+                        if (response.data.categoryIdea.length === 0){
+                            this.errorMessage = true
+                        } else {
+                            this.ideas = response.data.categoryIdea
+                            this.errorMessage = false
+                        }
+                        this.$emit('close-loading');
                     }).catch((error) => {
                     console.log(error)
+                    this.$emit('close-loading');
                 })
 
 
@@ -284,7 +362,7 @@
 
 
             priceSearch: function () {
-
+                this.$emit('open-loading');
                 /**
                  * 以上の方にのみ入力値存在する
                  * 入力値以上の値段のアイデアを取得
@@ -296,14 +374,23 @@
                         }
                     })
                         .then(response => {
-                            console.log(response)
-                            this.ideas = response.data.higherIdea
+                            console.log(response.data.higherIdea)
+                            if (response.data.higherIdea.length === 0) {
+
+                                this.searchedNoItems()
+
+                            } else if (response.data.higherIdea.length !== 0){
+                                this.ideas = response.data.higherIdea
+                            this.errorMessage = false
+                                this.$emit('close-loading');
+
+                            }
                         }).catch((error) => {
                         console.log(error)
                     })
                 }
                 /**
-                 * 以下の方にのみ入力値存在する
+                 * 円以下の方にだけ入力値存在する
                  * 入力値以下値段のアイデアを取得
                  */
                 else if (this.higher === "" && this.lower !== null) {
@@ -314,7 +401,14 @@
                     })
                         .then(response => {
                             console.log(response)
+                            if(response.data.lowerIdea.length === 0){
+
+                                this.searchedNoItems()
+
+                            }else if(response.data.lowerIdea.length !== 0)
                             this.ideas = response.data.lowerIdea
+                            this.errorMessage = false
+                            this.$emit('close-loading');
                         }).catch((error) => {
                         console.log(error)
                     })
@@ -331,8 +425,14 @@
                         }
                     })
                         .then(response => {
-                            console.log(response)
-                            this.ideas = response.data.middleIdea
+                            console.log(response.data.middleIdea)
+                            if (response.data.middleIdea.length === 0) {
+                                this.searchedNoItems()
+                            } else if (response.data.middleIdea.length !== 0) {
+                                this.$emit('close-loading');
+                            this.errorMessage = false;
+                            this.ideas = response.data.middleIdea;
+                        }
                         }).catch((error) => {
                         console.log(error)
                     })
@@ -340,12 +440,69 @@
 
             },
 
-            TermSearch: function () {
+            termYearSearch:function()
+            {
+                this.$emit('open-loading');
+                this.month = "";
+                this.day = "";
+                this.before = "";
+                this.after = "";
+                if(this.year !== "") {
+                    this.termSearch()
+                    this.$nextTick(() => {
+                        this.year = ""
+                        this.search = true
+                    })
+                }
+                this.$emit('close-loading');
+            },
+
+            termMonthSearch:function()
+            {
+                this.$emit('open-loading');
+                this.year = "";
+                this.day = "";
+                this.before = "";
+                this.after = "";
+                if(this.month !== "") {
+                    this.termSearch()
+                    this.$nextTick(() => {
+                        this.month = ""
+                        this.search = true
+                    })
+                }
+                this.$emit('close-loading');
+
+            },
+
+            termDaySearch:function()
+            {
+                this.$emit('open-loading');
+                this.year = "";
+                this.month = "";
+                this.before = "";
+                this.after = "";
+                if(this.day !== "") {
+                    this.termSearch()
+                    this.$nextTick(() => {
+                        this.day = ""
+                        this.search = true
+                    })
+                }
+                this.$emit('close-loading');
+
+            },
+
+            termSearch: function () {
+                this.$emit('open-loading');
+                this.errorMessage = false;
+
+
                 /**
                  * yearにのみ入力値存在する
                  * 入力値以前の期間のアイデアを取得
                  */
-                if (this.year !== "") {
+                if (this.year !== "" && this.month === "" && this.day === "") {
                     axios.get('/api/termSearch/year', {
                         params: {
                             year: this.year
@@ -353,9 +510,19 @@
                     })
                         .then(response => {
                             console.log(response)
-                            this.ideas = response.data.yearIdea
+                            this.$emit('close-loading');
+                            if(response.data.yearIdea.length === 0)
+                            {
+                                this.errorMessage = true
+                            }
+                            else if(response.data.yearIdea.length !== 0)
+                            {
+                                this.ideas = response.data.yearIdea
+                                this.errorMessage = false;
+                            }
                         }).catch((error) => {
                         console.log(error)
+                        this.$emit('close-loading');
                     })
                     }
 
@@ -363,17 +530,24 @@
                  * monthにのみ入力値存在する
                  * 入力値以前の期間のアイデアを取得
                  */
-                if (this.month !== "") {
+                else if (this.year === "" && this.month !== "" && this.day === "") {
                     axios.get('/api/termSearch/month', {
-                        params: {
-                            month: this.month
-                        }
-                    })
-                        .then(response => {
-                            console.log(response)
-                            this.ideas = response.data.monthIdea
-                        }).catch((error) => {
-                        console.log(error)
+                            params: {
+                                month: this.month
+                            }
+                        })
+                            .then(response => {
+                                console.log(response)
+                                this.$emit('close-loading');
+                                if (response.data.monthIdea.length === 0) {
+                                    this.errorMessage = true
+                                } else if (response.data.monthIdea.length !== 0) {
+                                    this.ideas = response.data.monthIdea
+                                    this.errorMessage = false;
+                                }
+                            }).catch((error) => {
+                            console.log(error)
+                        this.$emit('close-loading');
                     })
                 }
 
@@ -381,7 +555,7 @@
                  * dayにのみ入力値存在する
                  * 入力値以前の期間のアイデアを取得
                  */
-                if (this.day !== "") {
+                else if(this.year === "" && this.month === "" && this.day !== "") {
                     axios.get('/api/termSearch/day', {
                         params: {
                             day: this.day
@@ -389,9 +563,19 @@
                     })
                         .then(response => {
                             console.log(response)
-                            this.ideas = response.data.dayIdea
+                            this.$emit('close-loading');
+                            if(response.data.dayIdea.length === 0)
+                            {
+                                this.errorMessage = true
+                            }
+                            else if(response.data.dayIdea.length !== 0)
+                            {
+                                this.ideas = response.data.dayIdea
+                                this.errorMessage = false;
+                            }
                         }).catch((error) => {
                         console.log(error)
+                        this.$emit('close-loading');
                     })
                 }
 
@@ -399,17 +583,29 @@
                  * 以降のデータ検索
                  * afterにのみ入力値存在する
                  */
-                if (this.before === "" && this.after !== "") {
+                else if(this.before === "" && this.after !== "") {
                     axios.get('/api/termSearch/after', {
                         params: {
                             after: this.after
                         }
                     })
                         .then(response => {
+                            this.$emit('close-loading');
                             console.log(response)
+                            if(response.data.afterIdea.length === 0)
+                            {
+                                this.errorMessage = true
+                            }
+                            else if(response.data.afterIdea.length !== 0)
+                            {
+                                this.ideas = response.data.afterIdea
+                                this.errorMessage = false;
+                            }
                             this.ideas = response.data.afterIdea
                         }).catch((error) => {
                         console.log(error)
+                        this.$emit('close-loading');
+
                     })
                 }
 
@@ -420,17 +616,27 @@
                  *
                  *beforeにのみ入力値存在する
                  */
-                if (this.before !== null && this.after === null) {
+                else if(this.before !== null && this.after === null) {
                     axios.get('/api/termSearch/before', {
                         params: {
                             before: this.before
                         }
                     })
                         .then(response => {
+                            this.$emit('close-loading');
                             console.log(response)
-                            this.ideas = response.data.beforeIdea
+                            if(response.data.beforeIdea.length === 0)
+                            {
+                                this.errorMessage = true
+                            }
+                            else if(response.data.beforeIdea.length !== 0)
+                            {
+                                this.ideas = response.data.beforeIdea
+                                this.errorMessage = false;
+                            }
                         }).catch((error) => {
                         console.log(error)
+                        this.$emit('close-loading');
                     })
                 }
 
@@ -439,7 +645,7 @@
                      * 両方に入力値存在する
                      * 入力値の間の値段のアイデアを取得
                      */
-                    if (this.before !== "" && this.after !== ""  ) {
+                    else if(this.before !== "" && this.after !== ""  ) {
                         axios.get('/api/termSearch/middle', {
                             params: {
                                 before: this.before,
@@ -447,73 +653,74 @@
                             }
                         })
                             .then(response => {
+                                this.$emit('close-loading');
                                 console.log(response)
-                                this.ideas = response.data.middleIdea
+                                if(response.data.middleIdea.length === 0)
+                                {
+                                    this.searchedNoItems()
+                                }
+                                else if(response.data.middleIdea.length !== 0)
+                                {
+                                    this.ideas = response.data.middleIdea
+                                    this.errorMessage = false;
+                                }
                             }).catch((error) => {
                             console.log(error)
+                            this.$emit('close-loading');
                         })
                     }
 
-
             },
-
-
-            closeSearching: function () {
-                this.search = !this.search;
-                this.message = "検索する"
-            }
-
-            //
-            // allPosts(){
-            //     this.allIdeaLists = this.$store.state.ideas.allIdea;
-            // }
 
 
         },
 
         computed:{
 
+            searchedIdeas:function()
+            {
+                return this.ideas;
+            },
+
+
+            star:function(){
+
+
+                return function(stars) {
+
+                    var starReview = stars;
+
+                    if(starReview === 0)
+                    {
+                        return "ic-not-reviewed";
+                    }
+                    else if (starReview <= 0.5) {
+                        return "rate0-5"
+                    } else if (starReview > 0.5 && starReview <= 1) {
+                        return "rate1"
+                    } else if (starReview > 1 && starReview <= 1.5) {
+                        return "rate1-5"
+                    } else if (starReview > 1.5 && starReview <= 2) {
+                        return "rate2"
+                    } else if (starReview > 2 && starReview <= 2.5) {
+                        return "rate2-5"
+                    } else if (starReview > 2.5 && starReview <= 3) {
+                        return "rate3"
+                    } else if (starReview > 3 && starReview <= 3.5) {
+                        return "rate3-5"
+                    } else if (starReview > 3.5 && starReview <= 4) {
+                        return "rate4"
+                    } else if (starReview > 4 && starReview <= 4.5) {
+                        return "rate4-5"
+                    } else if (starReview > 4.5 && starReview <= 5) {
+                        return "rate5"
+                    }
+                }
+            },
+
 
         },
 
-
-
-        watch:{
-            year:function(){
-                this.month="";
-                this.day="";
-                this.before="";
-                this.after="";
-                this.TermSearch()
-            },
-            month:function(){
-                this.year="";
-                this.day="";
-                this.before="";
-                this.after="";
-                this.TermSearch()
-
-            },
-            day:function(){
-                this.year="";
-                this.month="";
-                this.before="";
-                this.after="";
-                this.TermSearch()
-            },
-            before:function(){
-                this.year="";
-                this.month="";
-                this.day="";
-                this.TermSearch()
-            },
-            after:function(){
-                this.year="";
-                this.month="";
-                this.day="";
-                this.TermSearch()
-            },
-        }
 
 
     }
@@ -542,5 +749,13 @@
     .pagination-container >>> a{
         color:black;
     }
+
+    main >>> input[type="input"]{
+        border: pink solid;
+        box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
+        font-size:18px;
+    }
+
+
 
 </style>

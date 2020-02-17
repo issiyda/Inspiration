@@ -205,8 +205,6 @@
             onFileChange(event) {
                 this.fileInfo = event.target.files[0]
                 this.createImage();
-                this.imgValidation()
-                this.saveImage();
             },
 
             createImage() {

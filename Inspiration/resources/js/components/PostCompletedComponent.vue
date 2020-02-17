@@ -63,6 +63,7 @@
 
         created() {
             this.$emit('open-loading');
+            this.ideas = this.$store.dispatch('getUserIdeas')
         },
 
         mounted()
