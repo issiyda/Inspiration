@@ -623,8 +623,8 @@
                         }
                     })
                         .then(response => {
-                            this.$emit('close-loading');
                             console.log(response)
+                            this.$emit('close-loading');
                             if(response.data.beforeIdea.length === 0)
                             {
                                 this.errorMessage = true

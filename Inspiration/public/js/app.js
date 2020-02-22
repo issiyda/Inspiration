@@ -2718,9 +2718,9 @@ __webpack_require__.r(__webpack_exports__);
                     before: this.before
                   }
                 }).then(function (response) {
-                  _this6.$emit('close-loading');
-
                   console.log(response);
+
+                  _this6.$emit('close-loading');
 
                   if (response.data.beforeIdea.length === 0) {
                     _this6.errorMessage = true;
@@ -5423,6 +5423,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -14210,10 +14211,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("footer", [
     _c("div", { staticClass: "l-footer" }, [
+      _c("h3", { staticClass: "l-footer-subject" }, [_vm._v("Inspiration")]),
+      _vm._v(" "),
       _c("div", { staticClass: "l-footer-container" }, [
         _c("div", { staticClass: "l-footer-content" }, [
           _c("div", { staticClass: "l-footer-content-items" }, [
-            _c("h3", [_vm._v("Inspiration")]),
+            _c("h3", [_vm._v("機能Menu")]),
             _vm._v(" "),
             _c(
               "p",
@@ -14261,7 +14264,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "l-footer-content" }, [
       _c("div", { staticClass: "l-footer-content-items" }, [
-        _c("h3", [_vm._v("Inspiration")]),
+        _c("h3", [_vm._v("ページMenu")]),
         _vm._v(" "),
         _c("p", [_c("a", { attrs: { href: "/" } }, [_vm._v("Topへ戻る")])]),
         _vm._v(" "),
@@ -14275,7 +14278,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "l-footer-bootm" }, [
+    return _c("div", { staticClass: "l-footer-bottom" }, [
       _c("div", { staticClass: "l-footer-copyRight" }, [
         _vm._v(
           "\n                Copyright © 2019 Inspiration. All rights reserved.\n            "
