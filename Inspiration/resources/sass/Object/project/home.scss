@@ -224,7 +224,7 @@
 
             &-transparent{
                 opacity: 0.3;
-                margin:30% auto;
+                margin:20% auto;
 
             }
 
@@ -328,6 +328,23 @@
             }
         }
     }
+}
+
+
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+////カテゴリ画像を下から上に表示
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+.js-rise-target {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s;
+}
+
+.js-slide-target{
+    opacity: 0;
+    transform: translateX(-200px);
+    transition: all 1s;
 }
 
 
