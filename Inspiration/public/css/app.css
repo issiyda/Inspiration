@@ -391,34 +391,34 @@ a {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
           flex-direction: row;
-  height: 300px;
+  height: 350px;
   justify-content: space-around;
   opacity: 0.6;
   position: relative;
 }
 
-@media screen and (max-width: 414px) {
-  .l-footer {
-    height: 250px;
-  }
-}
-
 .l-footer-subject {
   color: #A16EFF;
   font-size: 30px;
-  padding: 3%;
+  height: 25%;
+  margin-bottom: 5%;
+  padding: 2.5%;
   text-align: center;
 }
 
 .l-footer-container {
   display: -webkit-box;
   display: flex;
+  height: 30%;
   justify-content: space-around;
   width: 100%;
 }
 
 @media screen and (max-width: 414px) {
   .l-footer-container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+            flex-direction: column;
     width: 100%;
   }
 }
@@ -430,7 +430,14 @@ a {
   -webkit-box-direction: normal;
           flex-direction: row;
   justify-content: space-around;
+  margin-bottom: 5%;
   width: 50%;
+}
+
+@media screen and (max-width: 414px) {
+  .l-footer-container-menu {
+    width: 100%;
+  }
 }
 
 .l-footer-container-contact {
@@ -438,8 +445,14 @@ a {
           align-items: center;
   display: -webkit-box;
   display: flex;
-  margin-left: 5%;
+  margin-right: 5%;
   width: 30%;
+}
+
+@media screen and (max-width: 414px) {
+  .l-footer-container-contact {
+    width: 100%;
+  }
 }
 
 .l-footer-container-contact-message {
@@ -506,7 +519,7 @@ a {
 }
 
 .l-footer-copyRight {
-  bottom: 15px;
+  bottom: 1%;
   display: -webkit-box;
   display: flex;
   -webkit-box-pack: center;
@@ -1800,6 +1813,12 @@ confirm とdetailの共通部分　
   width: 100%;
 }
 
+@media screen and (max-width: 414px) {
+  .hero {
+    height: 650px;
+  }
+}
+
 .hero-item {
   display: -webkit-box;
   display: flex;
@@ -1826,6 +1845,14 @@ confirm とdetailの共通部分　
   text-align: center;
   margin: 10% auto;
   position: relative;
+  text-shadow: 2px 3px 2px #DDDDDD;
+}
+
+@media screen and (max-width: 414px) {
+  .home-header {
+    font-size: 18px;
+    width: 80%;
+  }
 }
 
 .home-header:after {
@@ -1835,10 +1862,17 @@ confirm とdetailの共通部分　
   right: 0;
   bottom: 0;
   width: 75%;
-  margin: -5px auto;
+  margin: -3% auto;
   height: 7px;
   background: -webkit-repeating-linear-gradient(-45deg, #A16EFF, #A16EFF 2px, #fff 2px, #fff 4px);
   background: repeating-linear-gradient(-45deg, #A16EFF, #A16EFF 2px, #fff 2px, #fff 4px);
+}
+
+@media screen and (max-width: 414px) {
+  .home-header:after {
+    margin: -5% auto;
+    width: 95%;
+  }
 }
 
 .home-what {
@@ -1858,6 +1892,20 @@ confirm とdetailの共通部分　
   margin: 0 auto;
 }
 
+.home-what-container:first-child,
+.home-merit-container:first-child {
+  margin-bottom: 5%;
+}
+
+@media screen and (max-width: 414px) {
+  .home-what-container,
+  .home-merit-container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+            flex-direction: column;
+  }
+}
+
 .home-what-shadow {
   background: #F5F5F5;
   position: absolute;
@@ -1865,15 +1913,63 @@ confirm とdetailの共通部分　
   height: 240px;
 }
 
-.home-what-items {
-  width: 30%;
-  margin: 0 auto;
+@media screen and (max-width: 414px) {
+  .home-what-shadow {
+    width: 230px;
+    height: 210px;
+  }
 }
 
-.home-what-items p {
+.home-what-items-top {
+  width: 30%;
+}
+
+@media screen and (max-width: 414px) {
+  .home-what-items-top {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+.home-what-items-top:nth-child(2) {
+  margin-top: 7.5%;
+}
+
+.home-what-items-top:nth-child(3) {
+  margin-top: 15%;
+}
+
+.home-what-items-top p {
   color: #FFBEDA;
   font-weight: bolder;
-  margin: 15% auto;
+  margin: 15% auto 0;
+  text-align: right;
+  width: 80%;
+}
+
+.home-what-items-bottom {
+  width: 30%;
+}
+
+@media screen and (max-width: 414px) {
+  .home-what-items-bottom {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+.home-what-items-bottom:nth-child(1) {
+  margin-top: 15%;
+}
+
+.home-what-items-bottom:nth-child(2) {
+  margin-top: 7.5%;
+}
+
+.home-what-items-bottom p {
+  color: #FFBEDA;
+  font-weight: bolder;
+  margin: 15% auto 0;
   text-align: right;
   width: 80%;
 }
@@ -1885,6 +1981,18 @@ confirm とdetailの共通部分　
   position: relative;
 }
 
+@media screen and (max-width: 414px) {
+  .home-what-item {
+    margin: 0;
+    width: 90%;
+  }
+}
+
+.home-what-item-description {
+  margin: 0 auto;
+  width: 70%;
+}
+
 .home-what-item img {
   border-radius: 2%;
   width: 260px;
@@ -1893,6 +2001,12 @@ confirm とdetailの共通部分　
   z-index: 2;
   top: 50px;
   left: 50px;
+}
+
+@media screen and (max-width: 414px) {
+  .home-what-item img {
+    left: 80px;
+  }
 }
 
 .home-merit {
@@ -1906,8 +2020,24 @@ confirm とdetailの共通部分　
   text-align: center;
 }
 
+.home-merit-evocation-item {
+  border-radius: 2% 2% 0 0;
+  margin: 0 auto 2%;
+}
+
+.home-merit-evocation-item:first-child {
+  margin: 20% auto;
+}
+
+@media screen and (max-width: 414px) {
+  .home-merit-evocation-item {
+    width: 90%;
+  }
+}
+
 .home-merit-evocation-transparent {
   opacity: 0.3;
+  margin: 30% auto;
 }
 
 .home-merit-evocation-accent {
@@ -1917,8 +2047,10 @@ confirm とdetailの共通部分　
   padding: 5%;
 }
 
-.home-merit-evocation p {
-  margin-bottom: 2%;
+@media screen and (max-width: 414px) {
+  .home-merit-evocation-accent {
+    padding: 30%;
+  }
 }
 
 .home-merit-container {
@@ -1926,9 +2058,18 @@ confirm とdetailの共通部分　
 }
 
 .home-merit-item {
-  margin: 0 auto;
+  border: solid 0.5px #f6f5f4;
+  border-radius: 2% 2% 0 0;
+  margin: 5% auto;
   text-align: center;
   top: 5%;
+  width: 30%;
+}
+
+@media screen and (max-width: 414px) {
+  .home-merit-item {
+    width: 80%;
+  }
 }
 
 .home-merit-item h3 {
@@ -1936,9 +2077,8 @@ confirm とdetailの共通部分　
 }
 
 .home-merit-item img {
-  border-radius: 2%;
-  width: 60%;
-  height: 50%;
+  border-radius: 2% 2% 0 0;
+  width: 100%;
 }
 
 .home-merit-item p {
@@ -1948,7 +2088,13 @@ confirm とdetailの共通部分　
   font-weight: bold;
   margin: 0 auto;
   padding: 3%;
-  width: 50%;
+  width: 100%;
+}
+
+@media screen and (max-width: 414px) {
+  .home-merit-item p {
+    width: 100%;
+  }
 }
 
 .home-merit-item-left {
@@ -1976,11 +2122,24 @@ confirm とdetailの共通部分　
   margin: 0 auto;
 }
 
+@media screen and (max-width: 414px) {
+  .home-recommend-word {
+    font-size: 30px;
+    width: 80%;
+  }
+}
+
 .home-recommend-button {
   border: none;
   text-align: center;
   margin: 5% auto;
   width: 20%;
+}
+
+@media screen and (max-width: 414px) {
+  .home-recommend-button {
+    width: 40%;
+  }
 }
 
 .c-form-container-passReminder {

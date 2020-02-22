@@ -35,12 +35,12 @@
                 </div>
             </div>
 
-        <div class="l-footer-bootm">
+    </div>
+
+        <div class="l-footer-bottom">
             <div class="l-footer-copyRight">
                 Copyright © 2019 Inspiration. All rights reserved.
             </div>
         </div>
-
-    </div>
 
 </footer>

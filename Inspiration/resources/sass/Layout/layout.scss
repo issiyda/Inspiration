@@ -127,43 +127,55 @@
   background:$color_base;
   color:#fff;
   flex-direction: row;
-  height:300px;
+  height:350px;
   justify-content: space-around;
   opacity: 0.6;
   position:relative;
 
-  @include mq{
-    height:250px;
-  }
-
     &-subject{
         color:$color_accent;
         font-size:$font-size_xxl;
-        padding:3%;
+        height:25%;
+        margin-bottom: 5%;
+        padding:2.5%;
         text-align:center;
     }
 
   &-container{
     display:flex;
+      height:30%;
     justify-content: space-around;
     width:100%;
 
     @include mq{
-      width:100%;
+        flex-direction:column;
+        width:100%;
     }
 
       &-menu{
           display: flex;
           flex-direction: row;
           justify-content:space-around;
-          width:50%
+          margin-bottom: 5%;
+          width:50%;
+
+          @include mq{
+          width:100%;
+      }
+
+
+
       }
 
       &-contact {
           align-items: center;
           display: flex;
-          margin-left:5%;
+          margin-right:5%;
           width: 30%;
+
+          @include mq{
+              width:100%;
+          }
 
           &-message {
               font-size: $font-size_xxl;
@@ -229,7 +241,7 @@
   }
 
   &-copyRight{
-    bottom:$space_l;
+    bottom:1%;
     display: flex;
     justify-content: center;
     margin: 0 auto;
