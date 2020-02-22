@@ -32,7 +32,6 @@
         </div>
     @endif
 
-    {{--<nav-bar-component></nav-bar-component>--}}
 
     <div class ="nav">
 

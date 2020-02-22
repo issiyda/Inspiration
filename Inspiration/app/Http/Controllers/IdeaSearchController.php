@@ -139,8 +139,9 @@ class   IdeaSearchController extends Controller
         {
 
             $afterTerm = new Carbon($request->input('after'));
+            $trueAfterTerm = $afterTerm->addDays(1);
 
-            $afterIdea = Idea::where('created_at', '>=', $afterTerm)->get();
+            $afterIdea = Idea::where('created_at', '>=', $trueAfterTerm)->get();
 
             return response()->json([
                 'afterIdea' => $afterIdea
@@ -164,9 +165,10 @@ class   IdeaSearchController extends Controller
             $afterTerm = new Carbon($request->input('after'));
 
             $trueBeforeTerm = $beforeTerm->addDays(1);
+            $trueAfterTerm = $afterTerm->addDays(1);
 
             $middleIdea = Idea::where('created_at', '<=', $trueBeforeTerm)
-                ->where('created_at','>=',$afterTerm)->get();
+                ->where('created_at','>=',$trueAfterTerm)->get();
 
             return response()->json([
                 'middleIdea' => $middleIdea
