@@ -401,9 +401,14 @@ a {
   color: #A16EFF;
   font-size: 30px;
   height: 25%;
-  margin-bottom: 5%;
   padding: 2.5%;
   text-align: center;
+}
+
+@media screen and (max-width: 414px) {
+  .l-footer-subject {
+    margin-bottom: 10%;
+  }
 }
 
 .l-footer-container {
@@ -2037,7 +2042,7 @@ confirm とdetailの共通部分　
 
 .home-merit-evocation-transparent {
   opacity: 0.3;
-  margin: 30% auto;
+  margin: 20% auto;
 }
 
 .home-merit-evocation-accent {
@@ -2140,6 +2145,22 @@ confirm とdetailの共通部分　
   .home-recommend-button {
     width: 40%;
   }
+}
+
+.js-rise-target {
+  opacity: 0;
+  -webkit-transform: translateY(50px);
+          transform: translateY(50px);
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+.js-slide-target {
+  opacity: 0;
+  -webkit-transform: translateX(-200px);
+          transform: translateX(-200px);
+  -webkit-transition: all 1s;
+  transition: all 1s;
 }
 
 .c-form-container-passReminder {

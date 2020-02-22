@@ -107,8 +107,8 @@
             <div class="home-what">
 
                 <div class="home-what-container">
-                    <div class="home-what-items-top">
-                    <div class="home-what-item js-rise-target">
+                    <div class="home-what-items-top js-rise-target">
+                    <div class="home-what-item">
                         <div class="home-what-shadow"></div>
                         <img src="{{asset(('/img/ec.jpg'))}}" alt="">
                     </div>
@@ -116,18 +116,18 @@
                         <div class="home-what-item-description">世の中の商品が集まるECサイトのアイデア</div>
                     </div>
 
-                    <div class="home-what-items-top">
-                    <div class="home-what-item  js-rise-target">
+                    <div class="home-what-items-top js-rise-target">
+                    <div class="home-what-item">
                         <div class="home-what-shadow"></div>
                         <img src="{{asset(('/img/sns.jpg'))}}" alt="">
                         </div>
                         <p>SNS</p>
-                        <div class="home-what-item-description">ビジネスや自己発信で用いられる流行りのSNSのアイデア</div>
+                        <div class="home-what-item-description">ビジネスや自己発信で用いる流行りのSNSのアイデア</div>
                     </div>
 
 
-                    <div class="home-what-items-top">
-                    <div class="home-what-item  js-rise-target">
+                    <div class="home-what-items-top js-rise-target">
+                    <div class="home-what-item">
                         <div class="home-what-shadow"></div>
                         <img src="{{asset(('/img/matching.jpg'))}}" alt="">
                         </div>
@@ -140,8 +140,8 @@
                 <div class="home-what-container">
 
 
-                    <div class="home-what-items-bottom">
-                        <div class="home-what-item  js-rise-target">
+                    <div class="home-what-items-bottom js-rise-target">
+                        <div class="home-what-item">
                             <div class="home-what-shadow"></div>
                             <img src="{{asset(('/img/board.jpg'))}}" alt="">
                         </div>
@@ -149,8 +149,8 @@
                         <div class="home-what-item-description">様々な情報が飛び交う掲示板に対してのアイデア</div>
                     </div>
 
-                    <div class="home-what-items-bottom">
-                        <div class="home-what-item  js-rise-target">
+                    <div class="home-what-items-bottom js-rise-target">
+                        <div class="home-what-item">
                             <div class="home-what-shadow"></div>
                             <img src="{{asset(('/img/infoplaner.jpg'))}}" alt="">
                         </div>
@@ -158,13 +158,13 @@
                         <div class="home-what-item-description">自分の持つ知識を使う情報発信に関するアイデア</div>
                     </div>
 
-                    <div class="home-what-items-bottom">
-                        <div class="home-what-item  js-rise-target">
+                    <div class="home-what-items-bottom js-rise-target">
+                        <div class="home-what-item">
                             <div class="home-what-shadow"></div>
                             <img src="{{asset(('/img/sharing.jpg'))}}" alt="">
                         </div>
                         <p>シェアリング</p>
-                        <div class="home-what-item-description">ITの普及に伴うのシェアリングに関するアイデア</div>
+                        <div class="home-what-item-description">ITの普及に伴うシェアリングに関するアイデア</div>
                     </div>
                 </div>
 
@@ -178,13 +178,13 @@
 
                 <div class="home-merit-evocation">
                     <p class="home-merit-evocation-item">自分のアイデアって普段どう捉えていますか？？</p>
-                    <p class="home-merit-evocation-transparent">自分のアイデアってあまり自信無いんだよな...</p>
+                    <p class="home-merit-evocation-transparent js-rise-target">自分のアイデアってあまり自信無いんだよな...</p>
                     <p class="home-merit-evocation-item">そんなあなたのアイデアも実はだれかにとっては宝の山だったりします。</p>
                     <p class="home-merit-evocation-item">そんなアイデアを投稿するメリット</p>
                     <p class ="home-merit-evocation-accent">5点</p>
                     <p class="home-merit-evocation-item">挙げてみました。</p>
                 </div>
-                <div class="home-merit-container">
+                <div class="home-merit-container js-slide-target">
                     <div class="home-merit-item">
                         <img src="{{asset(('/img/influencer.jpg'))}}" alt="">
                         <h3>影響力を持てる</h3>
@@ -202,7 +202,8 @@
                         <h3>アイデアがお金になる</h3>
                         <p>頭の中にあるだけであればガラクタ同然。誰かの手に渡ることで価値となりお金になります。</p>
                     </div>
-
+                </div>
+                <div class="home-merit-container js-slide-target">
                     <div class="home-merit-item">
                         <img src="{{asset(('/img/motivation.jpg'))}}" alt="">
                         <h3>モチベーション高められる</h3>
@@ -215,6 +216,7 @@
                         <p>どういう根拠でそのアイデアが上手くいくか論拠の提示で思考力上がります。</p>
                     </div>
                 </div>
+            </div>
             </div>
 
             <div class="home-recommend">
@@ -232,6 +234,7 @@
     </div>
 
 </main>
+
 
 @extends('layouts/footer')
 

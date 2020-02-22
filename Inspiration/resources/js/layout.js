@@ -1,0 +1,48 @@
+$(document).ready(function(){
+
+    //カテゴリ画像を下から上に表示
+
+
+        $(window).scroll(function () {
+            console.log('aaa')
+
+
+            $('.js-rise-target').each(function () {
+                var target = $(this).offset().top;
+                var scroll = $(window).scrollTop();
+                var windowHeight = $(window).height();
+
+                // PC用
+                if(scroll > target - windowHeight + 350)
+                {
+                    $(this).css('opacity',1);
+                    $(this).css('transform','translateY(0)');
+
+                }
+                //スマホ用
+
+
+
+            })
+
+            //メリット画像を左から横にスライド表示
+            $('.js-slide-target').each(function(){
+                var target = $(this).offset().top;
+                var scroll = $(window).scrollTop();
+                var windowHeight = $(window).height();
+
+                if(scroll > target - windowHeight + 350)
+                {
+                    $(this).css('opacity',1);
+                    $(this).css('transform','translateX(0)');
+                }
+
+            })
+
+
+        })
+
+
+
+
+});
