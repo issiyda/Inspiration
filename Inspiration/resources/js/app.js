@@ -50,6 +50,9 @@ const app = new Vue({
                 input: ['YYYY-MM-DD'],
             },
             selectedDate: null,
+            year:"",
+            month:"",
+            day:""
 
         }
 

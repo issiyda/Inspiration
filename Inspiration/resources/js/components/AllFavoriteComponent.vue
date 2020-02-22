@@ -15,23 +15,18 @@
                 <paginate name="paginate-log" :list="favoriteIdeas" :per="15">
                     <div v-for="favoriteIdea in paginated('paginate-log')" class="ic-card">
                         <router-link :to="{name:'postDetail', params:{
-                        ideaId:favoriteIdea.id,
+                        ideaId:favoriteIdea.idea_id,
                         userId:favoriteIdea.user_id
                         }}" class ="ic-a" href="#">
                             <h4 class ="f-h4">{{favoriteIdea.title}}</h4>
                             <div class="ic-img">
-                                <!--                            <img src="../images/staff6.jpg" alt="idea" class="ic-img-item">-->
+                                <img :src="require(`../assets${favoriteIdea.img}`)" alt="favoriteIdeaimg" class="ic-img-item">
                             </div>
                             <div class="ic-review">
                                 <span class ="ic-span">評価</span>
                                 <div>
-                                    <i class="fas fa-star ic-star"></i>
-                                    <i class="fas fa-star ic-star"></i>
-                                </div>
-                                <div>
-                                    <i class="fas fa-star ic-star"></i>
-                                    <i class="fas fa-star ic-star"></i>
-                                    <i class="fas fa-star ic-star"></i>
+                                    <span class ="ic-star-review" v-bind:class="star(favoriteIdea.averageReview)"></span>
+                                    <span class v-if="star(favoriteIdea.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
                                 </div>
                             </div>
                             <div class="ic-desc">
@@ -103,6 +98,8 @@
 
             favDelete:function(userId,ideaId){
 
+                this.$emit('open-loading');
+
                 this.errorMessage ="";
                 axios.post('/api/favDelete',{
                     userId:userId,
@@ -110,19 +107,56 @@
                 }).then((response) =>{
                     console.log(response)
                     this.ideas = this.$store.dispatch('getUserIdeas')
+                        .then(this.$emit('close-loading'));
+
                 }).catch((error) =>{
                     console.log(error)
                     this.errorMessage = "お気に入り解除できませんでした" +
                         "時間を置いてお試し下さい"
-            })
+                            .then(this.$emit('close-loading'));
+
+                })
 
             }
         },
 
-        computed:{
+        computed: {
 
-            favoriteIdeas(){
+            favoriteIdeas() {
                 return this.$store.state.ideas.favIdea;
+            },
+
+            star: function () {
+
+
+                return function (stars) {
+
+                    var starReview = stars;
+
+                    if (starReview === 0) {
+                        return "ic-not-reviewed";
+                    } else if (starReview <= 0.5) {
+                        return "rate0-5"
+                    } else if (starReview > 0.5 && starReview <= 1) {
+                        return "rate1"
+                    } else if (starReview > 1 && starReview <= 1.5) {
+                        return "rate1-5"
+                    } else if (starReview > 1.5 && starReview <= 2) {
+                        return "rate2"
+                    } else if (starReview > 2 && starReview <= 2.5) {
+                        return "rate2-5"
+                    } else if (starReview > 2.5 && starReview <= 3) {
+                        return "rate3"
+                    } else if (starReview > 3 && starReview <= 3.5) {
+                        return "rate3-5"
+                    } else if (starReview > 3.5 && starReview <= 4) {
+                        return "rate4"
+                    } else if (starReview > 4 && starReview <= 4.5) {
+                        return "rate4-5"
+                    } else if (starReview > 4.5 && starReview <= 5) {
+                        return "rate5"
+                    }
+                }
             },
         }
     }

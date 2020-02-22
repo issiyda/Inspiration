@@ -41,6 +41,14 @@
 // */
 //Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
+Route::get('/',function(){
+    return view('home');
+});
+
+Route::get('/home',function(){
+    return view('home');
+});
+
 Route::post('/home',function(){
     return view('home');
 });
@@ -49,17 +57,16 @@ Route::get('/users','UserController@getUserData');
 
 Route::post('/mypage','StripeController@charge');
 
-
-Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
-
 Auth::routes();
 
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/mypage', "InspirationController@mypage")->name('mypage');
 
 Route::get('/{any}', function () {
-    return view('home');
+    return redirect('/mypage');
 })->where('any', '.*');
+
 
 
 

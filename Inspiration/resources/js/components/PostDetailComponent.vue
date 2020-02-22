@@ -32,14 +32,13 @@
                                 <!-- hoverしたら画像をアップロードの文字が浮き上がって画像が薄暗く -->
                             </label>
                         </div>
-                        <div class="postDetail-container-img-left">
+                        <div class="ic postDetail-container-img-left">
                             <label class ="c-label" for="img">平均評価</label>
-                            ★3.3
+                            <span class="ic-star-review" v-bind:class="star(detail.averageReview)"></span>
+                            <span class v-if="star(detail.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
                         </div>
-
                     </div>
 
-                    平均の評価を計算するロジック記入
 
 
 
@@ -52,9 +51,8 @@
                     </div>
 
                     <label for="contents" class="c-label">内容</label>
-
                     <div id="contents" class="confirm-text">
-                        <div v-if="buying">
+                        <div v-if="contributorFlag === true || buying === true">
                             {{detail.content}}
                         </div>
                         <div v-else>
@@ -69,11 +67,12 @@
                         <i id ="fav" :class="{'fas': true, 'fa-heart':true ,'fa-2x':true,'fav': favActive}" @click="favSwitch($store.state.users.id,detail.id)"></i>
                     </div>
 
-                    <div v-if="contributorFlag">
-                        <label for="purchase" class="c-label">購入</label>
-                    <div id="purchase" class="c-button">
-                        購入する
+                    <label for="purchase" class="c-label">購入</label>
+
+                    <div v-if="contributorFlag === true" class="confirm-text">
+                        アイデアご提供ありがとうございます
                     </div>
+                    <div v-else-if="contributorFlag === false && buying === false">
                         <form action="/mypage" method="post">
                             <input type="hidden" name="postId" :value="detail.id">
                             <input type="hidden" name="userId" :value="userId">
@@ -92,10 +91,13 @@
                             </div>
                         </form>
                     </div>
+                    <div v-else-if="buying === true" class="confirm-text">
+                        ご購入ありがとうございます
+                    </div>
 
-                    <div v-else>
+                    <div v-if="!detail.bought_flag && ideaUserId === userId">
                     <label for="delete" class="c-label">削除</label>
-                    <div id="delete" class="c-button" v-show="deleteState" @click="appearForm()">
+                    <div id="delete" class="c-button" v-show="deleteState" @click="appearForm()" :disabled="detail.bought_flag">
                         アイデア削除
                     </div>
                     </div>
@@ -128,7 +130,8 @@
                                         userId:review.user_id
                     }}">
                         <div class="review-img">
-                            <img :src="require(`../assets${review.img}`)" alt="reviewUserImg">
+                            <img v-if="review.img !== null" :src="require(`../assets${review.img}`)" alt="reviewUserImg">
+                            <img v-else :src="require(`../assets/profileImages/account.jpeg`)" alt="reviewUserImg">
                             <div id="userName" class="review-img-name">
                                 {{review.name}}
                                 <p>さん</p>
@@ -371,13 +374,16 @@
                 favActive:"",
                 user:{},
                 favState:"",
-                contributorFlag:true,
+                contributorFlag:false,
                 reviewed:false,
                 ideaReviews:{},
                 ideaUserId:"",
                 userId:"",
                 deleteState:true,
+                //他者の投稿を購入しているか
                 buying:false,
+                //自分の投稿が購入されているか
+                bought_flag:false,
                 stars:{
                     oneStar:false,
                     twoStars:false,
@@ -400,7 +406,6 @@
             this.$emit('open-loading');
             this.user = this.$store.dispatch('getUsers');
             this.ideaId = this.$route.params.ideaId;
-            this.ideaUserId = this.$route.params.userId;
 
 
             /**
@@ -422,7 +427,7 @@
             this.$nextTick(function(){
             this.getState();
             this.checkCategory();
-            this.contributorJudge();
+            // this.contributorJudge();
             this.checkBuying;
             this.reviewedJudge();
             this.getReviews();
@@ -430,8 +435,7 @@
             })
         },
 
-        beforeUpdate() {
-            this.$emit('close-loading');
+        updated() {
         },
 
 
@@ -441,17 +445,18 @@
 
 
             favSwitch: function (userId, ideaId) {
+                this.$emit('open-loading');
                 axios.post('/api/favorite/',
                     {
                         userId: userId,
                         ideaId: ideaId
                     }).then((response) => {
                     console.log(response)
+                    this.getState();
                 }).catch((error) => {
                     console.log(error);
                 });
 
-                this.getState();
             },
 
             /**
@@ -466,9 +471,12 @@
                 })
                     .then((response) => {
                         this.favState = response.data
+                        this.$emit('close-loading');
                     }).catch((error) => {
                     console.log(error);
+                    this.$emit('close-loading');
                 });
+
             },
 
             //カテゴリーチェック
@@ -495,9 +503,11 @@
             //投稿者の投稿か確認
             contributorJudge: function () {
                 if (this.$store.state.users.id === this.ideaUserId) {
-                    console.log(this.$store.state.users.id === this.ideaUserId)
-                    this.contributorFlag = false;
+                    this.contributorFlag = true;
                 }
+
+                //購入されてるか確認
+                // this.bought = true;
             },
 
             //既にレビューしているか確認
@@ -516,6 +526,8 @@
                 })
 
             },
+
+
 
             //レビュー取得
             getReviews:function(){
@@ -606,6 +618,7 @@
                     //レビュー投稿処理
                 } else if (this.reviewNumber !== "" && this.reviewComment !== "") {
                     //二度送信できないようにする処理
+                    this.$emit('open-loading');
                     this.processing = true;
                     //投稿処理
                     setTimeout(()=>{
@@ -618,6 +631,7 @@
                         }).then((response)=>{
                             console.log(response);
                         this.processing = false;
+                        this.$emit('close-loading');
                         this.$router.push({ name: 'reviewCompleted',params:
                                     {
                                         ideaId:this.ideaId,
@@ -625,8 +639,10 @@
                                         title:this.title
                                     }})
                             }).catch((error) =>{
-                            console.log(error);
+                        this.$emit('close-loading');
+                        console.log(error);
                             this.reviewErrorMessage = '時間を置いてお試し下さい'
+                            this.processing = false;
                     });
                     },2000)
                 }
@@ -640,6 +656,8 @@
 
         computed:{
 
+            //投稿の内容見れるか確認
+            // 購入者もしくは起草者
             //購入しているか確認
             checkBuying:function(){
                 axios.get('/api/buyingJudge',{
@@ -655,9 +673,15 @@
                 });
             },
 
-            getReviewAverage:function()
+            canSeeContents: function()
             {
-
+                //投稿者の投稿,購入者なら内容見れる
+                if(this.contributorFlag === true && this.buying === true) {
+                    return true
+                }else if(this.contributorFlag === false && this.buying === false)
+                {
+                    return false
+                }
             },
 
 
@@ -666,12 +690,52 @@
                 if(this.buying === false && this.reviewed === false)
                 {
                     return 'レビューは購入者のみ可能です'
+
                 }
                 else if(this.buying === true && this.reviewed === true)
                 {
                     return 'レビューは一度のみ可能です'
+
                 }
-            }
+                this.$emit('close-loading');
+
+            },
+
+            star:function(){
+
+
+                return function(stars) {
+
+                    var starReview = stars;
+
+                    if(starReview === 0)
+                    {
+                        return "ic-not-reviewed";
+                    }
+                    else if (starReview <= 0.5) {
+                        return "rate0-5"
+                    } else if (starReview > 0.5 && starReview <= 1) {
+                        return "rate1"
+                    } else if (starReview > 1 && starReview <= 1.5) {
+                        return "rate1-5"
+                    } else if (starReview > 1.5 && starReview <= 2) {
+                        return "rate2"
+                    } else if (starReview > 2 && starReview <= 2.5) {
+                        return "rate2-5"
+                    } else if (starReview > 2.5 && starReview <= 3) {
+                        return "rate3"
+                    } else if (starReview > 3 && starReview <= 3.5) {
+                        return "rate3-5"
+                    } else if (starReview > 3.5 && starReview <= 4) {
+                        return "rate4"
+                    } else if (starReview > 4 && starReview <= 4.5) {
+                        return "rate4-5"
+                    } else if (starReview > 4.5 && starReview <= 5) {
+                        return "rate5"
+                    }
+                }
+            },
+
             },
 
 
@@ -688,12 +752,16 @@
             detail: function()
             {
                 this.title = this.detail.idea[0].title;
+                this.ideaUserId = this.detail.idea[0].user_id;
+                this.contributorJudge();
                 this.userId = this.$store.state.users.id;
             }
 
 
 
         },
+
+
 
 
 

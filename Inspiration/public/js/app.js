@@ -1913,14 +1913,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllBuyComponent",
   data: function data() {
@@ -1939,6 +1931,35 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     buyingIdeas: function buyingIdeas() {
       return this.$store.state.ideas.buyingIdea;
+    },
+    star: function star() {
+      return function (stars) {
+        var starReview = stars;
+
+        if (starReview === 0) {
+          return "ic-not-reviewed";
+        } else if (starReview <= 0.5) {
+          return "rate0-5";
+        } else if (starReview > 0.5 && starReview <= 1) {
+          return "rate1";
+        } else if (starReview > 1 && starReview <= 1.5) {
+          return "rate1-5";
+        } else if (starReview > 1.5 && starReview <= 2) {
+          return "rate2";
+        } else if (starReview > 2 && starReview <= 2.5) {
+          return "rate2-5";
+        } else if (starReview > 2.5 && starReview <= 3) {
+          return "rate3";
+        } else if (starReview > 3 && starReview <= 3.5) {
+          return "rate3-5";
+        } else if (starReview > 3.5 && starReview <= 4) {
+          return "rate4";
+        } else if (starReview > 4 && starReview <= 4.5) {
+          return "rate4-5";
+        } else if (starReview > 4.5 && starReview <= 5) {
+          return "rate5";
+        }
+      };
     }
   }
 });
@@ -1954,11 +1975,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2052,22 +2068,52 @@ __webpack_require__.r(__webpack_exports__);
     favDelete: function favDelete(userId, ideaId) {
       var _this = this;
 
+      this.$emit('open-loading');
       this.errorMessage = "";
       axios.post('/api/favDelete', {
         userId: userId,
         ideaId: ideaId
       }).then(function (response) {
         console.log(response);
-        _this.ideas = _this.$store.dispatch('getUserIdeas');
+        _this.ideas = _this.$store.dispatch('getUserIdeas').then(_this.$emit('close-loading'));
       })["catch"](function (error) {
         console.log(error);
-        _this.errorMessage = "お気に入り解除できませんでした" + "時間を置いてお試し下さい";
+        _this.errorMessage = "お気に入り解除できませんでした" + "時間を置いてお試し下さい".then(_this.$emit('close-loading'));
       });
     }
   },
   computed: {
     favoriteIdeas: function favoriteIdeas() {
       return this.$store.state.ideas.favIdea;
+    },
+    star: function star() {
+      return function (stars) {
+        var starReview = stars;
+
+        if (starReview === 0) {
+          return "ic-not-reviewed";
+        } else if (starReview <= 0.5) {
+          return "rate0-5";
+        } else if (starReview > 0.5 && starReview <= 1) {
+          return "rate1";
+        } else if (starReview > 1 && starReview <= 1.5) {
+          return "rate1-5";
+        } else if (starReview > 1.5 && starReview <= 2) {
+          return "rate2";
+        } else if (starReview > 2 && starReview <= 2.5) {
+          return "rate2-5";
+        } else if (starReview > 2.5 && starReview <= 3) {
+          return "rate3";
+        } else if (starReview > 3 && starReview <= 3.5) {
+          return "rate3-5";
+        } else if (starReview > 3.5 && starReview <= 4) {
+          return "rate4";
+        } else if (starReview > 4 && starReview <= 4.5) {
+          return "rate4-5";
+        } else if (starReview > 4.5 && starReview <= 5) {
+          return "rate5";
+        }
+      };
     }
   }
 });
@@ -2249,6 +2295,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllIdeaComponent",
   data: function data() {
@@ -2256,7 +2334,8 @@ __webpack_require__.r(__webpack_exports__);
       ideas: {},
       down: "",
       top: "",
-      message: "検索する",
+      closingMessage: "検索する",
+      openingMessage: "検索タブ閉じる",
       search: true,
       higher: "",
       lower: "",
@@ -2281,19 +2360,23 @@ __webpack_require__.r(__webpack_exports__);
       before: "",
       after: "",
       //paginate用
-      paginate: ['paginate-log']
+      paginate: ['paginate-log'],
+      categorySelected: false,
+      priceSelected: false,
+      dateSelected: false,
+      errorMessage: false,
+      noMatchMessage: '条件に該当するアイデアがありませんでした'
     };
-  },
-  mounted: function mounted() {
-    this.ideas = this.$store.state.ideas.allIdea;
   },
   created: function created() {
     this.$emit('open-loading');
     this.ideas = this.$store.dispatch('getUserIdeas');
   },
-  beforeUpdate: function beforeUpdate() {
+  mounted: function mounted() {
+    this.ideas = this.$store.state.ideas.allIdea;
     this.$emit('close-loading');
   },
+  updated: function updated() {},
   filters: {
     customformat: function customformat(value) {
       return moment(value).format('YYYY-MM-DD');
@@ -2303,6 +2386,9 @@ __webpack_require__.r(__webpack_exports__);
   //     this.$emit('close-loading');
   // },
   methods: {
+    reset: function reset() {
+      this.year = "".thie.month = "";
+    },
     customFormatter: function customFormatter(date) {
       return moment(date).format('YYYY-MM-DD');
     },
@@ -2323,7 +2409,25 @@ __webpack_require__.r(__webpack_exports__);
     },
     searching: function searching() {
       this.search = !this.search;
-      this.message = "検索タブ閉じる";
+    },
+    closeSearching: function closeSearching() {
+      this.search = !this.search;
+    },
+    //検索切り替え
+    categorySelect: function categorySelect() {
+      this.categorySelected = true;
+      this.priceSelected = false;
+      this.dateSelected = false;
+    },
+    priceSelect: function priceSelect() {
+      this.categorySelected = false;
+      this.priceSelected = true;
+      this.dateSelected = false;
+    },
+    dateSelect: function dateSelect() {
+      this.categorySelected = false;
+      this.priceSelected = false;
+      this.dateSelected = true;
     },
 
     /**
@@ -2334,38 +2438,59 @@ __webpack_require__.r(__webpack_exports__);
     searchCategory: function searchCategory(category_id) {
       var _this = this;
 
+      this.$emit('open-loading');
       axios.get('/api/categorySearch', {
         params: {
           categoryId: category_id
         }
       }).then(function (response) {
-        console.log(response);
-        _this.ideas = response.data.categoryIdea;
+        console.log(response.data.categoryIdea);
+
+        if (response.data.categoryIdea.length === 0) {
+          _this.errorMessage = true;
+        } else {
+          _this.ideas = response.data.categoryIdea;
+          _this.errorMessage = false;
+        }
+
+        _this.$emit('close-loading');
       })["catch"](function (error) {
         console.log(error);
+
+        _this.$emit('close-loading');
       });
     },
     priceSearch: function priceSearch() {
       var _this2 = this;
 
+      this.$emit('open-loading');
       /**
        * 以上の方にのみ入力値存在する
        * 入力値以上の値段のアイデアを取得
        */
+
       if (this.higher !== null && this.lower === "") {
         axios.get('/api/priceSearch/higher', {
           params: {
             higherPrice: this.higher
           }
         }).then(function (response) {
-          console.log(response);
-          _this2.ideas = response.data.higherIdea;
+          console.log(response.data.higherIdea);
+
+          if (response.data.higherIdea.length === 0) {
+            _this2.searchedNoItems();
+          } else if (response.data.higherIdea.length !== 0) {
+            _this2.ideas = response.data.higherIdea;
+            _this2.errorMessage = false;
+
+            _this2.$emit('close-loading');
+          }
         })["catch"](function (error) {
           console.log(error);
         });
       }
       /**
-       * 以下の方にのみ入力値存在する
+       * 円以下の方にだけ入力値存在する
        * 入力値以下値段のアイデアを取得
        */
       else if (this.higher === "" && this.lower !== null) {
@@ -2375,7 +2500,14 @@ __webpack_require__.r(__webpack_exports__);
             }
           }).then(function (response) {
             console.log(response);
-            _this2.ideas = response.data.lowerIdea;
+
+            if (response.data.lowerIdea.length === 0) {
+              _this2.searchedNoItems();
+            } else if (response.data.lowerIdea.length !== 0) _this2.ideas = response.data.lowerIdea;
+
+            _this2.errorMessage = false;
+
+            _this2.$emit('close-loading');
           })["catch"](function (error) {
             console.log(error);
           });
@@ -2391,167 +2523,278 @@ __webpack_require__.r(__webpack_exports__);
                 higherPrice: this.higher
               }
             }).then(function (response) {
-              console.log(response);
-              _this2.ideas = response.data.middleIdea;
+              console.log(response.data.middleIdea);
+
+              if (response.data.middleIdea.length === 0) {
+                _this2.searchedNoItems();
+              } else if (response.data.middleIdea.length !== 0) {
+                _this2.$emit('close-loading');
+
+                _this2.errorMessage = false;
+                _this2.ideas = response.data.middleIdea;
+              }
             })["catch"](function (error) {
               console.log(error);
             });
           }
     },
-    TermSearch: function TermSearch() {
+    termYearSearch: function termYearSearch() {
       var _this3 = this;
 
+      this.$emit('open-loading');
+      this.month = "";
+      this.day = "";
+      this.before = "";
+      this.after = "";
+
+      if (this.year !== "") {
+        this.termSearch();
+        this.$nextTick(function () {
+          _this3.year = "";
+          _this3.search = true;
+        });
+      }
+
+      this.$emit('close-loading');
+    },
+    termMonthSearch: function termMonthSearch() {
+      var _this4 = this;
+
+      this.$emit('open-loading');
+      this.year = "";
+      this.day = "";
+      this.before = "";
+      this.after = "";
+
+      if (this.month !== "") {
+        this.termSearch();
+        this.$nextTick(function () {
+          _this4.month = "";
+          _this4.search = true;
+        });
+      }
+
+      this.$emit('close-loading');
+    },
+    termDaySearch: function termDaySearch() {
+      var _this5 = this;
+
+      this.$emit('open-loading');
+      this.year = "";
+      this.month = "";
+      this.before = "";
+      this.after = "";
+
+      if (this.day !== "") {
+        this.termSearch();
+        this.$nextTick(function () {
+          _this5.day = "";
+          _this5.search = true;
+        });
+      }
+
+      this.$emit('close-loading');
+    },
+    termSearch: function termSearch() {
+      var _this6 = this;
+
+      this.$emit('open-loading');
+      this.errorMessage = false;
       /**
        * yearにのみ入力値存在する
        * 入力値以前の期間のアイデアを取得
        */
-      if (this.year !== "") {
+
+      if (this.year !== "" && this.month === "" && this.day === "") {
         axios.get('/api/termSearch/year', {
           params: {
             year: this.year
           }
         }).then(function (response) {
           console.log(response);
-          _this3.ideas = response.data.yearIdea;
+
+          _this6.$emit('close-loading');
+
+          if (response.data.yearIdea.length === 0) {
+            _this6.errorMessage = true;
+          } else if (response.data.yearIdea.length !== 0) {
+            _this6.ideas = response.data.yearIdea;
+            _this6.errorMessage = false;
+          }
         })["catch"](function (error) {
           console.log(error);
+
+          _this6.$emit('close-loading');
         });
       }
       /**
        * monthにのみ入力値存在する
        * 入力値以前の期間のアイデアを取得
        */
+      else if (this.year === "" && this.month !== "" && this.day === "") {
+          axios.get('/api/termSearch/month', {
+            params: {
+              month: this.month
+            }
+          }).then(function (response) {
+            console.log(response);
 
+            _this6.$emit('close-loading');
 
-      if (this.month !== "") {
-        axios.get('/api/termSearch/month', {
-          params: {
-            month: this.month
+            if (response.data.monthIdea.length === 0) {
+              _this6.errorMessage = true;
+            } else if (response.data.monthIdea.length !== 0) {
+              _this6.ideas = response.data.monthIdea;
+              _this6.errorMessage = false;
+            }
+          })["catch"](function (error) {
+            console.log(error);
+
+            _this6.$emit('close-loading');
+          });
+        }
+        /**
+         * dayにのみ入力値存在する
+         * 入力値以前の期間のアイデアを取得
+         */
+        else if (this.year === "" && this.month === "" && this.day !== "") {
+            axios.get('/api/termSearch/day', {
+              params: {
+                day: this.day
+              }
+            }).then(function (response) {
+              console.log(response);
+
+              _this6.$emit('close-loading');
+
+              if (response.data.dayIdea.length === 0) {
+                _this6.errorMessage = true;
+              } else if (response.data.dayIdea.length !== 0) {
+                _this6.ideas = response.data.dayIdea;
+                _this6.errorMessage = false;
+              }
+            })["catch"](function (error) {
+              console.log(error);
+
+              _this6.$emit('close-loading');
+            });
           }
-        }).then(function (response) {
-          console.log(response);
-          _this3.ideas = response.data.monthIdea;
-        })["catch"](function (error) {
-          console.log(error);
-        });
-      }
-      /**
-       * dayにのみ入力値存在する
-       * 入力値以前の期間のアイデアを取得
-       */
-
-
-      if (this.day !== "") {
-        axios.get('/api/termSearch/day', {
-          params: {
-            day: this.day
-          }
-        }).then(function (response) {
-          console.log(response);
-          _this3.ideas = response.data.dayIdea;
-        })["catch"](function (error) {
-          console.log(error);
-        });
-      }
-      /**
-       * 以降のデータ検索
-       * afterにのみ入力値存在する
-       */
-
-
-      if (this.before === "" && this.after !== "") {
-        axios.get('/api/termSearch/after', {
-          params: {
-            after: this.after
-          }
-        }).then(function (response) {
-          console.log(response);
-          _this3.ideas = response.data.afterIdea;
-        })["catch"](function (error) {
-          console.log(error);
-        });
-      }
-      /**
-       * 以前のデータ検索
-       *
-       *beforeにのみ入力値存在する
-       */
-
-
-      if (this.before !== null && this.after === null) {
-        axios.get('/api/termSearch/before', {
-          params: {
-            before: this.before
-          }
-        }).then(function (response) {
-          console.log(response);
-          _this3.ideas = response.data.beforeIdea;
-        })["catch"](function (error) {
-          console.log(error);
-        });
-      }
-      /**
-           * 両方に入力値存在する
-           * 入力値の間の値段のアイデアを取得
+          /**
+           * 以降のデータ検索
+           * afterにのみ入力値存在する
            */
+          else if (this.before === "" && this.after !== "") {
+              axios.get('/api/termSearch/after', {
+                params: {
+                  after: this.after
+                }
+              }).then(function (response) {
+                _this6.$emit('close-loading');
 
+                console.log(response);
 
-      if (this.before !== "" && this.after !== "") {
-        axios.get('/api/termSearch/middle', {
-          params: {
-            before: this.before,
-            after: this.after
-          }
-        }).then(function (response) {
-          console.log(response);
-          _this3.ideas = response.data.middleIdea;
-        })["catch"](function (error) {
-          console.log(error);
-        });
-      }
-    },
-    closeSearching: function closeSearching() {
-      this.search = !this.search;
-      this.message = "検索する";
-    } //
-    // allPosts(){
-    //     this.allIdeaLists = this.$store.state.ideas.allIdea;
-    // }
+                if (response.data.afterIdea.length === 0) {
+                  _this6.errorMessage = true;
+                } else if (response.data.afterIdea.length !== 0) {
+                  _this6.ideas = response.data.afterIdea;
+                  _this6.errorMessage = false;
+                }
 
+                _this6.ideas = response.data.afterIdea;
+              })["catch"](function (error) {
+                console.log(error);
+
+                _this6.$emit('close-loading');
+              });
+            }
+            /**
+             * 以前のデータ検索
+             *
+             *beforeにのみ入力値存在する
+             */
+            else if (this.before !== null && this.after === null) {
+                axios.get('/api/termSearch/before', {
+                  params: {
+                    before: this.before
+                  }
+                }).then(function (response) {
+                  console.log(response);
+
+                  _this6.$emit('close-loading');
+
+                  if (response.data.beforeIdea.length === 0) {
+                    _this6.errorMessage = true;
+                  } else if (response.data.beforeIdea.length !== 0) {
+                    _this6.ideas = response.data.beforeIdea;
+                    _this6.errorMessage = false;
+                  }
+                })["catch"](function (error) {
+                  console.log(error);
+
+                  _this6.$emit('close-loading');
+                });
+              }
+              /**
+                   * 両方に入力値存在する
+                   * 入力値の間の値段のアイデアを取得
+                   */
+              else if (this.before !== "" && this.after !== "") {
+                  axios.get('/api/termSearch/middle', {
+                    params: {
+                      before: this.before,
+                      after: this.after
+                    }
+                  }).then(function (response) {
+                    _this6.$emit('close-loading');
+
+                    console.log(response);
+
+                    if (response.data.middleIdea.length === 0) {
+                      _this6.searchedNoItems();
+                    } else if (response.data.middleIdea.length !== 0) {
+                      _this6.ideas = response.data.middleIdea;
+                      _this6.errorMessage = false;
+                    }
+                  })["catch"](function (error) {
+                    console.log(error);
+
+                    _this6.$emit('close-loading');
+                  });
+                }
+    }
   },
-  watch: {
-    year: function year() {
-      this.month = "";
-      this.day = "";
-      this.before = "";
-      this.after = "";
-      this.TermSearch();
+  computed: {
+    searchedIdeas: function searchedIdeas() {
+      return this.ideas;
     },
-    month: function month() {
-      this.year = "";
-      this.day = "";
-      this.before = "";
-      this.after = "";
-      this.TermSearch();
-    },
-    day: function day() {
-      this.year = "";
-      this.month = "";
-      this.before = "";
-      this.after = "";
-      this.TermSearch();
-    },
-    before: function before() {
-      this.year = "";
-      this.month = "";
-      this.day = "";
-      this.TermSearch();
-    },
-    after: function after() {
-      this.year = "";
-      this.month = "";
-      this.day = "";
-      this.TermSearch();
+    star: function star() {
+      return function (stars) {
+        var starReview = stars;
+
+        if (starReview === 0) {
+          return "ic-not-reviewed";
+        } else if (starReview <= 0.5) {
+          return "rate0-5";
+        } else if (starReview > 0.5 && starReview <= 1) {
+          return "rate1";
+        } else if (starReview > 1 && starReview <= 1.5) {
+          return "rate1-5";
+        } else if (starReview > 1.5 && starReview <= 2) {
+          return "rate2";
+        } else if (starReview > 2 && starReview <= 2.5) {
+          return "rate2-5";
+        } else if (starReview > 2.5 && starReview <= 3) {
+          return "rate3";
+        } else if (starReview > 3 && starReview <= 3.5) {
+          return "rate3-5";
+        } else if (starReview > 3.5 && starReview <= 4) {
+          return "rate4";
+        } else if (starReview > 4 && starReview <= 4.5) {
+          return "rate4-5";
+        } else if (starReview > 4.5 && starReview <= 5) {
+          return "rate5";
+        }
+      };
     }
   }
 });
@@ -2567,18 +2810,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2676,11 +2907,60 @@ __webpack_require__.r(__webpack_exports__);
     },
     myIdeas: function myIdeas() {
       this.myIdeaLists = this.$store.state.ideas.myIdea;
+    },
+    toEditPage: function toEditPage(id, bought_flag, category_id, content, delete_flag, img, overflow, price, title, user_id) {
+      if (bought_flag === 0) {
+        this.$router.push({
+          name: 'postIdeaEdit',
+          params: {
+            id: id,
+            bought_flag: bought_flag,
+            category_id: category_id,
+            content: content,
+            delete_flag: delete_flag,
+            img: img,
+            overflow: overflow,
+            price: price,
+            title: title,
+            user_id: user_id
+          }
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      } else if (bought_flag === 1) {
+        alert("購入されているので削除できません");
+      }
     }
   },
   computed: {
-    beforeUpdate: function beforeUpdate() {
-      this.$emit('close-loading');
+    star: function star() {
+      return function (stars) {
+        var starReview = stars;
+
+        if (starReview === 0) {
+          return "ic-not-reviewed";
+        } else if (starReview <= 0.5) {
+          return "rate0-5";
+        } else if (starReview > 0.5 && starReview <= 1) {
+          return "rate1";
+        } else if (starReview > 1 && starReview <= 1.5) {
+          return "rate1-5";
+        } else if (starReview > 1.5 && starReview <= 2) {
+          return "rate2";
+        } else if (starReview > 2 && starReview <= 2.5) {
+          return "rate2-5";
+        } else if (starReview > 2.5 && starReview <= 3) {
+          return "rate3";
+        } else if (starReview > 3 && starReview <= 3.5) {
+          return "rate3-5";
+        } else if (starReview > 3.5 && starReview <= 4) {
+          return "rate4";
+        } else if (starReview > 4 && starReview <= 4.5) {
+          return "rate4-5";
+        } else if (starReview > 4.5 && starReview <= 5) {
+          return "rate5";
+        }
+      };
     }
   }
 });
@@ -2696,14 +2976,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2783,6 +3055,35 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     reviewedIdeas: function reviewedIdeas() {
       return this.$store.state.ideas.review;
+    },
+    star: function star() {
+      return function (stars) {
+        var starReview = stars;
+
+        if (starReview === 0) {
+          return "ic-not-reviewed";
+        } else if (starReview <= 0.5) {
+          return "rate0-5";
+        } else if (starReview > 0.5 && starReview <= 1) {
+          return "rate1";
+        } else if (starReview > 1 && starReview <= 1.5) {
+          return "rate1-5";
+        } else if (starReview > 1.5 && starReview <= 2) {
+          return "rate2";
+        } else if (starReview > 2 && starReview <= 2.5) {
+          return "rate2-5";
+        } else if (starReview > 2.5 && starReview <= 3) {
+          return "rate3";
+        } else if (starReview > 3 && starReview <= 3.5) {
+          return "rate3-5";
+        } else if (starReview > 3.5 && starReview <= 4) {
+          return "rate4";
+        } else if (starReview > 4 && starReview <= 4.5) {
+          return "rate4-5";
+        } else if (starReview > 4.5 && starReview <= 5) {
+          return "rate5";
+        }
+      };
     }
   }
 });
@@ -3091,31 +3392,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MyPageComponent",
   data: function data() {
-    return {// user:{},
-      // buiedIdea: {},
-      // myIdea: {},
-      // favIdea :{} ,
-      // review : {}
+    return {
+      notReviewedFlag: false
     };
   },
   methods: {},
@@ -3141,6 +3422,35 @@ __webpack_require__.r(__webpack_exports__);
     },
     reviews: function reviews() {
       return this.$store.state.ideas.review;
+    },
+    star: function star() {
+      return function (stars) {
+        var starReview = stars;
+
+        if (starReview === 0) {
+          return "ic-not-reviewed";
+        } else if (starReview <= 0.5) {
+          return "rate0-5";
+        } else if (starReview > 0.5 && starReview <= 1) {
+          return "rate1";
+        } else if (starReview > 1 && starReview <= 1.5) {
+          return "rate1-5";
+        } else if (starReview > 1.5 && starReview <= 2) {
+          return "rate2";
+        } else if (starReview > 2 && starReview <= 2.5) {
+          return "rate2-5";
+        } else if (starReview > 2.5 && starReview <= 3) {
+          return "rate3";
+        } else if (starReview > 3 && starReview <= 3.5) {
+          return "rate3-5";
+        } else if (starReview > 3.5 && starReview <= 4) {
+          return "rate4";
+        } else if (starReview > 4 && starReview <= 4.5) {
+          return "rate4-5";
+        } else if (starReview > 4.5 && starReview <= 5) {
+          return "rate5";
+        }
+      };
     }
   }
 });
@@ -3397,6 +3707,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.$emit('open-loading');
+    this.ideas = this.$store.dispatch('getUserIdeas');
   },
   mounted: function mounted() {
     this.title = this.$route.params.title;
@@ -3782,6 +4093,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostDetailComponent",
   data: function data() {
@@ -3792,13 +4106,16 @@ __webpack_require__.r(__webpack_exports__);
       favActive: "",
       user: {},
       favState: "",
-      contributorFlag: true,
+      contributorFlag: false,
       reviewed: false,
       ideaReviews: {},
       ideaUserId: "",
       userId: "",
       deleteState: true,
+      //他者の投稿を購入しているか
       buying: false,
+      //自分の投稿が購入されているか
+      bought_flag: false,
       stars: {
         oneStar: false,
         twoStars: false,
@@ -3819,7 +4136,6 @@ __webpack_require__.r(__webpack_exports__);
     this.$emit('open-loading');
     this.user = this.$store.dispatch('getUsers');
     this.ideaId = this.$route.params.ideaId;
-    this.ideaUserId = this.$route.params.userId;
     /**
      * 投稿情報取得
      */
@@ -3834,35 +4150,37 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.$nextTick(function () {
       this.getState();
-      this.checkCategory();
-      this.contributorJudge();
+      this.checkCategory(); // this.contributorJudge();
+
       this.checkBuying;
       this.reviewedJudge();
       this.getReviews();
       console.log('PostDetailComponent mounted');
     });
   },
-  beforeUpdate: function beforeUpdate() {
-    this.$emit('close-loading');
-  },
+  updated: function updated() {},
   methods: {
     favSwitch: function favSwitch(userId, ideaId) {
+      var _this2 = this;
+
+      this.$emit('open-loading');
       axios.post('/api/favorite/', {
         userId: userId,
         ideaId: ideaId
       }).then(function (response) {
         console.log(response);
+
+        _this2.getState();
       })["catch"](function (error) {
         console.log(error);
       });
-      this.getState();
     },
 
     /**
      * お気に入り状態取得
      */
     getState: function getState() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get('/api/favState', {
         params: {
@@ -3870,9 +4188,13 @@ __webpack_require__.r(__webpack_exports__);
           ideaId: this.ideaId
         }
       }).then(function (response) {
-        _this2.favState = response.data;
+        _this3.favState = response.data;
+
+        _this3.$emit('close-loading');
       })["catch"](function (error) {
         console.log(error);
+
+        _this3.$emit('close-loading');
       });
     },
     //カテゴリーチェック
@@ -3902,13 +4224,14 @@ __webpack_require__.r(__webpack_exports__);
     //投稿者の投稿か確認
     contributorJudge: function contributorJudge() {
       if (this.$store.state.users.id === this.ideaUserId) {
-        console.log(this.$store.state.users.id === this.ideaUserId);
-        this.contributorFlag = false;
-      }
+        this.contributorFlag = true;
+      } //購入されてるか確認
+      // this.bought = true;
+
     },
     //既にレビューしているか確認
     reviewedJudge: function reviewedJudge() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get('/api/reviewedJudge', {
         params: {
@@ -3918,14 +4241,14 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         console.log(response); //投稿がある場合はtrue ない場合はデフォルト値false
 
-        _this3.reviewed = response.data.judge;
+        _this4.reviewed = response.data.judge;
       })["catch"](function (error) {
         console.log(error);
       });
     },
     //レビュー取得
     getReviews: function getReviews() {
-      var _this4 = this;
+      var _this5 = this;
 
       axios.get('/api/getReviews', {
         params: {
@@ -3933,7 +4256,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         console.log(response);
-        _this4.ideaReviews = response.data.reviews;
+        _this5.ideaReviews = response.data.reviews;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -3987,7 +4310,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     reviewPost: function reviewPost() {
-      var _this5 = this;
+      var _this6 = this;
 
       //すでに投稿しているか確認
       if (this.reviewed === true) {
@@ -3996,30 +4319,36 @@ __webpack_require__.r(__webpack_exports__);
         this.reviewErrorMessage = '500文字以下で入力して下さい'; //レビュー投稿処理
       } else if (this.reviewNumber !== "" && this.reviewComment !== "") {
         //二度送信できないようにする処理
+        this.$emit('open-loading');
         this.processing = true; //投稿処理
 
         setTimeout(function () {
           axios.post('/api/reviewPost', {
-            userId: _this5.$store.state.users.id,
-            ideaId: _this5.ideaId,
-            ideaUserId: _this5.ideaUserId,
-            star: _this5.reviewNumber,
-            comment: _this5.reviewComment
+            userId: _this6.$store.state.users.id,
+            ideaId: _this6.ideaId,
+            ideaUserId: _this6.ideaUserId,
+            star: _this6.reviewNumber,
+            comment: _this6.reviewComment
           }).then(function (response) {
             console.log(response);
-            _this5.processing = false;
+            _this6.processing = false;
 
-            _this5.$router.push({
+            _this6.$emit('close-loading');
+
+            _this6.$router.push({
               name: 'reviewCompleted',
               params: {
-                ideaId: _this5.ideaId,
-                userId: _this5.ideaUserId,
-                title: _this5.title
+                ideaId: _this6.ideaId,
+                userId: _this6.ideaUserId,
+                title: _this6.title
               }
             });
           })["catch"](function (error) {
+            _this6.$emit('close-loading');
+
             console.log(error);
-            _this5.reviewErrorMessage = '時間を置いてお試し下さい';
+            _this6.reviewErrorMessage = '時間を置いてお試し下さい';
+            _this6.processing = false;
           });
         }, 2000);
       } //入力がされていない
@@ -4029,9 +4358,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    //投稿の内容見れるか確認
+    // 購入者もしくは起草者
     //購入しているか確認
     checkBuying: function checkBuying() {
-      var _this6 = this;
+      var _this7 = this;
 
       axios.get('/api/buyingJudge', {
         params: {
@@ -4040,18 +4371,56 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         console.log(response);
-        _this6.buying = response.data.judge;
+        _this7.buying = response.data.judge;
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    getReviewAverage: function getReviewAverage() {},
+    canSeeContents: function canSeeContents() {
+      //投稿者の投稿,購入者なら内容見れる
+      if (this.contributorFlag === true && this.buying === true) {
+        return true;
+      } else if (this.contributorFlag === false && this.buying === false) {
+        return false;
+      }
+    },
     reviewRegurationMessage: function reviewRegurationMessage() {
       if (this.buying === false && this.reviewed === false) {
         return 'レビューは購入者のみ可能です';
       } else if (this.buying === true && this.reviewed === true) {
         return 'レビューは一度のみ可能です';
       }
+
+      this.$emit('close-loading');
+    },
+    star: function star() {
+      return function (stars) {
+        var starReview = stars;
+
+        if (starReview === 0) {
+          return "ic-not-reviewed";
+        } else if (starReview <= 0.5) {
+          return "rate0-5";
+        } else if (starReview > 0.5 && starReview <= 1) {
+          return "rate1";
+        } else if (starReview > 1 && starReview <= 1.5) {
+          return "rate1-5";
+        } else if (starReview > 1.5 && starReview <= 2) {
+          return "rate2";
+        } else if (starReview > 2 && starReview <= 2.5) {
+          return "rate2-5";
+        } else if (starReview > 2.5 && starReview <= 3) {
+          return "rate3";
+        } else if (starReview > 3 && starReview <= 3.5) {
+          return "rate3-5";
+        } else if (starReview > 3.5 && starReview <= 4) {
+          return "rate4";
+        } else if (starReview > 4 && starReview <= 4.5) {
+          return "rate4-5";
+        } else if (starReview > 4.5 && starReview <= 5) {
+          return "rate5";
+        }
+      };
     }
   },
   watch: {
@@ -4060,6 +4429,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     detail: function detail() {
       this.title = this.detail.idea[0].title;
+      this.ideaUserId = this.detail.idea[0].user_id;
+      this.contributorJudge();
       this.userId = this.$store.state.users.id;
     }
   }
@@ -4225,21 +4596,26 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.$emit('open-loading');
+    this.fileInfo = this.$route.params.fileInfo;
+    this.user = this.$store.dispatch('getUsers');
+    this.title = this.$route.params.title;
+    this.category_id = this.$route.params.category_id;
+    this.price = this.$route.params.price;
+    this.overflow = this.$route.params.overflow;
+    this.content = this.$route.params.content;
+    this.ideaImage = this.$route.params.img;
   },
   mounted: function mounted() {
     console.log('PostIdeaComponent mounted.');
     this.user = this.$store.dispatch('getUsers');
     this.$emit('close-loading');
   },
-  beforeUpdate: function beforeUpdate() {
-    this.$emit('close-loading');
-  },
+  beforeUpdate: function beforeUpdate() {},
   methods: {
     onFileChange: function onFileChange(event) {
+      this.$emit('open-loading');
       this.fileInfo = event.target.files[0];
       this.createImage();
-      this.imgValidation();
-      this.saveImage();
     },
     createImage: function createImage() {
       var _this = this;
@@ -4252,26 +4628,12 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       reader.readAsDataURL(this.fileInfo);
+      this.$emit('close-loading');
     },
-    //画像をDBに保存してパスを保存するロジック
-    saveImage: function saveImage() {
-      var formData = new FormData();
-      console.log(this.fileInfo);
-      formData.append('file', this.fileInfo);
-      axios.post('/api/profileImgUpload', formData).then(function (response) {
-        console.log(response);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    //文字数にバリデーションかけるロジック
-    // title	24文字以下
-    // カテゴリ	必須
-    // 価格	0 < 1000000
-    // 概要	100文字以下
-    // 内容	10000文字以下
     //画像バリデーション
     imgValidation: function imgValidation() {
+      this.errorMessages.imgErrorMessage = false;
+
       if (this.ideaImage === "") {
         this.validations.imgValidation = false;
         this.errorMessages.imgErrorMessage = "＋をクリックして画像を選択して下さい";
@@ -4282,6 +4644,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     //
     titleValidation: function titleValidation() {
+      this.errorMessages.titleErrorMessage = false;
+
       if (this.title === "") {
         this.validations.titleValidation = false;
         this.errorMessages.titleErrorMessage = "入力必須です";
@@ -4298,6 +4662,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     //カテゴリーのバリデーション
     categoryValidation: function categoryValidation() {
+      this.errorMessages.categoryErrorMessage = false;
+
       if (this.category_id === "") {
         this.validations.categoryValidation = false;
         this.errorMessages.categoryErrorMessage = "入力必須です";
@@ -4308,9 +4674,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     //価格のバリデーション
     priceValidation: function priceValidation() {
+      this.errorMessages.priceErrorMessage = false;
+
       if (this.price === "") {
         this.validations.priceValidation = false;
-        this.errorMessages.priceErrorMessage = "入力必須です";
+        this.errorMessages.priceErrorMessage = "数値を入力して下さい";
       } else if (this.price > 1000000) {
         this.validations.priceValidation = false;
         this.errorMessages.priceErrorMessage = "100万円以下で設定して下さい";
@@ -4353,6 +4721,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     //確認用バリデーション
     checkValidation: function checkValidation() {
+      this.errorMessages.submitErrorMessage = "";
       this.imgValidation();
       this.titleValidation();
       this.priceValidation();
@@ -4362,7 +4731,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.submitOk === true) {
         this.formSubmit(); //エラーがあればメッセージ
-      } else {
+      } else if (this.submitOk === false) {
         this.errorMessages.submitErrorMessage = "エラーがあります";
       }
     },
@@ -4387,16 +4756,20 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.state.users.id;
     },
     titleLength: function titleLength() {
-      return this.title.length;
+      if (this.title !== undefined) return this.title.length;
     },
     overflowLength: function overflowLength() {
-      return this.overflow.length;
+      if (this.overflow !== undefined) return this.overflow.length;
     },
     contentLength: function contentLength() {
-      return this.content.length;
+      if (this.content !== undefined) return this.content.length;
     },
     submitOk: function submitOk() {
-      if (this.validations.imgValidation === true && this.validations.categoryValidation === true && this.validations.contentValidation === true && this.validations.overflowValidation === true && this.validations.imgValidation === true && this.validations.contentValidation === true) return true;
+      if (this.validations.imgValidation === true && this.validations.categoryValidation === true && this.validations.contentValidation === true && this.validations.overflowValidation === true && this.validations.imgValidation === true && this.validations.contentValidation === true) {
+        return true;
+      } else {
+        return false;
+      }
     }
   },
   watch: {
@@ -4420,7 +4793,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -4528,6 +4900,8 @@ __webpack_require__.r(__webpack_exports__);
     editIdea: function editIdea() {},
     //投稿保存
     saveIdea: function saveIdea(userId) {
+      var _this = this;
+
       //画像を保存の形式に
       var formData = new FormData();
       formData.append('file', this.fileInfo);
@@ -4542,7 +4916,14 @@ __webpack_require__.r(__webpack_exports__);
           'content-type': 'multipart/form-data'
         }
       }).then(function (response) {
-        console.log(response); //投稿した後は詳細に飛びたい
+        console.log(response);
+
+        _this.$router.push({
+          name: 'postComplete',
+          params: {
+            title: _this.title
+          }
+        });
       })["catch"](function (error) {
         console.log(error);
       });
@@ -4589,7 +4970,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
 //
 //
 //
@@ -4773,9 +5153,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     saveImage: function saveImage() {
       var _this2 = this;
 
+      this.errorMessages.imgErrorMessage = "";
+      this.$emit('open-loading');
       this.imgValidation();
 
-      if (this.validation.imgValidation === true) {
+      if (this.validations.imgValidation === true) {
         var formData = new FormData();
         console.log(this.fileInfo);
         formData.append('file', this.fileInfo);
@@ -4785,6 +5167,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           _this2.user = response.data;
           _this2.user = _this2.$store.dispatch('getUsers');
           _this2.ImgChangeState = true;
+
+          _this2.$emit('close-loading');
         })["catch"](function (error) {
           console.log(error);
         });
@@ -4800,9 +5184,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.errorMessages.imgErrorMessage = false;
       }
     },
+    nameMessage: function nameMessage() {
+      this.errorMessages.nameErrorMessage = "";
+    },
     updateName: function updateName(id, name) {
       var _this3 = this;
 
+      this.$emit('open-loading');
       this.nameValidation(); //名前のバリデーションが通ってれば保存処理
 
       if (this.validations.nameValidation === true) {
@@ -4831,10 +5219,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.errorMessages.nameErrorMessage = false;
         this.errorMessages.nameErrorMessage = "変更に成功しました";
       }
+
+      this.$emit('open-loading');
     },
     updateEmail: function updateEmail(id, email) {
       var _this4 = this;
 
+      this.$emit('open-loading');
       this.emailValidation();
 
       if (this.validations.emailValidation === true) {
@@ -4848,6 +5239,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           console.log(error);
         });
       }
+
+      this.$emit('close-loading');
     },
     emailValidation: function emailValidation() {
       if (this.$store.state.users.email === "") {
@@ -4868,6 +5261,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     updateIntroduction: function updateIntroduction(id, introduction) {
       var _this5 = this;
 
+      this.$emit('open-loading');
       this.introductionValidation();
 
       if (this.validations.introductionValidation === true) {
@@ -4881,6 +5275,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           console.log(error);
         });
       }
+
+      this.$emit('close-loading');
     },
     //自己紹介のバリデーション
     introductionValidation: function introductionValidation() {
@@ -4930,6 +5326,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -5026,6 +5423,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -5409,8 +5807,6 @@ __webpack_require__.r(__webpack_exports__);
     onFileChange: function onFileChange(event) {
       this.fileInfo = event.target.files[0];
       this.createImage();
-      this.imgValidation();
-      this.saveImage();
     },
     createImage: function createImage() {
       var _this = this;
@@ -5729,6 +6125,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "headerBeforeComponent",
   created: function created() {
@@ -5803,7 +6200,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.ic[data-v-722e3f90] ul{\n    display:-webkit-box;\n    display:flex;\n    width:100%;\n    margin:5% auto;\n    flex-wrap:wrap;\n}\n.pagination[data-v-722e3f90] ul{\n    display: -webkit-box;\n    display: flex;\n    font-size:24px;\n    -webkit-box-pack:center;\n            justify-content:center;\n    list-style:none;\n}\n.pagination[data-v-722e3f90] li{\n    margin: 0 2%;\n}\n.pagination-container[data-v-722e3f90] a{\n    color:black;\n}\n\n", ""]);
+exports.push([module.i, "\n.ic[data-v-722e3f90] ul{\n    display:-webkit-box;\n    display:flex;\n    width:100%;\n    margin:5% auto;\n    flex-wrap:wrap;\n}\n.pagination[data-v-722e3f90] ul{\n    display: -webkit-box;\n    display: flex;\n    font-size:24px;\n    -webkit-box-pack:center;\n            justify-content:center;\n    list-style:none;\n}\n.pagination[data-v-722e3f90] li{\n    margin: 0 2%;\n}\n.pagination-container[data-v-722e3f90] a{\n    color:black;\n}\nmain[data-v-722e3f90] input[type=\"input\"]{\n    border: pink solid;\n    box-shadow: 3px 3px 3px rgba(0,0,0,0.2);\n    font-size:18px;\n}\n\n\n\n", ""]);
 
 // exports
 
@@ -9421,7 +9818,7 @@ var render = function() {
                         to: {
                           name: "postDetail",
                           params: {
-                            ideaId: buyingIdea.id,
+                            ideaId: buyingIdea.post_id,
                             userId: buyingIdea.user_id
                           }
                         },
@@ -9435,9 +9832,10 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "ic-img" }, [
                         _c("img", {
+                          staticClass: "ic-img-item",
                           attrs: {
                             src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + buyingIdea.img),
-                            alt: ""
+                            alt: "buyingIdeaimg"
                           }
                         })
                       ]),
@@ -9447,19 +9845,14 @@ var render = function() {
                           _vm._v("評価")
                         ]),
                         _vm._v(" "),
-                        _c("div", [
-                          _c("i", { staticClass: "fas fa-star ic-star" }),
-                          _vm._v(" "),
-                          _c("i", { staticClass: "fas fa-star ic-star" })
-                        ]),
+                        _vm.star(buyingIdea.averageReview) === "ic-not-reviewed"
+                          ? _c("span", {}, [_vm._v("未評価のアイデアです")])
+                          : _vm._e(),
                         _vm._v(" "),
-                        _c("div", [
-                          _c("i", { staticClass: "fas fa-star ic-star" }),
-                          _vm._v(" "),
-                          _c("i", { staticClass: "fas fa-star ic-star" }),
-                          _vm._v(" "),
-                          _c("i", { staticClass: "fas fa-star ic-star" })
-                        ])
+                        _c("span", {
+                          staticClass: "ic-star-review",
+                          class: _vm.star(buyingIdea.averageReview)
+                        })
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "ic-desc" }, [
@@ -9488,7 +9881,7 @@ var render = function() {
                                   to: {
                                     name: "postDetail",
                                     params: {
-                                      ideaId: buyingIdea.id,
+                                      ideaId: buyingIdea.post_id,
                                       userId: buyingIdea.user_id
                                     }
                                   }
@@ -9581,7 +9974,7 @@ var render = function() {
                           to: {
                             name: "postDetail",
                             params: {
-                              ideaId: favoriteIdea.id,
+                              ideaId: favoriteIdea.idea_id,
                               userId: favoriteIdea.user_id
                             }
                           },
@@ -9593,7 +9986,15 @@ var render = function() {
                           _vm._v(_vm._s(favoriteIdea.title))
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "ic-img" }),
+                        _c("div", { staticClass: "ic-img" }, [
+                          _c("img", {
+                            staticClass: "ic-img-item",
+                            attrs: {
+                              src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + favoriteIdea.img),
+                              alt: "favoriteIdeaimg"
+                            }
+                          })
+                        ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "ic-review" }, [
                           _c("span", { staticClass: "ic-span" }, [
@@ -9601,17 +10002,15 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("div", [
-                            _c("i", { staticClass: "fas fa-star ic-star" }),
+                            _c("span", {
+                              staticClass: "ic-star-review",
+                              class: _vm.star(favoriteIdea.averageReview)
+                            }),
                             _vm._v(" "),
-                            _c("i", { staticClass: "fas fa-star ic-star" })
-                          ]),
-                          _vm._v(" "),
-                          _c("div", [
-                            _c("i", { staticClass: "fas fa-star ic-star" }),
-                            _vm._v(" "),
-                            _c("i", { staticClass: "fas fa-star ic-star" }),
-                            _vm._v(" "),
-                            _c("i", { staticClass: "fas fa-star ic-star" })
+                            _vm.star(favoriteIdea.averageReview) ===
+                            "ic-not-reviewed"
+                              ? _c("span", {}, [_vm._v("未評価のアイデアです")])
+                              : _vm._e()
                           ])
                         ]),
                         _vm._v(" "),
@@ -9755,7 +10154,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v(_vm._s(_vm.message))]
+        [_vm._v(_vm._s(_vm.closingMessage))]
       ),
       _vm._v(" "),
       _c(
@@ -9776,7 +10175,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v(_vm._s(_vm.message))]
+        [_vm._v(_vm._s(_vm.openingMessage))]
       ),
       _vm._v(" "),
       _c(
@@ -9796,387 +10195,505 @@ var render = function() {
           _c("h4", [_vm._v("アイデア検索ボックス")]),
           _vm._v(" "),
           _c("div", { staticClass: "search-container" }, [
-            _c("div", { staticClass: "search-category" }, [
-              _c("div", { staticClass: "search-subject" }, [
-                _vm._v("カテゴリ検索")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                attrs: { id: "matching", name: "category", type: "radio" }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "c-radio search-category-radio",
-                  attrs: { for: "matching" },
-                  on: {
-                    click: function($event) {
-                      return _vm.searchCategory(1)
-                    }
-                  }
-                },
-                [_vm._v("マッチング")]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                attrs: { id: "board", name: "category", type: "radio" }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "c-radio search-category-radio",
-                  attrs: { for: "board" },
-                  on: {
-                    click: function($event) {
-                      return _vm.searchCategory(2)
-                    }
-                  }
-                },
-                [_vm._v("掲示板")]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                attrs: { id: "sns", name: "category", type: "radio" }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "c-radio search-category-radio",
-                  attrs: { for: "sns" },
-                  on: {
-                    click: function($event) {
-                      return _vm.searchCategory(3)
-                    }
-                  }
-                },
-                [_vm._v("SNS")]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                attrs: { id: "EC", name: "category", type: "radio" }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "c-radio search-category-radio",
-                  attrs: { for: "EC" },
-                  on: {
-                    click: function($event) {
-                      return _vm.searchCategory(4)
-                    }
-                  }
-                },
-                [_vm._v("ECサイト")]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                attrs: { id: "infoplaner", name: "category", type: "radio" }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "c-radio search-category-radio",
-                  attrs: { for: "infoplaner" },
-                  on: {
-                    click: function($event) {
-                      return _vm.searchCategory(5)
-                    }
-                  }
-                },
-                [_vm._v("情報発信")]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                attrs: { id: "other", name: "category", type: "radio" }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "c-radio search-category-radio",
-                  attrs: { for: "other" },
-                  on: {
-                    click: function($event) {
-                      return _vm.searchCategory(6)
-                    }
-                  }
-                },
-                [_vm._v("その他")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "search-price" }, [
-              _c("div", { staticClass: "search-subject" }, [
-                _vm._v("価格検索")
-              ]),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "down" } }, [_vm._v("以上")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.higher,
-                    expression: "higher",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "search-price-input",
-                attrs: { id: "down", type: "number" },
-                domProps: { value: _vm.higher },
+            _c(
+              "div",
+              {
+                staticClass: "search-subject allIdea-button-search",
                 on: {
-                  blur: [
-                    function($event) {
-                      return _vm.priceSearch()
-                    },
-                    function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  ],
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.higher = _vm._n($event.target.value)
+                  click: function($event) {
+                    return _vm.categorySelect()
                   }
                 }
-              }),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "top" } }, [_vm._v("以下")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.lower,
-                    expression: "lower",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "search-price-input",
-                attrs: { id: "top", type: "number" },
-                domProps: { value: _vm.lower },
-                on: {
-                  blur: [
-                    function($event) {
-                      return _vm.priceSearch()
-                    },
-                    function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  ],
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.lower = _vm._n($event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("input", {
-                attrs: { id: "price", name: "category", type: "radio" }
-              })
-            ]),
+              },
+              [_vm._v("カテゴリ検索")]
+            ),
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "search-date" },
-              [
+              {
+                staticClass: "search-subject allIdea-button-search",
+                on: {
+                  click: function($event) {
+                    return _vm.priceSelect()
+                  }
+                }
+              },
+              [_vm._v("価格検索")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "search-subject allIdea-button-search",
+                on: {
+                  click: function($event) {
+                    return _vm.dateSelect()
+                  }
+                }
+              },
+              [_vm._v("期間検索")]
+            )
+          ]),
+          _vm._v(" "),
+          _vm.categorySelected
+            ? _c("div", { staticClass: "search-category" }, [
                 _c("div", { staticClass: "search-subject" }, [
-                  _vm._v("期間検索")
+                  _vm._v("カテゴリ検索")
                 ]),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "down" } }, [_vm._v("年別")]),
+                _c("input", {
+                  attrs: { id: "matching", name: "category", type: "radio" }
+                }),
                 _vm._v(" "),
-                _c("v-date-picker", {
-                  attrs: {
-                    mode: _vm.mode,
-                    format: _vm.customFormatter,
-                    language: _vm.ja,
-                    "minimum-view": "year"
+                _c(
+                  "label",
+                  {
+                    staticClass: "c-radio search-category-radio",
+                    attrs: { for: "matching" },
+                    on: {
+                      click: function($event) {
+                        return _vm.searchCategory(1)
+                      }
+                    }
                   },
-                  model: {
-                    value: _vm.year,
-                    callback: function($$v) {
-                      _vm.year = $$v
-                    },
-                    expression: "year"
-                  }
+                  [_vm._v("マッチング")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: { id: "board", name: "category", type: "radio" }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "top" } }, [_vm._v("月別")]),
-                _vm._v(" "),
-                _c("v-date-picker", {
-                  attrs: {
-                    mode: _vm.mode,
-                    format: _vm.customFormatter,
-                    "minimum-view": "month"
+                _c(
+                  "label",
+                  {
+                    staticClass: "c-radio search-category-radio",
+                    attrs: { for: "board" },
+                    on: {
+                      click: function($event) {
+                        return _vm.searchCategory(2)
+                      }
+                    }
                   },
-                  model: {
-                    value: _vm.month,
-                    callback: function($$v) {
-                      _vm.month = $$v
-                    },
-                    expression: "month"
-                  }
+                  [_vm._v("掲示板")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: { id: "sns", name: "category", type: "radio" }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "top" } }, [_vm._v("日別")]),
+                _c(
+                  "label",
+                  {
+                    staticClass: "c-radio search-category-radio",
+                    attrs: { for: "sns" },
+                    on: {
+                      click: function($event) {
+                        return _vm.searchCategory(3)
+                      }
+                    }
+                  },
+                  [_vm._v("SNS")]
+                ),
                 _vm._v(" "),
-                _c("v-date-picker", {
-                  attrs: { mode: _vm.mode, format: _vm.customFormatter },
-                  model: {
-                    value: _vm.day,
-                    callback: function($$v) {
-                      _vm.day = $$v
-                    },
-                    expression: "day"
-                  }
+                _c("input", {
+                  attrs: { id: "EC", name: "category", type: "radio" }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "top" } }, [_vm._v("以降")]),
+                _c(
+                  "label",
+                  {
+                    staticClass: "c-radio search-category-radio",
+                    attrs: { for: "EC" },
+                    on: {
+                      click: function($event) {
+                        return _vm.searchCategory(4)
+                      }
+                    }
+                  },
+                  [_vm._v("ECサイト")]
+                ),
                 _vm._v(" "),
-                _c("v-date-picker", {
-                  attrs: { mode: _vm.mode, format: _vm.customFormatter },
-                  model: {
-                    value: _vm.after,
-                    callback: function($$v) {
-                      _vm.after = $$v
-                    },
-                    expression: "after"
-                  }
+                _c("input", {
+                  attrs: { id: "infoplaner", name: "category", type: "radio" }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "top" } }, [_vm._v("以前")]),
+                _c(
+                  "label",
+                  {
+                    staticClass: "c-radio search-category-radio",
+                    attrs: { for: "infoplaner" },
+                    on: {
+                      click: function($event) {
+                        return _vm.searchCategory(5)
+                      }
+                    }
+                  },
+                  [_vm._v("情報発信")]
+                ),
                 _vm._v(" "),
-                _c("v-date-picker", {
-                  attrs: { mode: _vm.mode, format: _vm.customFormatter },
-                  model: {
-                    value: _vm.before,
-                    callback: function($$v) {
-                      _vm.before = $$v
-                    },
-                    expression: "before"
-                  }
-                })
-              ],
-              1
-            )
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("h3", { staticClass: "f-h3" }, [_vm._v("全アイデア")]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "ic" },
-        [
-          _c(
-            "paginate",
-            { attrs: { name: "paginate-log", list: this.ideas, per: 15 } },
-            _vm._l(_vm.paginated("paginate-log"), function(allIdea) {
-              return _c(
-                "div",
-                { staticClass: "ic-card" },
-                [
-                  _c(
-                    "router-link",
+                _c("input", {
+                  attrs: { id: "other", name: "category", type: "radio" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "c-radio search-category-radio",
+                    attrs: { for: "other" },
+                    on: {
+                      click: function($event) {
+                        return _vm.searchCategory(6)
+                      }
+                    }
+                  },
+                  [_vm._v("その他")]
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.priceSelected
+            ? _c("div", { staticClass: "search-price" }, [
+                _c("div", { staticClass: "search-subject" }, [
+                  _vm._v("価格検索")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
                     {
-                      staticClass: "ic-a",
-                      attrs: {
-                        to: {
-                          name: "postDetail",
-                          params: {
-                            ideaId: allIdea.id,
-                            userId: allIdea.user_id
-                          }
-                        },
-                        href: "#"
+                      name: "model",
+                      rawName: "v-model.number",
+                      value: _vm.higher,
+                      expression: "higher",
+                      modifiers: { number: true }
+                    }
+                  ],
+                  staticClass: "search-price-input",
+                  attrs: { id: "down", type: "number" },
+                  domProps: { value: _vm.higher },
+                  on: {
+                    blur: [
+                      function($event) {
+                        return _vm.priceSearch()
+                      },
+                      function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    ],
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.higher = _vm._n($event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "down" } }, [_vm._v("円以上")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.number",
+                      value: _vm.lower,
+                      expression: "lower",
+                      modifiers: { number: true }
+                    }
+                  ],
+                  staticClass: "search-price-input",
+                  attrs: { id: "top", type: "number" },
+                  domProps: { value: _vm.lower },
+                  on: {
+                    blur: [
+                      function($event) {
+                        return _vm.priceSearch()
+                      },
+                      function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    ],
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.lower = _vm._n($event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "top" } }, [_vm._v("円以下")]),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: { id: "price", name: "category", type: "radio" }
+                })
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.dateSelected
+            ? _c(
+                "div",
+                { staticClass: "search-date" },
+                [
+                  _c("div", { staticClass: "search-subject" }, [
+                    _vm._v("期間検索")
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "down" } }, [_vm._v("年別")]),
+                  _vm._v(" "),
+                  _c("v-date-picker", {
+                    key: "year",
+                    attrs: {
+                      mode: _vm.mode,
+                      format: _vm.customFormatter,
+                      language: _vm.ja,
+                      clearable: "",
+                      "minimum-view": "`year`"
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.termYearSearch()
                       }
                     },
-                    [
-                      _c("h4", { staticClass: "f-h4" }, [
-                        _vm._v(_vm._s(allIdea.title))
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "ic-img" }),
-                      _vm._v(" "),
-                      _c("label", [_vm._v("カテゴリ")]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _vm._v(_vm._s(_vm.categoryName(allIdea.category_id)))
-                      ]),
-                      _vm._v(" "),
-                      _c("label", [_vm._v("価格")]),
-                      _vm._v(" "),
-                      _c("div", [_vm._v(_vm._s(allIdea.price))]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "ic-review" }, [
-                        _c("span", { staticClass: "ic-span" }, [
-                          _vm._v("評価")
-                        ]),
-                        _vm._v(" "),
-                        _c("i", { staticClass: "fas fa-star ic-star" }),
-                        _vm._v(" "),
-                        _c("i", { staticClass: "fas fa-star ic-star" }),
-                        _vm._v(" "),
-                        _c("i", { staticClass: "fas fa-star ic-star" }),
-                        _vm._v(" "),
-                        _c("i", { staticClass: "fas fa-star ic-star" }),
-                        _vm._v(" "),
-                        _c("i", { staticClass: "fas fa-star ic-star" })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "ic-desc" }, [
-                        _c("div", { staticClass: "ic-desc-overflow" }, [
-                          _vm._v("概要")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "ic-desc-text" }, [
-                          _vm._v(
-                            "\n                                    " +
-                              _vm._s(allIdea.overflow) +
-                              "\n                                "
+                    model: {
+                      value: _vm.year,
+                      callback: function($$v) {
+                        _vm.year = $$v
+                      },
+                      expression: "year"
+                    }
+                  }),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "top" } }, [_vm._v("月別")]),
+                  _vm._v(" "),
+                  _c("v-date-picker", {
+                    key: "month",
+                    attrs: {
+                      mode: _vm.mode,
+                      format: _vm.customFormatter,
+                      clearable: "",
+                      "minimum-view": "`month`"
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.termMonthSearch()
+                      }
+                    },
+                    model: {
+                      value: _vm.month,
+                      callback: function($$v) {
+                        _vm.month = $$v
+                      },
+                      expression: "month"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "top" } }, [_vm._v("日別")]),
+                  _vm._v(" "),
+                  _c("v-date-picker", {
+                    key: "day",
+                    attrs: {
+                      mode: _vm.mode,
+                      format: _vm.customFormatter,
+                      "minimum-view": "'day'"
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.termDaySearch()
+                      }
+                    },
+                    model: {
+                      value: _vm.day,
+                      callback: function($$v) {
+                        _vm.day = $$v
+                      },
+                      expression: "day"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "top" } }, [_vm._v("以降")]),
+                  _vm._v(" "),
+                  _c("v-date-picker", {
+                    key: "after",
+                    attrs: { mode: _vm.mode, format: _vm.customFormatter },
+                    on: {
+                      input: function($event) {
+                        return _vm.termSearch()
+                      }
+                    },
+                    model: {
+                      value: _vm.after,
+                      callback: function($$v) {
+                        _vm.after = $$v
+                      },
+                      expression: "after"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "top" } }, [_vm._v("以前")]),
+                  _vm._v(" "),
+                  _c("v-date-picker", {
+                    key: "before",
+                    attrs: { mode: _vm.mode, format: _vm.customFormatter },
+                    on: {
+                      input: function($event) {
+                        return _vm.termSearch()
+                      }
+                    },
+                    model: {
+                      value: _vm.before,
+                      callback: function($$v) {
+                        _vm.before = $$v
+                      },
+                      expression: "before"
+                    }
+                  })
+                ],
+                1
+              )
+            : _vm._e()
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("h3", { staticClass: "f-h3" }, [_vm._v("全アイデア")]),
+    _vm._v(" "),
+    _vm.errorMessage
+      ? _c("div", { staticClass: "error" }, [
+          _vm._v(_vm._s(_vm.noMatchMessage))
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    !_vm.errorMessage
+      ? _c("div", [
+          this.ideas
+            ? _c(
+                "div",
+                { staticClass: "ic" },
+                [
+                  _c(
+                    "paginate",
+                    {
+                      attrs: {
+                        name: "paginate-log",
+                        list: _vm.searchedIdeas,
+                        per: 15
+                      }
+                    },
+                    _vm._l(_vm.paginated("paginate-log"), function(allIdea) {
+                      return _c(
+                        "div",
+                        { staticClass: "ic-card" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "ic-a",
+                              attrs: {
+                                to: {
+                                  name: "postDetail",
+                                  params: {
+                                    ideaId: allIdea.id,
+                                    userId: allIdea.user_id
+                                  }
+                                },
+                                href: "#"
+                              }
+                            },
+                            [
+                              _c("h4", { staticClass: "f-h4" }, [
+                                _vm._v(_vm._s(allIdea.title))
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "ic-img" }, [
+                                _c("img", {
+                                  staticClass: "ic-img-item",
+                                  attrs: {
+                                    src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + allIdea.img),
+                                    alt: "idea"
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("label", [_vm._v("カテゴリ")]),
+                              _vm._v(" "),
+                              _c("div", [
+                                _vm._v(
+                                  _vm._s(_vm.categoryName(allIdea.category_id))
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("label", [_vm._v("価格")]),
+                              _vm._v(" "),
+                              _c("div", [_vm._v(_vm._s(allIdea.price))]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "ic-review" }, [
+                                _c("label", [_vm._v("平均評価")]),
+                                _vm._v(" "),
+                                _c("span", {
+                                  staticClass: "ic-star-review",
+                                  class: _vm.star(allIdea.averageReview)
+                                }),
+                                _vm._v(" "),
+                                _vm.star(allIdea.averageReview) ===
+                                "ic-not-reviewed"
+                                  ? _c("span", {}, [
+                                      _vm._v("未評価のアイデアです")
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _c("label", [_vm._v("レビュー数")]),
+                                _vm._v(" "),
+                                _c("div", [
+                                  _vm._v(
+                                    _vm._s(allIdea.review_counts) + "件です"
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "ic-desc" }, [
+                                _c("div", { staticClass: "ic-desc-overflow" }, [
+                                  _vm._v("概要")
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "ic-desc-text" }, [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(allIdea.overflow) +
+                                      "\n                                "
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("label", [_vm._v("投稿日")]),
+                              _vm._v(" "),
+                              _c("div", [_vm._v(_vm._s(allIdea.created_at))])
+                            ]
                           )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("label", [_vm._v("投稿日")]),
-                      _vm._v(" "),
-                      _c("div", [_vm._v(_vm._s(allIdea.created_at))])
-                    ]
+                        ],
+                        1
+                      )
+                    }),
+                    0
                   )
                 ],
                 1
               )
-            }),
-            0
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "pagination" },
+            [
+              _c("paginate-links", {
+                staticClass: "pagination-container",
+                attrs: { for: "paginate-log", "show-step-links": true }
+              })
+            ],
+            1
           )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "pagination" },
-        [
-          _c("paginate-links", {
-            staticClass: "pagination-container",
-            attrs: { for: "paginate-log", "show-step-links": true }
-          })
-        ],
-        1
-      )
-    ])
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -10215,137 +10732,103 @@ var render = function() {
             "paginate",
             { attrs: { name: "paginate-log", list: _vm.myIdeaLists, per: 15 } },
             _vm._l(_vm.paginated("paginate-log"), function(myIdea) {
-              return _c(
-                "div",
-                { staticClass: "ic-card" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "ic-a",
+              return _c("div", { staticClass: "ic-card" }, [
+                _c("div", { staticClass: "ic-a" }, [
+                  _c("h4", { staticClass: "f-h4" }, [
+                    _vm._v(_vm._s(myIdea.title))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ic-img" }, [
+                    _c("img", {
+                      staticClass: "ic-img-item",
                       attrs: {
-                        to: {
-                          name: "postDetail",
-                          params: {
-                            ideaId: myIdea.id,
-                            userId: myIdea.user_id
-                          }
-                        },
-                        href: "#"
+                        src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + myIdea.img),
+                        alt: "postIdeaImg"
                       }
-                    },
-                    [
-                      _c("h4", { staticClass: "f-h4" }, [
-                        _vm._v(_vm._s(myIdea.title))
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "ic-img" }, [
-                        _c("img", {
-                          attrs: {
-                            src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + myIdea.img),
-                            alt: ""
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "ic-review" }, [
-                        _c("span", { staticClass: "ic-span" }, [
-                          _vm._v("評価")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", [
-                          _c("i", { staticClass: "fas fa-star ic-star" }),
-                          _vm._v(" "),
-                          _c("i", { staticClass: "fas fa-star ic-star" })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", [
-                          _c("i", { staticClass: "fas fa-star ic-star" }),
-                          _vm._v(" "),
-                          _c("i", { staticClass: "fas fa-star ic-star" }),
-                          _vm._v(" "),
-                          _c("i", { staticClass: "fas fa-star ic-star" })
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "ic-desc" }, [
-                        _c("div", { staticClass: "ic-desc-overflow" }, [
-                          _vm._v("概要")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "ic-desc-text" }, [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(myIdea.overflow) +
-                              "\n                            "
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "ic-button-two-container" }, [
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ic-review" }, [
+                    _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass: "ic-star-review",
+                      class: _vm.star(myIdea.averageReview)
+                    }),
+                    _vm._v(" "),
+                    _vm.star(myIdea.averageReview) === "ic-not-reviewed"
+                      ? _c("span", {}, [_vm._v("未評価のアイデアです")])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ic-desc" }, [
+                    _c("div", { staticClass: "ic-desc-overflow" }, [
+                      _vm._v("概要")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "ic-desc-text" }, [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(myIdea.overflow) +
+                          "\n                            "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ic-button-two-container" }, [
+                    _c(
+                      "div",
+                      { staticClass: "c-mini-button" },
+                      [
                         _c(
-                          "div",
-                          { staticClass: "c-mini-button" },
-                          [
-                            _c(
-                              "router-link",
-                              {
-                                attrs: {
-                                  to: {
-                                    name: "postDetail",
-                                    params: {
-                                      ideaId: myIdea.id,
-                                      userId: myIdea.user_id
-                                    }
-                                  }
+                          "router-link",
+                          {
+                            attrs: {
+                              to: {
+                                name: "postDetail",
+                                params: {
+                                  ideaId: myIdea.id,
+                                  userId: myIdea.user_id
                                 }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                    詳細"
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "c-mini-button" },
-                          [
-                            _c(
-                              "router-link",
-                              {
-                                attrs: {
-                                  to: {
-                                    name: "postIdeaEdit",
-                                    params: {
-                                      id: myIdea.id,
-                                      bought_flag: myIdea.bought_flag,
-                                      category_id: myIdea.category_id,
-                                      content: myIdea.content,
-                                      delete_flag: myIdea.delete_flag,
-                                      img: myIdea.img,
-                                      overflow: myIdea.overflow,
-                                      price: myIdea.price,
-                                      title: myIdea.title,
-                                      user_id: myIdea.user_id
-                                    }
-                                  }
-                                }
-                              },
-                              [_vm._v("編集")]
-                            )
-                          ],
-                          1
+                              }
+                            }
+                          },
+                          [_vm._v("\n                                    詳細")]
                         )
-                      ])
-                    ]
-                  )
-                ],
-                1
-              )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "c-mini-button",
+                        on: {
+                          click: function($event) {
+                            return _vm.toEditPage(
+                              myIdea.id,
+                              myIdea.bought_flag,
+                              myIdea.category_id,
+                              myIdea.content,
+                              myIdea.delete_flag,
+                              myIdea.img,
+                              myIdea.overflow,
+                              myIdea.price,
+                              myIdea.title,
+                              myIdea.user_id
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                編集\n                            "
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ])
             }),
             0
           )
@@ -10431,26 +10914,25 @@ var render = function() {
                         _vm._v(_vm._s(reviewedIdea.title))
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "ic-img" }),
+                      _c("div", { staticClass: "ic-img" }, [
+                        _c("img", {
+                          staticClass: "ic-img-item",
+                          attrs: {
+                            src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + reviewedIdea.img),
+                            alt: "reviewIdeaImg"
+                          }
+                        })
+                      ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "ic-review" }, [
                         _c("span", { staticClass: "ic-span" }, [
                           _vm._v("評価")
                         ]),
                         _vm._v(" "),
-                        _c("div", [
-                          _c("i", { staticClass: "fas fa-star ic-star" }),
-                          _vm._v(" "),
-                          _c("i", { staticClass: "fas fa-star ic-star" })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", [
-                          _c("i", { staticClass: "fas fa-star ic-star" }),
-                          _vm._v(" "),
-                          _c("i", { staticClass: "fas fa-star ic-star" }),
-                          _vm._v(" "),
-                          _c("i", { staticClass: "fas fa-star ic-star" })
-                        ])
+                        _c("span", {
+                          staticClass: "ic-star-review",
+                          class: _vm.star(reviewedIdea.averageReview)
+                        })
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "ic-desc" }, [
@@ -10742,20 +11224,27 @@ var render = function() {
                       _vm._v(_vm._s(buyingIdea.title))
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-img" }),
+                    _c("div", { staticClass: "ic-img" }, [
+                      _c("img", {
+                        staticClass: "ic-img-item",
+                        attrs: {
+                          src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + buyingIdea.img),
+                          alt: "idea"
+                        }
+                      })
+                    ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "ic-review" }, [
                       _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
                       _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
+                      _vm.star(buyingIdea.averageReview) === "ic-not-reviewed"
+                        ? _c("span", {}, [_vm._v("未評価のアイデアです")])
+                        : _vm._e(),
                       _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" })
+                      _c("span", {
+                        staticClass: "ic-star-review",
+                        class: _vm.star(buyingIdea.averageReview)
+                      })
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "ic-desc" }, [
@@ -10765,9 +11254,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "ic-desc-text" }, [
                         _vm._v(
-                          "\n                               " +
+                          "\n                           " +
                             _vm._s(buyingIdea.overflow) +
-                            "\n                            "
+                            "\n                        "
                         )
                       ])
                     ])
@@ -10829,15 +11318,14 @@ var render = function() {
                     _c("div", { staticClass: "ic-review" }, [
                       _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
                       _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
+                      _c("span", {
+                        staticClass: "ic-star-review",
+                        class: _vm.star(favIdea.averageReview)
+                      }),
                       _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" })
+                      _vm.star(favIdea.averageReview) === "ic-not-reviewed"
+                        ? _c("span", {}, [_vm._v("未評価のアイデアです")])
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "ic-desc" }, [
@@ -10847,9 +11335,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "ic-desc-text" }, [
                         _vm._v(
-                          "\n                                    " +
+                          "\n                                " +
                             _vm._s(favIdea.overflow) +
-                            "\n                                "
+                            "\n                            "
                         )
                       ])
                     ])
@@ -10911,19 +11399,14 @@ var render = function() {
                     _c("div", { staticClass: "ic-review" }, [
                       _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
                       _vm._v(" "),
-                      _c("div", [
-                        _c("i", { staticClass: "fas fa-star ic-star" }),
-                        _vm._v(" "),
-                        _c("i", { staticClass: "fas fa-star ic-star" })
-                      ]),
+                      _c("span", {
+                        staticClass: "ic-star-review",
+                        class: _vm.star(myIdea.averageReview)
+                      }),
                       _vm._v(" "),
-                      _c("div", [
-                        _c("i", { staticClass: "fas fa-star ic-star" }),
-                        _vm._v(" "),
-                        _c("i", { staticClass: "fas fa-star ic-star" }),
-                        _vm._v(" "),
-                        _c("i", { staticClass: "fas fa-star ic-star" })
-                      ])
+                      _vm.star(myIdea.averageReview) === "ic-not-reviewed"
+                        ? _c("span", {}, [_vm._v("未評価のアイデアです")])
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "ic-desc" }, [
@@ -10933,9 +11416,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "ic-desc-text" }, [
                         _vm._v(
-                          "\n                                        " +
+                          "\n                                    " +
                             _vm._s(myIdea.overflow) +
-                            "\n                                    "
+                            "\n                                "
                         )
                       ])
                     ])
@@ -10996,15 +11479,10 @@ var render = function() {
                     _c("div", { staticClass: "ic-review" }, [
                       _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
                       _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star ic-star" })
+                      _c("span", {
+                        staticClass: "ic-star-review",
+                        class: _vm.star(review.averageReview)
+                      })
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "ic-desc" }, [
@@ -11014,9 +11492,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "ic-desc-text" }, [
                         _vm._v(
-                          "\n                                            " +
+                          "\n                                        " +
                             _vm._s(review.comment) +
-                            "\n                                        "
+                            "\n                                    "
                         )
                       ])
                     ])
@@ -11136,7 +11614,7 @@ var render = function() {
                   attrs: {
                     id: "mail",
                     type: "text",
-                    placeholder: "（例）info@.com"
+                    placeholder: "現在のパスワード"
                   },
                   domProps: { value: _vm.currentPass },
                   on: {
@@ -11468,11 +11946,24 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(1, true)
+                _c("div", { staticClass: "ic postDetail-container-img-left" }, [
+                  _c(
+                    "label",
+                    { staticClass: "c-label", attrs: { for: "img" } },
+                    [_vm._v("平均評価")]
+                  ),
+                  _vm._v(" "),
+                  _c("span", {
+                    staticClass: "ic-star-review",
+                    class: _vm.star(detail.averageReview)
+                  }),
+                  _vm._v(" "),
+                  _vm.star(detail.averageReview) === "ic-not-reviewed"
+                    ? _c("span", {}, [_vm._v("未評価のアイデアです")])
+                    : _vm._e()
+                ])
               ]),
-              _vm._v(
-                "\n\n                平均の評価を計算するロジック記入\n\n\n\n                "
-              ),
+              _vm._v(" "),
               _c(
                 "label",
                 { staticClass: "c-label", attrs: { for: "category" } },
@@ -11513,7 +12004,7 @@ var render = function() {
                 "div",
                 { staticClass: "confirm-text", attrs: { id: "contents" } },
                 [
-                  _vm.buying
+                  _vm.contributorFlag === true || _vm.buying === true
                     ? _c("div", [
                         _vm._v(
                           "\n                        " +
@@ -11562,24 +12053,20 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm.contributorFlag
+              _c(
+                "label",
+                { staticClass: "c-label", attrs: { for: "purchase" } },
+                [_vm._v("購入")]
+              ),
+              _vm._v(" "),
+              _vm.contributorFlag === true
+                ? _c("div", { staticClass: "confirm-text" }, [
+                    _vm._v(
+                      "\n                    アイデアご提供ありがとうございます\n                "
+                    )
+                  ])
+                : _vm.contributorFlag === false && _vm.buying === false
                 ? _c("div", [
-                    _c(
-                      "label",
-                      { staticClass: "c-label", attrs: { for: "purchase" } },
-                      [_vm._v("購入")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "c-button", attrs: { id: "purchase" } },
-                      [
-                        _vm._v(
-                          "\n                    購入する\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
                     _c(
                       "form",
                       { attrs: { action: "/mypage", method: "post" } },
@@ -11626,7 +12113,16 @@ var render = function() {
                       1
                     )
                   ])
-                : _c("div", [
+                : _vm.buying === true
+                ? _c("div", { staticClass: "confirm-text" }, [
+                    _vm._v(
+                      "\n                    ご購入ありがとうございます\n                "
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              !detail.bought_flag && _vm.ideaUserId === _vm.userId
+                ? _c("div", [
                     _c(
                       "label",
                       { staticClass: "c-label", attrs: { for: "delete" } },
@@ -11645,7 +12141,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "c-button",
-                        attrs: { id: "delete" },
+                        attrs: { id: "delete", disabled: detail.bought_flag },
                         on: {
                           click: function($event) {
                             return _vm.appearForm()
@@ -11658,7 +12154,8 @@ var render = function() {
                         )
                       ]
                     )
-                  ]),
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _c(
                 "div",
@@ -11693,7 +12190,7 @@ var render = function() {
         0
       ),
       _vm._v(" "),
-      _vm._m(2),
+      _vm._m(1),
       _vm._v(" "),
       _c(
         "div",
@@ -11718,12 +12215,19 @@ var render = function() {
                   },
                   [
                     _c("div", { staticClass: "review-img" }, [
-                      _c("img", {
-                        attrs: {
-                          src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + review.img),
-                          alt: "reviewUserImg"
-                        }
-                      }),
+                      review.img !== null
+                        ? _c("img", {
+                            attrs: {
+                              src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + review.img),
+                              alt: "reviewUserImg"
+                            }
+                          })
+                        : _c("img", {
+                            attrs: {
+                              src: __webpack_require__(/*! ../assets/profileImages/account.jpeg */ "./storage/app/public/profileImages/account.jpeg"),
+                              alt: "reviewUserImg"
+                            }
+                          }),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -11764,7 +12268,7 @@ var render = function() {
                       staticClass: "review-posted-comment-star",
                       attrs: { id: "reviewComment" }
                     },
-                    [_vm._m(3, true), _vm._v(" "), _vm._m(4, true)]
+                    [_vm._m(2, true), _vm._v(" "), _vm._m(3, true)]
                   )
                 : review.star === 2
                 ? _c(
@@ -11773,7 +12277,7 @@ var render = function() {
                       staticClass: "review-posted-comment-star",
                       attrs: { id: "reviewComment" }
                     },
-                    [_vm._m(5, true), _vm._v(" "), _vm._m(6, true)]
+                    [_vm._m(4, true), _vm._v(" "), _vm._m(5, true)]
                   )
                 : review.star === 3
                 ? _c(
@@ -11782,7 +12286,7 @@ var render = function() {
                       staticClass: "review-posted-comment-star",
                       attrs: { id: "reviewComment" }
                     },
-                    [_vm._m(7, true), _vm._v(" "), _vm._m(8, true)]
+                    [_vm._m(6, true), _vm._v(" "), _vm._m(7, true)]
                   )
                 : review.star === 4
                 ? _c(
@@ -11791,7 +12295,7 @@ var render = function() {
                       staticClass: "review-posted-comment-star",
                       attrs: { id: "reviewComment" }
                     },
-                    [_vm._m(9, true), _vm._v(" "), _vm._m(10, true)]
+                    [_vm._m(8, true), _vm._v(" "), _vm._m(9, true)]
                   )
                 : review.star === 5
                 ? _c(
@@ -11800,7 +12304,7 @@ var render = function() {
                       staticClass: "review-posted-comment-star",
                       attrs: { id: "reviewComment" }
                     },
-                    [_vm._m(11, true), _vm._v(" "), _vm._m(12, true)]
+                    [_vm._m(10, true), _vm._v(" "), _vm._m(11, true)]
                   )
                 : _vm._e()
             ]),
@@ -11837,7 +12341,7 @@ var render = function() {
       _vm._v(" "),
       !_vm.reviewed && _vm.buying
         ? _c("div", { staticClass: "review-container" }, [
-            _vm._m(13),
+            _vm._m(12),
             _vm._v(" "),
             _c("div", { staticClass: "review-comment" }, [
               _c(
@@ -11917,7 +12421,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(14), _vm._v(" "), _vm._m(15)]
+                        [_vm._m(13), _vm._v(" "), _vm._m(14)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -11932,7 +12436,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(16), _vm._v(" "), _vm._m(17)]
+                        [_vm._m(15), _vm._v(" "), _vm._m(16)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -11947,7 +12451,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(18), _vm._v(" "), _vm._m(19)]
+                        [_vm._m(17), _vm._v(" "), _vm._m(18)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -11962,7 +12466,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(20), _vm._v(" "), _vm._m(21)]
+                        [_vm._m(19), _vm._v(" "), _vm._m(20)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -11977,7 +12481,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(22), _vm._v(" "), _vm._m(23)]
+                        [_vm._m(21), _vm._v(" "), _vm._m(22)]
                       )
                     ])
                   ]),
@@ -12035,7 +12539,7 @@ var render = function() {
             ])
           ])
         : _c("div", { staticClass: "review-container-restriction" }, [
-            _vm._m(24),
+            _vm._m(23),
             _vm._v(" "),
             _c("div", { staticClass: "review-comment" }, [
               _c("form", { attrs: { action: "" } }, [
@@ -12044,7 +12548,7 @@ var render = function() {
                     _vm._v("評価")
                   ]),
                   _vm._v(" "),
-                  _vm._m(25),
+                  _vm._m(24),
                   _vm._v(" "),
                   _c("div", { staticClass: "review-comment-container" }, [
                     _c("label", { attrs: { for: "review-comment" } }, [
@@ -12107,17 +12611,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "c-heading" }, [
       _c("h3", { staticClass: "f-h3" }, [_vm._v("アイデア")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "postDetail-container-img-left" }, [
-      _c("label", { staticClass: "c-label", attrs: { for: "img" } }, [
-        _vm._v("平均評価")
-      ]),
-      _vm._v("\n                        ★3.3\n                    ")
     ])
   },
   function() {
@@ -12861,7 +13354,7 @@ var render = function() {
                   }
                 }
               }),
-              _vm._v(" "),
+              _vm._v("円\n\n                    "),
               _vm.errorMessages.priceErrorMessage
                 ? _c("div", { staticClass: "error" }, [
                     _vm._v(_vm._s(_vm.errorMessages.priceErrorMessage))
@@ -13137,6 +13630,7 @@ var render = function() {
                     to: {
                       name: "post",
                       params: {
+                        fileInfo: this.fileInfo,
                         img: this.img,
                         title: this.title,
                         category_id: this.category_id,
@@ -13155,8 +13649,6 @@ var render = function() {
           _vm._v(" "),
           _vm._m(1),
           _vm._v(" "),
-          _c("div", { staticClass: "arrow" }),
-          _vm._v(" "),
           _c(
             "div",
             {
@@ -13167,23 +13659,7 @@ var render = function() {
                 }
               }
             },
-            [
-              _c(
-                "router-link",
-                {
-                  attrs: {
-                    to: {
-                      name: "postComplete",
-                      params: {
-                        title: this.title
-                      }
-                    }
-                  }
-                },
-                [_vm._v("投稿する")]
-              )
-            ],
-            1
+            [_c("div", [_vm._v("投稿する")])]
           )
         ]
       )
@@ -13648,7 +14124,16 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "profile-container-img-right" }, [
               _c("label", [
-                _c("img", { attrs: { src: _vm.profileImg, alt: "profileImg" } })
+                _vm.profileImg
+                  ? _c("img", {
+                      attrs: { src: _vm.profileImg, alt: "profileImg" }
+                    })
+                  : _c("img", {
+                      attrs: {
+                        src: __webpack_require__(/*! ../assets/profileImages/account.jpeg */ "./storage/app/public/profileImages/account.jpeg"),
+                        alt: "profileImg"
+                      }
+                    })
               ])
             ])
           ]),
@@ -13726,10 +14211,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("footer", [
     _c("div", { staticClass: "l-footer" }, [
+      _c("h3", { staticClass: "l-footer-subject" }, [_vm._v("Inspiration")]),
+      _vm._v(" "),
       _c("div", { staticClass: "l-footer-container" }, [
         _c("div", { staticClass: "l-footer-content" }, [
           _c("div", { staticClass: "l-footer-content-items" }, [
-            _c("h3", [_vm._v("Inspiration")]),
+            _c("h3", [_vm._v("機能Menu")]),
             _vm._v(" "),
             _c(
               "p",
@@ -13777,7 +14264,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "l-footer-content" }, [
       _c("div", { staticClass: "l-footer-content-items" }, [
-        _c("h3", [_vm._v("Inspiration")]),
+        _c("h3", [_vm._v("ページMenu")]),
         _vm._v(" "),
         _c("p", [_c("a", { attrs: { href: "/" } }, [_vm._v("Topへ戻る")])]),
         _vm._v(" "),
@@ -13791,7 +14278,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "l-footer-bootm" }, [
+    return _c("div", { staticClass: "l-footer-bottom" }, [
       _c("div", { staticClass: "l-footer-copyRight" }, [
         _vm._v(
           "\n                Copyright © 2019 Inspiration. All rights reserved.\n            "
@@ -14726,29 +15213,31 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", [
-    _c("h2", { staticClass: "f-h2" }, [_vm._v("退会")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "c-form" }, [
-      _vm._m(0),
+    _c("div", { staticClass: "c-container" }, [
+      _c("h2", { staticClass: "f-h2" }, [_vm._v("退会")]),
       _vm._v(" "),
-      _c(
-        "form",
-        {
-          staticClass: "c-form-submit withdraw-submit",
-          attrs: { method: "get", action: "/home" },
-          on: {
-            click: function($event) {
-              return _vm.userWithdraw(_vm.$store.state.users.id)
+      _c("div", { staticClass: "c-form" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            staticClass: "c-form-submit withdraw-submit",
+            attrs: { method: "get", action: "/home" },
+            on: {
+              click: function($event) {
+                return _vm.userWithdraw(_vm.$store.state.users.id)
+              }
             }
-          }
-        },
-        [
-          _c("input", {
-            staticClass: "c-button withdraw-submit-button",
-            attrs: { type: "submit", value: "退会する" }
-          })
-        ]
-      )
+          },
+          [
+            _c("input", {
+              staticClass: "c-button withdraw-submit-button",
+              attrs: { type: "submit", value: "退会する" }
+            })
+          ]
+        )
+      ])
     ])
   ])
 }
@@ -31763,6 +32252,7 @@ module.exports = g;
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./assets/ideaImages/ab9af3c8.jpg": "./storage/app/public/ideaImages/ab9af3c8.jpg",
 	"./assets/ideaImages/jazz.jpg": "./storage/app/public/ideaImages/jazz.jpg",
 	"./assets/ideaImages/maxresdefault.jpg": "./storage/app/public/ideaImages/maxresdefault.jpg",
 	"./assets/ideaImages/repezen.jpeg": "./storage/app/public/ideaImages/repezen.jpeg",
@@ -31778,7 +32268,11 @@ var map = {
 	"./assets/ideaImages/スクリーンショット 2020-02-03 8.33.27.png": "./storage/app/public/ideaImages/スクリーンショット 2020-02-03 8.33.27.png",
 	"./assets/ideaImages/スクリーンショット 2020-02-08 15.44.35.png": "./storage/app/public/ideaImages/スクリーンショット 2020-02-08 15.44.35.png",
 	"./assets/ideaImages/スクリーンショット 2020-02-09 21.23.20.png": "./storage/app/public/ideaImages/スクリーンショット 2020-02-09 21.23.20.png",
+	"./assets/ideaImages/スクリーンショット 2020-02-15 14.10.10.png": "./storage/app/public/ideaImages/スクリーンショット 2020-02-15 14.10.10.png",
+	"./assets/ideaImages/スクリーンショット 2020-02-15 9.35.26.png": "./storage/app/public/ideaImages/スクリーンショット 2020-02-15 9.35.26.png",
+	"./assets/ideaImages/スクリーンショット 2020-02-15 9.35.36.png": "./storage/app/public/ideaImages/スクリーンショット 2020-02-15 9.35.36.png",
 	"./assets/ideaImages/名称未設定プロジェクト.jpg": "./storage/app/public/ideaImages/名称未設定プロジェクト.jpg",
+	"./assets/images/account.jpeg": "./storage/app/public/images/account.jpeg",
 	"./assets/images/jazz.jpg": "./storage/app/public/images/jazz.jpg",
 	"./assets/images/maxresdefault.jpg": "./storage/app/public/images/maxresdefault.jpg",
 	"./assets/images/twitter.jpg": "./storage/app/public/images/twitter.jpg",
@@ -31798,8 +32292,10 @@ var map = {
 	"./assets/images/スクリーンショット 2020-02-03 8.33.27.png": "./storage/app/public/images/スクリーンショット 2020-02-03 8.33.27.png",
 	"./assets/images/スクリーンショット 2020-02-08 15.44.35.png": "./storage/app/public/images/スクリーンショット 2020-02-08 15.44.35.png",
 	"./assets/images/スクリーンショット 2020-02-09 21.23.20.png": "./storage/app/public/images/スクリーンショット 2020-02-09 21.23.20.png",
+	"./assets/images/スクリーンショット 2020-02-15 9.35.36.png": "./storage/app/public/images/スクリーンショット 2020-02-15 9.35.36.png",
 	"./assets/images/ブリ大根　サムネイル.jpg": "./storage/app/public/images/ブリ大根　サムネイル.jpg",
 	"./assets/images/名称未設定プロジェクト.jpg": "./storage/app/public/images/名称未設定プロジェクト.jpg",
+	"./assets/profileImages/account.jpeg": "./storage/app/public/profileImages/account.jpeg",
 	"./assets/profileImages/スクリーンショット 2019-12-29 14.47.31.png": "./storage/app/public/profileImages/スクリーンショット 2019-12-29 14.47.31.png",
 	"./assets/profileImages/スクリーンショット 2019-12-31 11.51.03.png": "./storage/app/public/profileImages/スクリーンショット 2019-12-31 11.51.03.png"
 };
@@ -31886,7 +32382,10 @@ var app = new Vue({
       formats: {
         input: ['YYYY-MM-DD']
       },
-      selectedDate: null
+      selectedDate: null,
+      year: "",
+      month: "",
+      day: ""
     };
   },
   mounted: function mounted() {
@@ -33837,6 +34336,17 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
 
 /***/ }),
 
+/***/ "./storage/app/public/ideaImages/ab9af3c8.jpg":
+/*!****************************************************!*\
+  !*** ./storage/app/public/ideaImages/ab9af3c8.jpg ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/ab9af3c8.jpg?827b7bb58bfd437df85823d9670a9790";
+
+/***/ }),
+
 /***/ "./storage/app/public/ideaImages/jazz.jpg":
 /*!************************************************!*\
   !*** ./storage/app/public/ideaImages/jazz.jpg ***!
@@ -34002,6 +34512,39 @@ module.exports = "/images/スクリーンショット 2020-02-09 21.23.20.png?d2
 
 /***/ }),
 
+/***/ "./storage/app/public/ideaImages/スクリーンショット 2020-02-15 14.10.10.png":
+/*!*************************************************************************!*\
+  !*** ./storage/app/public/ideaImages/スクリーンショット 2020-02-15 14.10.10.png ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2020-02-15 14.10.10.png?f183c177abb56152f6fb91bc06774047";
+
+/***/ }),
+
+/***/ "./storage/app/public/ideaImages/スクリーンショット 2020-02-15 9.35.26.png":
+/*!************************************************************************!*\
+  !*** ./storage/app/public/ideaImages/スクリーンショット 2020-02-15 9.35.26.png ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2020-02-15 9.35.26.png?9030c431b31ccdbe46cef1b047b9df16";
+
+/***/ }),
+
+/***/ "./storage/app/public/ideaImages/スクリーンショット 2020-02-15 9.35.36.png":
+/*!************************************************************************!*\
+  !*** ./storage/app/public/ideaImages/スクリーンショット 2020-02-15 9.35.36.png ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2020-02-15 9.35.36.png?e54247188ea33272103db5c08566baf6";
+
+/***/ }),
+
 /***/ "./storage/app/public/ideaImages/名称未設定プロジェクト.jpg":
 /*!*******************************************************!*\
   !*** ./storage/app/public/ideaImages/名称未設定プロジェクト.jpg ***!
@@ -34010,6 +34553,17 @@ module.exports = "/images/スクリーンショット 2020-02-09 21.23.20.png?d2
 /***/ (function(module, exports) {
 
 module.exports = "/images/名称未設定プロジェクト.jpg?2e7186316dcbd5f87bf908075ea1f37d";
+
+/***/ }),
+
+/***/ "./storage/app/public/images/account.jpeg":
+/*!************************************************!*\
+  !*** ./storage/app/public/images/account.jpeg ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/account.jpeg?dfb6f56101680b9482da4d16fa016375";
 
 /***/ }),
 
@@ -34222,6 +34776,17 @@ module.exports = "/images/スクリーンショット 2020-02-09 21.23.20.png?d2
 
 /***/ }),
 
+/***/ "./storage/app/public/images/スクリーンショット 2020-02-15 9.35.36.png":
+/*!********************************************************************!*\
+  !*** ./storage/app/public/images/スクリーンショット 2020-02-15 9.35.36.png ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/スクリーンショット 2020-02-15 9.35.36.png?e54247188ea33272103db5c08566baf6";
+
+/***/ }),
+
 /***/ "./storage/app/public/images/ブリ大根　サムネイル.jpg":
 /*!**************************************************!*\
   !*** ./storage/app/public/images/ブリ大根　サムネイル.jpg ***!
@@ -34241,6 +34806,17 @@ module.exports = "/images/ブリ大根　サムネイル.jpg?1bc345a7dbbd86d59c8
 /***/ (function(module, exports) {
 
 module.exports = "/images/名称未設定プロジェクト.jpg?2e7186316dcbd5f87bf908075ea1f37d";
+
+/***/ }),
+
+/***/ "./storage/app/public/profileImages/account.jpeg":
+/*!*******************************************************!*\
+  !*** ./storage/app/public/profileImages/account.jpeg ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/account.jpeg?dfb6f56101680b9482da4d16fa016375";
 
 /***/ }),
 

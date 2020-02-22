@@ -18,7 +18,6 @@
                                 <input id="img" @change="onFileChange" class ="c-input profile-container-img-none" type="file" />
                                 <i aria-hidden="true" v-show="!profileImg" class="fas fa-plus fa-7x"></i>
                                 <img :src="profileImg" v-show="profileImg" alt="profileImg">
-                                <!-- hoverしたら画像をアップロードの文字が浮き上がって画像が薄暗く -->
                             </label>
                         </div>
 
@@ -203,9 +202,12 @@
             },
 
             saveImage() {
+                this.errorMessages.imgErrorMessage = ""
+                this.$emit('open-loading');
+
                 this.imgValidation();
 
-                if (this.validation.imgValidation === true) {
+                if (this.validations.imgValidation === true) {
 
                     const formData = new FormData();
                     console.log(this.fileInfo);
@@ -218,6 +220,7 @@
                             this.user = response.data;
                             this.user = this.$store.dispatch('getUsers');
                             this.ImgChangeState = true;
+                            this.$emit('close-loading');
                         }).catch((error) => {
                         console.log(error);
                     });
@@ -235,8 +238,13 @@
                 }
             },
 
-            updateName: function (id, name) {
+            nameMessage:function()
+            {
+                this.errorMessages.nameErrorMessage = ""
+            },
 
+            updateName: function (id, name) {
+                this.$emit('open-loading');
                 this.nameValidation();
 
                 //名前のバリデーションが通ってれば保存処理
@@ -255,6 +263,7 @@
             //名前のバリデーション
             nameValidation: function () {
 
+
                 if (this.$store.state.users.name === "") {
                     this.validations.nameValidation = false;
                     this.errorMessages.nameErrorMessage = "入力必須です";
@@ -268,13 +277,13 @@
                     this.validations.nameValidation = true;
                     this.errorMessages.nameErrorMessage = false;
                     this.errorMessages.nameErrorMessage = "変更に成功しました"
-
                 }
+                this.$emit('open-loading');
             },
 
 
             updateEmail: function (id, email) {
-
+                this.$emit('open-loading');
                 this.emailValidation();
 
                 if (this.validations.emailValidation === true) {
@@ -287,6 +296,7 @@
                         console.log(error);
                     });
                 }
+                this.$emit('close-loading');
             },
 
             emailValidation: function () {
@@ -307,10 +317,12 @@
                     this.errorMessages.emailErrorMessage = "変更に成功しました"
 
                 }
+
             },
 
 
             updateIntroduction: function (id, introduction) {
+                this.$emit('open-loading');
 
                 this.introductionValidation();
 
@@ -324,6 +336,8 @@
                         console.log(error);
                     });
                 }
+                this.$emit('close-loading');
+
             },
 
             //自己紹介のバリデーション

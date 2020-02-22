@@ -78,6 +78,9 @@ class StripeController extends Controller
                 'price' => $amount
             ]);
 
+            return redirect('/mypage')->with('flash_message', '投稿が完了しました');
+
+
             return view('layouts.index');
 
         } catch (\Exception $ex) {

@@ -103,63 +103,113 @@
         </div>
 
         <div class="home-container">
-            <h3 class ="home-header">あなたのアイデアから価値を生み出す</h3>
+            <h3 class="home-header">あなたのアイデアから価値を生み出す</h3>
             <div class="home-what">
 
                 <div class="home-what-container">
-                    <div class="home-what-item">
+                    <div class="home-what-items-top">
+                    <div class="home-what-item js-rise-target">
+                        <div class="home-what-shadow"></div>
                         <img src="{{asset(('/img/ec.jpg'))}}" alt="">
+                    </div>
                         <p>ECサイト</p>
+                        <div class="home-what-item-description">世の中の商品が集まるECサイトのアイデア</div>
                     </div>
-                    <div class="home-what-item">
-                        <img src="{{asset(('/img/sns.jpg'))}}" alt="">
-                        <p>SNS</p>
-                    </div>
-                    <div class="home-what-item">
-                        <img src="{{asset(('/img/matching.jpg'))}}" alt="">
 
-                        <p>マッチング</p>
+                    <div class="home-what-items-top">
+                    <div class="home-what-item  js-rise-target">
+                        <div class="home-what-shadow"></div>
+                        <img src="{{asset(('/img/sns.jpg'))}}" alt="">
+                        </div>
+                        <p>SNS</p>
+                        <div class="home-what-item-description">ビジネスや自己発信で用いられる流行りのSNSのアイデア</div>
                     </div>
+
+
+                    <div class="home-what-items-top">
+                    <div class="home-what-item  js-rise-target">
+                        <div class="home-what-shadow"></div>
+                        <img src="{{asset(('/img/matching.jpg'))}}" alt="">
+                        </div>
+                        <p>マッチング</p>
+                        <div class="home-what-item-description">恋愛などに代表されるマッチングに関するアイデア</div>
+                    </div>
+
+                </div>
+
+                <div class="home-what-container">
+
+
+                    <div class="home-what-items-bottom">
+                        <div class="home-what-item  js-rise-target">
+                            <div class="home-what-shadow"></div>
+                            <img src="{{asset(('/img/board.jpg'))}}" alt="">
+                        </div>
+                        <p>掲示板</p>
+                        <div class="home-what-item-description">様々な情報が飛び交う掲示板に対してのアイデア</div>
+                    </div>
+
+                    <div class="home-what-items-bottom">
+                        <div class="home-what-item  js-rise-target">
+                            <div class="home-what-shadow"></div>
+                            <img src="{{asset(('/img/infoplaner.jpg'))}}" alt="">
+                        </div>
+                        <p>情報発信</p>
+                        <div class="home-what-item-description">自分の持つ知識を使う情報発信に関するアイデア</div>
+                    </div>
+
+                    <div class="home-what-items-bottom">
+                        <div class="home-what-item  js-rise-target">
+                            <div class="home-what-shadow"></div>
+                            <img src="{{asset(('/img/sharing.jpg'))}}" alt="">
+                        </div>
+                        <p>シェアリング</p>
+                        <div class="home-what-item-description">ITの普及に伴うのシェアリングに関するアイデア</div>
+                    </div>
+                </div>
+
+
                 </div>
             </div>
 
             <div class="home-merit">
 
-                <h3 class ="home-header">アイデア提供のメリット</h3>
+                <h3 class="home-header">アイデア提供のメリット</h3>
 
                 <div class="home-merit-evocation">
-                    <p>自分のアイデアってあまり自信無いんだよな...</p>
-                    <p>そんなあなたのアイデアもじつはだれかにとっては宝の山だったりします。</p>
-                    <p>そんなアイデアを投稿するメリット</p>
+                    <p class="home-merit-evocation-item">自分のアイデアって普段どう捉えていますか？？</p>
+                    <p class="home-merit-evocation-transparent">自分のアイデアってあまり自信無いんだよな...</p>
+                    <p class="home-merit-evocation-item">そんなあなたのアイデアも実はだれかにとっては宝の山だったりします。</p>
+                    <p class="home-merit-evocation-item">そんなアイデアを投稿するメリット</p>
                     <p class ="home-merit-evocation-accent">5点</p>
-                    <p>挙げてみました。</p>
+                    <p class="home-merit-evocation-item">挙げてみました。</p>
                 </div>
                 <div class="home-merit-container">
-                    <div class="home-merit-item home-merit-item-left">
+                    <div class="home-merit-item">
                         <img src="{{asset(('/img/influencer.jpg'))}}" alt="">
                         <h3>影響力を持てる</h3>
-                        <p>資本主義も成熟し今後は信用こそが本当の価値と言われる時代に発信力鍛えれます。</p>
+                        <p>資本主義が成熟し信用こそが本当の価値と言われる時代に発信力鍛えられます。</p>
                     </div>
 
-                    <div class="home-merit-item home-merit-item-center">
+                    <div class="home-merit-item">
                         <img src="{{asset(('/img/partner.jpg'))}}" alt="">
                         <h3>仲間が見つかる</h3>
                         <p>アイデアを投稿していく中で、ともに成長しあえる仲間を見つけることができます。</p>
                     </div>
 
-                    <div class="home-merit-item home-merit-item-right">
+                    <div class="home-merit-item">
                         <img src="{{asset(('/img/money.jpg'))}}" alt="">
                         <h3>アイデアがお金になる</h3>
-                        <p>ただ頭の中にあるだけであればガラクタ同然。誰かの手に渡ることで価値となりお金になります。</p>
+                        <p>頭の中にあるだけであればガラクタ同然。誰かの手に渡ることで価値となりお金になります。</p>
                     </div>
 
-                    <div class="home-merit-item home-merit-item-left">
+                    <div class="home-merit-item">
                         <img src="{{asset(('/img/motivation.jpg'))}}" alt="">
-                        <h3>自己肯定感高められる</h3>
+                        <h3>モチベーション高められる</h3>
                         <p>自分のアイデアが誰かに認められることでより一層モチベーションが上がります。</p>
                     </div>
 
-                    <div class="home-merit-item home-merit-item-left">
+                    <div class="home-merit-item">
                         <img src="{{asset(('/img/logical.jpg'))}}" alt="">
                         <h3>論理的思考力Up</h3>
                         <p>どういう根拠でそのアイデアが上手くいくか論拠の提示で思考力上がります。</p>
@@ -168,11 +218,11 @@
             </div>
 
             <div class="home-recommend">
-                <p>あなたのアイデアを価値へと交換していきましょう</p>
+                <p class="home-recommend-word">あなたのアイデアを価値へ
+                    <br>交換していきましょう</p>
 
-                拡大して出てくる
-                <form>
-                    <input class="c-button home-recommend-button" value="新規登録">
+                <form action="{{route('register')}}">
+                    <input type="submit" class="c-button home-recommend-button" value="新規登録">
                 </form>
 
             </div>

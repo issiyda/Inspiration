@@ -30,6 +30,20 @@ $space_3l: 40px;
 
 $font-family_corp: 'Amatic SC', cursive;
 
+//レビュー ★
+$starFull: 16px;//星1個の幅
+$starHalf: $starFull / 2;//星半分（0.5）の幅
+
+$rate1: $starFull;//星1
+$rate1-5: $starFull + $starHalf;//星1.5
+$rate2: $starFull * 2;//星2
+$rate2-5: ($starFull * 2) + $starHalf;//星2.5
+$rate3: $starFull * 3;//星3
+$rate3-5: ($starFull * 3) + $starHalf;//星3.5
+$rate4: $starFull * 4;//星4
+$rate4-5: ($starFull * 4) + $starHalf;//星4.5
+$rate5 :$starFull * 5;//星5
+
 
 $breakpoints: (
   'sm': 'screen and (max-width: 414px)',
@@ -146,5 +160,6 @@ a{
         font-weight:bolder;
         font-size:$font-size_l;
         padding:5%;
+        text-align:center;
 }
 

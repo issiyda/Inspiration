@@ -83,7 +83,24 @@ class ReviewController extends Controller
             $message->to($ideaUserInfo[0]->email, $ideaUserInfo[0]->name.'さん')->subject('新規レビューを頂きました！！');
         });
 
+        //        アイデアの平均点数計算ロジック
 
+        $reviewCount = Review::where('idea_id',$ideaId)->count() + 1;
+        $sumStars = Review::where('idea_id',$ideaId)->sum('star') + $star;
+
+
+        $averageReview = $sumStars / $reviewCount ;
+        $averageReview = round($averageReview,1);
+
+
+
+        $average = Idea::where('id',$ideaId)->first();
+        $average->averageReview = $averageReview;
+        $average->review_counts = $reviewCount;
+        $average->save();
+
+
+        //レビュー作成
         Review::create([
             'user_id' => $reviewerId,
             'idea_id' => $ideaId,
@@ -91,11 +108,12 @@ class ReviewController extends Controller
             'star' => $star
         ]);
 
+
         return response()->json([
             'data' =>$request,
+            'review' => $averageReview,
             'success' => 'review created successfully!'
         ],200);
-
 
     }
 }

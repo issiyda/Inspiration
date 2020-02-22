@@ -42,6 +42,7 @@
 
                 <div class ="c-button confirm-post" @click="editIdea()">
                 <router-link :to="{name:'post',params:{
+                     fileInfo: this.fileInfo,
                      img: this.img,
                      title:this.title,
                      category_id:this.category_id,
@@ -58,13 +59,11 @@
                     <p>下記の投稿ボタンを押してください</p>
                 </div>
 
-                <div class="arrow"></div>
 
 
 
                 <div class ="c-button confirm-post" @click="saveIdea(userId)">
-                <router-link :to="{name:'postComplete',params:{
-                                    title:this.title}}">投稿する</router-link>
+                    <div>投稿する</div>
                 </div>
 
             </form>
@@ -135,7 +134,9 @@
                 })
                     .then((response) => {
                         console.log(response);
-                        //投稿した後は詳細に飛びたい
+                        this.$router.push({name:'postComplete',params: {
+                                title: this.title,
+                            }})
                     }).catch((error) => {
                     console.log(error);
                 });
