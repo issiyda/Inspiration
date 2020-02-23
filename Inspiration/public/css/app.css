@@ -241,6 +241,13 @@ a {
 }
 
 .f-h4 {
+  height: 15%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
   color: #FFBEDA;
   font-size: 18px;
   font-weight: bold;
@@ -756,6 +763,7 @@ a {
 }
 
 .c-button,
+.c-button-allShow,
 .c-mini-button,
 .c-radio,
 .allIdea-button-search {
@@ -773,10 +781,12 @@ a {
   padding: 2%;
   -webkit-transition: 0.6s;
   transition: 0.6s;
+  text-align: center;
   width: 30%;
 }
 
 .c-button:hover,
+.c-button-allShow:hover,
 .c-mini-button:hover,
 .c-radio:hover,
 .allIdea-button-search:hover {
@@ -789,10 +799,32 @@ a {
 }
 
 .c-button:focus,
+.c-button-allShow:focus,
 .c-mini-button:focus,
 .c-radio:focus,
 .allIdea-button-search:focus {
   outline: 0;
+}
+
+.c-button-allShow {
+  margin: 5% 0 5% 70%;
+  position: relative;
+  padding: 3%;
+  width: 20%;
+}
+
+.c-button-allShow a {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  top: 0;
+  -webkit-box-align: center;
+          align-items: center;
+  left: 0;
 }
 
 .c-mini-button,
@@ -887,6 +919,7 @@ input[type="radio"]:checked + .c-radio {
   }
 
   .c-form .c-button,
+  .c-form .c-button-allShow,
   .c-form .c-mini-button,
   .c-form .c-radio,
   .c-form .allIdea-button-search {
@@ -990,7 +1023,7 @@ input[type="radio"]:checked + .c-radio {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  margin: 5% auto;
+  margin: 5% auto 0;
   /**
 カード全体のcss
  */
@@ -1004,11 +1037,24 @@ input[type="radio"]:checked + .c-radio {
   text-decoration: none;
 }
 
+.ic-mypage {
+  height: 650px;
+}
+
+.ic-filter {
+  height: 700px;
+}
+
+.ic-all {
+  height: 950px;
+}
+
 .ic-card {
   background: #f6f5f4;
   border-radius: 2%;
-  margin: 1% auto;
+  margin: 0 auto 10%;
   position: relative;
+  padding-bottom: 1%;
   text-align: center;
   width: 17%;
   z-index: 1;
@@ -1061,9 +1107,9 @@ input[type="radio"]:checked + .c-radio {
 }
 
 .ic-img {
-  height: 160px;
+  height: 20%;
   margin: 0 auto;
-  width: 90%;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -1084,11 +1130,63 @@ input[type="radio"]:checked + .c-radio {
           transform: scale(1.3) skewX(4deg);
 }
 
+.ic-desc,
+.ic-desc-mypage,
+.ic-desc-filter,
+.ic-desc-all {
+  background: #fff;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+  -webkit-box-pack: left;
+          justify-content: left;
+  margin: 15% auto 5%;
+  overflow: hidden;
+  padding: 5%;
+  width: 90%;
+  word-break: break-word;
+  /**
+        幅を揃えるためにmypageでは40% それ以外では30%
+         */
+}
+
+.ic-desc-mypage {
+  height: 35%;
+}
+
+.ic-desc-filter {
+  height: 30%;
+}
+
+.ic-desc-all {
+  height: 25%;
+}
+
+.ic-desc-overflow {
+  -webkit-box-align: center;
+          align-items: center;
+  height: 15%;
+}
+
+.ic-desc-text {
+  -webkit-box-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: flex;
+  overflow: hidden;
+  height: 90%;
+  -webkit-box-pack: center;
+          justify-content: center;
+}
+
 .ic-button-one-container {
   display: -webkit-box;
   display: flex;
   justify-content: space-around;
-  margin: 10% auto;
+  margin: auto;
   padding: 3%;
   z-index: 3;
 }
@@ -1097,42 +1195,10 @@ input[type="radio"]:checked + .c-radio {
   display: -webkit-box;
   display: flex;
   justify-content: space-around;
-  margin: 10% auto;
+  margin: auto;
   padding: 3%;
   width: 90%;
   z-index: 3;
-}
-
-.ic-desc {
-  background: #fff;
-  box-sizing: border-box;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-          flex-direction: column;
-  height: 240px;
-  -webkit-box-pack: left;
-          justify-content: left;
-  margin: 15% auto 10%;
-  overflow: hidden;
-  padding: 5%;
-  width: 90%;
-  word-break: break-word;
-}
-
-.ic-desc-overflow {
-  -webkit-box-align: center;
-          align-items: center;
-  height: 10%;
-}
-
-.ic-desc-text {
-  -webkit-box-align: center;
-          align-items: center;
-  display: -webkit-box;
-  display: flex;
-  height: 90%;
 }
 
 .ic-star-review {
@@ -1210,7 +1276,12 @@ input[type="radio"]:checked + .c-radio {
 
 .ic-review {
   width: 88px;
-  margin: 0 auto;
+  margin: 10% auto;
+}
+
+.ic-review-reviewed {
+  border: solid 0.5px #A16EFF;
+  border-radius: 5%;
 }
 
 .ic-not-reviewed {
@@ -1358,7 +1429,7 @@ confirm とdetailの共通部分　
   box-sizing: border-box;
   background: #fff;
   margin: 0 auto;
-  padding: 2%;
+  padding: 3%;
   width: 80%;
   word-break: break-all;
 }
@@ -1583,7 +1654,7 @@ confirm とdetailの共通部分　
           flex-direction: column;
   -webkit-box-pack: center;
           justify-content: center;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -1603,6 +1674,8 @@ confirm とdetailの共通部分　
   background: #fff;
   padding: 8%;
   margin: 6% auto;
+  width: 80%;
+  word-wrap: break-word;
 }
 
 .review-posted-comment-star {

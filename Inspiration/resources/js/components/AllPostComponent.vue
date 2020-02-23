@@ -13,9 +13,12 @@
 
 
                 <paginate name="paginate-log" :list="myIdeaLists" :per="15">
-                    <div v-for="myIdea in paginated('paginate-log')" class="ic-card">
-                        <div class="ic-a">
-                        <h4 class ="f-h4">{{myIdea.title}}</h4>
+                    <div v-for="myIdea in paginated('paginate-log')" class="ic-card ic-filter">
+                        <router-link :to="{name:'postDetail',params:{
+                                ideaId: myIdea.id,
+                                userId: myIdea.user_id
+                                }}" class ="ic-a">
+                            <h4 class ="f-h4">{{myIdea.title}}</h4>
                         <div class="ic-img">
                             <img :src="require(`../assets${myIdea.img}`)" alt="postIdeaImg" class="ic-img-item">
                         </div>
@@ -24,12 +27,14 @@
                             <span class ="ic-star-review" v-bind:class="star(myIdea.averageReview)"></span>
                             <span class v-if="star(myIdea.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
                         </div>
-                        <div class="ic-desc">
+                            <div class="ic-desc-filter">
                             <div class ="ic-desc-overflow">概要</div>
                             <div class="ic-desc-text">
-                                {{myIdea.overflow}}
+                                {{myIdea.overflow.slice(0,48)}}
                             </div>
                         </div>
+                        </router-link>
+
                         <div class="ic-button-two-container">
 
                             <div class="c-mini-button">
@@ -55,11 +60,8 @@
 <!--                            <input type="submit" class="c-mini-button" value="詳細">-->
 <!--                            <input type="submit" class="c-mini-button" value="編集">-->
                         </div>
-                        </div>
                     </div>
                 </paginate>
-
-
 
             </div>
 
@@ -132,7 +134,7 @@
                 }
                 else if(bought_flag === 1)
                 {
-                    alert("購入されているので削除できません")
+                    alert("購入されているので編集できません")
                 }
             }
         },

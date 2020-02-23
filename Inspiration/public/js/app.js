@@ -2886,6 +2886,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllPostComponent",
   data: function data() {
@@ -2928,7 +2930,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
         });
       } else if (bought_flag === 1) {
-        alert("購入されているので削除できません");
+        alert("購入されているので編集できません");
       }
     }
   },
@@ -3390,14 +3392,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MyPageComponent",
   data: function data() {
-    return {
-      notReviewedFlag: false
-    };
+    return {};
   },
   methods: {},
   created: function created() {
@@ -3423,33 +3421,44 @@ __webpack_require__.r(__webpack_exports__);
     reviews: function reviews() {
       return this.$store.state.ideas.review;
     },
+    reviewed: function reviewed() {
+      return function (stars) {
+        var starReview = stars;
+
+        if (starReview === 0) {
+          return false;
+        } else if (starReview !== 0) return true;
+      };
+    },
     star: function star() {
       return function (stars) {
         var starReview = stars;
 
         if (starReview === 0) {
           return "ic-not-reviewed";
-        } else if (starReview <= 0.5) {
-          return "rate0-5";
-        } else if (starReview > 0.5 && starReview <= 1) {
-          return "rate1";
-        } else if (starReview > 1 && starReview <= 1.5) {
-          return "rate1-5";
-        } else if (starReview > 1.5 && starReview <= 2) {
-          return "rate2";
-        } else if (starReview > 2 && starReview <= 2.5) {
-          return "rate2-5";
-        } else if (starReview > 2.5 && starReview <= 3) {
-          return "rate3";
-        } else if (starReview > 3 && starReview <= 3.5) {
-          return "rate3-5";
-        } else if (starReview > 3.5 && starReview <= 4) {
-          return "rate4";
-        } else if (starReview > 4 && starReview <= 4.5) {
-          return "rate4-5";
-        } else if (starReview > 4.5 && starReview <= 5) {
-          return "rate5";
-        }
+          this.notReviewed;
+        } //星の数に応じて画面の星変化
+        else if (starReview <= 0.5) {
+            return "rate0-5";
+          } else if (starReview > 0.5 && starReview <= 1) {
+            return "rate1";
+          } else if (starReview > 1 && starReview <= 1.5) {
+            return "rate1-5";
+          } else if (starReview > 1.5 && starReview <= 2) {
+            return "rate2";
+          } else if (starReview > 2 && starReview <= 2.5) {
+            return "rate2-5";
+          } else if (starReview > 2.5 && starReview <= 3) {
+            return "rate3";
+          } else if (starReview > 3 && starReview <= 3.5) {
+            return "rate3-5";
+          } else if (starReview > 3.5 && starReview <= 4) {
+            return "rate4";
+          } else if (starReview > 4 && starReview <= 4.5) {
+            return "rate4-5";
+          } else if (starReview > 4.5 && starReview <= 5) {
+            return "rate5";
+          }
       };
     }
   }
@@ -9808,7 +9817,7 @@ var render = function() {
             _vm._l(_vm.paginated("paginate-log"), function(buyingIdea) {
               return _c(
                 "div",
-                { staticClass: "ic-card" },
+                { staticClass: "ic-card ic-filter" },
                 [
                   _c(
                     "router-link",
@@ -9855,7 +9864,7 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "ic-desc" }, [
+                      _c("div", { staticClass: "ic-desc-filter" }, [
                         _c("div", { staticClass: "ic-desc-overflow" }, [
                           _vm._v("概要")
                         ]),
@@ -9863,7 +9872,7 @@ var render = function() {
                         _c("div", { staticClass: "ic-desc-text" }, [
                           _vm._v(
                             "\n                                " +
-                              _vm._s(buyingIdea.overflow) +
+                              _vm._s(buyingIdea.overflow.slice(0, 48)) +
                               "\n                            "
                           )
                         ])
@@ -9964,7 +9973,7 @@ var render = function() {
               _vm._l(_vm.paginated("paginate-log"), function(favoriteIdea) {
                 return _c(
                   "div",
-                  { staticClass: "ic-card" },
+                  { staticClass: "ic-card ic-filter" },
                   [
                     _c(
                       "router-link",
@@ -10014,7 +10023,7 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "ic-desc" }, [
+                        _c("div", { staticClass: "ic-desc-filter" }, [
                           _c("div", { staticClass: "ic-desc-overflow" }, [
                             _vm._v("概要")
                           ]),
@@ -10022,7 +10031,7 @@ var render = function() {
                           _c("div", { staticClass: "ic-desc-text" }, [
                             _vm._v(
                               "\n                                " +
-                                _vm._s(favoriteIdea.overflow) +
+                                _vm._s(favoriteIdea.overflow.slice(0, 48)) +
                                 "\n                            "
                             )
                           ])
@@ -10583,7 +10592,7 @@ var render = function() {
                     _vm._l(_vm.paginated("paginate-log"), function(allIdea) {
                       return _c(
                         "div",
-                        { staticClass: "ic-card" },
+                        { staticClass: "ic-card ic-all" },
                         [
                           _c(
                             "router-link",
@@ -10651,7 +10660,7 @@ var render = function() {
                                 ])
                               ]),
                               _vm._v(" "),
-                              _c("div", { staticClass: "ic-desc" }, [
+                              _c("div", { staticClass: "ic-desc-all" }, [
                                 _c("div", { staticClass: "ic-desc-overflow" }, [
                                   _vm._v("概要")
                                 ]),
@@ -10659,7 +10668,7 @@ var render = function() {
                                 _c("div", { staticClass: "ic-desc-text" }, [
                                   _vm._v(
                                     "\n                                    " +
-                                      _vm._s(allIdea.overflow) +
+                                      _vm._s(allIdea.overflow.slice(0, 48)) +
                                       "\n                                "
                                   )
                                 ])
@@ -10732,48 +10741,69 @@ var render = function() {
             "paginate",
             { attrs: { name: "paginate-log", list: _vm.myIdeaLists, per: 15 } },
             _vm._l(_vm.paginated("paginate-log"), function(myIdea) {
-              return _c("div", { staticClass: "ic-card" }, [
-                _c("div", { staticClass: "ic-a" }, [
-                  _c("h4", { staticClass: "f-h4" }, [
-                    _vm._v(_vm._s(myIdea.title))
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "ic-img" }, [
-                    _c("img", {
-                      staticClass: "ic-img-item",
+              return _c(
+                "div",
+                { staticClass: "ic-card ic-filter" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "ic-a",
                       attrs: {
-                        src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + myIdea.img),
-                        alt: "postIdeaImg"
+                        to: {
+                          name: "postDetail",
+                          params: {
+                            ideaId: myIdea.id,
+                            userId: myIdea.user_id
+                          }
+                        }
                       }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "ic-review" }, [
-                    _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
-                    _vm._v(" "),
-                    _c("span", {
-                      staticClass: "ic-star-review",
-                      class: _vm.star(myIdea.averageReview)
-                    }),
-                    _vm._v(" "),
-                    _vm.star(myIdea.averageReview) === "ic-not-reviewed"
-                      ? _c("span", {}, [_vm._v("未評価のアイデアです")])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "ic-desc" }, [
-                    _c("div", { staticClass: "ic-desc-overflow" }, [
-                      _vm._v("概要")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "ic-desc-text" }, [
-                      _vm._v(
-                        "\n                                " +
-                          _vm._s(myIdea.overflow) +
-                          "\n                            "
-                      )
-                    ])
-                  ]),
+                    },
+                    [
+                      _c("h4", { staticClass: "f-h4" }, [
+                        _vm._v(_vm._s(myIdea.title))
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "ic-img" }, [
+                        _c("img", {
+                          staticClass: "ic-img-item",
+                          attrs: {
+                            src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + myIdea.img),
+                            alt: "postIdeaImg"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "ic-review" }, [
+                        _c("span", { staticClass: "ic-span" }, [
+                          _vm._v("評価")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", {
+                          staticClass: "ic-star-review",
+                          class: _vm.star(myIdea.averageReview)
+                        }),
+                        _vm._v(" "),
+                        _vm.star(myIdea.averageReview) === "ic-not-reviewed"
+                          ? _c("span", {}, [_vm._v("未評価のアイデアです")])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "ic-desc-filter" }, [
+                        _c("div", { staticClass: "ic-desc-overflow" }, [
+                          _vm._v("概要")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "ic-desc-text" }, [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(myIdea.overflow.slice(0, 48)) +
+                              "\n                            "
+                          )
+                        ])
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("div", { staticClass: "ic-button-two-container" }, [
                     _c(
@@ -10827,8 +10857,9 @@ var render = function() {
                       ]
                     )
                   ])
-                ])
-              ])
+                ],
+                1
+              )
             }),
             0
           )
@@ -10892,7 +10923,7 @@ var render = function() {
             _vm._l(_vm.paginated("paginate-log"), function(reviewedIdea) {
               return _c(
                 "div",
-                { staticClass: "ic-card" },
+                { staticClass: "ic-card ic-filter" },
                 [
                   _c(
                     "router-link",
@@ -10935,7 +10966,7 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "ic-desc" }, [
+                      _c("div", { staticClass: "ic-desc-filter" }, [
                         _c("div", { staticClass: "ic-desc-overflow" }, [
                           _vm._v("概要")
                         ]),
@@ -11202,7 +11233,7 @@ var render = function() {
           _vm._l(_vm.buyingIdeas.slice(0, 5), function(buyingIdea) {
             return _c(
               "div",
-              { staticClass: "ic-card" },
+              { staticClass: "ic-card ic-mypage" },
               [
                 _c(
                   "router-link",
@@ -11234,20 +11265,33 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-review" }, [
-                      _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
-                      _vm._v(" "),
-                      _vm.star(buyingIdea.averageReview) === "ic-not-reviewed"
-                        ? _c("span", {}, [_vm._v("未評価のアイデアです")])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "ic-star-review",
-                        class: _vm.star(buyingIdea.averageReview)
-                      })
-                    ]),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "ic-review",
+                        class: {
+                          "ic-review-reviewed": _vm.reviewed(
+                            buyingIdea.averageReview
+                          )
+                        }
+                      },
+                      [
+                        _c("span", { staticClass: "ic-span" }, [
+                          _vm._v("評価")
+                        ]),
+                        _vm._v(" "),
+                        _vm.star(buyingIdea.averageReview) === "ic-not-reviewed"
+                          ? _c("span", {}, [_vm._v("未評価のアイデアです")])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("span", {
+                          staticClass: "ic-star-review",
+                          class: _vm.star(buyingIdea.averageReview)
+                        })
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-desc" }, [
+                    _c("div", { staticClass: "ic-desc-mypage" }, [
                       _c("div", { staticClass: "ic-desc-overflow" }, [
                         _vm._v("概要")
                       ]),
@@ -11255,7 +11299,7 @@ var render = function() {
                       _c("div", { staticClass: "ic-desc-text" }, [
                         _vm._v(
                           "\n                           " +
-                            _vm._s(buyingIdea.overflow) +
+                            _vm._s(buyingIdea.overflow.slice(0, 48)) +
                             "\n                        "
                         )
                       ])
@@ -11283,7 +11327,7 @@ var render = function() {
           _vm._l(_vm.favIdeas.slice(0, 5), function(favIdea) {
             return _c(
               "div",
-              { staticClass: "ic-card" },
+              { staticClass: "ic-card ic-mypage" },
               [
                 _c(
                   "router-link",
@@ -11315,20 +11359,33 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-review" }, [
-                      _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "ic-star-review",
-                        class: _vm.star(favIdea.averageReview)
-                      }),
-                      _vm._v(" "),
-                      _vm.star(favIdea.averageReview) === "ic-not-reviewed"
-                        ? _c("span", {}, [_vm._v("未評価のアイデアです")])
-                        : _vm._e()
-                    ]),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "ic-review",
+                        class: {
+                          "ic-review-reviewed": _vm.reviewed(
+                            favIdea.averageReview
+                          )
+                        }
+                      },
+                      [
+                        _c("span", { staticClass: "ic-span" }, [
+                          _vm._v("評価")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", {
+                          staticClass: "ic-star-review",
+                          class: _vm.star(favIdea.averageReview)
+                        }),
+                        _vm._v(" "),
+                        _vm.star(favIdea.averageReview) === "ic-not-reviewed"
+                          ? _c("span", {}, [_vm._v("未評価のアイデアです")])
+                          : _vm._e()
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-desc" }, [
+                    _c("div", { staticClass: "ic-desc-mypage" }, [
                       _c("div", { staticClass: "ic-desc-overflow" }, [
                         _vm._v("概要")
                       ]),
@@ -11336,7 +11393,7 @@ var render = function() {
                       _c("div", { staticClass: "ic-desc-text" }, [
                         _vm._v(
                           "\n                                " +
-                            _vm._s(favIdea.overflow) +
+                            _vm._s(favIdea.overflow.slice(0, 48)) +
                             "\n                            "
                         )
                       ])
@@ -11364,7 +11421,7 @@ var render = function() {
           _vm._l(_vm.myIdeas.slice(0, 5), function(myIdea) {
             return _c(
               "div",
-              { staticClass: "ic-card" },
+              { staticClass: "ic-card ic-mypage" },
               [
                 _c(
                   "router-link",
@@ -11396,20 +11453,33 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-review" }, [
-                      _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "ic-star-review",
-                        class: _vm.star(myIdea.averageReview)
-                      }),
-                      _vm._v(" "),
-                      _vm.star(myIdea.averageReview) === "ic-not-reviewed"
-                        ? _c("span", {}, [_vm._v("未評価のアイデアです")])
-                        : _vm._e()
-                    ]),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "ic-review",
+                        class: {
+                          "ic-review-reviewed": _vm.reviewed(
+                            myIdea.averageReview
+                          )
+                        }
+                      },
+                      [
+                        _c("span", { staticClass: "ic-span" }, [
+                          _vm._v("評価")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", {
+                          staticClass: "ic-star-review",
+                          class: _vm.star(myIdea.averageReview)
+                        }),
+                        _vm._v(" "),
+                        _vm.star(myIdea.averageReview) === "ic-not-reviewed"
+                          ? _c("span", {}, [_vm._v("未評価のアイデアです")])
+                          : _vm._e()
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-desc" }, [
+                    _c("div", { staticClass: "ic-desc-mypage" }, [
                       _c("div", { staticClass: "ic-desc-overflow" }, [
                         _vm._v("概要")
                       ]),
@@ -11417,7 +11487,7 @@ var render = function() {
                       _c("div", { staticClass: "ic-desc-text" }, [
                         _vm._v(
                           "\n                                    " +
-                            _vm._s(myIdea.overflow) +
+                            _vm._s(myIdea.overflow.slice(0, 48)) +
                             "\n                                "
                         )
                       ])
@@ -11445,7 +11515,7 @@ var render = function() {
           _vm._l(_vm.reviews.slice(0, 5), function(review) {
             return _c(
               "div",
-              { staticClass: "ic-card" },
+              { staticClass: "ic-card ic-mypage" },
               [
                 _c(
                   "router-link",
@@ -11476,16 +11546,26 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-review" }, [
-                      _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "ic-star-review",
-                        class: _vm.star(review.averageReview)
-                      })
-                    ]),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "ic-review",
+                        class: {
+                          "ic-review-reviewed": _vm.reviewed(
+                            review.averageReview
+                          )
+                        }
+                      },
+                      [
+                        _c("span", { staticClass: "ic-span" }, [
+                          _vm._v("評価")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "ic-star-review" })
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-desc" }, [
+                    _c("div", { staticClass: "ic-desc-mypage" }, [
                       _c("div", { staticClass: "ic-desc-overflow" }, [
                         _vm._v("コメント")
                       ]),
@@ -11493,7 +11573,7 @@ var render = function() {
                       _c("div", { staticClass: "ic-desc-text" }, [
                         _vm._v(
                           "\n                                        " +
-                            _vm._s(review.comment) +
+                            _vm._s(review.comment.slice(0, 48)) +
                             "\n                                    "
                         )
                       ])
@@ -11515,7 +11595,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "c-button" },
+          { staticClass: "c-button-allShow" },
           [
             _c("router-link", { attrs: { to: "/allIdea" } }, [
               _vm._v("全アイデアを見る")
@@ -15182,7 +15262,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("p", { staticClass: "completed-paragraph" }, [
       _vm._v(
-        "\n                    レビュー投稿が新た無いアイデアをもたらします。"
+        "\n                    レビュー投稿が新たなアイデアをもたらします。"
       ),
       _c("br"),
       _vm._v(

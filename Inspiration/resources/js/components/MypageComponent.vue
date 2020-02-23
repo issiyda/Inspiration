@@ -11,7 +11,7 @@
             <div class="ic">
 
 
-                <div class="ic-card" v-for="buyingIdea in buyingIdeas.slice(0,5)">
+                <div class="ic-card ic-mypage" v-for="buyingIdea in buyingIdeas.slice(0,5)">
                     <router-link v-bind:to="{name:'postDetail',params:{
                      ideaId: buyingIdea.post_id,
                      userId: buyingIdea.user_id
@@ -21,15 +21,15 @@
                         <div class="ic-img">
                             <img :src="require(`../assets${buyingIdea.img}`)" alt="idea" class="ic-img-item">
                         </div>
-                        <div class="ic-review">
+                        <div class="ic-review" v-bind:class="{'ic-review-reviewed':reviewed(buyingIdea.averageReview)}">
                             <span class="ic-span">評価</span>
                             <span class v-if="star(buyingIdea.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
                             <span class="ic-star-review" v-bind:class="star(buyingIdea.averageReview)"></span>
                         </div>
-                        <div class="ic-desc">
+                        <div class="ic-desc-mypage">
                             <div class ="ic-desc-overflow">概要</div>
                             <div class="ic-desc-text">
-                               {{buyingIdea.overflow}}
+                               {{buyingIdea.overflow.slice(0,48)}}
                             </div>
                         </div>
 
@@ -45,10 +45,10 @@
 
 
 
-            <div class="ic" >
+            <div class="ic">
 
 
-                    <div class="ic-card" v-for="favIdea in favIdeas.slice(0,5)">
+                    <div class="ic-card ic-mypage" v-for="favIdea in favIdeas.slice(0,5)">
                         <router-link v-bind:to="{name:'postDetail',params:{
                                 ideaId: favIdea.idea_id,
                                 userId: favIdea.user_id
@@ -57,15 +57,15 @@
                             <div class="ic-img">
                                 <img :src="require(`../assets${favIdea.img}`)" alt="idea" class="ic-img-item">
                             </div>
-                            <div class="ic-review">
-                                <span class ="ic-span">評価</span>
-                                <span class ="ic-star-review" v-bind:class="star(favIdea.averageReview)"></span>
+                            <div class="ic-review" v-bind:class="{'ic-review-reviewed':reviewed(favIdea.averageReview)}">
+                                <span class="ic-span">評価</span>
+                                <span class="ic-star-review" v-bind:class="star(favIdea.averageReview)"></span>
                                 <span class v-if="star(favIdea.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
                             </div>
-                            <div class="ic-desc">
+                            <div class="ic-desc-mypage">
                                 <div class ="ic-desc-overflow">概要</div>
                                 <div class="ic-desc-text">
-                                    {{favIdea.overflow}}
+                                    {{favIdea.overflow.slice(0,48)}}
                                 </div>
                             </div>
                         </router-link>
@@ -77,10 +77,9 @@
 
             <h3 class ="f-h3">投稿したアイデア</h3>
 
-                    <div class="ic" >
+                    <div class="ic">
 
-
-                        <div class="ic-card" v-for="myIdea in myIdeas.slice(0,5)">
+                        <div class="ic-card ic-mypage" v-for="myIdea in myIdeas.slice(0,5)">
                             <router-link :to="{name:'postDetail',params:{
                                 ideaId: myIdea.id,
                                 userId: myIdea.user_id
@@ -89,57 +88,56 @@
                                 <div class="ic-img">
                                     <img :src="require(`../assets${myIdea.img}`)" alt="idea" class="ic-img-item">
                                 </div>
-                                <div class="ic-review">
+                                <div class="ic-review" v-bind:class="{'ic-review-reviewed':reviewed(myIdea.averageReview)}">
                                     <span class ="ic-span">評価</span>
                                     <span class ="ic-star-review" v-bind:class="star(myIdea.averageReview)"></span>
                                     <span class v-if="star(myIdea.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
                                 </div>
-                                <div class="ic-desc">
+                                <div class="ic-desc-mypage">
                                     <div class ="ic-desc-overflow">概要</div>
                                     <div class="ic-desc-text">
-                                        {{myIdea.overflow}}
+                                        {{myIdea.overflow.slice(0,48)}}
                                     </div>
                                 </div>
                             </router-link>
                         </div>
                     </div>
 
-            <router-link to="/allPost" class ="p-mypage-more">全件表示</router-link>
+            <router-link to="/allPost" class="p-mypage-more">全件表示</router-link>
 
 
 
             <h3 class ="f-h3">新着レビュー</h3>
 
-                        <div class="ic" >
+                        <div class="ic">
 
-
-                            <div class="ic-card" v-for="review in reviews.slice(0,5)">
+                            <div class="ic-card ic-mypage" v-for="review in reviews.slice(0,5)">
                                 <router-link :to="{name:'postDetail',params:{
                                 ideaId: review.id,
                                 userId: review.user_id
                                 }}" class ="ic-a">
-                                    <h4 class ="f-h4">{{review.title}}</h4>
+                                    <h4 class="f-h4">{{review.title}}</h4>
                                     <div class="ic-img">
                                         <img :src="require(`../assets${review.img}`)" alt="idea" class="ic-img-item">
                                     </div>
-                                    <div class="ic-review">
-                                        <span class ="ic-span">評価</span>
-                                        <span class ="ic-star-review" v-bind:class="star(review.averageReview)"></span>
+                                    <div class="ic-review"  v-bind:class="{'ic-review-reviewed':reviewed(review.averageReview)}">
+                                        <span class="ic-span">評価</span>
+                                        <span class="ic-star-review"></span>
                                     </div>
-                                    <div class="ic-desc">
+                                    <div class="ic-desc-mypage">
                                         <div class ="ic-desc-overflow">コメント</div>
                                         <div class="ic-desc-text">
-                                            {{review.comment}}
+                                            {{review.comment.slice(0,48)}}
                                         </div>
                                     </div>
                                 </router-link>
                             </div>
                         </div>
 
-            <router-link to="/allReview" class ="p-mypage-more">全件表示</router-link>
+            <router-link to="/allReview" class="p-mypage-more">全件表示</router-link>
 
 
-            <div class ="c-button">
+            <div class ="c-button-allShow">
                 <router-link to="/allIdea">全アイデアを見る</router-link>
             </div>
 
@@ -160,7 +158,6 @@
         data:function(){
             return{
 
-                notReviewedFlag:false
 
                 }
 
@@ -205,6 +202,25 @@
 
             },
 
+
+            reviewed:function(){
+
+                return function(stars) {
+
+                    var starReview = stars;
+
+                    if(starReview === 0)
+                {
+                    return false
+                }
+                else if(starReview !== 0)
+                    return true
+                }
+
+            },
+
+
+
             star:function(){
 
 
@@ -215,7 +231,10 @@
                     if(starReview === 0)
                     {
                         return "ic-not-reviewed";
+                        this.notReviewed;
                     }
+
+                    //星の数に応じて画面の星変化
                     else if (starReview <= 0.5) {
                         return "rate0-5"
                     } else if (starReview > 0.5 && starReview <= 1) {

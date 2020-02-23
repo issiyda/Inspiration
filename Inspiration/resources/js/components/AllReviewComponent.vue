@@ -13,7 +13,7 @@
 
 
                 <paginate name="paginate-log" :list="reviewedIdeas" :per="15">
-                    <div v-for="reviewedIdea in paginated('paginate-log')" class="ic-card">
+                    <div v-for="reviewedIdea in paginated('paginate-log')" class="ic-card ic-filter">
                         <router-link :to="{name:'postDetail', params:{
                         ideaId:reviewedIdea.id,
                         userId:reviewedIdea.user_id
@@ -26,7 +26,7 @@
                                 <span class ="ic-span">評価</span>
                                 <span class ="ic-star-review" v-bind:class="star(reviewedIdea.averageReview)"></span>
                             </div>
-                            <div class="ic-desc">
+                            <div class="ic-desc-filter">
                                 <div class ="ic-desc-overflow">概要</div>
                                 <div class="ic-desc-text">
                                     {{reviewedIdea.overflow}}
