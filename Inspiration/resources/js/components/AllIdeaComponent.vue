@@ -144,7 +144,7 @@
 
 
                     <paginate name="paginate-log" :list="searchedIdeas" :per="15">
-                        <div v-for="allIdea in paginated('paginate-log')" class="ic-card">
+                        <div v-for="allIdea in paginated('paginate-log')" class="ic-card ic-all">
                             <router-link :to="{name:'postDetail', params:{
                         ideaId:allIdea.id,
                         userId:allIdea.user_id
@@ -172,10 +172,10 @@
 
 
 
-                            <div class="ic-desc">
+                            <div class="ic-desc-all">
                                 <div class ="ic-desc-overflow">概要</div>
                                 <div class="ic-desc-text">
-                                    {{allIdea.overflow}}
+                                    {{allIdea.overflow.slice(0,48)}}
                                 </div>
                             </div>
 
