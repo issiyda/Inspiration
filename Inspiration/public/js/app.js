@@ -2317,6 +2317,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllIdeaComponent",
   data: function data() {
@@ -2393,7 +2396,9 @@ __webpack_require__.r(__webpack_exports__);
         return 'ECサイト';
       } else if (id === 5) {
         return '情報発信';
-      } else {
+      } else if (id === 6) {
+        return 'シェアリング';
+      } else if (id === 7) {
         return 'その他';
       }
     },
@@ -4215,6 +4220,10 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (category_id === 6) {
+        return 'シェアリング';
+      }
+
+      if (category_id === 7) {
         return 'その他';
       }
     },
@@ -4555,6 +4564,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostIdeaComponent",
@@ -4629,9 +4641,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     //画像バリデーション
     imgValidation: function imgValidation() {
+      var here = this;
       this.errorMessages.imgErrorMessage = false;
 
-      if (this.ideaImage === "") {
+      if (this.ideaImage === undefined || this.ideaImage === "") {
         this.validations.imgValidation = false;
         this.errorMessages.imgErrorMessage = "＋をクリックして画像を選択して下さい";
       } else {
@@ -4643,7 +4656,7 @@ __webpack_require__.r(__webpack_exports__);
     titleValidation: function titleValidation() {
       this.errorMessages.titleErrorMessage = false;
 
-      if (this.title === "") {
+      if (this.title === undefined || this.title === "") {
         this.validations.titleValidation = false;
         this.errorMessages.titleErrorMessage = "入力必須です";
         this.titleChangeColor = true;
@@ -4661,7 +4674,7 @@ __webpack_require__.r(__webpack_exports__);
     categoryValidation: function categoryValidation() {
       this.errorMessages.categoryErrorMessage = false;
 
-      if (this.category_id === "") {
+      if (this.category_id === undefined || this.category_id === "") {
         this.validations.categoryValidation = false;
         this.errorMessages.categoryErrorMessage = "入力必須です";
       } else {
@@ -4673,7 +4686,7 @@ __webpack_require__.r(__webpack_exports__);
     priceValidation: function priceValidation() {
       this.errorMessages.priceErrorMessage = false;
 
-      if (this.price === "") {
+      if (this.price === undefined || this.price === "") {
         this.validations.priceValidation = false;
         this.errorMessages.priceErrorMessage = "数値を入力して下さい";
       } else if (this.price > 1000000) {
@@ -4686,7 +4699,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     //概要のバリデーション
     overflowValidation: function overflowValidation() {
-      if (this.overflow === "") {
+      if (this.overflow === undefined || this.overflow === "") {
         this.validations.overflowValidation = false;
         this.errorMessages.overflowErrorMessage = "入力必須です";
         this.overflowChangeColor = true;
@@ -4702,7 +4715,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     //内容のバリデーション
     contentValidation: function contentValidation() {
-      if (this.content === "") {
+      if (this.content === undefined || this.content === "") {
         this.validations.contentValidation = false;
         this.errorMessages.contentErrorMessage = "入力必須です";
         this.contentChangeColor = true;
@@ -4947,6 +4960,8 @@ __webpack_require__.r(__webpack_exports__);
         return 'ECサイト';
       } else if (this.$route.params.category_id == "5") {
         return '情報発信';
+      } else if (this.$route.params.category_id == "6") {
+        return 'シェアリング';
       } else {
         return 'その他';
       }
@@ -5717,6 +5732,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostIdeaEditComponent",
   data: function data() {
@@ -5741,6 +5759,7 @@ __webpack_require__.r(__webpack_exports__);
         sns: "",
         ecSite: "",
         infoPlaner: "",
+        sharing: "",
         other: ""
       },
       EditResultMessage: false,
@@ -5798,6 +5817,10 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this.category_id === 6) {
+        this.category.sharing = true;
+      }
+
+      if (this.category_id === 7) {
         this.category.other = true;
       }
     },
@@ -10329,6 +10352,24 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("input", {
+                  attrs: { id: "sharing", name: "category", type: "radio" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "c-radio search-category-radio",
+                    attrs: { for: "sharing" },
+                    on: {
+                      click: function($event) {
+                        return _vm.searchCategory(6)
+                      }
+                    }
+                  },
+                  [_vm._v("シェアリング")]
+                ),
+                _vm._v(" "),
+                _c("input", {
                   attrs: { id: "other", name: "category", type: "radio" }
                 }),
                 _vm._v(" "),
@@ -10339,7 +10380,7 @@ var render = function() {
                     attrs: { for: "other" },
                     on: {
                       click: function($event) {
-                        return _vm.searchCategory(6)
+                        return _vm.searchCategory(7)
                       }
                     }
                   },
@@ -13382,7 +13423,7 @@ var render = function() {
                     }
                   ],
                   attrs: {
-                    id: "other",
+                    id: "sharing",
                     name: "category",
                     type: "radio",
                     value: "6"
@@ -13392,6 +13433,38 @@ var render = function() {
                     change: [
                       function($event) {
                         _vm.category_id = "6"
+                      },
+                      _vm.categoryValidation
+                    ]
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  { staticClass: "c-radio", attrs: { for: "sharing" } },
+                  [_vm._v("シェアリング")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.category_id,
+                      expression: "category_id"
+                    }
+                  ],
+                  attrs: {
+                    id: "other",
+                    name: "category",
+                    type: "radio",
+                    value: "7"
+                  },
+                  domProps: { checked: _vm._q(_vm.category_id, "7") },
+                  on: {
+                    change: [
+                      function($event) {
+                        _vm.category_id = "7"
                       },
                       _vm.categoryValidation
                     ]
@@ -14122,7 +14195,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("詳細画面")]
+                  [_vm._v("詳細画面へ")]
                 )
               ],
               1
@@ -14947,15 +15020,45 @@ var render = function() {
                         expression: "category_id"
                       }
                     ],
-                    attrs: { id: "other", type: "radio", value: "6" },
+                    attrs: { id: "sharing", type: "radio", value: "6" },
                     domProps: {
-                      checked: _vm.category.other,
+                      checked: _vm.category.sharing,
                       checked: _vm._q(_vm.category_id, "6")
                     },
                     on: {
                       change: [
                         function($event) {
                           _vm.category_id = "6"
+                        },
+                        _vm.categoryValidation
+                      ]
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    { staticClass: "c-radio", attrs: { for: "infoplaner" } },
+                    [_vm._v("シェアリング")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.category_id,
+                        expression: "category_id"
+                      }
+                    ],
+                    attrs: { id: "other", type: "radio", value: "7" },
+                    domProps: {
+                      checked: _vm.category.other,
+                      checked: _vm._q(_vm.category_id, "7")
+                    },
+                    on: {
+                      change: [
+                        function($event) {
+                          _vm.category_id = "7"
                         },
                         _vm.categoryValidation
                       ]

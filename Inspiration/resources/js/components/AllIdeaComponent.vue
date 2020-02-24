@@ -42,8 +42,11 @@
                         <input id="infoplaner"  name="category" class ="" type="radio">
                         <label for="infoplaner" class="c-radio search-category-radio" @click="searchCategory(5)">情報発信</label>
 
+                        <input id="sharing"  name="category" class ="" type="radio">
+                        <label for="sharing" class="c-radio search-category-radio" @click="searchCategory(6)">シェアリング</label>
+
                         <input id="other"  name="category" class ="" type="radio">
-                        <label for="other" class="c-radio search-category-radio" @click="searchCategory(6)">その他</label>
+                        <label for="other" class="c-radio search-category-radio" @click="searchCategory(7)">その他</label>
                     </div>
 
                     <div v-if="priceSelected" class="search-price">
@@ -280,10 +283,12 @@
                     return 'SNS'
                 } else if (id === 4) {
                     return 'ECサイト'
-
                 } else if (id === 5) {
                     return '情報発信'
-                } else {
+                }else if (id === 6) {
+                    return 'シェアリング'
+                }
+                else if(id === 7) {
                     return 'その他'
                 }
             },
