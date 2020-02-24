@@ -2316,17 +2316,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllIdeaComponent",
   data: function data() {
@@ -2810,8 +2799,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -10439,127 +10426,156 @@ var render = function() {
             : _vm._e(),
           _vm._v(" "),
           _vm.dateSelected
-            ? _c(
-                "div",
-                { staticClass: "search-date" },
-                [
-                  _c("div", { staticClass: "search-subject" }, [
-                    _vm._v("期間検索")
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "down" } }, [_vm._v("年別")]),
-                  _vm._v(" "),
-                  _c("v-date-picker", {
-                    key: "year",
-                    attrs: {
-                      mode: _vm.mode,
-                      format: _vm.customFormatter,
-                      language: _vm.ja,
-                      clearable: "",
-                      "minimum-view": "`year`"
-                    },
-                    on: {
-                      input: function($event) {
-                        return _vm.termYearSearch()
-                      }
-                    },
-                    model: {
-                      value: _vm.year,
-                      callback: function($$v) {
-                        _vm.year = $$v
+            ? _c("div", { staticClass: "search-date" }, [
+                _c("div", { staticClass: "search-subject" }, [
+                  _vm._v("期間検索")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "search-date-box" },
+                  [
+                    _c("label", { attrs: { for: "down" } }, [_vm._v("年別")]),
+                    _vm._v(" "),
+                    _c("v-date-picker", {
+                      key: "year",
+                      attrs: {
+                        mode: _vm.mode,
+                        format: _vm.customFormatter,
+                        language: _vm.ja,
+                        clearable: "",
+                        "minimum-view": "`year`"
                       },
-                      expression: "year"
-                    }
-                  }),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "top" } }, [_vm._v("月別")]),
-                  _vm._v(" "),
-                  _c("v-date-picker", {
-                    key: "month",
-                    attrs: {
-                      mode: _vm.mode,
-                      format: _vm.customFormatter,
-                      clearable: "",
-                      "minimum-view": "`month`"
-                    },
-                    on: {
-                      input: function($event) {
-                        return _vm.termMonthSearch()
-                      }
-                    },
-                    model: {
-                      value: _vm.month,
-                      callback: function($$v) {
-                        _vm.month = $$v
+                      on: {
+                        input: function($event) {
+                          return _vm.termYearSearch()
+                        }
                       },
-                      expression: "month"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "top" } }, [_vm._v("日別")]),
-                  _vm._v(" "),
-                  _c("v-date-picker", {
-                    key: "day",
-                    attrs: {
-                      mode: _vm.mode,
-                      format: _vm.customFormatter,
-                      "minimum-view": "'day'"
-                    },
-                    on: {
-                      input: function($event) {
-                        return _vm.termDaySearch()
+                      model: {
+                        value: _vm.year,
+                        callback: function($$v) {
+                          _vm.year = $$v
+                        },
+                        expression: "year"
                       }
-                    },
-                    model: {
-                      value: _vm.day,
-                      callback: function($$v) {
-                        _vm.day = $$v
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "search-date-box" },
+                  [
+                    _c("label", { attrs: { for: "top" } }, [_vm._v("月別")]),
+                    _vm._v(" "),
+                    _c("v-date-picker", {
+                      key: "month",
+                      attrs: {
+                        mode: _vm.mode,
+                        format: _vm.customFormatter,
+                        clearable: "",
+                        "minimum-view": "`month`"
                       },
-                      expression: "day"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "top" } }, [_vm._v("以降")]),
-                  _vm._v(" "),
-                  _c("v-date-picker", {
-                    key: "after",
-                    attrs: { mode: _vm.mode, format: _vm.customFormatter },
-                    on: {
-                      input: function($event) {
-                        return _vm.termSearch()
+                      on: {
+                        input: function($event) {
+                          return _vm.termMonthSearch()
+                        }
+                      },
+                      model: {
+                        value: _vm.month,
+                        callback: function($$v) {
+                          _vm.month = $$v
+                        },
+                        expression: "month"
                       }
-                    },
-                    model: {
-                      value: _vm.after,
-                      callback: function($$v) {
-                        _vm.after = $$v
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "search-date-box" },
+                  [
+                    _c("label", { attrs: { for: "top" } }, [_vm._v("日別")]),
+                    _vm._v(" "),
+                    _c("v-date-picker", {
+                      key: "day",
+                      attrs: {
+                        mode: _vm.mode,
+                        format: _vm.customFormatter,
+                        "minimum-view": "'day'"
                       },
-                      expression: "after"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "top" } }, [_vm._v("以前")]),
-                  _vm._v(" "),
-                  _c("v-date-picker", {
-                    key: "before",
-                    attrs: { mode: _vm.mode, format: _vm.customFormatter },
-                    on: {
-                      input: function($event) {
-                        return _vm.termSearch()
+                      on: {
+                        input: function($event) {
+                          return _vm.termDaySearch()
+                        }
+                      },
+                      model: {
+                        value: _vm.day,
+                        callback: function($$v) {
+                          _vm.day = $$v
+                        },
+                        expression: "day"
                       }
-                    },
-                    model: {
-                      value: _vm.before,
-                      callback: function($$v) {
-                        _vm.before = $$v
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "search-date-box" },
+                  [
+                    _c("label", { attrs: { for: "top" } }, [_vm._v("以降")]),
+                    _vm._v(" "),
+                    _c("v-date-picker", {
+                      key: "after",
+                      attrs: { mode: _vm.mode, format: _vm.customFormatter },
+                      on: {
+                        input: function($event) {
+                          return _vm.termSearch()
+                        }
                       },
-                      expression: "before"
-                    }
-                  })
-                ],
-                1
-              )
+                      model: {
+                        value: _vm.after,
+                        callback: function($$v) {
+                          _vm.after = $$v
+                        },
+                        expression: "after"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "search-date-box" },
+                  [
+                    _c("label", { attrs: { for: "top" } }, [_vm._v("以前")]),
+                    _vm._v(" "),
+                    _c("v-date-picker", {
+                      key: "before",
+                      attrs: { mode: _vm.mode, format: _vm.customFormatter },
+                      on: {
+                        input: function($event) {
+                          return _vm.termSearch()
+                        }
+                      },
+                      model: {
+                        value: _vm.before,
+                        callback: function($$v) {
+                          _vm.before = $$v
+                        },
+                        expression: "before"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ])
             : _vm._e()
         ]
       )
@@ -10667,9 +10683,9 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("div", { staticClass: "ic-desc-text" }, [
                                   _vm._v(
-                                    "\n                                    " +
+                                    "\n                            " +
                                       _vm._s(allIdea.overflow.slice(0, 48)) +
-                                      "\n                                "
+                                      "\n                        "
                                   )
                                 ])
                               ]),
@@ -10796,9 +10812,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "ic-desc-text" }, [
                           _vm._v(
-                            "\n                                " +
+                            "\n                            " +
                               _vm._s(myIdea.overflow.slice(0, 48)) +
-                              "\n                            "
+                              "\n                        "
                           )
                         ])
                       ])
@@ -10823,7 +10839,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("\n                                    詳細")]
+                          [_vm._v("\n                                詳細")]
                         )
                       ],
                       1
@@ -10852,7 +10868,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                                編集\n                            "
+                          "\n                            編集\n                        "
                         )
                       ]
                     )
@@ -11598,7 +11614,7 @@ var render = function() {
           { staticClass: "c-button-allShow" },
           [
             _c("router-link", { attrs: { to: "/allIdea" } }, [
-              _vm._v("全アイデアを見る")
+              _vm._v("全アイデア")
             ])
           ],
           1
@@ -11917,7 +11933,7 @@ var render = function() {
               { staticClass: "c-button completed-button column-button" },
               [
                 _c("router-link", { attrs: { to: "/mypage" } }, [
-                  _vm._v("Mypageへ")
+                  _vm._v("Mypage")
                 ])
               ],
               1
@@ -12607,7 +12623,7 @@ var render = function() {
                     : _vm._e(),
                   _vm._v(" "),
                   _c("input", {
-                    staticClass: "c-mini-button review-button",
+                    staticClass: "c-button review-button",
                     attrs: {
                       type: "submit",
                       disabled: _vm.processing,
@@ -12667,7 +12683,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("input", {
-                  staticClass: "c-mini-button review-button-restriction",
+                  staticClass: "c-button review-button-restriction",
                   attrs: {
                     type: "text",
                     disabled: _vm.processing,
@@ -13566,7 +13582,7 @@ var render = function() {
             _vm._v(" "),
             _c("input", {
               staticClass: "c-button",
-              attrs: { type: "submit", value: "確認画面へ" }
+              attrs: { type: "submit", value: "確認する" }
             })
           ])
         ]
@@ -14105,7 +14121,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("詳細画面へ")]
+                  [_vm._v("詳細画面")]
                 )
               ],
               1

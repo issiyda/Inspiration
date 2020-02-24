@@ -58,9 +58,8 @@
 
                     <div v-if="dateSelected" class="search-date">
                         <div class="search-subject">期間検索</div>
-                        <!--                        　<input type="date" name="from" placeholder="〜から">-->
-<!--                        　<input type="date" name="from" placeholder="〜まで">-->
-<!--                        <button type="submit" @click="dateSearch">日付検索</button>-->
+
+                        <div class="search-date-box">
                         <label for="down">年別</label>
                         <v-date-picker :mode="mode"
                                        :format="customFormatter"
@@ -70,8 +69,10 @@
                                        key="year"
                                        clearable
                                        minimum-view="`year`">
-                        </v-date-picker><br>
+                        </v-date-picker>
+                        </div>
 
+                        <div class="search-date-box">
                         <label for="top">月別</label>
                         <v-date-picker :mode="mode"
                                        :format="customFormatter"
@@ -81,7 +82,9 @@
                                        clearable
                                        minimum-view="`month`">
                         </v-date-picker>
+                        </div>
 
+                        <div class="search-date-box">
                         <label for="top">日別</label>
                         <v-date-picker :mode="mode"
                                        :format="customFormatter"
@@ -90,7 +93,9 @@
                                        key="day"
                                        minimum-view="'day'">
                         </v-date-picker>
+                        </div>
 
+                        <div class="search-date-box">
                         <label for="top">以降</label>
                         <v-date-picker :mode="mode"
                                        :format="customFormatter"
@@ -98,6 +103,8 @@
                                        @input="termSearch()"
                                        key="after">
                         </v-date-picker>
+                        </div>
+                        <div class="search-date-box">
 
                         <label for="top">以前</label>
                         <v-date-picker :mode="mode"
@@ -106,28 +113,10 @@
                                        @input="termSearch()"
                                        key="before">
                         </v-date-picker>
-
-
-
-
-                        <!--                        <v-date-picker :mode="mode"-->
-<!--                                       :format="customFormatter"-->
-<!--                                       @closed="pickerClosed"-->
-<!--                                       name="day"-->
-<!--                                       v-model="day">-->
-<!--                        </v-date-picker>-->
-
-<!--                        <v-date-picker :mode="mode"-->
-<!--                                       :format="customFormatter"-->
-<!--                                       @closed="pickerClosed"-->
-<!--                                       name="day"-->
-<!--                                       v-model="day">-->
-<!--                        </v-date-picker>-->
+                        </div>
 
                     </div>
-
                     </div>
-
                 </div>
 
 

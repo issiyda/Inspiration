@@ -77,7 +77,7 @@
                         <div id="profileDetail" class="c-button profile-withdraw">
                             <router-link :to="{name:'profileDetail',params:{
                             userId:this.$store.state.users.id
-                            }}">詳細画面へ</router-link>
+                            }}">詳細画面</router-link>
                         </div>
                     </div>
 

@@ -404,18 +404,24 @@ a {
   position: relative;
 }
 
+@media screen and (max-width: 414px) {
+  .l-footer {
+    height: 300px;
+  }
+}
+
 .l-footer-subject {
+  -webkit-box-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
   color: #A16EFF;
   font-size: 30px;
   height: 25%;
   padding: 2.5%;
   text-align: center;
-}
-
-@media screen and (max-width: 414px) {
-  .l-footer-subject {
-    margin-bottom: 10%;
-  }
 }
 
 .l-footer-container {
@@ -424,14 +430,14 @@ a {
   height: 30%;
   justify-content: space-around;
   width: 100%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
 }
 
 @media screen and (max-width: 414px) {
   .l-footer-container {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-            flex-direction: column;
-    width: 100%;
+    height: 40%;
   }
 }
 
@@ -501,24 +507,61 @@ a {
   visibility: visible;
 }
 
+.l-footer-content {
+  display: -webkit-box;
+  display: flex;
+  margin: 0 2%;
+  width: 40%;
+}
+
+@media screen and (max-width: 414px) {
+  .l-footer-content {
+    -webkit-box-pack: center;
+            justify-content: center;
+    margin: 0 1%;
+  }
+}
+
 .l-footer-content-items {
   display: -webkit-box;
   display: flex;
+  flex-direction: column;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-          flex-direction: column;
-  height: 100%;
-  justify-content: space-around;
+  -webkit-box-pack: center;
+          justify-content: center;
+  width: 50%;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 414px) {
+  .l-footer-content-items {
+    width: 100%;
+    margin: 0;
+  }
 }
 
 .l-footer-content h3 {
   color: #A16EFF;
   font-weight: bolder;
-  font-size: 18px;
+  font-size: 24px;
+}
+
+@media screen and (max-width: 414px) {
+  .l-footer-content h3 {
+    font-size: 18px;
+  }
 }
 
 .l-footer-content p {
+  font-size: 18px;
   margin-left: 15px;
+}
+
+@media screen and (max-width: 414px) {
+  .l-footer-content p {
+    font-size: 14px;
+  }
 }
 
 .l-footer-content a {
@@ -785,6 +828,16 @@ a {
   width: 30%;
 }
 
+@media screen and (max-width: 414px) {
+  .c-button,
+  .c-button-allShow,
+  .c-mini-button,
+  .c-radio,
+  .allIdea-button-search {
+    padding: 1%;
+  }
+}
+
 .c-button:hover,
 .c-button-allShow:hover,
 .c-mini-button:hover,
@@ -811,6 +864,15 @@ a {
   position: relative;
   padding: 3%;
   width: 20%;
+}
+
+@media screen and (max-width: 414px) {
+  .c-button-allShow {
+    height: 40px;
+    margin: 5% 0 5% 60%;
+    position: relative;
+    width: 30%;
+  }
 }
 
 .c-button-allShow a {
@@ -903,9 +965,21 @@ input[type="radio"]:checked + .c-radio {
   margin: 3%;
 }
 
+@media screen and (max-width: 414px) {
+  .c-label {
+    font-size: 18px;
+  }
+}
+
 .c-container {
   width: 50%;
   margin: 0 auto 5%;
+}
+
+@media screen and (max-width: 414px) {
+  .c-container {
+    width: 80%;
+  }
 }
 
 .c-form {
@@ -915,7 +989,8 @@ input[type="radio"]:checked + .c-radio {
 
 @media screen and (max-width: 414px) {
   .c-form {
-    width: 85%;
+    width: 100%;
+    margin: 0 auto;
   }
 
   .c-form .c-button,
@@ -946,8 +1021,12 @@ input[type="radio"]:checked + .c-radio {
   }
 }
 
+.c-form-container-input {
+  margin-bottom: 10%;
+}
+
 .c-form-check {
-  margin: 3% auto;
+  margin: 3% auto 10%;
 }
 
 @media screen and (max-width: 414px) {
@@ -1065,7 +1144,7 @@ input[type="radio"]:checked + .c-radio {
 
 @media screen and (max-width: 414px) {
   .ic-card {
-    width: 47.5%;
+    width: 42%;
   }
 }
 
@@ -1155,6 +1234,12 @@ input[type="radio"]:checked + .c-radio {
 
 .ic-desc-mypage {
   height: 35%;
+}
+
+@media screen and (max-width: 414px) {
+  .ic-desc-mypage {
+    height: 40%;
+  }
 }
 
 .ic-desc-filter {
@@ -1304,6 +1389,12 @@ input[type="radio"]:checked + .c-radio {
   margin: 3%;
 }
 
+@media screen and (max-width: 414px) {
+  .register-input label {
+    font-size: 18px;
+  }
+}
+
 .p-mypage-more {
   color: #A16EFF;
 }
@@ -1425,6 +1516,12 @@ confirm とdetailの共通部分　
   width: 60%;
 }
 
+@media screen and (max-width: 414px) {
+  .confirm {
+    width: 80%;
+  }
+}
+
 .confirm-text {
   box-sizing: border-box;
   background: #fff;
@@ -1479,11 +1576,24 @@ confirm とdetailの共通部分　
   margin: 5% auto;
 }
 
+@media screen and (max-width: 414px) {
+  .confirm-post {
+    margin: 5% auto 10%;
+  }
+}
+
 .confirm-attention {
   color: #A16EFF;
   font-size: 24px;
   font-weight: bolder;
   margin: 10% auto 5%;
+}
+
+@media screen and (max-width: 414px) {
+  .confirm-attention {
+    font-size: 18px;
+    width: 70%;
+  }
 }
 
 .postDetail {
@@ -1595,6 +1705,7 @@ confirm とdetailの共通部分　
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
             flex-direction: column;
+    flex-wrap: nowrap;
   }
 }
 
@@ -1662,6 +1773,7 @@ confirm とdetailの共通部分　
   .review-posted-comment,
   .review-comment textarea {
     padding: 7%;
+    width: 80%;
   }
 }
 
@@ -2217,6 +2329,223 @@ confirm とdetailの共通部分　
 @media screen and (max-width: 414px) {
   .home-recommend-button {
     width: 40%;
+    padding: 3%;
+  }
+}
+
+.home-footer {
+  background: #FFBEDA;
+  color: #fff;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+  height: 350px;
+  justify-content: space-around;
+  opacity: 0.6;
+  position: relative;
+}
+
+@media screen and (max-width: 414px) {
+  .home-footer {
+    height: 350px;
+  }
+}
+
+.home-footer-subject {
+  -webkit-box-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  color: #A16EFF;
+  font-size: 30px;
+  height: 25%;
+  padding: 2.5%;
+  text-align: center;
+}
+
+.home-footer-container {
+  display: -webkit-box;
+  display: flex;
+  height: 30%;
+  justify-content: space-around;
+  width: 100%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+}
+
+@media screen and (max-width: 414px) {
+  .home-footer-container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+            flex-direction: column;
+    height: 40%;
+  }
+}
+
+.home-footer-container-menu {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 5%;
+  width: 50%;
+}
+
+@media screen and (max-width: 414px) {
+  .home-footer-container-menu {
+    width: 100%;
+  }
+}
+
+.home-footer-container-contact {
+  -webkit-box-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+  margin-right: 5%;
+  width: 30%;
+}
+
+@media screen and (max-width: 414px) {
+  .home-footer-container-contact {
+    width: 100%;
+  }
+}
+
+.home-footer-container-contact-message {
+  font-size: 30px;
+  text-align: center;
+  width: 100%;
+}
+
+@media screen and (max-width: 414px) {
+  .home-footer-container-contact-message {
+    font-size: 24px;
+  }
+}
+
+.home-footer-container-contact a {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.home-footer-container-contact a::after {
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: #333;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: .3s;
+  transition: .3s;
+  background: #fff;
+}
+
+.home-footer-container-contact a:hover::after {
+  bottom: -4px;
+  background: #fff;
+  opacity: 1;
+  visibility: visible;
+}
+
+.home-footer-content {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+  margin: 0 2%;
+  width: 40%;
+}
+
+@media screen and (max-width: 414px) {
+  .home-footer-content {
+    -webkit-box-pack: center;
+            justify-content: center;
+    margin: 0 1%;
+  }
+}
+
+.home-footer-content-items {
+  display: -webkit-box;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-box-pack: center;
+          justify-content: center;
+  width: 50%;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 414px) {
+  .home-footer-content-items {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.home-footer-content h3 {
+  color: #A16EFF;
+  font-weight: bolder;
+  font-size: 24px;
+}
+
+@media screen and (max-width: 414px) {
+  .home-footer-content h3 {
+    font-size: 18px;
+  }
+}
+
+.home-footer-content p {
+  font-size: 18px;
+  margin-left: 15px;
+}
+
+@media screen and (max-width: 414px) {
+  .home-footer-content p {
+    font-size: 14px;
+  }
+}
+
+.home-footer-content a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.home-footer-bottom {
+  text-align: center;
+}
+
+.home-footer-copyRight {
+  bottom: 1%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  margin: 0 auto;
+  position: absolute;
+  text-align: center;
+  width: 70%;
+  left: 0;
+  right: 0;
+}
+
+@media screen and (max-width: 414px) {
+  .home-footer-copyRight {
+    width: 75%;
   }
 }
 
@@ -2278,6 +2607,12 @@ confirm とdetailの共通部分　
   text-decoration: none;
 }
 
+@media screen and (max-width: 414px) {
+  .completed-share {
+    width: 75%;
+  }
+}
+
 .completed-share-twitter {
   text-shadow: 2px 2px 0px #4287d6;
   font-size: 30px;
@@ -2301,6 +2636,28 @@ confirm とdetailの共通部分　
 
 .completed-button {
   margin: 5% auto;
+  padding: 5%;
+  position: relative;
+}
+
+@media screen and (max-width: 414px) {
+  .completed-button {
+    padding: 8%;
+  }
+}
+
+.completed-button a {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  top: 0;
+  -webkit-box-align: center;
+          align-items: center;
+  left: 0;
 }
 
 .email-alert {
@@ -2316,6 +2673,13 @@ confirm とdetailの共通部分　
   margin: 5% 0 5% 75%;
   padding: 1%;
   width: 15%;
+}
+
+@media screen and (max-width: 414px) {
+  .allIdea-button {
+    margin: 5% 0 5% 70%;
+    width: 25%;
+  }
 }
 
 .allIdea-button-search {
@@ -2340,6 +2704,13 @@ confirm とdetailの共通部分　
   margin: 5%;
   text-align: center;
   width: 100%;
+}
+
+@media screen and (max-width: 414px) {
+  .search-subject {
+    font-size: 16px;
+    margin: 3%;
+  }
 }
 
 .search-category {
@@ -2378,6 +2749,16 @@ confirm とdetailの共通部分　
   flex-wrap: wrap;
   margin: 0 auto;
   width: 20%;
+}
+
+@media screen and (max-width: 414px) {
+  .search-date {
+    width: 80%;
+  }
+}
+
+.search-date-box {
+  margin-bottom: 5%;
 }
 
 .contact {

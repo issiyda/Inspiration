@@ -129,6 +129,10 @@
     text-align: center;
   width:30%;
 
+    @include mq{
+        padding:1%;
+    }
+
   &:hover{
       box-shadow:none;
     color:$color_accent;
@@ -149,6 +153,13 @@
         position:relative;
         padding:3%;
         width:20%;
+
+        @include mq{
+            height: 40px;
+            margin: 5% 0 5% 60%;
+            position: relative;
+            width: 30%;
+        }
 
         a{
             height:100%;
@@ -257,6 +268,10 @@ input[type="radio"] {
   display:block;
   font-size: $font-size_xl;
   margin:3%;
+
+    @include mq{
+        font-size: $font-size_l;
+    }
 }
 
 //==========================
@@ -266,6 +281,11 @@ input[type="radio"] {
 .c-container{
     width:50%;
     margin:0 auto 5%;
+
+    @include mq{
+        width:80%;
+
+    }
 
 }
 
@@ -278,31 +298,35 @@ input[type="radio"] {
     .c-button{
       display: flex;
       justify-content: center;
-
     }
-    width: 85%;
+    width: 100%;
+      margin:0 auto;
   }
 
-  &-container{
+  &-container {
 
-    box-sizing: border-box;
-    font-weight:bold;
-    padding:5%;
+      box-sizing: border-box;
+      font-weight: bold;
+      padding: 5%;
 
-    a{
-      margin: 0 auto 3%;
+      a {
+          margin: 0 auto 3%;
 
-      @include  mq{
-        margin: 0 auto 10%;
+          @include mq {
+              margin: 0 auto 10%;
+          }
       }
-    }
+
+      &-input {
+            margin-bottom:10%;
+      }
   }
 
   //==========================
   //チェックボックス
   //==========================
   &-check {
-    margin: 3% auto;
+    margin: 3% auto 10%;
 
     @include mq{
       margin: 5% auto
@@ -420,7 +444,7 @@ input[type="radio"] {
     z-index: 1;
 
     @include mq {
-        width:47.5%
+        width:42%
     }
 
   &-a{
@@ -507,6 +531,10 @@ input[type="radio"] {
         &-mypage{
             @extend .ic-desc;
             height:35%;
+
+            @include mq{
+                height: 40%;
+            }
         }
 
         &-filter{

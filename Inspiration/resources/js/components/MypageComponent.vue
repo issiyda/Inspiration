@@ -138,7 +138,7 @@
 
 
             <div class ="c-button-allShow">
-                <router-link to="/allIdea">全アイデアを見る</router-link>
+                <router-link to="/allIdea">全アイデア</router-link>
             </div>
 
 

@@ -95,7 +95,7 @@
 
     @include mq{
       flex-direction: column;
-
+        flex-wrap:nowrap;
     }
 
 
@@ -151,9 +151,9 @@
       margin:0 auto;
 
 
-
       @include mq{
         padding: 7%;
+          width:80%;
       }
 
       &-label{
@@ -336,6 +336,7 @@
       &-restriction{
           @extend .review-button;
           pointer-events:none;
+
       }
 
     @include mq{

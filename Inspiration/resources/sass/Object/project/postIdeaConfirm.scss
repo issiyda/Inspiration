@@ -8,6 +8,10 @@ confirm とdetailの共通部分　
   margin: 8% auto 12%;
   width:60%;
 
+    @include mq{
+        width:80%;
+    }
+
 
 
   &-text{
@@ -62,6 +66,10 @@ confirm とdetailの共通部分　
 
   &-post{
     margin:5% auto;
+
+      @include mq {
+          margin:5% auto 10%;
+      }
   }
 
   &-attention{
@@ -69,6 +77,11 @@ confirm とdetailの共通部分　
     font-size:$font-size_xl;
     font-weight: bolder;
     margin:10% auto 5%;
+
+      @include mq{
+          font-size: $font-size_l;
+          width:70%;
+      }
   }
 
 }

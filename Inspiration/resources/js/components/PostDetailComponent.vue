@@ -314,7 +314,7 @@
                         <textarea v-model="reviewComment" class ="c-input review-comment-input" name="review" id="review-comment" cols="30" rows="10" placeholder="レビューを記入"></textarea>
                     </div>
                     <div v-if="reviewErrorMessage" class="review-comment-error">{{reviewErrorMessage}}</div>
-                    <input type="submit" class="c-mini-button review-button" :disabled="processing" value="送信">
+                    <input type="submit" class="c-button review-button" :disabled="processing" value="送信">
                 </form>
             </div>
             </div>
@@ -345,7 +345,7 @@
                             <textarea disabled class ="c-input review-comment-input" v-model="reviewComment" name="" id="review-comment" cols="30" rows="10" placeholder="レビューを記入"></textarea>
                             </div>
                         </div>
-                        <input type="text" class="c-mini-button review-button-restriction" :disabled="processing" value="送信">
+                        <input type="text" class="c-button review-button-restriction" :disabled="processing" value="送信">
                     </form>
 
                     <div class="review-comment-restriction">{{reviewRegurationMessage}}</div>

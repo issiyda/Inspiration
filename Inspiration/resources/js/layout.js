@@ -1,10 +1,14 @@
 $(document).ready(function(){
 
+
+
+
+
     //カテゴリ画像を下から上に表示
 
 
         $(window).scroll(function () {
-            console.log('aaa')
+            console.log('aaa');
 
 
             $('.js-rise-target').each(function () {

@@ -27,6 +27,10 @@
         overflow: hidden;
         text-decoration:none;
 
+        @include mq{
+            width:75%;
+        }
+
         &-twitter {
             text-shadow: 2px 2px 0px #4287d6;
             font-size: 30px;
@@ -48,8 +52,26 @@
         display:flex;
     }
 
-    &-button{
-        margin:5% auto;
+    &-button {
+        margin: 5% auto;
+        padding:5%;
+        position:relative;
+
+        @include mq{
+            padding:8%;
+        }
+
+        a {
+            height: 100%;
+            position: absolute;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            top: 0;
+            align-items: center;
+            left: 0;
+        }
+
     }
 
 

@@ -40,13 +40,6 @@
                     Inspiration
                 </a>
 
-{{--                <div class ="nav">--}}
-{{--                    <ul class ="nav-container">--}}
-{{--                        <li class ="nav-item"><a href="#">Top</a></li>--}}
-{{--                        <li class ="nav-item"><a href="#">Register</a></li>--}}
-{{--                        <li class ="nav-item"><a href="#">Login</a></li>--}}
-{{--                    </ul>--}}
-{{--                </div>--}}
 
 
                 <div class="nav-trigger js-toggle-sp-menu">
@@ -60,14 +53,6 @@
                     <div class ="nav-heading">
                         <h2 class ="f-h2">Menu</h2>
                     </div>
-
-{{--                    <ul class ="nav-container">--}}
-{{--                        <li class ="nav-item"><a href="#">Top</a></li>--}}
-{{--                        <li class ="nav-item"><a href="#">Mypage</a></li>--}}
-{{--                        <li class ="nav-item"><a href="#">Post</a></li>--}}
-{{--                        <li class ="nav-item"><a href="#">Profile</a></li>--}}
-{{--                        <li class ="nav-item"><a href="#">Logout</a></li>--}}
-{{--                    </ul>--}}
 
                     <ul class ="nav-container">
                         <li class ="nav-item"><a href="#">Home</a></li>
@@ -231,19 +216,14 @@
         </div>
 
 
-    </div>
 
 </main>
 
 
 @extends('layouts/footer')
 
-<!-- script js-->
-<script src="js/script.js"></script>
-<!-- wow -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-
-
 </div>
 </body>
+<script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{asset('js/layout.js')}}"></script>
 </html>

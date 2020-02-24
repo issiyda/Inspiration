@@ -98,7 +98,7 @@
                     <div class="error" v-if="errorMessages.submitErrorMessage">{{errorMessages.submitErrorMessage}}</div>
 
 
-                        <input type="submit" class ="c-button" value="確認画面へ">
+                        <input type="submit" class ="c-button" value="確認する">
 
                 </div>
             </form>

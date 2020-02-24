@@ -57,8 +57,6 @@
                                         myIdea.user_id,)">
                                 編集
                             </div>
-<!--                            <input type="submit" class="c-mini-button" value="詳細">-->
-<!--                            <input type="submit" class="c-mini-button" value="編集">-->
                         </div>
                     </div>
                 </paginate>
