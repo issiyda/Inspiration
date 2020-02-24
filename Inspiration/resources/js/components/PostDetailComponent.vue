@@ -496,6 +496,9 @@
                     return "情報発信"
                 }
                 if (category_id === 6) {
+                    return 'シェアリング'
+                }
+                if (category_id === 7) {
                     return 'その他'
                 }
             },
