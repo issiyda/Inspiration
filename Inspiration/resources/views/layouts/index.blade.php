@@ -33,13 +33,13 @@
     @endif
 
 
-    <div class ="nav">
+    <div class="nav">
 
         <a class="nav-title" href="/home">
             Inspiration
         </a>
 
-        <div class="nav-trigger js-toggle-sp-menu">
+        <div class="nav-trigger js-toggle-sp-menu"  @touchStart="sidebarSwitch">
             <span></span>
             <span></span>
             <span></span>
@@ -92,7 +92,7 @@
     <router-view v-on:close-loading="closeMethod()" v-on:open-loading="openMethod()"></router-view>
 
 
-<side-bar-component v-if="sidebarShow" @call-sidebar-switch="sidebarSwitch"></side-bar-component>
+<side-bar-component v-if="sidebarShow" @call-sidebar-switch="sidebarSwitch" v-bind:class="{'sidebar-active':isMenuActive}"></side-bar-component>
 
 <footer-component></footer-component>
 

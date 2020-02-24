@@ -53,7 +53,11 @@ const app = new Vue({
             selectedDate: null,
             year:"",
             month:"",
-            day:""
+            day:"",
+
+            isMenuActive:false
+
+
 
         }
 
@@ -76,6 +80,9 @@ const app = new Vue({
 
         sidebarSwitch: function(){
             this.sidebarShow = !this.sidebarShow;
+            $('nav-sp').toggleClass('sidebar-active');
+            this.isMenuActive = true;
+
         }
     },
 

@@ -32482,7 +32482,8 @@ var app = new Vue({
       selectedDate: null,
       year: "",
       month: "",
-      day: ""
+      day: "",
+      isMenuActive: false
     };
   },
   mounted: function mounted() {
@@ -32497,6 +32498,8 @@ var app = new Vue({
     },
     sidebarSwitch: function sidebarSwitch() {
       this.sidebarShow = !this.sidebarShow;
+      $('nav-sp').toggleClass('sidebar-active');
+      this.isMenuActive = true;
     }
   },
   filters: {

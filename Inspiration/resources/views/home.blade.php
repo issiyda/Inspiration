@@ -42,7 +42,7 @@
 
 
 
-                <div class="nav-trigger js-toggle-sp-menu">
+                <div class="nav-trigger js-home-sp-menu">
                     <span></span>
                     <span></span>
                     <span></span>
