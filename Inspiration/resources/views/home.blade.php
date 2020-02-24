@@ -24,7 +24,7 @@
 <body>
 
 
-<div id="app">
+<div>
 
 
 
@@ -213,18 +213,18 @@
                 </form>
 
             </div>
-
-</div>
-
-
-
 </main>
-@extends('layouts/spSidebar')
+
+    @extends('layouts/spSidebar')
 
 
-@extends('layouts/footer')
-
+    @extends('layouts/footer')
 </div>
+
+
+
+
+
 
 <!-- script js-->
 <script src="{{ asset('js/app.js') }}" defer></script>

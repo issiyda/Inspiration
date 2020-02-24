@@ -374,6 +374,7 @@ input[type="radio"] {
     resize:vertical;
     width:55%;
 
+
   @include mq{
     font-size:$font-size_m;
   }

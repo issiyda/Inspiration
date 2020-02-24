@@ -39,7 +39,7 @@
             Inspiration
         </a>
 
-        <div class="nav-trigger js-toggle-sp-menu"  @touchStart="sidebarSwitch">
+        <div class="nav-trigger js-toggle-sp-menu">
             <span></span>
             <span></span>
             <span></span>

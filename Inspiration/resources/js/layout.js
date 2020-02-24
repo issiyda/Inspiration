@@ -2,6 +2,14 @@ $(document).ready(function(){
 
 
 
+    //スマホ画面時にボタンクリックしたらサイドバー表示
+
+    $('.js-toggle-sp-menu').click(function(){
+        var button = $('.sidebar');
+        button.toggleClass('sidebar-active');
+    });
+
+
 
 
     //カテゴリ画像を下から上に表示

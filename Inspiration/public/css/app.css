@@ -593,14 +593,21 @@ a {
   }
 }
 
+.sidebar {
+  display: none;
+}
+
 @media screen and (max-width: 414px) {
   .sidebar {
     background: rgba(255, 190, 218, 0.4);
     display: -webkit-box;
     display: flex;
     left: 0;
+    opacity: 0;
     position: fixed;
     top: 100px;
+    -webkit-transition: all 0.6s;
+    transition: all 0.6s;
     width: 100%;
     z-index: 5;
   }
@@ -609,6 +616,14 @@ a {
 @media screen and (max-width: 414px) {
   .sidebar-h2 {
     padding: 0;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .sidebar-active {
+    opacity: 1;
+    -webkit-transition: all 0.6s;
+    transition: all 0.6s;
   }
 }
 
