@@ -27,8 +27,9 @@
             </div>
             <div class="home-footer-container-contact">
                 <i class="fas fa-envelope fa-2x sidebar-item-logo"></i>
-                <div class="home-footer-container-contact-message">
-                    <a href="">
+                <div class="l-footer-container-contact-message">
+                    <a href="{{route('contact')}}">
+
                         お問い合わせは<br>
                     こちらから
                     </a>
