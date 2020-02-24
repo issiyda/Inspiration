@@ -7,6 +7,12 @@
         padding:1%;
         width:15%;
 
+        @include mq{
+            margin:5% 0 5% 70%;
+            width:25%;
+
+        }
+
         &-search{
             @extend .c-button;
             margin: 5%;
@@ -33,6 +39,11 @@
         margin:5%;
         text-align:center;
         width:100%;
+
+        @include mq{
+            font-size: 16px;
+            margin:3%;
+        }
     }
 
       &-category{
@@ -71,6 +82,15 @@
           flex-wrap:wrap;
           margin:0 auto;
           width:20%;
+
+          @include mq{
+              width:80%
+          }
+
+          &-box{
+              margin-bottom:5%;
+
+          }
       }
 
 

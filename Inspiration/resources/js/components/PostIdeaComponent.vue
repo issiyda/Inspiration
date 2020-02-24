@@ -56,10 +56,13 @@
                             <input id="EC" v-model="category_id" @change="categoryValidation"  name="category" class ="" type="radio" value=4>
                             <label for="EC" class="c-radio">ECサイト</label>
 
-                            <input id="infoplaner" v-model="category_id" @change="categoryValidation"  name="category" class ="" type="radio" value=5>
+                            <input id="infoplaner" v-model="category_id" @change="categoryValidation"  name="category" class="" type="radio" value=5>
                             <label for="infoplaner" class="c-radio">情報発信</label>
 
-                            <input id="other" v-model="category_id" @change="categoryValidation"  name="category" class ="" type="radio" value=6>
+                            <input id="sharing" v-model="category_id" @change="categoryValidation"  name="category" class="" type="radio" value=6>
+                            <label for="sharing" class="c-radio">シェアリング</label>
+
+                            <input id="other" v-model="category_id" @change="categoryValidation"  name="category" class="" type="radio" value=7>
                             <label for="other" class="c-radio">その他</label>
 
 
@@ -98,7 +101,7 @@
                     <div class="error" v-if="errorMessages.submitErrorMessage">{{errorMessages.submitErrorMessage}}</div>
 
 
-                        <input type="submit" class ="c-button" value="確認画面へ">
+                        <input type="submit" class ="c-button" value="確認する">
 
                 </div>
             </form>
@@ -195,8 +198,9 @@
 
             //画像バリデーション
             imgValidation:function(){
+                var here = this
                 this.errorMessages.imgErrorMessage = false
-                if(this.ideaImage === ""){
+                if(this.ideaImage === undefined || this.ideaImage ==="" ) {
                     this.validations.imgValidation = false;
                     this.errorMessages.imgErrorMessage ="＋をクリックして画像を選択して下さい"
                 }else {
@@ -208,7 +212,7 @@
             //
             titleValidation:function(){
                 this.errorMessages.titleErrorMessage = false;
-                if(this.title === ""){
+                if(this.title === undefined || this.title ===""){
                     this.validations.titleValidation = false;
                     this.errorMessages.titleErrorMessage ="入力必須です"
                     this.titleChangeColor = true;
@@ -232,7 +236,7 @@
 
                 this.errorMessages.categoryErrorMessage =false
 
-                if (this.category_id === "") {
+                if (this.category_id === undefined || this.category_id ==="") {
                     this.validations.categoryValidation = false;
                     this.errorMessages.categoryErrorMessage ="入力必須です"
                 } else {
@@ -245,7 +249,7 @@
 
                 this.errorMessages.priceErrorMessage = false;
 
-                if(this.price === "") {
+                if(this.price === undefined || this.price ==="") {
                     this.validations.priceValidation = false;
                     this.errorMessages.priceErrorMessage ="数値を入力して下さい"
                 }else if(this.price > 1000000){
@@ -261,7 +265,7 @@
             //概要のバリデーション
             overflowValidation:function(){
 
-                if(this.overflow === "") {
+                if(this.overflow === undefined || this.overflow ==="") {
                     this.validations.overflowValidation =false;
                     this.errorMessages.overflowErrorMessage ="入力必須です"
                     this.overflowChangeColor = true;
@@ -282,7 +286,7 @@
             },
             //内容のバリデーション
             contentValidation:function(){
-                if(this.content === "") {
+                if(this.content === undefined || this.content ==="") {
                     this.validations.contentValidation =false;
                     this.errorMessages.contentErrorMessage ="入力必須です"
                     this.contentChangeColor = true;

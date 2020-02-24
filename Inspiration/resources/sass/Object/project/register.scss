@@ -17,6 +17,10 @@
       display:block;
       font-size: $font-size_xl;
       margin:3%;
+
+        @include mq{
+           font-size:$font-size_l;
+        }
     }
     }
 

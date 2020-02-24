@@ -12,7 +12,7 @@
             <div class="ic">
 
                 <paginate name="paginate-log" :list="buyingIdeas" :per="15">
-                    <div v-for="buyingIdea in paginated('paginate-log')" class="ic-card">
+                    <div v-for="buyingIdea in paginated('paginate-log')" class="ic-card ic-filter">
                         <router-link :to="{name:'postDetail', params:{
                         ideaId:buyingIdea.post_id,
                         userId:buyingIdea.user_id
@@ -26,10 +26,10 @@
                                 <span class v-if="star(buyingIdea.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
                                 <span class ="ic-star-review" v-bind:class="star(buyingIdea.averageReview)"></span>
                             </div>
-                            <div class="ic-desc">
+                            <div class="ic-desc-filter">
                                 <div class ="ic-desc-overflow">概要</div>
                                 <div class="ic-desc-text">
-                                    {{buyingIdea.overflow}}
+                                    {{buyingIdea.overflow.slice(0,48)}}
                                 </div>
                             </div>
                             <div class="ic-button-one-container">
@@ -45,6 +45,7 @@
                         </router-link>
                     </div>
                 </paginate>
+
 
 
 

@@ -172,7 +172,10 @@
 
                 } else if(this.$route.params.category_id == "5"){
                     return '情報発信'
-                } else{
+                } else if(this.$route.params.category_id == "6") {
+                    return 'シェアリング'
+                }
+                else{
                     return 'その他'
                 }
             },

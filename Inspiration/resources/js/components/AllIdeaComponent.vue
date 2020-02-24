@@ -42,8 +42,11 @@
                         <input id="infoplaner"  name="category" class ="" type="radio">
                         <label for="infoplaner" class="c-radio search-category-radio" @click="searchCategory(5)">情報発信</label>
 
+                        <input id="sharing"  name="category" class ="" type="radio">
+                        <label for="sharing" class="c-radio search-category-radio" @click="searchCategory(6)">シェアリング</label>
+
                         <input id="other"  name="category" class ="" type="radio">
-                        <label for="other" class="c-radio search-category-radio" @click="searchCategory(6)">その他</label>
+                        <label for="other" class="c-radio search-category-radio" @click="searchCategory(7)">その他</label>
                     </div>
 
                     <div v-if="priceSelected" class="search-price">
@@ -58,9 +61,8 @@
 
                     <div v-if="dateSelected" class="search-date">
                         <div class="search-subject">期間検索</div>
-                        <!--                        　<input type="date" name="from" placeholder="〜から">-->
-<!--                        　<input type="date" name="from" placeholder="〜まで">-->
-<!--                        <button type="submit" @click="dateSearch">日付検索</button>-->
+
+                        <div class="search-date-box">
                         <label for="down">年別</label>
                         <v-date-picker :mode="mode"
                                        :format="customFormatter"
@@ -70,8 +72,10 @@
                                        key="year"
                                        clearable
                                        minimum-view="`year`">
-                        </v-date-picker><br>
+                        </v-date-picker>
+                        </div>
 
+                        <div class="search-date-box">
                         <label for="top">月別</label>
                         <v-date-picker :mode="mode"
                                        :format="customFormatter"
@@ -81,7 +85,9 @@
                                        clearable
                                        minimum-view="`month`">
                         </v-date-picker>
+                        </div>
 
+                        <div class="search-date-box">
                         <label for="top">日別</label>
                         <v-date-picker :mode="mode"
                                        :format="customFormatter"
@@ -90,7 +96,9 @@
                                        key="day"
                                        minimum-view="'day'">
                         </v-date-picker>
+                        </div>
 
+                        <div class="search-date-box">
                         <label for="top">以降</label>
                         <v-date-picker :mode="mode"
                                        :format="customFormatter"
@@ -98,6 +106,8 @@
                                        @input="termSearch()"
                                        key="after">
                         </v-date-picker>
+                        </div>
+                        <div class="search-date-box">
 
                         <label for="top">以前</label>
                         <v-date-picker :mode="mode"
@@ -106,28 +116,10 @@
                                        @input="termSearch()"
                                        key="before">
                         </v-date-picker>
-
-
-
-
-                        <!--                        <v-date-picker :mode="mode"-->
-<!--                                       :format="customFormatter"-->
-<!--                                       @closed="pickerClosed"-->
-<!--                                       name="day"-->
-<!--                                       v-model="day">-->
-<!--                        </v-date-picker>-->
-
-<!--                        <v-date-picker :mode="mode"-->
-<!--                                       :format="customFormatter"-->
-<!--                                       @closed="pickerClosed"-->
-<!--                                       name="day"-->
-<!--                                       v-model="day">-->
-<!--                        </v-date-picker>-->
+                        </div>
 
                     </div>
-
                     </div>
-
                 </div>
 
 
@@ -144,7 +136,7 @@
 
 
                     <paginate name="paginate-log" :list="searchedIdeas" :per="15">
-                        <div v-for="allIdea in paginated('paginate-log')" class="ic-card">
+                        <div v-for="allIdea in paginated('paginate-log')" class="ic-card ic-all">
                             <router-link :to="{name:'postDetail', params:{
                         ideaId:allIdea.id,
                         userId:allIdea.user_id
@@ -172,10 +164,10 @@
 
 
 
-                            <div class="ic-desc">
+                            <div class="ic-desc-all">
                                 <div class ="ic-desc-overflow">概要</div>
                                 <div class="ic-desc-text">
-                                    {{allIdea.overflow}}
+                                    {{allIdea.overflow.slice(0,48)}}
                                 </div>
                             </div>
 
@@ -291,10 +283,12 @@
                     return 'SNS'
                 } else if (id === 4) {
                     return 'ECサイト'
-
                 } else if (id === 5) {
                     return '情報発信'
-                } else {
+                }else if (id === 6) {
+                    return 'シェアリング'
+                }
+                else if(id === 7) {
                     return 'その他'
                 }
             },

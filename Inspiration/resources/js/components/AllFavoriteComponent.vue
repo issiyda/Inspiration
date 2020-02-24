@@ -13,7 +13,7 @@
 
 
                 <paginate name="paginate-log" :list="favoriteIdeas" :per="15">
-                    <div v-for="favoriteIdea in paginated('paginate-log')" class="ic-card">
+                    <div v-for="favoriteIdea in paginated('paginate-log')" class="ic-card ic-filter">
                         <router-link :to="{name:'postDetail', params:{
                         ideaId:favoriteIdea.idea_id,
                         userId:favoriteIdea.user_id
@@ -29,10 +29,10 @@
                                     <span class v-if="star(favoriteIdea.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
                                 </div>
                             </div>
-                            <div class="ic-desc">
+                            <div class="ic-desc-filter">
                                 <div class ="ic-desc-overflow">概要</div>
                                 <div class="ic-desc-text">
-                                    {{favoriteIdea.overflow}}
+                                    {{favoriteIdea.overflow.slice(0,48)}}
                                 </div>
                             </div>
                             <div class="ic-button-two-container">

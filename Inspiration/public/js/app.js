@@ -1913,6 +1913,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllBuyComponent",
   data: function data() {
@@ -2319,14 +2320,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllIdeaComponent",
   data: function data() {
@@ -2403,7 +2396,9 @@ __webpack_require__.r(__webpack_exports__);
         return 'ECサイト';
       } else if (id === 5) {
         return '情報発信';
-      } else {
+      } else if (id === 6) {
+        return 'シェアリング';
+      } else if (id === 7) {
         return 'その他';
       }
     },
@@ -2928,7 +2923,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
         });
       } else if (bought_flag === 1) {
-        alert("購入されているので削除できません");
+        alert("購入されているので編集できません");
       }
     }
   },
@@ -3390,14 +3385,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MyPageComponent",
   data: function data() {
-    return {
-      notReviewedFlag: false
-    };
+    return {};
   },
   methods: {},
   created: function created() {
@@ -3423,33 +3414,44 @@ __webpack_require__.r(__webpack_exports__);
     reviews: function reviews() {
       return this.$store.state.ideas.review;
     },
+    reviewed: function reviewed() {
+      return function (stars) {
+        var starReview = stars;
+
+        if (starReview === 0) {
+          return false;
+        } else if (starReview !== 0) return true;
+      };
+    },
     star: function star() {
       return function (stars) {
         var starReview = stars;
 
         if (starReview === 0) {
           return "ic-not-reviewed";
-        } else if (starReview <= 0.5) {
-          return "rate0-5";
-        } else if (starReview > 0.5 && starReview <= 1) {
-          return "rate1";
-        } else if (starReview > 1 && starReview <= 1.5) {
-          return "rate1-5";
-        } else if (starReview > 1.5 && starReview <= 2) {
-          return "rate2";
-        } else if (starReview > 2 && starReview <= 2.5) {
-          return "rate2-5";
-        } else if (starReview > 2.5 && starReview <= 3) {
-          return "rate3";
-        } else if (starReview > 3 && starReview <= 3.5) {
-          return "rate3-5";
-        } else if (starReview > 3.5 && starReview <= 4) {
-          return "rate4";
-        } else if (starReview > 4 && starReview <= 4.5) {
-          return "rate4-5";
-        } else if (starReview > 4.5 && starReview <= 5) {
-          return "rate5";
-        }
+          this.notReviewed;
+        } //星の数に応じて画面の星変化
+        else if (starReview <= 0.5) {
+            return "rate0-5";
+          } else if (starReview > 0.5 && starReview <= 1) {
+            return "rate1";
+          } else if (starReview > 1 && starReview <= 1.5) {
+            return "rate1-5";
+          } else if (starReview > 1.5 && starReview <= 2) {
+            return "rate2";
+          } else if (starReview > 2 && starReview <= 2.5) {
+            return "rate2-5";
+          } else if (starReview > 2.5 && starReview <= 3) {
+            return "rate3";
+          } else if (starReview > 3 && starReview <= 3.5) {
+            return "rate3-5";
+          } else if (starReview > 3.5 && starReview <= 4) {
+            return "rate4";
+          } else if (starReview > 4 && starReview <= 4.5) {
+            return "rate4-5";
+          } else if (starReview > 4.5 && starReview <= 5) {
+            return "rate5";
+          }
       };
     }
   }
@@ -4218,6 +4220,10 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (category_id === 6) {
+        return 'シェアリング';
+      }
+
+      if (category_id === 7) {
         return 'その他';
       }
     },
@@ -4558,6 +4564,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostIdeaComponent",
@@ -4632,9 +4641,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     //画像バリデーション
     imgValidation: function imgValidation() {
+      var here = this;
       this.errorMessages.imgErrorMessage = false;
 
-      if (this.ideaImage === "") {
+      if (this.ideaImage === undefined || this.ideaImage === "") {
         this.validations.imgValidation = false;
         this.errorMessages.imgErrorMessage = "＋をクリックして画像を選択して下さい";
       } else {
@@ -4646,7 +4656,7 @@ __webpack_require__.r(__webpack_exports__);
     titleValidation: function titleValidation() {
       this.errorMessages.titleErrorMessage = false;
 
-      if (this.title === "") {
+      if (this.title === undefined || this.title === "") {
         this.validations.titleValidation = false;
         this.errorMessages.titleErrorMessage = "入力必須です";
         this.titleChangeColor = true;
@@ -4664,7 +4674,7 @@ __webpack_require__.r(__webpack_exports__);
     categoryValidation: function categoryValidation() {
       this.errorMessages.categoryErrorMessage = false;
 
-      if (this.category_id === "") {
+      if (this.category_id === undefined || this.category_id === "") {
         this.validations.categoryValidation = false;
         this.errorMessages.categoryErrorMessage = "入力必須です";
       } else {
@@ -4676,7 +4686,7 @@ __webpack_require__.r(__webpack_exports__);
     priceValidation: function priceValidation() {
       this.errorMessages.priceErrorMessage = false;
 
-      if (this.price === "") {
+      if (this.price === undefined || this.price === "") {
         this.validations.priceValidation = false;
         this.errorMessages.priceErrorMessage = "数値を入力して下さい";
       } else if (this.price > 1000000) {
@@ -4689,7 +4699,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     //概要のバリデーション
     overflowValidation: function overflowValidation() {
-      if (this.overflow === "") {
+      if (this.overflow === undefined || this.overflow === "") {
         this.validations.overflowValidation = false;
         this.errorMessages.overflowErrorMessage = "入力必須です";
         this.overflowChangeColor = true;
@@ -4705,7 +4715,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     //内容のバリデーション
     contentValidation: function contentValidation() {
-      if (this.content === "") {
+      if (this.content === undefined || this.content === "") {
         this.validations.contentValidation = false;
         this.errorMessages.contentErrorMessage = "入力必須です";
         this.contentChangeColor = true;
@@ -4950,6 +4960,8 @@ __webpack_require__.r(__webpack_exports__);
         return 'ECサイト';
       } else if (this.$route.params.category_id == "5") {
         return '情報発信';
+      } else if (this.$route.params.category_id == "6") {
+        return 'シェアリング';
       } else {
         return 'その他';
       }
@@ -5720,6 +5732,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostIdeaEditComponent",
   data: function data() {
@@ -5744,6 +5759,7 @@ __webpack_require__.r(__webpack_exports__);
         sns: "",
         ecSite: "",
         infoPlaner: "",
+        sharing: "",
         other: ""
       },
       EditResultMessage: false,
@@ -5801,6 +5817,10 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this.category_id === 6) {
+        this.category.sharing = true;
+      }
+
+      if (this.category_id === 7) {
         this.category.other = true;
       }
     },
@@ -9808,7 +9828,7 @@ var render = function() {
             _vm._l(_vm.paginated("paginate-log"), function(buyingIdea) {
               return _c(
                 "div",
-                { staticClass: "ic-card" },
+                { staticClass: "ic-card ic-filter" },
                 [
                   _c(
                     "router-link",
@@ -9855,7 +9875,7 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "ic-desc" }, [
+                      _c("div", { staticClass: "ic-desc-filter" }, [
                         _c("div", { staticClass: "ic-desc-overflow" }, [
                           _vm._v("概要")
                         ]),
@@ -9863,7 +9883,7 @@ var render = function() {
                         _c("div", { staticClass: "ic-desc-text" }, [
                           _vm._v(
                             "\n                                " +
-                              _vm._s(buyingIdea.overflow) +
+                              _vm._s(buyingIdea.overflow.slice(0, 48)) +
                               "\n                            "
                           )
                         ])
@@ -9964,7 +9984,7 @@ var render = function() {
               _vm._l(_vm.paginated("paginate-log"), function(favoriteIdea) {
                 return _c(
                   "div",
-                  { staticClass: "ic-card" },
+                  { staticClass: "ic-card ic-filter" },
                   [
                     _c(
                       "router-link",
@@ -10014,7 +10034,7 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "ic-desc" }, [
+                        _c("div", { staticClass: "ic-desc-filter" }, [
                           _c("div", { staticClass: "ic-desc-overflow" }, [
                             _vm._v("概要")
                           ]),
@@ -10022,7 +10042,7 @@ var render = function() {
                           _c("div", { staticClass: "ic-desc-text" }, [
                             _vm._v(
                               "\n                                " +
-                                _vm._s(favoriteIdea.overflow) +
+                                _vm._s(favoriteIdea.overflow.slice(0, 48)) +
                                 "\n                            "
                             )
                           ])
@@ -10332,6 +10352,24 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("input", {
+                  attrs: { id: "sharing", name: "category", type: "radio" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "c-radio search-category-radio",
+                    attrs: { for: "sharing" },
+                    on: {
+                      click: function($event) {
+                        return _vm.searchCategory(6)
+                      }
+                    }
+                  },
+                  [_vm._v("シェアリング")]
+                ),
+                _vm._v(" "),
+                _c("input", {
                   attrs: { id: "other", name: "category", type: "radio" }
                 }),
                 _vm._v(" "),
@@ -10342,7 +10380,7 @@ var render = function() {
                     attrs: { for: "other" },
                     on: {
                       click: function($event) {
-                        return _vm.searchCategory(6)
+                        return _vm.searchCategory(7)
                       }
                     }
                   },
@@ -10430,127 +10468,156 @@ var render = function() {
             : _vm._e(),
           _vm._v(" "),
           _vm.dateSelected
-            ? _c(
-                "div",
-                { staticClass: "search-date" },
-                [
-                  _c("div", { staticClass: "search-subject" }, [
-                    _vm._v("期間検索")
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "down" } }, [_vm._v("年別")]),
-                  _vm._v(" "),
-                  _c("v-date-picker", {
-                    key: "year",
-                    attrs: {
-                      mode: _vm.mode,
-                      format: _vm.customFormatter,
-                      language: _vm.ja,
-                      clearable: "",
-                      "minimum-view": "`year`"
-                    },
-                    on: {
-                      input: function($event) {
-                        return _vm.termYearSearch()
-                      }
-                    },
-                    model: {
-                      value: _vm.year,
-                      callback: function($$v) {
-                        _vm.year = $$v
+            ? _c("div", { staticClass: "search-date" }, [
+                _c("div", { staticClass: "search-subject" }, [
+                  _vm._v("期間検索")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "search-date-box" },
+                  [
+                    _c("label", { attrs: { for: "down" } }, [_vm._v("年別")]),
+                    _vm._v(" "),
+                    _c("v-date-picker", {
+                      key: "year",
+                      attrs: {
+                        mode: _vm.mode,
+                        format: _vm.customFormatter,
+                        language: _vm.ja,
+                        clearable: "",
+                        "minimum-view": "`year`"
                       },
-                      expression: "year"
-                    }
-                  }),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "top" } }, [_vm._v("月別")]),
-                  _vm._v(" "),
-                  _c("v-date-picker", {
-                    key: "month",
-                    attrs: {
-                      mode: _vm.mode,
-                      format: _vm.customFormatter,
-                      clearable: "",
-                      "minimum-view": "`month`"
-                    },
-                    on: {
-                      input: function($event) {
-                        return _vm.termMonthSearch()
-                      }
-                    },
-                    model: {
-                      value: _vm.month,
-                      callback: function($$v) {
-                        _vm.month = $$v
+                      on: {
+                        input: function($event) {
+                          return _vm.termYearSearch()
+                        }
                       },
-                      expression: "month"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "top" } }, [_vm._v("日別")]),
-                  _vm._v(" "),
-                  _c("v-date-picker", {
-                    key: "day",
-                    attrs: {
-                      mode: _vm.mode,
-                      format: _vm.customFormatter,
-                      "minimum-view": "'day'"
-                    },
-                    on: {
-                      input: function($event) {
-                        return _vm.termDaySearch()
+                      model: {
+                        value: _vm.year,
+                        callback: function($$v) {
+                          _vm.year = $$v
+                        },
+                        expression: "year"
                       }
-                    },
-                    model: {
-                      value: _vm.day,
-                      callback: function($$v) {
-                        _vm.day = $$v
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "search-date-box" },
+                  [
+                    _c("label", { attrs: { for: "top" } }, [_vm._v("月別")]),
+                    _vm._v(" "),
+                    _c("v-date-picker", {
+                      key: "month",
+                      attrs: {
+                        mode: _vm.mode,
+                        format: _vm.customFormatter,
+                        clearable: "",
+                        "minimum-view": "`month`"
                       },
-                      expression: "day"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "top" } }, [_vm._v("以降")]),
-                  _vm._v(" "),
-                  _c("v-date-picker", {
-                    key: "after",
-                    attrs: { mode: _vm.mode, format: _vm.customFormatter },
-                    on: {
-                      input: function($event) {
-                        return _vm.termSearch()
+                      on: {
+                        input: function($event) {
+                          return _vm.termMonthSearch()
+                        }
+                      },
+                      model: {
+                        value: _vm.month,
+                        callback: function($$v) {
+                          _vm.month = $$v
+                        },
+                        expression: "month"
                       }
-                    },
-                    model: {
-                      value: _vm.after,
-                      callback: function($$v) {
-                        _vm.after = $$v
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "search-date-box" },
+                  [
+                    _c("label", { attrs: { for: "top" } }, [_vm._v("日別")]),
+                    _vm._v(" "),
+                    _c("v-date-picker", {
+                      key: "day",
+                      attrs: {
+                        mode: _vm.mode,
+                        format: _vm.customFormatter,
+                        "minimum-view": "'day'"
                       },
-                      expression: "after"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "top" } }, [_vm._v("以前")]),
-                  _vm._v(" "),
-                  _c("v-date-picker", {
-                    key: "before",
-                    attrs: { mode: _vm.mode, format: _vm.customFormatter },
-                    on: {
-                      input: function($event) {
-                        return _vm.termSearch()
+                      on: {
+                        input: function($event) {
+                          return _vm.termDaySearch()
+                        }
+                      },
+                      model: {
+                        value: _vm.day,
+                        callback: function($$v) {
+                          _vm.day = $$v
+                        },
+                        expression: "day"
                       }
-                    },
-                    model: {
-                      value: _vm.before,
-                      callback: function($$v) {
-                        _vm.before = $$v
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "search-date-box" },
+                  [
+                    _c("label", { attrs: { for: "top" } }, [_vm._v("以降")]),
+                    _vm._v(" "),
+                    _c("v-date-picker", {
+                      key: "after",
+                      attrs: { mode: _vm.mode, format: _vm.customFormatter },
+                      on: {
+                        input: function($event) {
+                          return _vm.termSearch()
+                        }
                       },
-                      expression: "before"
-                    }
-                  })
-                ],
-                1
-              )
+                      model: {
+                        value: _vm.after,
+                        callback: function($$v) {
+                          _vm.after = $$v
+                        },
+                        expression: "after"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "search-date-box" },
+                  [
+                    _c("label", { attrs: { for: "top" } }, [_vm._v("以前")]),
+                    _vm._v(" "),
+                    _c("v-date-picker", {
+                      key: "before",
+                      attrs: { mode: _vm.mode, format: _vm.customFormatter },
+                      on: {
+                        input: function($event) {
+                          return _vm.termSearch()
+                        }
+                      },
+                      model: {
+                        value: _vm.before,
+                        callback: function($$v) {
+                          _vm.before = $$v
+                        },
+                        expression: "before"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ])
             : _vm._e()
         ]
       )
@@ -10583,7 +10650,7 @@ var render = function() {
                     _vm._l(_vm.paginated("paginate-log"), function(allIdea) {
                       return _c(
                         "div",
-                        { staticClass: "ic-card" },
+                        { staticClass: "ic-card ic-all" },
                         [
                           _c(
                             "router-link",
@@ -10651,16 +10718,16 @@ var render = function() {
                                 ])
                               ]),
                               _vm._v(" "),
-                              _c("div", { staticClass: "ic-desc" }, [
+                              _c("div", { staticClass: "ic-desc-all" }, [
                                 _c("div", { staticClass: "ic-desc-overflow" }, [
                                   _vm._v("概要")
                                 ]),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "ic-desc-text" }, [
                                   _vm._v(
-                                    "\n                                    " +
-                                      _vm._s(allIdea.overflow) +
-                                      "\n                                "
+                                    "\n                            " +
+                                      _vm._s(allIdea.overflow.slice(0, 48)) +
+                                      "\n                        "
                                   )
                                 ])
                               ]),
@@ -10732,48 +10799,69 @@ var render = function() {
             "paginate",
             { attrs: { name: "paginate-log", list: _vm.myIdeaLists, per: 15 } },
             _vm._l(_vm.paginated("paginate-log"), function(myIdea) {
-              return _c("div", { staticClass: "ic-card" }, [
-                _c("div", { staticClass: "ic-a" }, [
-                  _c("h4", { staticClass: "f-h4" }, [
-                    _vm._v(_vm._s(myIdea.title))
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "ic-img" }, [
-                    _c("img", {
-                      staticClass: "ic-img-item",
+              return _c(
+                "div",
+                { staticClass: "ic-card ic-filter" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "ic-a",
                       attrs: {
-                        src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + myIdea.img),
-                        alt: "postIdeaImg"
+                        to: {
+                          name: "postDetail",
+                          params: {
+                            ideaId: myIdea.id,
+                            userId: myIdea.user_id
+                          }
+                        }
                       }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "ic-review" }, [
-                    _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
-                    _vm._v(" "),
-                    _c("span", {
-                      staticClass: "ic-star-review",
-                      class: _vm.star(myIdea.averageReview)
-                    }),
-                    _vm._v(" "),
-                    _vm.star(myIdea.averageReview) === "ic-not-reviewed"
-                      ? _c("span", {}, [_vm._v("未評価のアイデアです")])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "ic-desc" }, [
-                    _c("div", { staticClass: "ic-desc-overflow" }, [
-                      _vm._v("概要")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "ic-desc-text" }, [
-                      _vm._v(
-                        "\n                                " +
-                          _vm._s(myIdea.overflow) +
-                          "\n                            "
-                      )
-                    ])
-                  ]),
+                    },
+                    [
+                      _c("h4", { staticClass: "f-h4" }, [
+                        _vm._v(_vm._s(myIdea.title))
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "ic-img" }, [
+                        _c("img", {
+                          staticClass: "ic-img-item",
+                          attrs: {
+                            src: __webpack_require__("./resources/js sync recursive ^\\.\\/assets.*$")("./assets" + myIdea.img),
+                            alt: "postIdeaImg"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "ic-review" }, [
+                        _c("span", { staticClass: "ic-span" }, [
+                          _vm._v("評価")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", {
+                          staticClass: "ic-star-review",
+                          class: _vm.star(myIdea.averageReview)
+                        }),
+                        _vm._v(" "),
+                        _vm.star(myIdea.averageReview) === "ic-not-reviewed"
+                          ? _c("span", {}, [_vm._v("未評価のアイデアです")])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "ic-desc-filter" }, [
+                        _c("div", { staticClass: "ic-desc-overflow" }, [
+                          _vm._v("概要")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "ic-desc-text" }, [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(myIdea.overflow.slice(0, 48)) +
+                              "\n                        "
+                          )
+                        ])
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("div", { staticClass: "ic-button-two-container" }, [
                     _c(
@@ -10793,7 +10881,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("\n                                    詳細")]
+                          [_vm._v("\n                                詳細")]
                         )
                       ],
                       1
@@ -10822,13 +10910,14 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                                編集\n                            "
+                          "\n                            編集\n                        "
                         )
                       ]
                     )
                   ])
-                ])
-              ])
+                ],
+                1
+              )
             }),
             0
           )
@@ -10892,7 +10981,7 @@ var render = function() {
             _vm._l(_vm.paginated("paginate-log"), function(reviewedIdea) {
               return _c(
                 "div",
-                { staticClass: "ic-card" },
+                { staticClass: "ic-card ic-filter" },
                 [
                   _c(
                     "router-link",
@@ -10935,7 +11024,7 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "ic-desc" }, [
+                      _c("div", { staticClass: "ic-desc-filter" }, [
                         _c("div", { staticClass: "ic-desc-overflow" }, [
                           _vm._v("概要")
                         ]),
@@ -11202,7 +11291,7 @@ var render = function() {
           _vm._l(_vm.buyingIdeas.slice(0, 5), function(buyingIdea) {
             return _c(
               "div",
-              { staticClass: "ic-card" },
+              { staticClass: "ic-card ic-mypage" },
               [
                 _c(
                   "router-link",
@@ -11234,20 +11323,33 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-review" }, [
-                      _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
-                      _vm._v(" "),
-                      _vm.star(buyingIdea.averageReview) === "ic-not-reviewed"
-                        ? _c("span", {}, [_vm._v("未評価のアイデアです")])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "ic-star-review",
-                        class: _vm.star(buyingIdea.averageReview)
-                      })
-                    ]),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "ic-review",
+                        class: {
+                          "ic-review-reviewed": _vm.reviewed(
+                            buyingIdea.averageReview
+                          )
+                        }
+                      },
+                      [
+                        _c("span", { staticClass: "ic-span" }, [
+                          _vm._v("評価")
+                        ]),
+                        _vm._v(" "),
+                        _vm.star(buyingIdea.averageReview) === "ic-not-reviewed"
+                          ? _c("span", {}, [_vm._v("未評価のアイデアです")])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("span", {
+                          staticClass: "ic-star-review",
+                          class: _vm.star(buyingIdea.averageReview)
+                        })
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-desc" }, [
+                    _c("div", { staticClass: "ic-desc-mypage" }, [
                       _c("div", { staticClass: "ic-desc-overflow" }, [
                         _vm._v("概要")
                       ]),
@@ -11255,7 +11357,7 @@ var render = function() {
                       _c("div", { staticClass: "ic-desc-text" }, [
                         _vm._v(
                           "\n                           " +
-                            _vm._s(buyingIdea.overflow) +
+                            _vm._s(buyingIdea.overflow.slice(0, 48)) +
                             "\n                        "
                         )
                       ])
@@ -11283,7 +11385,7 @@ var render = function() {
           _vm._l(_vm.favIdeas.slice(0, 5), function(favIdea) {
             return _c(
               "div",
-              { staticClass: "ic-card" },
+              { staticClass: "ic-card ic-mypage" },
               [
                 _c(
                   "router-link",
@@ -11315,20 +11417,33 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-review" }, [
-                      _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "ic-star-review",
-                        class: _vm.star(favIdea.averageReview)
-                      }),
-                      _vm._v(" "),
-                      _vm.star(favIdea.averageReview) === "ic-not-reviewed"
-                        ? _c("span", {}, [_vm._v("未評価のアイデアです")])
-                        : _vm._e()
-                    ]),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "ic-review",
+                        class: {
+                          "ic-review-reviewed": _vm.reviewed(
+                            favIdea.averageReview
+                          )
+                        }
+                      },
+                      [
+                        _c("span", { staticClass: "ic-span" }, [
+                          _vm._v("評価")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", {
+                          staticClass: "ic-star-review",
+                          class: _vm.star(favIdea.averageReview)
+                        }),
+                        _vm._v(" "),
+                        _vm.star(favIdea.averageReview) === "ic-not-reviewed"
+                          ? _c("span", {}, [_vm._v("未評価のアイデアです")])
+                          : _vm._e()
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-desc" }, [
+                    _c("div", { staticClass: "ic-desc-mypage" }, [
                       _c("div", { staticClass: "ic-desc-overflow" }, [
                         _vm._v("概要")
                       ]),
@@ -11336,7 +11451,7 @@ var render = function() {
                       _c("div", { staticClass: "ic-desc-text" }, [
                         _vm._v(
                           "\n                                " +
-                            _vm._s(favIdea.overflow) +
+                            _vm._s(favIdea.overflow.slice(0, 48)) +
                             "\n                            "
                         )
                       ])
@@ -11364,7 +11479,7 @@ var render = function() {
           _vm._l(_vm.myIdeas.slice(0, 5), function(myIdea) {
             return _c(
               "div",
-              { staticClass: "ic-card" },
+              { staticClass: "ic-card ic-mypage" },
               [
                 _c(
                   "router-link",
@@ -11396,20 +11511,33 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-review" }, [
-                      _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "ic-star-review",
-                        class: _vm.star(myIdea.averageReview)
-                      }),
-                      _vm._v(" "),
-                      _vm.star(myIdea.averageReview) === "ic-not-reviewed"
-                        ? _c("span", {}, [_vm._v("未評価のアイデアです")])
-                        : _vm._e()
-                    ]),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "ic-review",
+                        class: {
+                          "ic-review-reviewed": _vm.reviewed(
+                            myIdea.averageReview
+                          )
+                        }
+                      },
+                      [
+                        _c("span", { staticClass: "ic-span" }, [
+                          _vm._v("評価")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", {
+                          staticClass: "ic-star-review",
+                          class: _vm.star(myIdea.averageReview)
+                        }),
+                        _vm._v(" "),
+                        _vm.star(myIdea.averageReview) === "ic-not-reviewed"
+                          ? _c("span", {}, [_vm._v("未評価のアイデアです")])
+                          : _vm._e()
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-desc" }, [
+                    _c("div", { staticClass: "ic-desc-mypage" }, [
                       _c("div", { staticClass: "ic-desc-overflow" }, [
                         _vm._v("概要")
                       ]),
@@ -11417,7 +11545,7 @@ var render = function() {
                       _c("div", { staticClass: "ic-desc-text" }, [
                         _vm._v(
                           "\n                                    " +
-                            _vm._s(myIdea.overflow) +
+                            _vm._s(myIdea.overflow.slice(0, 48)) +
                             "\n                                "
                         )
                       ])
@@ -11445,7 +11573,7 @@ var render = function() {
           _vm._l(_vm.reviews.slice(0, 5), function(review) {
             return _c(
               "div",
-              { staticClass: "ic-card" },
+              { staticClass: "ic-card ic-mypage" },
               [
                 _c(
                   "router-link",
@@ -11476,16 +11604,26 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-review" }, [
-                      _c("span", { staticClass: "ic-span" }, [_vm._v("評価")]),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "ic-star-review",
-                        class: _vm.star(review.averageReview)
-                      })
-                    ]),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "ic-review",
+                        class: {
+                          "ic-review-reviewed": _vm.reviewed(
+                            review.averageReview
+                          )
+                        }
+                      },
+                      [
+                        _c("span", { staticClass: "ic-span" }, [
+                          _vm._v("評価")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "ic-star-review" })
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ic-desc" }, [
+                    _c("div", { staticClass: "ic-desc-mypage" }, [
                       _c("div", { staticClass: "ic-desc-overflow" }, [
                         _vm._v("コメント")
                       ]),
@@ -11493,7 +11631,7 @@ var render = function() {
                       _c("div", { staticClass: "ic-desc-text" }, [
                         _vm._v(
                           "\n                                        " +
-                            _vm._s(review.comment) +
+                            _vm._s(review.comment.slice(0, 48)) +
                             "\n                                    "
                         )
                       ])
@@ -11515,10 +11653,10 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "c-button" },
+          { staticClass: "c-button-allShow" },
           [
             _c("router-link", { attrs: { to: "/allIdea" } }, [
-              _vm._v("全アイデアを見る")
+              _vm._v("全アイデア")
             ])
           ],
           1
@@ -11837,7 +11975,7 @@ var render = function() {
               { staticClass: "c-button completed-button column-button" },
               [
                 _c("router-link", { attrs: { to: "/mypage" } }, [
-                  _vm._v("Mypageへ")
+                  _vm._v("Mypage")
                 ])
               ],
               1
@@ -12527,7 +12665,7 @@ var render = function() {
                     : _vm._e(),
                   _vm._v(" "),
                   _c("input", {
-                    staticClass: "c-mini-button review-button",
+                    staticClass: "c-button review-button",
                     attrs: {
                       type: "submit",
                       disabled: _vm.processing,
@@ -12587,7 +12725,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("input", {
-                  staticClass: "c-mini-button review-button-restriction",
+                  staticClass: "c-button review-button-restriction",
                   attrs: {
                     type: "text",
                     disabled: _vm.processing,
@@ -13285,7 +13423,7 @@ var render = function() {
                     }
                   ],
                   attrs: {
-                    id: "other",
+                    id: "sharing",
                     name: "category",
                     type: "radio",
                     value: "6"
@@ -13295,6 +13433,38 @@ var render = function() {
                     change: [
                       function($event) {
                         _vm.category_id = "6"
+                      },
+                      _vm.categoryValidation
+                    ]
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  { staticClass: "c-radio", attrs: { for: "sharing" } },
+                  [_vm._v("シェアリング")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.category_id,
+                      expression: "category_id"
+                    }
+                  ],
+                  attrs: {
+                    id: "other",
+                    name: "category",
+                    type: "radio",
+                    value: "7"
+                  },
+                  domProps: { checked: _vm._q(_vm.category_id, "7") },
+                  on: {
+                    change: [
+                      function($event) {
+                        _vm.category_id = "7"
                       },
                       _vm.categoryValidation
                     ]
@@ -13486,7 +13656,7 @@ var render = function() {
             _vm._v(" "),
             _c("input", {
               staticClass: "c-button",
-              attrs: { type: "submit", value: "確認画面へ" }
+              attrs: { type: "submit", value: "確認する" }
             })
           ])
         ]
@@ -14850,15 +15020,45 @@ var render = function() {
                         expression: "category_id"
                       }
                     ],
-                    attrs: { id: "other", type: "radio", value: "6" },
+                    attrs: { id: "sharing", type: "radio", value: "6" },
                     domProps: {
-                      checked: _vm.category.other,
+                      checked: _vm.category.sharing,
                       checked: _vm._q(_vm.category_id, "6")
                     },
                     on: {
                       change: [
                         function($event) {
                           _vm.category_id = "6"
+                        },
+                        _vm.categoryValidation
+                      ]
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    { staticClass: "c-radio", attrs: { for: "infoplaner" } },
+                    [_vm._v("シェアリング")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.category_id,
+                        expression: "category_id"
+                      }
+                    ],
+                    attrs: { id: "other", type: "radio", value: "7" },
+                    domProps: {
+                      checked: _vm.category.other,
+                      checked: _vm._q(_vm.category_id, "7")
+                    },
+                    on: {
+                      change: [
+                        function($event) {
+                          _vm.category_id = "7"
                         },
                         _vm.categoryValidation
                       ]
@@ -15182,7 +15382,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("p", { staticClass: "completed-paragraph" }, [
       _vm._v(
-        "\n                    レビュー投稿が新た無いアイデアをもたらします。"
+        "\n                    レビュー投稿が新たなアイデアをもたらします。"
       ),
       _c("br"),
       _vm._v(
@@ -32385,7 +32585,8 @@ var app = new Vue({
       selectedDate: null,
       year: "",
       month: "",
-      day: ""
+      day: "",
+      isMenuActive: false
     };
   },
   mounted: function mounted() {
@@ -32400,6 +32601,8 @@ var app = new Vue({
     },
     sidebarSwitch: function sidebarSwitch() {
       this.sidebarShow = !this.sidebarShow;
+      $('nav-sp').toggleClass('sidebar-active');
+      this.isMenuActive = true;
     }
   },
   filters: {

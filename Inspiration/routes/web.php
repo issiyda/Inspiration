@@ -53,6 +53,13 @@ Route::post('/home',function(){
     return view('home');
 });
 
+Route::get('/contact',function(){
+    return view('contact');
+})->name('contact');
+
+Route::post('/contactPost','contactController@contactHome')->name('contactPost');
+
+
 Route::get('/users','UserController@getUserData');
 
 Route::post('/mypage','StripeController@charge');
