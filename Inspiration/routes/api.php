@@ -209,5 +209,5 @@ ROUTE::post('/favDelete','InspirationController@favDelete');
 /**
  * お問い合わせ送信ルーティング
  */
-Route::post('/contactPost','contactController@contactPost');
+Route::post('/contactPost','contactController@contactPost')->name('contact');
 

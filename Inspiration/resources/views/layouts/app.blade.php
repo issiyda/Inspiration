@@ -46,7 +46,7 @@
 </head>
 
 <body>
-    <div>
+    <div id="app">
         <div class ="nav">
 
             <a class="nav-title" href="/home">

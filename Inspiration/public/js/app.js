@@ -1913,6 +1913,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllBuyComponent",
   data: function data() {
@@ -32516,6 +32517,7 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('nav-bar-component', __webpack_require__(/*! ./components/common/NavBarComponent */ "./resources/js/components/common/NavBarComponent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('side-bar-component', __webpack_require__(/*! ./components/common/SideBarComponent */ "./resources/js/components/common/SideBarComponent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('footer-component', __webpack_require__(/*! ./components/common/FooterComponent */ "./resources/js/components/common/FooterComponent.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('contact-component', __webpack_require__(/*! ./components/ContactComponent */ "./resources/js/components/ContactComponent.vue")["default"]);
 
 /***/ }),
 

@@ -4,4 +4,6 @@ Vue.component('nav-bar-component',require('./components/common/NavBarComponent')
 Vue.component('side-bar-component',require('./components/common/SideBarComponent').default);
 Vue.component('footer-component',require('./components/common/FooterComponent').default);
 
+Vue.component('contact-component',require('./components/ContactComponent').default);
+
 
