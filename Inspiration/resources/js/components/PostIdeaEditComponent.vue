@@ -41,19 +41,22 @@
                             <input id="matching" v-model="category_id" @change="categoryValidation" type="radio" value="1" :checked="category.matching">
                             <label for="matching" class="c-radio" >マッチング</label>
 
-                            <input id="board" v-model="category_id" @change="categoryValidation" class ="" type="radio" value="2" :checked="category.board">
+                            <input id="board" v-model="category_id" @change="categoryValidation" class="" type="radio" value="2" :checked="category.board">
                             <label for="board" class="c-radio">掲示板</label>
 
-                            <input id="sns" v-model="category_id" @change="categoryValidation" class ="" type="radio" value="3" :checked="category.sns">
+                            <input id="sns" v-model="category_id" @change="categoryValidation" class="" type="radio" value="3" :checked="category.sns">
                             <label for="sns" class="c-radio">SNS</label>
 
-                            <input id="EC" v-model="category_id" @change="categoryValidation" class ="" type="radio" value="4"  :checked="category.ecSite">
+                            <input id="EC" v-model="category_id" @change="categoryValidation" class="" type="radio" value="4"  :checked="category.ecSite">
                             <label for="EC" class="c-radio">ECサイト</label>
 
-                            <input id="infoplaner" v-model="category_id" @change="categoryValidation" class ="" type="radio" value="5" :checked="category.infoPlaner">
+                            <input id="infoplaner" v-model="category_id" @change="categoryValidation" class="" type="radio" value="5" :checked="category.infoPlaner">
                             <label for="infoplaner" class="c-radio">情報発信</label>
 
-                            <input id="other" v-model="category_id" @change="categoryValidation"  class ="" type="radio" value="6" :checked="category.other">
+                            <input id="sharing" v-model="category_id" @change="categoryValidation" class="" type="radio" value="6" :checked="category.sharing">
+                            <label for="infoplaner" class="c-radio">シェアリング</label>
+
+                            <input id="other" v-model="category_id" @change="categoryValidation"  class="" type="radio" value="7" :checked="category.other">
                             <label for="other" class="c-radio">その他</label>
 
                         </div>
@@ -124,6 +127,7 @@
                     sns: "",
                     ecSite: "",
                     infoPlaner: "",
+                    sharing:"",
                     other: ""
                 },
                 EditResultMessage: false,
@@ -198,6 +202,9 @@
                     this.category.infoPlaner = true
                 }
                 if (this.category_id === 6) {
+                    this.category.sharing = true
+                }
+                if (this.category_id === 7) {
                     this.category.other = true
                 }
             },

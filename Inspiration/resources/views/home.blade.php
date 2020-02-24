@@ -24,7 +24,7 @@
 <body>
 
 
-<div id="app">
+<div>
 
 
 
@@ -40,16 +40,9 @@
                     Inspiration
                 </a>
 
-{{--                <div class ="nav">--}}
-{{--                    <ul class ="nav-container">--}}
-{{--                        <li class ="nav-item"><a href="#">Top</a></li>--}}
-{{--                        <li class ="nav-item"><a href="#">Register</a></li>--}}
-{{--                        <li class ="nav-item"><a href="#">Login</a></li>--}}
-{{--                    </ul>--}}
-{{--                </div>--}}
 
 
-                <div class="nav-trigger js-toggle-sp-menu">
+                <div class="nav-trigger js-home-sp-menu">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -60,14 +53,6 @@
                     <div class ="nav-heading">
                         <h2 class ="f-h2">Menu</h2>
                     </div>
-
-{{--                    <ul class ="nav-container">--}}
-{{--                        <li class ="nav-item"><a href="#">Top</a></li>--}}
-{{--                        <li class ="nav-item"><a href="#">Mypage</a></li>--}}
-{{--                        <li class ="nav-item"><a href="#">Post</a></li>--}}
-{{--                        <li class ="nav-item"><a href="#">Profile</a></li>--}}
-{{--                        <li class ="nav-item"><a href="#">Logout</a></li>--}}
-{{--                    </ul>--}}
 
                     <ul class ="nav-container">
                         <li class ="nav-item"><a href="#">Home</a></li>
@@ -228,22 +213,29 @@
                 </form>
 
             </div>
-        </div>
-
-
-    </div>
-
 </main>
 
+    @extends('layouts/spSidebar')
 
-@extends('layouts/footer')
+
+    @extends('layouts/footer')
+</div>
+
+
+
+
+
 
 <!-- script js-->
-<script src="js/script.js"></script>
+<script src="{{ asset('js/app.js') }}" defer></script>
 <!-- wow -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+{{--Vueのバリデーション用--}}
+<script src="https://cdn.jsdelivr.net/npm/vuelidate@0.7.4/dist/validators.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuelidate@0.7.4/dist/vuelidate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ja.js"></script>
 
-
-</div>
 </body>
+<script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{asset('js/layout.js')}}"></script>
 </html>

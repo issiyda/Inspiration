@@ -34,7 +34,7 @@
                 <div class="completed-container">
 
                 <div class="c-button completed-button column-button">
-                <router-link to="/mypage">Mypageへ</router-link>
+                <router-link to="/mypage">Mypage</router-link>
                 </div>
 
                 <div  class="c-button completed-button column-button">
