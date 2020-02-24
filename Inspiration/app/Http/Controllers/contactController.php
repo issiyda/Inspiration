@@ -30,6 +30,7 @@ class contactController extends Controller
 
         });
 
+
         return response()->json([
             'success' => 'contact created successfully!'
         ]);
