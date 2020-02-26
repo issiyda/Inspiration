@@ -1,0 +1,33 @@
+
+
+
+//====================================
+//新規登録に関するcss
+//====================================
+
+
+  .register{
+    background: $color_sub;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    &-input{
+    label{
+      display:block;
+      font-size: $font-size_xl;
+      margin:3%;
+
+        @include mq{
+           font-size:$font-size_l;
+        }
+    }
+    }
+
+
+
+
+
+
+
+}
