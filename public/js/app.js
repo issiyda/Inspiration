@@ -14195,7 +14195,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("詳細画面")]
+                  [_vm._v("詳細画面へ")]
                 )
               ],
               1
@@ -32493,7 +32493,6 @@ var map = {
 	"./assets/images/スクリーンショット 2020-02-08 15.44.35.png": "./storage/app/public/images/スクリーンショット 2020-02-08 15.44.35.png",
 	"./assets/images/スクリーンショット 2020-02-09 21.23.20.png": "./storage/app/public/images/スクリーンショット 2020-02-09 21.23.20.png",
 	"./assets/images/スクリーンショット 2020-02-15 9.35.36.png": "./storage/app/public/images/スクリーンショット 2020-02-15 9.35.36.png",
-	"./assets/images/スクリーンショット 2020-02-25 0.55.27.png": "./storage/app/public/images/スクリーンショット 2020-02-25 0.55.27.png",
 	"./assets/images/ブリ大根　サムネイル.jpg": "./storage/app/public/images/ブリ大根　サムネイル.jpg",
 	"./assets/images/名称未設定プロジェクト.jpg": "./storage/app/public/images/名称未設定プロジェクト.jpg",
 	"./assets/profileImages/account.jpeg": "./storage/app/public/profileImages/account.jpeg",
@@ -34988,17 +34987,6 @@ module.exports = "/images/スクリーンショット 2020-02-09 21.23.20.png?d2
 /***/ (function(module, exports) {
 
 module.exports = "/images/スクリーンショット 2020-02-15 9.35.36.png?e54247188ea33272103db5c08566baf6";
-
-/***/ }),
-
-/***/ "./storage/app/public/images/スクリーンショット 2020-02-25 0.55.27.png":
-/*!********************************************************************!*\
-  !*** ./storage/app/public/images/スクリーンショット 2020-02-25 0.55.27.png ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/スクリーンショット 2020-02-25 0.55.27.png?2b4f95d1d632bf6a5bdc7c4d56b0412e";
 
 /***/ }),
 
