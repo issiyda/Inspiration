@@ -2,13 +2,7 @@
 
 namespace Illuminate\Auth\Passwords;
 
-use Illuminate\Auth\Notifications\ResetPasswordCustom as ResetPasswordNotification;
-/**
- * Trait CanResetPassword
- * @package Illuminate\Auth\Passwords
- * 元のResetPasswordをResetPasswordNotificationという名前で使ってたやつ
- */
-//use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
+use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 
 trait CanResetPassword
 {
