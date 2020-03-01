@@ -25,6 +25,7 @@
 
 <div id="app">
 
+
     <!-- フラッシュメッセージ -->
     @if (session('flash_message'))
         <div class="flash_message">
@@ -78,6 +79,9 @@
 
     <div class="nav-height"></div>
 
+    @auth
+
+
     <div v-if="show" class="loading">
         <div class="loading-overlay">
             <div class ="loader-container">
@@ -90,6 +94,13 @@
 
 
     <router-view v-on:close-loading="closeMethod()" v-on:open-loading="openMethod()"></router-view>
+
+    @endauth
+
+    @guest
+
+        ログインし直してください。
+    @endguest
 
 
 <side-bar-component v-if="sidebarShow" @call-sidebar-switch="sidebarSwitch" v-bind:class="{'sidebar-active':isMenuActive}"></side-bar-component>
