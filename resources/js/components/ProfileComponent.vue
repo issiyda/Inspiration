@@ -45,7 +45,7 @@
                         <input v-else id="name" @blur="updateName($store.state.users.id,$store.state.users.name)" v-model="$store.state.users.name" class="c-input" type="text" placeholder="（例）だーいし">
                     </div>
 
-                    <div class="error" v-if="errorMessages.nameErrorMessage">{{errorMessages.nameErrorMessage}}</div>
+                    <div class="error" v-if="nameShow">{{errorMessages.nameErrorMessage}}</div>
 
 
                     <div class="profile-container-input">
@@ -54,7 +54,7 @@
                         <input v-else id="mail" @blur="updateEmail($store.state.users.id, $store.state.users.email)" v-model="$store.state.users.email" class="c-input" type="text" placeholder="（例）info@.com" value="{$store.state.users.email}">
                     </div>
 
-                    <div class="error" v-if="errorMessages.emailErrorMessage">{{errorMessages.emailErrorMessage}}</div>
+                    <div class="error" v-if="emailShow">{{errorMessages.emailErrorMessage}}</div>
 
 
 
@@ -67,7 +67,7 @@
                         <textarea v-else id="introduction" @blur="updateIntroduction($store.state.users.id, $store.state.users.introduction)" v-model="$store.state.users.introduction" class="c-input" type="text" placeholder="（例）お取引よろしくお願いいたします"></textarea>
                     </div>
 
-                    <div class="error" v-if="errorMessages.introductionErrorMessage">{{errorMessages.introductionErrorMessage}}</div>
+                    <div class="error" v-if="introductionShow">{{errorMessages.introductionErrorMessage}}</div>
 
                     <p><span :class="{'profile-container-validation':this.introductionChangeColor}">{{introductionLength}}</span>/300文字</p>
 
@@ -139,6 +139,11 @@
                     introductionErrorMessage: false,
                 },
 
+                //保存結果表示
+                nameShow:false,
+                emailShow:false,
+                introductionShow:false,
+
                 introductionChangeColor:false,
 
 
@@ -172,9 +177,34 @@
             this.$emit('close-loading');
         },
 
-        computed: {},
-
         methods: {
+
+            //規定の時間になったら消えるメッセージの関数
+            nameShowFlash(){
+                this.nameShow = true;
+                // setTimeoutで3000ms後にshowをfalseにする
+                setTimeout(() => {
+                        this.nameShow = false}
+                    ,3000
+                )
+            },
+            emailShowFlash(){
+                this.emailShow = true;
+                // setTimeoutで3000ms後にshowをfalseにする
+                setTimeout(() => {
+                        this.emailShow = false}
+                    ,3000
+                )
+            },
+            introductionShowFlash(){
+                this.introductionShow = true;
+                // setTimeoutで3000ms後にshowをfalseにする
+                setTimeout(() => {
+                        this.introductionShow = false}
+                    ,3000
+                )
+            },
+
 
             /**
              * DBから画像取得
@@ -257,6 +287,8 @@
                         }).catch((error) => {
                         console.log(error);
                     })
+                    this.nameShowFlash();
+                    this.$emit('close-loading');
                 }
             },
 
@@ -278,7 +310,6 @@
                     this.errorMessages.nameErrorMessage = false;
                     this.errorMessages.nameErrorMessage = "変更に成功しました"
                 }
-                this.$emit('open-loading');
             },
 
 
@@ -296,6 +327,7 @@
                         console.log(error);
                     });
                 }
+                this.emailShowFlash();
                 this.$emit('close-loading');
             },
 
@@ -315,8 +347,8 @@
                     this.validations.emailValidation = true;
                     this.errorMessages.emailErrorMessage = false;
                     this.errorMessages.emailErrorMessage = "変更に成功しました"
-
                 }
+
 
             },
 
@@ -336,6 +368,7 @@
                         console.log(error);
                     });
                 }
+                this.introductionShowFlash();
                 this.$emit('close-loading');
 
             },
@@ -358,15 +391,11 @@
                     this.errorMessages.introductionErrorMessage = false;
                     this.errorMessages.introductionErrorMessage = "変更に成功しました"
                     this.introductionChangeColor = false
-
-
                 }
+
             },
 
 
-            // beforeUpdate() {
-            //     this.profileImg this.$store.state.users.img;
-            // }
 
 
         },

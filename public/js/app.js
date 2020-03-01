@@ -4980,8 +4980,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -5087,7 +5085,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
+/* harmony default export */ __webpack_exports__["default"] = ({
   name: "ProfileComponent",
   data: function data() {
     return {
@@ -5117,6 +5115,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         emailErrorMessage: false,
         introductionErrorMessage: false
       },
+      //保存結果表示
+      nameShow: false,
+      emailShow: false,
+      introductionShow: false,
       introductionChangeColor: false
     };
   },
@@ -5135,8 +5137,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   beforeUpdate: function beforeUpdate() {
     this.$emit('close-loading');
   },
-  computed: {},
   methods: {
+    //規定の時間になったら消えるメッセージの関数
+    nameShowFlash: function nameShowFlash() {
+      var _this = this;
+
+      this.nameShow = true; // setTimeoutで3000ms後にshowをfalseにする
+
+      setTimeout(function () {
+        _this.nameShow = false;
+      }, 3000);
+    },
+    emailShowFlash: function emailShowFlash() {
+      var _this2 = this;
+
+      this.emailShow = true; // setTimeoutで3000ms後にshowをfalseにする
+
+      setTimeout(function () {
+        _this2.emailShow = false;
+      }, 3000);
+    },
+    introductionShowFlash: function introductionShowFlash() {
+      var _this3 = this;
+
+      this.introductionShow = true; // setTimeoutで3000ms後にshowをfalseにする
+
+      setTimeout(function () {
+        _this3.introductionShow = false;
+      }, 3000);
+    },
+
     /**
      * DBから画像取得
      */
@@ -5151,19 +5181,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log('onFileChangeFinished');
     },
     previewImage: function previewImage() {
-      var _this = this;
+      var _this4 = this;
 
       //画像をプレビュー表示するロジック
       var reader = new FileReader();
 
       reader.onload = function (e) {
-        _this.profileImg = e.target.result;
+        _this4.profileImg = e.target.result;
       };
 
       reader.readAsDataURL(this.fileInfo);
     },
     saveImage: function saveImage() {
-      var _this2 = this;
+      var _this5 = this;
 
       this.errorMessages.imgErrorMessage = "";
       this.$emit('open-loading');
@@ -5176,11 +5206,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         formData.append('user_id', this.$store.state.users.id);
         axios.post('/api/profileImgUpload', formData).then(function (response) {
           console.log(response);
-          _this2.user = response.data;
-          _this2.user = _this2.$store.dispatch('getUsers');
-          _this2.ImgChangeState = true;
+          _this5.user = response.data;
+          _this5.user = _this5.$store.dispatch('getUsers');
+          _this5.ImgChangeState = true;
 
-          _this2.$emit('close-loading');
+          _this5.$emit('close-loading');
         })["catch"](function (error) {
           console.log(error);
         });
@@ -5200,7 +5230,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.errorMessages.nameErrorMessage = "";
     },
     updateName: function updateName(id, name) {
-      var _this3 = this;
+      var _this6 = this;
 
       this.$emit('open-loading');
       this.nameValidation(); //名前のバリデーションが通ってれば保存処理
@@ -5210,11 +5240,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           id: id,
           name: name
         }).then(function (response) {
-          _this3.isNameEdit = false;
+          _this6.isNameEdit = false;
           console.log(response);
         })["catch"](function (error) {
           console.log(error);
         });
+        this.nameShowFlash();
+        this.$emit('close-loading');
       }
     },
     //名前のバリデーション
@@ -5231,11 +5263,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.errorMessages.nameErrorMessage = false;
         this.errorMessages.nameErrorMessage = "変更に成功しました";
       }
-
-      this.$emit('open-loading');
     },
     updateEmail: function updateEmail(id, email) {
-      var _this4 = this;
+      var _this7 = this;
 
       this.$emit('open-loading');
       this.emailValidation();
@@ -5245,13 +5275,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           id: id,
           email: email
         }).then(function (response) {
-          _this4.isEmailEdit = false;
+          _this7.isEmailEdit = false;
           console.log(response);
         })["catch"](function (error) {
           console.log(error);
         });
       }
 
+      this.emailShowFlash();
       this.$emit('close-loading');
     },
     emailValidation: function emailValidation() {
@@ -5271,7 +5302,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     updateIntroduction: function updateIntroduction(id, introduction) {
-      var _this5 = this;
+      var _this8 = this;
 
       this.$emit('open-loading');
       this.introductionValidation();
@@ -5281,13 +5312,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           id: id,
           introduction: introduction
         }).then(function (response) {
-          _this5.isIntroductionEdit = false;
+          _this8.isIntroductionEdit = false;
           console.log(response);
         })["catch"](function (error) {
           console.log(error);
         });
       }
 
+      this.introductionShowFlash();
       this.$emit('close-loading');
     },
     //自己紹介のバリデーション
@@ -5306,26 +5338,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.errorMessages.introductionErrorMessage = "変更に成功しました";
         this.introductionChangeColor = false;
       }
-    } // beforeUpdate() {
-    //     this.profileImg this.$store.state.users.img;
-    // }
-
-  }
-}, "computed", {
-  titleLength: function titleLength() {
-    return this.title.length;
+    }
   },
-  overflowLength: function overflowLength() {
-    return this.overflow.length;
-  },
-  introductionLength: function introductionLength() {
-    if (this.$store.state.users.introduction == null) {
-      return 0;
-    } else if (this.$store.state.users.introduction) {
-      return this.$store.state.users.introduction.length;
+  computed: {
+    titleLength: function titleLength() {
+      return this.title.length;
+    },
+    overflowLength: function overflowLength() {
+      return this.overflow.length;
+    },
+    introductionLength: function introductionLength() {
+      if (this.$store.state.users.introduction == null) {
+        return 0;
+      } else if (this.$store.state.users.introduction) {
+        return this.$store.state.users.introduction.length;
+      }
     }
   }
-}));
+});
 
 /***/ }),
 
@@ -14021,7 +14051,7 @@ var render = function() {
                   })
             ]),
             _vm._v(" "),
-            _vm.errorMessages.nameErrorMessage
+            _vm.nameShow
               ? _c("div", { staticClass: "error" }, [
                   _vm._v(_vm._s(_vm.errorMessages.nameErrorMessage))
                 ])
@@ -14083,7 +14113,7 @@ var render = function() {
                   })
             ]),
             _vm._v(" "),
-            _vm.errorMessages.emailErrorMessage
+            _vm.emailShow
               ? _c("div", { staticClass: "error" }, [
                   _vm._v(_vm._s(_vm.errorMessages.emailErrorMessage))
                 ])
@@ -14149,7 +14179,7 @@ var render = function() {
                   })
             ]),
             _vm._v(" "),
-            _vm.errorMessages.introductionErrorMessage
+            _vm.introductionShow
               ? _c("div", { staticClass: "error" }, [
                   _vm._v(_vm._s(_vm.errorMessages.introductionErrorMessage))
                 ])
