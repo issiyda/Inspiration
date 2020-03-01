@@ -90,22 +90,37 @@
             </div>
         </div>
     </div>
-{{--    <loading-component></loading-component>--}}
 
 
     <router-view v-on:close-loading="closeMethod()" v-on:open-loading="openMethod()"></router-view>
 
+        <side-bar-component v-if="sidebarShow" @call-sidebar-switch="sidebarSwitch" v-bind:class="{'sidebar-active':isMenuActive}"></side-bar-component>
+
+        <footer-component></footer-component>
+
     @endauth
 
     @guest
+        <div class="guest">
+            ログインしてください。
+            <form method='get' class="guest-form">
+                <button class="c-button guest-button">
+                    <a href="/home">Home</a>
+                </button>
+                <button class="c-button guest-button">
+                    <a href="/login">Login</a>
+                </button>
+            </form>
+        </div>
 
-        ログインし直してください。
+        <side-bar-component v-if="sidebarShow" @call-sidebar-switch="sidebarSwitch" v-bind:class="{'sidebar-active':isMenuActive}"></side-bar-component>
+
+        <guest-footer-component></guest-footer-component>
+
     @endguest
 
 
-<side-bar-component v-if="sidebarShow" @call-sidebar-switch="sidebarSwitch" v-bind:class="{'sidebar-active':isMenuActive}"></side-bar-component>
 
-<footer-component></footer-component>
 
 </div>
 

@@ -2893,3 +2893,30 @@ confirm とdetailの共通部分　
   font-weight: bold;
 }
 
+.guest {
+  text-align: center;
+  margin: 5% auto;
+  height: 300px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #A16EFF;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+  justify-content: space-around;
+}
+
+.guest-form {
+  display: -webkit-box;
+  display: flex;
+  margin: 0 auto;
+  width: 70%;
+}
+
+.guest-button {
+  margin: 5% auto;
+  width: 20%;
+}
+
