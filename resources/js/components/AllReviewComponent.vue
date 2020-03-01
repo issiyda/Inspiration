@@ -20,7 +20,7 @@
                         }}" class ="ic-a" href="#">
                             <h4 class ="f-h4">{{reviewedIdea.title}}</h4>
                             <div class="ic-img">
-                                <img :src="require(`../assets${reviewedIdea.img}`)" alt="reviewIdeaImg" class="ic-img-item">
+                                <img :src="`./img${reviewedIdea.img}`" alt="reviewIdeaImg" class="ic-img-item">
                             </div>
                             <div class="ic-review">
                                 <span class ="ic-span">評価</span>
