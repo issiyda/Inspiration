@@ -16,7 +16,6 @@ $(document).ready(function(){
 
 
         $(window).scroll(function () {
-            console.log('aaa');
 
 
             $('.js-rise-target').each(function () {
