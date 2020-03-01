@@ -837,8 +837,8 @@ a {
   font-weight: bolder;
   margin: 5% 0 5% 60%;
   padding: 2%;
-  -webkit-transition: 0.6s;
-  transition: 0.6s;
+  -webkit-transition: 1s;
+  transition: 1s;
   text-align: center;
   width: 30%;
 }
@@ -853,17 +853,18 @@ a {
   }
 }
 
-.c-button:hover,
-.allIdea-button-search:hover,
-.c-mini-button:hover,
-.c-radio:hover,
-.c-button-allShow:hover {
+.c-button:active,
+.allIdea-button-search:active,
+.c-mini-button:active,
+.c-radio:active,
+.c-button-allShow:active {
   box-shadow: none;
+  border: none;
   color: #A16EFF;
   opacity: 0.7;
   outline: none;
-  -webkit-transition: 0.6s;
-  transition: 0.6s;
+  -webkit-transition: 0.9s;
+  transition: 0.9s;
 }
 
 .c-button:focus,
