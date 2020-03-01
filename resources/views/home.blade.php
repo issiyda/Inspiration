@@ -173,13 +173,13 @@
                     <div class="home-merit-item">
                         <img src="{{asset(('/img/influencer.jpg'))}}" alt="">
                         <h3>影響力を持てる</h3>
-                        <p>資本主義が成熟し信用こそが本当の価値と言われる時代に発信力鍛えられます。</p>
+                        <p>資本主義が成熟し信用こそが本当の価値と言われる時代。アイデア発信で信用力を鍛えることができます。</p>
                     </div>
 
                     <div class="home-merit-item">
                         <img src="{{asset(('/img/partner.jpg'))}}" alt="">
                         <h3>仲間が見つかる</h3>
-                        <p>アイデアを投稿していく中で、ともに成長しあえる仲間を見つけることができます。</p>
+                        <p>オリジナルのアイデアを投稿していく中で、ともに成長しあえる仲間と巡り合うことができます。</p>
                     </div>
 
                     <div class="home-merit-item">
@@ -192,13 +192,13 @@
                     <div class="home-merit-item">
                         <img src="{{asset(('/img/motivation.jpg'))}}" alt="">
                         <h3>モチベーション高められる</h3>
-                        <p>自分のアイデアが誰かに認められることでより一層モチベーションが上がります。</p>
+                        <p>自分のアイデアが誰かに認められる・認知されることでより一層モチベーションが上がります。</p>
                     </div>
 
                     <div class="home-merit-item">
                         <img src="{{asset(('/img/logical.jpg'))}}" alt="">
                         <h3>論理的思考力Up</h3>
-                        <p>どういう根拠でそのアイデアが上手くいくか論拠の提示で思考力上がります。</p>
+                        <p>どういう根拠でそのアイデアが上手くいくかを考え、論拠を提示することで思考力が上がります。</p>
                     </div>
                 </div>
             </div>
