@@ -20,7 +20,7 @@
                         }}" class ="ic-a" href="#">
                             <h4 class ="f-h4">{{favoriteIdea.title}}</h4>
                             <div class="ic-img">
-                                <img :src="require(`../assets${favoriteIdea.img}`)" alt="favoriteIdeaimg" class="ic-img-item">
+                                <img :src="`./img${favoriteIdea.img}`" alt="favoriteIdeaimg" class="ic-img-item">
                             </div>
                             <div class="ic-review">
                                 <span class ="ic-span">評価</span>

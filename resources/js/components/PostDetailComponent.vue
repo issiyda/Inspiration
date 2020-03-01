@@ -27,7 +27,7 @@
                     <div class="postDetail-container-img">
                         <div class="postDetail-container-img-right">
                             <label>
-                                <img :src="require(`../assets${detail.img}`)" alt="">
+                                <img :src="`./img${detail.img}`" alt="detailIdeaImg">
                                 <input id="img" class ="c-input postDetail-container-img-none" type="file" />
                                 <!-- hoverしたら画像をアップロードの文字が浮き上がって画像が薄暗く -->
                             </label>
@@ -130,8 +130,8 @@
                                         userId:review.user_id
                     }}">
                         <div class="review-img">
-                            <img v-if="review.img !== null" :src="require(`../assets${review.img}`)" alt="reviewUserImg">
-                            <img v-else :src="require(`../assets/profileImages/account.jpeg`)" alt="reviewUserImg">
+                            <img v-if="review.img !== null" :src="`./img${review.img}`" alt="reviewUserImg">
+                            <img v-else :src="`./img/images/account.jpeg`" alt="reviewUserImg">
                             <div id="userName" class="review-img-name">
                                 {{review.name}}
                                 <p>さん</p>

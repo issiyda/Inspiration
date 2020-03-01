@@ -19,7 +19,7 @@
 
                         <h4 class ="f-h4">{{buyingIdea.title}}</h4>
                         <div class="ic-img">
-                            <img :src="require(`../assets${buyingIdea.img}`)" alt="idea" class="ic-img-item">
+                            <img :src="`./img${buyingIdea.img}`" alt="idea" class="ic-img-item">
                         </div>
                         <div class="ic-review" v-bind:class="{'ic-review-reviewed':reviewed(buyingIdea.averageReview)}">
                             <span class="ic-span">評価</span>
@@ -55,7 +55,7 @@
                                 }}" class ="ic-a" href="#">
                             <h4 class ="f-h4">{{favIdea.title}}</h4>
                             <div class="ic-img">
-                                <img :src="require(`../assets${favIdea.img}`)" alt="idea" class="ic-img-item">
+                                <img :src="`./img${favIdea.img}`" alt="idea" class="ic-img-item">
                             </div>
                             <div class="ic-review" v-bind:class="{'ic-review-reviewed':reviewed(favIdea.averageReview)}">
                                 <span class="ic-span">評価</span>
@@ -86,7 +86,7 @@
                                 }}" class ="ic-a" href="#">
                                 <h4 class ="f-h4">{{myIdea.title}}</h4>
                                 <div class="ic-img">
-                                    <img :src="require(`../assets${myIdea.img}`)" alt="idea" class="ic-img-item">
+                                    <img :src="`./img${myIdea.img}`" alt="idea" class="ic-img-item">
                                 </div>
                                 <div class="ic-review" v-bind:class="{'ic-review-reviewed':reviewed(myIdea.averageReview)}">
                                     <span class ="ic-span">評価</span>
@@ -118,7 +118,7 @@
                                 }}" class ="ic-a">
                                     <h4 class="f-h4">{{review.title}}</h4>
                                     <div class="ic-img">
-                                        <img :src="require(`../assets${review.img}`)" alt="idea" class="ic-img-item">
+                                        <img :src="`./img${review.img}`" alt="idea" class="ic-img-item">
                                     </div>
                                     <div class="ic-review"  v-bind:class="{'ic-review-reviewed':reviewed(review.averageReview)}">
                                         <span class="ic-span">評価</span>

@@ -144,7 +144,7 @@
 
                             <h4 class ="f-h4">{{allIdea.title}}</h4>
                             <div class="ic-img">
-                                <img :src="require(`../assets${allIdea.img}`)" alt="idea" class="ic-img-item">
+                                <img :src="`./img${allIdea.img}`" alt="idea" class="ic-img-item">
                             </div>
 
                             <label>カテゴリ</label>

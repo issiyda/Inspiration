@@ -6,7 +6,7 @@
 
 
             <h2 class="f-h2">プロフィール編集</h2>
-            <form class="profile-container">
+            <form class="profile-container" @submit.prevent>
 
                 <div class="profile-container-input">
                     <div class="profile-container-img">
@@ -181,7 +181,7 @@
              */
             getImg() {
                 if (this.user.img !== null) {
-                    this.profileImg = require(`../assets${this.user.img}`)
+                    this.profileImg = `./img${this.user.img}`
                 }
             },
 
