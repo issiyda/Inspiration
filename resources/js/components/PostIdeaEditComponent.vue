@@ -19,7 +19,7 @@
                         <div class="profile-container-img-right">
                             <label>
                                 <input id="img" @change="onFileChange" class ="c-input profile-container-img-none" type="file" />
-                                <img :src="require(`../assets${img}`)" v-show="!newImage" alt="">
+                                <img :src="`./img${img}`" v-show="!newImage" alt="editImage">
                                 <img :src="newImage" v-show="newImage" alt="ideaImg">
                             </label>
                         </div>

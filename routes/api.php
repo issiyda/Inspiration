@@ -54,13 +54,13 @@ Route::get('/review','InspirationController@review');
 /**
  * アイデア投稿保存
  */
-Route::post('/saveIdea','postIdeaController@saveIdea');
+Route::post('/saveIdea','PostIdeaController@saveIdea');
 
 
 /**
  * アイデア編集機能ルーティング
  */
-Route::post('/ideaEdit','postIdeaController@editIdea');
+Route::post('/ideaEdit','PostIdeaController@editIdea');
 
 
 

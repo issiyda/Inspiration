@@ -11,12 +11,12 @@
                 <div class="profile-container-input">
                     <div class="profile-container-img">
                         <div class="profile-container-img-left">
-                            <label class ="c-label" for="img">プロフィール画像</label>
+                            <label class ="c-label">プロフィール画像</label>
                         </div>
                         <div v-cloak class="profile-container-img-right">
                             <label>
-                                <img v-if="profileImg" :src="profileImg" alt="profileImg">
-                                <img v-cloak v-else :src="require(`../assets/profileImages/account.jpeg`)" alt="profileImg">
+                                <img v-if="profileImg !== './imgnull'" :src="profileImg" alt="profileImg">
+                                <img v-cloak v-else :src="`./img/Images/account.jpeg`" alt="profileImgNull">
                             </label>
                         </div>
                     </div>
@@ -51,7 +51,8 @@
         data: function () {
             return {
 
-                profile:{}
+                profile:{},
+                profileImg:null,
             }
 
 
@@ -100,7 +101,7 @@
 
             profile:function(){
 
-                this.profileImg = require(`../assets${this.profile.img}`)
+                this.profileImg = `./img${this.profile.img}`
             }
         },
 
