@@ -330,7 +330,9 @@
         }
     }
 
-    //Footer
+//=====================
+//Footer
+// =====================
     &-footer{
         background:$color_base;
         color:#fff;
@@ -363,10 +365,11 @@
 
         &-container{
             display:flex;
+            flex-direction:row;
             height:30%;
             justify-content: space-around;
-            width:100%;
-            flex-direction:row;
+            margin:0 auto;
+            width:90%;
 
             @include mq{
                 flex-direction: column;
@@ -374,14 +377,27 @@
             }
 
             &-menu{
+                align-items:center;
                 display: flex;
                 flex-direction: row;
+                height:100%;
                 justify-content:space-around;
                 margin-bottom: 5%;
                 width:50%;
 
                 @include mq{
-                    width:100%;
+                    width:90%;
+                    margin:5% auto;
+                }
+
+                &-h3{
+                    font-size:$font-size_xxl;
+
+                    @include mq{
+                        align-items: center;
+                        display: flex;
+                        font-size: $font-size_xl;
+                    }
                 }
 
 
@@ -446,6 +462,7 @@
             @include mq{
                 justify-content: center;
                 margin:0 1%;
+                width: auto
             }
 
             &-items{
@@ -475,7 +492,7 @@
             }
 
             p{
-                font-size: $font-size_l;
+                font-size: $font-size_xl;
                 margin-left: $space_l;
 
                 @include mq{
