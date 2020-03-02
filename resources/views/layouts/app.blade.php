@@ -54,7 +54,7 @@
             </a>
 
 
-            <div class="nav-trigger js-toggle-sp-menu">
+            <div class="nav-trigger js-home-sp-menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -97,13 +97,12 @@
             @yield('content')
         </main>
 
+        @extends('layouts/spSidebar')
         @extends('layouts/footer')
     </div>
 
 
 </body>
-
-
-
-
+<script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{asset('js/layout.js')}}"></script>
 </html>

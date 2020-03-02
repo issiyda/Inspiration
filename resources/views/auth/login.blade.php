@@ -71,7 +71,6 @@
 {{--    </div>--}}
 {{--</div>--}}
 
-<main>
 
     <div class="c-container">
 
@@ -135,5 +134,4 @@
         </form>
     </div>
     </div>
-</main>
 @endsection
