@@ -2492,7 +2492,17 @@ confirm とdetailの共通部分　
 
 @media screen and (max-width: 414px) {
   .home-footer-container-menu {
-    width: 100%;
+    width: 90%;
+    margin: 5% auto;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .home-footer-container-menu-h3 {
+    -webkit-box-align: center;
+            align-items: center;
+    display: -webkit-box;
+    display: flex;
   }
 }
 
@@ -2569,6 +2579,7 @@ confirm とdetailの共通部分　
     -webkit-box-pack: center;
             justify-content: center;
     margin: 0 1%;
+    width: auto;
   }
 }
 

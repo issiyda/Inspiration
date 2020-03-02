@@ -1,4 +1,3 @@
-@section('')
 <footer>
 
     <div class="home-footer">
@@ -6,24 +5,18 @@
         <div class="home-footer-container">
 
             <div class="home-footer-container-menu">
-            <div class="home-footer-content">
-                <h3>Inspiration</h3>
-                <p><a href="">Top</a></p>
-                <p><a href="">Mypage</a></p>
-                <p><a href="">Idea一覧</a></p>
-            </div>
-            <div class="home-footer-content">
-                <h3>Inspiration</h3>
-                <p><a href="">Top</a></p>
-                <p><a href="">Mypage</a></p>
-                <p><a href="">Idea一覧</a></p>
-            </div>
-            <div class="home-footer-content">
-                <h3>Inspiration</h3>
-                <p><a href="">Top</a></p>
-                <p><a href="">Mypage</a></p>
-                <p><a href="">Idea一覧</a></p>
-            </div>
+                <h3 class="home-footer-container-menu-h3">Inspiration</h3>
+                <div class="home-footer-content">
+                        @auth
+                            <p><a href="/">Home</a></p>
+                            <p><a href="/mypage">Mypage</a></p>
+                        @endauth
+                        @guest
+                            <p><a href="">Home</a></p>
+                            <p><a href="/register">Register</a></p>
+                            <p><a href="/login">Login</a></p>
+                        @endguest
+                </div>
             </div>
             <div class="home-footer-container-contact">
                 <i class="fas fa-envelope fa-2x sidebar-item-logo"></i>
@@ -36,12 +29,12 @@
                 </div>
             </div>
 
-    </div>
+        </div>
 
         <div class="home-footer-bottom">
             <div class="home-footer-copyRight">
                 Copyright © 2019 Inspiration. All rights reserved.
             </div>
         </div>
-
+    </div>
 </footer>

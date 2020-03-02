@@ -330,7 +330,9 @@
         }
     }
 
-    //Footer
+//=====================
+//Footer
+// =====================
     &-footer{
         background:$color_base;
         color:#fff;
@@ -381,7 +383,15 @@
                 width:50%;
 
                 @include mq{
-                    width:100%;
+                    width:90%;
+                    margin:5% auto;
+                }
+
+                &-h3{
+                    @include mq{
+                        align-items: center;
+                        display: flex;
+                    }
                 }
 
 
@@ -446,6 +456,7 @@
             @include mq{
                 justify-content: center;
                 margin:0 1%;
+                width: auto
             }
 
             &-items{
