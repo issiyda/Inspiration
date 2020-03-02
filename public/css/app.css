@@ -635,8 +635,9 @@ a {
   -webkit-box-direction: normal;
           flex-direction: column;
   justify-content: space-around;
+  margin: 0 auto;
   padding: 0 5%;
-  width: 90%;
+  width: 80%;
 }
 
 .sidebar-container a {
@@ -704,6 +705,13 @@ a {
   font-weight: bolder;
   text-align: center;
   width: 60%;
+}
+
+.flash_message {
+  color: #FFBEDA;
+  font-weight: bolder;
+  text-align: center;
+  margin: 10% auto 5%;
 }
 
 .c-heading {
