@@ -758,6 +758,13 @@ a {
   width: 60%;
 }
 
+.flash_message {
+  color: #FFBEDA;
+  font-weight: bolder;
+  text-align: center;
+  margin: 10% auto 5%;
+}
+
 .c-heading {
   margin: 5% auto;
 }
