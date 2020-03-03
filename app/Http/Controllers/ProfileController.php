@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    //
-
-
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * Profile詳細情報取得
+     */
     public function showProfileDetail(Request $request)
     {
 

@@ -9,7 +9,11 @@ use Illuminate\Http\Request;
 class DetailController extends Controller
 {
 
-
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * アイデア詳細情報取得
+     */
     public function detail($id)
     {
         $idea = Idea::where('id', $id)->get();
@@ -20,6 +24,11 @@ class DetailController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * 購入判定
+     */
     public function buyingJudge(Request $request)
     {
         $userId = $request->input('userId');
@@ -41,8 +50,5 @@ class DetailController extends Controller
                 'judge' => false
             ]);
         }
-
-
-
     }
 }

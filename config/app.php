@@ -228,4 +228,12 @@ return [
 
     ],
 
+    /**
+     * STRIPE-KEY
+     * 決済処理のための鍵
+     */
+        'stripe-secret' => env('STRIPE_SECRET'),
+
+
+
 ];

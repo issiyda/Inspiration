@@ -1,7 +1,7 @@
 //====================================
 //ログインしていない時のための表示CSS
 //====================================
-.guest{
+.guest {
     text-align: center;
     margin: 5% auto;
     height: 300px;
@@ -12,23 +12,23 @@
     flex-direction: column;
     justify-content: space-around;
 
-    @include mq{
-        height:250px;
+    @include mq {
+        height: 250px;
     }
 
-    &-form{
+    &-form {
         display: flex;
         margin: 0 auto;
         width: 70%;
     }
 
-    &-button{
-        margin:5% auto;
-        width:20%;
+    &-button {
+        margin: 5% auto;
+        width: 20%;
 
         @include mq {
-            padding:7%;
-            width:30%;
+            padding: 7%;
+            width: 30%;
         }
     }
 }

@@ -1,18 +1,21 @@
+//====================================
+//投稿完了画面のCSS
+//====================================
 .completed {
 
-    &-paragraph{
-        margin:3%;
+    &-paragraph {
+        margin: 3%;
     }
 
-    &-header{
-        color:$color_base;
-        font-size:$font-size_xl;
+    &-header {
+        color: $color_base;
+        font-size: $font-size_xl;
         margin: 10% auto;
     }
 
 
     &-share {
-        border:none;
+        border: none;
         box-shadow: 2px 2px 4px gray;
         color: #FFF;
         border-radius: 7px;
@@ -23,12 +26,12 @@
         font-size: $font-size_xl;
         line-height: 50px;
         background: #1da1f3;
-        margin:10% auto;
+        margin: 10% auto;
         overflow: hidden;
-        text-decoration:none;
+        text-decoration: none;
 
-        @include mq{
-            width:75%;
+        @include mq {
+            width: 75%;
         }
 
         &-twitter {
@@ -36,29 +39,29 @@
             font-size: 30px;
         }
 
-        span{
-            display:inline-block;
+        span {
+            display: inline-block;
             transition: .5s;
         }
 
-        &:hover span{
+        &:hover span {
             -webkit-transform: rotateX(360deg);
             transform: rotateX(360deg);
         }
 
     }
 
-    &-container{
-        display:flex;
+    &-container {
+        display: flex;
     }
 
     &-button {
         margin: 5% auto;
-        padding:5%;
-        position:relative;
+        padding: 5%;
+        position: relative;
 
-        @include mq{
-            padding:8%;
+        @include mq {
+            padding: 8%;
         }
 
         a {
@@ -73,11 +76,6 @@
         }
 
     }
-
-
-
-
-
 
 
 }
