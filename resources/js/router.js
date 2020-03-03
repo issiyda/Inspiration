@@ -1,6 +1,5 @@
 import Router from 'vue-router'
 
-
 // コンポーネントをインポート
 import notfound from './components/NotFoundComponent';
 import mypage from './components/MypageComponent';
@@ -19,12 +18,8 @@ import allIdea from './components/AllIdeaComponent';
 import postComplete from './components/PostCompletedComponent';
 import withdraw from "./components/withdrawComponent";
 import passwordEdit from "./components/PasswordEdit";
-import contact from "./components/ContactComponent"
-
-
-// bladeで行う
-// import withdraw from './components/withdrawComponent';
-// import passReminder from './components/passReminderComponent';
+import contact from "./components/ContactComponent";
+import postIdeaDelete from "./components/PostIdeaDeleteComponent"
 
 export default new Router({
     // モードの設定
@@ -160,5 +155,11 @@ export default new Router({
             name: 'contact',
             component: contact
         },
+
+        {
+            path: '/postIdeaDelete',
+            name: 'postIdeaDelete',
+            component: postIdeaDelete
+        }
     ]
 });

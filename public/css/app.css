@@ -880,7 +880,11 @@ a {
 }
 
 .c-button,
+.edit-button,
+.edit-button-delete,
 .allIdea-button-search,
+.profile-button,
+.profile-button-img,
 .c-mini-button,
 .c-radio,
 .c-button-allShow {
@@ -905,7 +909,11 @@ a {
 
 @media screen and (max-width: 414px) {
   .c-button,
+  .edit-button,
+  .edit-button-delete,
   .allIdea-button-search,
+  .profile-button,
+  .profile-button-img,
   .c-mini-button,
   .c-radio,
   .c-button-allShow {
@@ -914,7 +922,11 @@ a {
 }
 
 .c-button a,
+.edit-button a,
+.edit-button-delete a,
 .allIdea-button-search a,
+.profile-button a,
+.profile-button-img a,
 .c-mini-button a,
 .c-radio a,
 .c-button-allShow a {
@@ -932,7 +944,11 @@ a {
 }
 
 .c-button:active,
+.edit-button:active,
+.edit-button-delete:active,
 .allIdea-button-search:active,
+.profile-button:active,
+.profile-button-img:active,
 .c-mini-button:active,
 .c-radio:active,
 .c-button-allShow:active {
@@ -946,7 +962,11 @@ a {
 }
 
 .c-button:focus,
+.edit-button:focus,
+.edit-button-delete:focus,
 .allIdea-button-search:focus,
+.profile-button:focus,
+.profile-button-img:focus,
 .c-mini-button:focus,
 .c-radio:focus,
 .c-button-allShow:focus {
@@ -1002,7 +1022,8 @@ a {
 .c-mini-button a,
 .c-radio a {
   box-sizing: border-box;
-  display: block;
+  display: -webkit-box;
+  display: flex;
   width: 100%;
 }
 
@@ -1088,7 +1109,11 @@ input[type=radio]:checked + .c-radio {
   }
 
   .c-form .c-button,
+  .c-form .edit-button,
+  .c-form .edit-button-delete,
   .c-form .allIdea-button-search,
+  .c-form .profile-button,
+  .c-form .profile-button-img,
   .c-form .c-button-allShow,
   .c-form .c-mini-button,
   .c-form .c-radio {
@@ -1601,9 +1626,15 @@ input[type=radio]:checked + .c-radio {
   margin: 0 auto;
 }
 
-/**
-confirm とdetailの共通部分　
- */
+.profile-button,
+.profile-button-img {
+  padding: 5%;
+  margin: 0 auto;
+}
+
+.profile-button-img {
+  padding: 3%;
+}
 
 .confirm {
   margin: 8% auto 12%;
@@ -3010,5 +3041,126 @@ confirm とdetailの共通部分　
     padding: 7%;
     width: 30%;
   }
+}
+
+.edit {
+  margin: 0 auto 12%;
+  width: 50%;
+}
+
+@media screen and (max-width: 414px) {
+  .edit {
+    width: 80%;
+  }
+}
+
+.edit-container {
+  background: #F5F5F5;
+  border-radius: 1%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+  text-align: center;
+}
+
+.edit-container-input {
+  margin-bottom: 10%;
+}
+
+.edit-container-input-label {
+  display: block;
+  font-size: 24px;
+  margin: 3%;
+}
+
+.edit-container-textarea {
+  height: 100%;
+}
+
+.edit-container-img {
+  display: -webkit-box;
+  display: flex;
+  margin: 10% auto;
+  width: 100%;
+}
+
+@media screen and (max-width: 414px) {
+  .edit-container-img {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+            flex-direction: column;
+    justify-content: space-around;
+  }
+}
+
+.edit-container-img-left {
+  -webkit-box-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  width: 40%;
+  margin: 5%;
+}
+
+@media screen and (max-width: 414px) {
+  .edit-container-img-left {
+    margin: 0 auto;
+    width: 60%;
+    word-wrap: break-word;
+  }
+}
+
+.edit-container-img-right {
+  width: 60%;
+  margin: 5%;
+}
+
+@media screen and (max-width: 414px) {
+  .edit-container-img-right {
+    margin: 5% auto;
+  }
+}
+
+.edit-container-img-right img {
+  width: 100%;
+}
+
+.edit-container-img-none {
+  display: none;
+}
+
+.edit-container-img-message {
+  font-weight: bolder;
+  color: #FFBEDA;
+  font-size: 24px;
+  margin-bottom: 15%;
+}
+
+.edit-container-validation {
+  color: #FF00FF;
+  font-weight: bolder;
+}
+
+.edit-withdraw {
+  margin: 0 auto;
+}
+
+.edit-button,
+.edit-button-delete {
+  margin: 0 auto;
+}
+
+.edit-button-delete {
+  padding: 4%;
+}
+
+.edit-label {
+  margin: 10% auto;
 }
 

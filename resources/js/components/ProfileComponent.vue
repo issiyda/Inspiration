@@ -31,7 +31,7 @@
                         {{profImgChangeMessage}}
                     </div>
 
-                    <div id="withdraw" @click="saveImage()" class="c-button profile-withdraw">
+                    <div @click="saveImage()" class="profile-withdraw profile-button-img">
                         プロフ画像に設定
                     </div>
 
@@ -74,7 +74,7 @@
 
                     <div class="profile-container-input">
                         <label class="c-label" for="profileDetail">プロフィール詳細</label>
-                        <div id="profileDetail" class="c-button profile-withdraw">
+                        <div id="profileDetail" class="profile-button">
                             <router-link :to="{name:'profileDetail',params:{
                             userId:this.$store.state.users.id
                             }}">詳細画面</router-link>
@@ -83,14 +83,14 @@
 
                     <div class="profile-container-input">
                         <label class="c-label" for="pass">パスワード変更</label>
-                        <div id="pass" class="c-button profile-withdraw">
+                        <div id="pass" class="profile-button">
                             <router-link to="/passEdit">編集する</router-link>
                         </div>
                     </div>
 
                     <div class="profile-container-input">
                         <label class="c-label" for="withdraw">退会</label>
-                        <div id="withdraw" class="c-button profile-withdraw">
+                        <div id="withdraw" class="profile-button">
                             <router-link to="/withdraw">退会する</router-link>
                         </div>
                     </div>

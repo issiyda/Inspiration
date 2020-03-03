@@ -1,8 +1,8 @@
 //====================================
-//Profile部分
+//PostIdeaEdit部分
 //====================================
 
-.profile {
+.edit {
 
     margin: 0 auto 12%;
     width: 50%;
@@ -98,12 +98,15 @@
 
     &-button {
         @extend .c-button;
-        padding: 5%;
         margin:0 auto;
 
-        &-img{
-            @extend .profile-button;
-            padding:3%;
+        &-delete{
+            @extend .edit-button;
+            padding:4%;
         }
     }
+
+    &-label{
+        margin:10% auto;
+}
 }
