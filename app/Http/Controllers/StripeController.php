@@ -15,6 +15,11 @@ class StripeController extends Controller
 {
     //
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View|string
+     *アイデア購入後/メール送信＋mypageに飛ばす
+     */
     public function charge(Request $request)
     {
 
@@ -22,7 +27,7 @@ class StripeController extends Controller
 
             $amount = $request->input('price');
 
-            Stripe::setApiKey(env('STRIPE_SECRET'));
+            Stripe::setApiKey(config('app.stripe-secret'));
 
             $customer = Customer::create(array(
                 'email' => $request->stripeEmail,
@@ -78,7 +83,7 @@ class StripeController extends Controller
                 'price' => $amount
             ]);
 
-            return redirect('/mypage')->with('flash_message', '投稿が完了しました');
+            return redirect('/mypage')->with('flash_message', '購入が完了しました');
 
 
             return view('layouts.index');
