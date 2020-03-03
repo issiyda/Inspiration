@@ -8,8 +8,11 @@ use Illuminate\Http\Request;
 
 class   IdeaSearchController extends Controller
 {
-    //
-
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     *カテゴリ検索
+     */
     public function categorySearch(Request $request)
     {
         $category_id = $request->input('categoryId');
@@ -23,6 +26,11 @@ class   IdeaSearchController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * 入力値より高い価格検索
+     */
     public function priceSearchHigher(Request $request)
     {
 
@@ -33,8 +41,13 @@ class   IdeaSearchController extends Controller
         return response()->json([
             'higherIdea' =>$priceIdea
         ]);
-
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * 入力値以下の価格検索
+     */
     public function priceSearchLower(Request $request)
     {
         $lowerPrice = $request->input('lowerPrice');
@@ -44,9 +57,13 @@ class   IdeaSearchController extends Controller
         return response()->json([
             'lowerIdea' =>$priceIdea
         ]);
-
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * 中間の価格検索
+     */
     public function priceSearchMiddle(Request $request)
     {
         $lowerPrice = $request->input('lowerPrice');
@@ -58,7 +75,6 @@ class   IdeaSearchController extends Controller
         return response()->json([
             'middleIdea' =>$priceIdea
         ]);
-
     }
 
     public function termSearchYear(Request $request)
@@ -73,11 +89,15 @@ class   IdeaSearchController extends Controller
             return response()->json([
                 'yearIdea' =>$yearIdea
             ]);
-
-
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     * 期間の検索
+     */
     public function termSearchMonth(Request $request)
     {
         {
@@ -90,11 +110,15 @@ class   IdeaSearchController extends Controller
             return response()->json([
                 'monthIdea' =>$monthIdea
             ]);
-
-
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     * 日付検索
+     */
     public function termSearchDay(Request $request)
     {
         {
@@ -108,8 +132,6 @@ class   IdeaSearchController extends Controller
             return response()->json([
                 'dayIdea' =>$dayIdea
             ]);
-
-
         }
     }
 
@@ -134,6 +156,12 @@ class   IdeaSearchController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     * 入力日付以降に作られたアイデア検索
+     */
     public function termSearchAfter(Request $request)
     {
         {
@@ -146,8 +174,6 @@ class   IdeaSearchController extends Controller
             return response()->json([
                 'afterIdea' => $afterIdea
             ]);
-
-
         }
     }
 
@@ -155,7 +181,7 @@ class   IdeaSearchController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
-     * 入力した日付以降に作られたデータ
+     * 入力した日付以降と以前の間に作られたアイデア検索
      */
     public function termSearchMiddle(Request $request)
     {
@@ -173,15 +199,6 @@ class   IdeaSearchController extends Controller
             return response()->json([
                 'middleIdea' => $middleIdea
             ]);
-
-
         }
     }
-
-
-
-
-
-
-
 }

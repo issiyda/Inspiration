@@ -25,15 +25,6 @@
 
 <div id="app">
 
-
-    <!-- フラッシュメッセージ -->
-    @if (session('flash_message'))
-        <div class="flash_message">
-            {{ session('flash_message') }}
-        </div>
-    @endif
-
-
     <div class="nav">
 
         <a class="nav-title" href="/home">
@@ -78,6 +69,13 @@
 
 
     <div class="nav-height"></div>
+
+    <!-- フラッシュメッセージ -->
+    @if (session('flash_message'))
+        <div class="flash_message">
+            {{ session('flash_message') }}
+        </div>
+    @endif
 
     @auth
 

@@ -1,4 +1,3 @@
-
 //==========================
 //heading部分の共通パーツ
 //==========================
@@ -9,9 +8,6 @@
 //==========================
 //Loading画面
 //==========================
-
-
-
 .loading-overlay{
     background-color:rgba(255,255,255,0.8);
     height:120%;
@@ -103,12 +99,10 @@
             box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
         }
     }
-
 }
 .loading-img{
     width: 20%;
 }
-
 
 //==========================
 //投稿ボタン
@@ -143,7 +137,6 @@
         top: 0;
         align-items: center;
         left: 0;
-
     }
 
   &:active{
@@ -190,8 +183,6 @@
     }
 }
 
-
-
 //==========================
 //詳細ボタン　お気に入りボタン
 //==========================
@@ -214,8 +205,6 @@
         width: 100%;
     }
 }
-
-
 
 //==========================
 //ラジオボタン
@@ -266,13 +255,6 @@ input[type="radio"] {
   &:disabled + .c-radio{
   }
 }
-
-
-
-
-
-
-
 
 //==========================
 //説明用ラベル部品
@@ -412,7 +394,6 @@ input[type="radio"] {
   }
 }
 
-
 //==========================
 //投稿一列の部品
 //==========================
@@ -422,8 +403,6 @@ input[type="radio"] {
   flex-wrap: wrap;
   width:100%;
   margin:5% auto 0;
-
-
 
   &-a{
     color:black;
@@ -440,10 +419,6 @@ input[type="radio"] {
     &-all{
         height:950px
     }
-
-
-
-
 
 /**
 カード全体のcss
@@ -472,8 +447,6 @@ input[type="radio"] {
     z-index: 2;
   }
 
-
-
     /**
     hoverさせた際の挙動
      */
@@ -481,7 +454,6 @@ input[type="radio"] {
           opacity:0.75;
         }
       }
-
 
   &-review{
     align-items: center;
@@ -577,10 +549,7 @@ input[type="radio"] {
             height:90%;
             justify-content: center;
         }
-
-
     }
-
 
   //==========================
   //ボタンが一つの際のcss
@@ -604,12 +573,6 @@ input[type="radio"] {
     width:90%;
     z-index:3;
   }
-
-
-
-
-
-
 
         &-star-review{
             position: relative;
@@ -669,10 +632,6 @@ input[type="radio"] {
             width: 100%;
         }
 
-
-
-
-
         &-review{
             width: 88px;
             margin: 10% auto;
@@ -683,11 +642,8 @@ input[type="radio"] {
             }
         }
 
-
         &-not-reviewed{
             display:none;
         }
-
-
 
 }

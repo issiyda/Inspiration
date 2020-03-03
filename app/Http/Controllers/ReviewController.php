@@ -12,8 +12,11 @@ use Symfony\Component\Console\Input;
 class ReviewController extends Controller
 {
 
-    //アイデアに対する全レビューの取得
-
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * アイデアに対する全レビューの取得
+     */
     public function getReviews(Request $request)
     {
         $ideaId = $request->input('ideaId');
@@ -27,7 +30,11 @@ class ReviewController extends Controller
         ]);
     }
 
-    //ログイン中のユーザが投稿に対してレビューしているかどうかの判断
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * ログイン中のユーザが投稿に対してレビューしているかどうかの判断
+     */
     public function reviewJudge(Request $request)
     {
 
@@ -54,6 +61,7 @@ class ReviewController extends Controller
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
+     * レビュー投稿
      */
     public function reviewPost(Request $request)
     {
@@ -70,6 +78,7 @@ class ReviewController extends Controller
 
 
 
+        //レビューされた際にアイデア提供者にメール送信
         Mail::send('emails.toIdeaUserReviewedMail',[
 
                 'ideaUserInfo' => $ideaUserInfo,
@@ -83,15 +92,13 @@ class ReviewController extends Controller
             $message->to($ideaUserInfo[0]->email, $ideaUserInfo[0]->name.'さん')->subject('新規レビューを頂きました！！');
         });
 
-        //        アイデアの平均点数計算ロジック
-
+        //アイデアの平均点数計算ロジック
         $reviewCount = Review::where('idea_id',$ideaId)->count() + 1;
         $sumStars = Review::where('idea_id',$ideaId)->sum('star') + $star;
 
 
         $averageReview = $sumStars / $reviewCount ;
         $averageReview = round($averageReview,1);
-
 
 
         $average = Idea::where('id',$ideaId)->first();

@@ -48,6 +48,11 @@ class PostIdeaController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * アイデア編集
+     */
     public function editIdea(Request $request)
     {
         $idea_id = $request->input('idea_id');
@@ -92,6 +97,10 @@ class PostIdeaController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * 画像保存
+     */
     public function saveIdeaImages(Request $request)
     {
         $file_name = $request->file->getClientOriginalName();

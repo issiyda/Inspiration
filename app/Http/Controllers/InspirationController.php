@@ -14,6 +14,11 @@ class InspirationController extends Controller
 {
     //
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * パスワード変更時の現在のパス確認
+     */
     public function checkPass(Request $request)
     {
         $userId = $request->input('user_id');
@@ -27,11 +32,14 @@ class InspirationController extends Controller
             return response()->json([
                 'message' => '現在のパスと一致しません',
             ]);
-
-
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * パスワード変更
+     */
     public function updatePass(Request $request)
     {
         $userId = $request->input('user_id');
@@ -44,30 +52,37 @@ class InspirationController extends Controller
         ]);
     }
 
+    /**
+     * @param $id
+     * 退会
+     */
     public function withdraw($id)
     {
         User::find($id)->delete();
     }
 
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * mypage表示
+     */
     public function mypage()
     {
         return view('layouts.index');
     }
 
 
-
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * アイデア取得
+     */
     public function getIdeas(Request $request)
     {
 
         $userId = $request->Input('userId');
 
         $allIdea = Idea::get();
-
-
-
-
-
 
         /**
          * ログイン中のユーザが購入したアイデアデータ取得
@@ -107,11 +122,6 @@ class InspirationController extends Controller
         ], 200);
     }
 
-    public function confirm()
-    {
-
-    }
-
     /**
      * 投稿削除
      *
@@ -131,21 +141,6 @@ class InspirationController extends Controller
         ]);
     }
 
-
-//    /**
-//     *
-//     *
-//     * @param Request $request
-//     * @return \Illuminate\Http\JsonResponse
-//     */
-//    public function post(Request $request)
-//    {
-//        $idea = \App\Idea::create($request->all());
-//
-//        return response()->json([
-//            'idea' => $idea
-//        ]);
-//    }
 
     /**
      * @param Request $request
@@ -269,10 +264,7 @@ class InspirationController extends Controller
                 'success' => 'user updated successfully!'
             ],200);
         }
-
-
     }
-
 
     //お気に入り一覧でお気に入りから削除するための機能
     public function favDelete(Request $request)
@@ -288,7 +280,4 @@ class InspirationController extends Controller
             'favorite' => 'delete Success'
         ]);
     }
-
-
-
 }
