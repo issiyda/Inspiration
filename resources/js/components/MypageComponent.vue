@@ -176,7 +176,6 @@
 
         mounted(){
             this.ideas = this.$store.dispatch('getUserIdeas')
-
         },
 
         beforeUpdate() {

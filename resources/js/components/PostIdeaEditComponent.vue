@@ -2,101 +2,145 @@
 
     <main>
 
-        <div class="profile">
+        <div class="edit">
             <h2 class="f-h2">アイデア編集</h2>
 
-            <form method="post" @submit.prevent="checkValidation()" class="profile-container">
+            <form method="post" @submit.prevent="checkValidation()" class="edit-container">
 
 
-                <div class="profile-container-input">
+                <div class="edit-container-input">
+
+                    <div class="edit-container-input">
+                        <label class="c-label edit-label" for="delete">アイデア編集</label>
 
 
-
-                    <div class="profile-container-img">
-                        <div class="profile-container-img-left">
-                            <label class ="c-label" for="img">アイデアイメージ画像</label>
-                        </div>
-                        <div class="profile-container-img-right">
-                            <label>
-                                <input id="img" @change="onFileChange" class ="c-input profile-container-img-none" type="file" />
-                                <img :src="`./img${img}`" v-show="!newImage" alt="editImage">
-                                <img :src="newImage" v-show="newImage" alt="ideaImg">
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="profile-container-input">
-                        <label class ="c-label" for="title">アイデア名</label>
-                        <input id="title" @blur="titleValidation()" v-model="title" class="c-input" type="text" placeholder="（例）だーいし">
-
-                        <div class="error" v-if="errorMessages.titleErrorMessage">{{errorMessages.titleErrorMessage}}</div>
-                        <p><span :class="{'profile-container-validation':this.titleChangeColor}">{{titleLength}}</span>/24文字</p>
-                    </div>
-
-                    <div class="profile-container-input">
-
-                        <label class ="c-label" for="category">カテゴリー</label>
-                        <div id="category" class="c-radio-container">
-
-                            <input id="matching" v-model="category_id" @change="categoryValidation" type="radio" value="1" :checked="category.matching">
-                            <label for="matching" class="c-radio" >マッチング</label>
-
-                            <input id="board" v-model="category_id" @change="categoryValidation" class="" type="radio" value="2" :checked="category.board">
-                            <label for="board" class="c-radio">掲示板</label>
-
-                            <input id="sns" v-model="category_id" @change="categoryValidation" class="" type="radio" value="3" :checked="category.sns">
-                            <label for="sns" class="c-radio">SNS</label>
-
-                            <input id="EC" v-model="category_id" @change="categoryValidation" class="" type="radio" value="4"  :checked="category.ecSite">
-                            <label for="EC" class="c-radio">ECサイト</label>
-
-                            <input id="infoplaner" v-model="category_id" @change="categoryValidation" class="" type="radio" value="5" :checked="category.infoPlaner">
-                            <label for="infoplaner" class="c-radio">情報発信</label>
-
-                            <input id="sharing" v-model="category_id" @change="categoryValidation" class="" type="radio" value="6" :checked="category.sharing">
-                            <label for="infoplaner" class="c-radio">シェアリング</label>
-
-                            <input id="other" v-model="category_id" @change="categoryValidation"  class="" type="radio" value="7" :checked="category.other">
-                            <label for="other" class="c-radio">その他</label>
-
+                        <div class="edit-container-img">
+                            <div class="edit-container-img-left">
+                                <label class="c-label" for="img">アイデアイメージ画像</label>
+                            </div>
+                            <div class="edit-container-img-right">
+                                <label>
+                                    <input id="img" @change="onFileChange" class="c-input edit-container-img-none"
+                                           type="file"/>
+                                    <img :src="`./img${img}`" v-show="!newImage" alt="editImage">
+                                    <img :src="newImage" v-show="newImage" alt="ideaImg">
+                                </label>
+                            </div>
                         </div>
 
-                        <div class="error" v-if="errorMessages.categoryErrorMessage">{{errorMessages.categoryErrorMessage}}</div>
+                        <div class="edit-container-input">
+                            <label class="c-label" for="title">アイデア名</label>
+                            <input id="title" @blur="titleValidation()" v-model="title" class="c-input" type="text"
+                                   placeholder="（例）だーいし">
 
-                    </div>
+                            <div class="error" v-if="errorMessages.titleErrorMessage">
+                                {{errorMessages.titleErrorMessage}}
+                            </div>
+                            <p><span :class="{'edit-container-validation':this.titleChangeColor}">{{titleLength}}</span>/24文字
+                            </p>
+                        </div>
 
-                        <div class="profile-container-input">
-                            <label class ="c-label" for="price">価格</label>
-                            <input id="price" v-model.number="price" type="number" @blur="priceValidation()" class ="c-input" placeholder="1000000円以内で設定して下さい">
-                            <div class="error" v-if="errorMessages.priceErrorMessage">{{errorMessages.priceErrorMessage}}</div>
+                        <div class="edit-container-input">
+
+                            <label class="c-label" for="category">カテゴリー</label>
+                            <div id="category" class="c-radio-container">
+
+                                <input id="matching" v-model="category_id" @change="categoryValidation" type="radio"
+                                       value="1" :checked="category.matching">
+                                <label for="matching" class="c-radio">マッチング</label>
+
+                                <input id="board" v-model="category_id" @change="categoryValidation" class=""
+                                       type="radio" value="2" :checked="category.board">
+                                <label for="board" class="c-radio">掲示板</label>
+
+                                <input id="sns" v-model="category_id" @change="categoryValidation" class="" type="radio"
+                                       value="3" :checked="category.sns">
+                                <label for="sns" class="c-radio">SNS</label>
+
+                                <input id="EC" v-model="category_id" @change="categoryValidation" class="" type="radio"
+                                       value="4" :checked="category.ecSite">
+                                <label for="EC" class="c-radio">ECサイト</label>
+
+                                <input id="infoplaner" v-model="category_id" @change="categoryValidation" class=""
+                                       type="radio" value="5" :checked="category.infoPlaner">
+                                <label for="infoplaner" class="c-radio">情報発信</label>
+
+                                <input id="sharing" v-model="category_id" @change="categoryValidation" class=""
+                                       type="radio" value="6" :checked="category.sharing">
+                                <label for="infoplaner" class="c-radio">シェアリング</label>
+
+                                <input id="other" v-model="category_id" @change="categoryValidation" class=""
+                                       type="radio" value="7" :checked="category.other">
+                                <label for="other" class="c-radio">その他</label>
+
+                            </div>
+
+                            <div class="error" v-if="errorMessages.categoryErrorMessage">
+                                {{errorMessages.categoryErrorMessage}}
+                            </div>
+
+                        </div>
+
+                        <div class="edit-container-input">
+                            <label class="c-label" for="price">価格</label>
+                            <input id="price" v-model.number="price" type="number" @blur="priceValidation()"
+                                   class="c-input" placeholder="1000000円以内で設定して下さい">
+                            <div class="error" v-if="errorMessages.priceErrorMessage">
+                                {{errorMessages.priceErrorMessage}}
+                            </div>
                         </div>
                     </div>
 
 
-
-                    <div class="profile-container-input">
-                        <label class ="c-label">概要</label>
-                        <textarea name="" v-model="overflow" @blur="overflowValidation()" id="profile" class ="c-textarea" cols="30" rows="10" placeholder="自己紹介を記入してください">{{overflow}}</textarea>
-                        <div class="error" v-if="errorMessages.overflowErrorMessage">{{errorMessages.overflowErrorMessage}}</div>
-                        <p><span :class="{'profile-container-validation':this.overflowChangeColor}">{{overflowLength}}</span>/100文字</p>
+                    <div class="edit-container-input">
+                        <label class="c-label">概要</label>
+                        <textarea name="" v-model="overflow" @blur="overflowValidation()" id="edit" class="c-textarea"
+                                  cols="30" rows="10" placeholder="自己紹介を記入してください">{{overflow}}</textarea>
+                        <div class="error" v-if="errorMessages.overflowErrorMessage">
+                            {{errorMessages.overflowErrorMessage}}
+                        </div>
+                        <p><span
+                            :class="{'edit-container-validation':this.overflowChangeColor}">{{overflowLength}}</span>/100文字
+                        </p>
                     </div>
 
 
-
-                    <div class="profile-container-input">
-                        <label class ="c-label" for="contents">内容</label>
-                        <textarea v-model="content" @blur="contentValidation()" id="contents" class ="c-textarea" cols="30" rows="10" placeholder="あなたのアイデアをお待ちしてます">{{content}}</textarea>
-                        <div class="error" v-if="errorMessages.contentErrorMessage">{{errorMessages.contentErrorMessage}}</div>
-                        <p><span :class="{'profile-container-validation':this.contentChangeColor}">{{contentLength}}</span>/10000文字</p>
+                    <div class="edit-container-input">
+                        <label class="c-label" for="contents">内容</label>
+                        <textarea v-model="content" @blur="contentValidation()" id="contents" class="c-textarea"
+                                  cols="30" rows="10" placeholder="あなたのアイデアをお待ちしてます">{{content}}</textarea>
+                        <div class="error" v-if="errorMessages.contentErrorMessage">
+                            {{errorMessages.contentErrorMessage}}
+                        </div>
+                        <p><span :class="{'edit-container-validation':this.contentChangeColor}">{{contentLength}}</span>/10000文字
+                        </p>
                     </div>
 
-                    <div class="error" v-if="errorMessages.submitErrorMessage">{{errorMessages.submitErrorMessage}}</div>
+                    <div class="error" v-if="errorMessages.submitErrorMessage">{{errorMessages.submitErrorMessage}}
+                    </div>
 
-                <div class="profile-container-img-message" v-if="EditResultMessage">{{EditResultMessage}}</div>
+                    <div class="edit-container-img-message" v-if="EditResultMessage">{{EditResultMessage}}</div>
 
-                    <input type="submit" class="c-button" value="編集する">
+                    <input type="submit" class="edit-button" value="編集する">
+
+                    <div class="edit-container-input">
+                        <label class="c-label edit-label" for="delete">アイデア削除</label>
+                        <button id="delete" class="edit-button-delete">
+                            <router-link :to="{name:'postIdeaDelete',params:{
+                            userId:this.user_id,
+                            ideaId:this.id,
+                            ideaTitle:this.title
+                            }}">削除する
+                            </router-link>
+                        </button>
+                    </div>
+
+
+                </div>
 
             </form>
+
+
         </div>
     </main>
 </template>
@@ -127,7 +171,7 @@
                     sns: "",
                     ecSite: "",
                     infoPlaner: "",
-                    sharing:"",
+                    sharing: "",
                     other: ""
                 },
                 EditResultMessage: false,
@@ -137,12 +181,12 @@
                 //バリデーション部分
 
                 validations: {
-                    imgValidation:true,
-                    titleValidation:true,
-                    categoryValidation:true,
-                    priceValidation:true,
-                    overflowValidation:true,
-                    contentValidation:true,
+                    imgValidation: true,
+                    titleValidation: true,
+                    categoryValidation: true,
+                    priceValidation: true,
+                    overflowValidation: true,
+                    contentValidation: true,
                 },
 
                 errorMessages: {
@@ -223,16 +267,16 @@
                 reader.readAsDataURL(this.fileInfo);
             },
 
-            saveImage(){
+            saveImage() {
 
                 const formData = new FormData()
                 console.log(this.fileInfo);
-                formData.append('file',this.fileInfo);
+                formData.append('file', this.fileInfo);
 
-                axios.post('/api/profileImgUpload',formData)
-                    .then(response =>{
+                axios.post('/api/editImgUpload', formData)
+                    .then(response => {
                         console.log(response)
-                    }).catch((error)=>{
+                    }).catch((error) => {
                     console.log(error)
                 })
             },
@@ -348,7 +392,7 @@
                     this.editIdeaSave();
 
                     //エラーがあればメッセージ
-                } else{
+                } else {
                     this.errorMessages.submitErrorMessage = "エラーがあります"
                 }
             },
@@ -412,18 +456,14 @@
                     this.errorMessages.imgErrorMessage = ""
                 }
             },
-            submitOk:function(){
-                if(this.submitOk === true)
-                {
-                    this.errorMessages.submitErrorMessage =false;
+            submitOk: function () {
+                if (this.submitOk === true) {
+                    this.errorMessages.submitErrorMessage = false;
                 }
             },
         }
     }
 </script>
-
-
-
 
 
 <style scoped>
