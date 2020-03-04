@@ -66,7 +66,7 @@
                 </div>
 
                 <ul class ="nav-container">
-                    <li class ="nav-item"><a href="#">Home</a></li>
+                    <li class ="nav-item"><a href="/home">Home</a></li>
 
                     {{--                        ログインしてる時--}}
                     @auth
