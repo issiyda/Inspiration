@@ -759,10 +759,34 @@ a {
 }
 
 .flash_message {
-  color: #FFBEDA;
+  background: rgba(161, 110, 255, 0.5);
+  right: 0%;
+  top: 150px;
+  position: fixed;
+  color: white;
   font-weight: bolder;
   text-align: center;
-  margin: 10% auto 5%;
+  height: 10%;
+  width: 20%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  border-radius: 3%;
+}
+
+.flash_message_word {
+  width: 70%;
+}
+
+@media screen and (max-width: 414px) {
+  .flash_message {
+    padding: 3%;
+    top: 110px;
+    width: 30%;
+  }
 }
 
 .c-heading {

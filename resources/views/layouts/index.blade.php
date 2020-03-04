@@ -73,7 +73,9 @@
     <!-- フラッシュメッセージ -->
     @if (session('flash_message'))
         <div class="flash_message">
-            {{ session('flash_message') }}
+            <div class="flash_message_word">
+                {{ session('flash_message') }}
+            </div>
         </div>
     @endif
 

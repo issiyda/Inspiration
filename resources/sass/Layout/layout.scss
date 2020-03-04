@@ -422,8 +422,29 @@
 //========================
 
 .flash_message{
-    color: $color_base;
+    background:rgba(161,110,255,0.5);
+    right: 0%;
+    top: 150px;
+    position: fixed;
+    color: white;
     font-weight: bolder;
     text-align: center;
-    margin: 10% auto 5%;
+    height: 10%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3%;
+
+    &_word{
+        width:70%;
+    }
+
+    @include mq{
+
+        padding:3%;
+        top: 110px;
+        width: 30%;
+
+    }
 }
