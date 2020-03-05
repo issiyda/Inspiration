@@ -122,8 +122,8 @@
 
 
             <div class="review review-container">
-
-                <div v-for="review in this.ideaReviews" class="review-posted">
+                <paginate name="paginate-log" :list="this.ideaReviews" :per="3">
+                <div v-for="review in paginated('paginate-log')" class="review-posted">
 
                     <div class="review-posted-name">
                         <router-link :to="{name:'profileDetail',params:{
@@ -219,7 +219,11 @@
                     </div>
 
                 </div>
+                </paginate>
+            </div>
 
+            <div class="pagination">
+                <paginate-links for="paginate-log" class="pagination-container" :show-step-links="true"></paginate-links>
             </div>
 
 
@@ -397,7 +401,8 @@
                 reviewErrorMessage:false,
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 
-                processing:false
+                processing:false,
+                paginate: ['paginate-log']
 
         }
         },
@@ -785,6 +790,28 @@
 
     .c-button{
         margin:5% auto;
+    }
+
+    .ic >>> ul{
+        display:flex;
+        width:100%;
+        margin:5% auto;
+        flex-wrap:wrap;
+    }
+
+    .pagination >>> ul{
+        display: flex;
+        font-size:24px;
+        justify-content:center;
+        list-style:none;
+    }
+
+    .pagination >>> li{
+        margin: 0 2%;
+    }
+
+    .pagination-container >>> a{
+        color:black;
     }
 
 </style>
