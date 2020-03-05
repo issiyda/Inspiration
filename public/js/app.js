@@ -3199,6 +3199,7 @@ __webpack_require__.r(__webpack_exports__);
     contactSubmit: function contactSubmit() {
       var _this = this;
 
+      this.$emit('open-loading');
       this.subjectValidation();
       this.textValidation();
 
@@ -3211,10 +3212,14 @@ __webpack_require__.r(__webpack_exports__);
           subject: this.contactSubject,
           contents: this.contactText
         }).then(function (response) {
+          _this.$emit('close-loading');
+
           console.log(response);
           _this.resultMessage = 'お問い合わせ完了しました';
           _this.processing = false;
         })["catch"](function (error) {
+          _this.$emit('close-loading');
+
           _this.resultMessage = "時間を置いてお試し下さい";
           console.log(error);
         });
@@ -4098,6 +4103,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostDetailComponent",
   data: function data() {
@@ -4129,7 +4138,8 @@ __webpack_require__.r(__webpack_exports__);
       reviewNumber: "",
       reviewErrorMessage: false,
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-      processing: false
+      processing: false,
+      paginate: ['paginate-log']
     };
   },
   created: function created() {
@@ -4964,6 +4974,96 @@ __webpack_require__.r(__webpack_exports__);
         return 'シェアリング';
       } else {
         return 'その他';
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PostIdeaDeleteComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PostIdeaDeleteComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "PostIdeaDeleteComponent",
+  data: function data() {
+    return {
+      ideaId: "",
+      userId: "",
+      ideaTitle: "",
+      user: ""
+    };
+  },
+  created: function created() {
+    this.$emit('open-loading');
+    this.ideaId = this.$route.params.ideaId, this.userId = this.$route.params.userId, this.ideaTitle = this.$route.params.ideaTitle;
+  },
+  mounted: function mounted() {
+    this.$emit('close-loading');
+    this.user = this.$store.dispatch('getUsers');
+  },
+  methods: {
+    //投稿削除
+    ideaDelete: function ideaDelete(ideaId, userId) {
+      console.log("method");
+      console.log(this.$store.state.users.id);
+      console.log(userId);
+
+      if (this.$store.state.users.id === userId) {
+        axios["delete"]('api/ideaDelete', {
+          params: {
+            ideaId: this.ideaId
+          }
+        }).then(function (response) {
+          console.log(response);
+          alert("削除完了しました");
+        })["catch"](function (error) {
+          console.log(error);
+          alert("削除失敗しました");
+        });
       }
     }
   }
@@ -5818,6 +5918,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostIdeaEditComponent",
   data: function data() {
@@ -5927,7 +6071,7 @@ __webpack_require__.r(__webpack_exports__);
       var formData = new FormData();
       console.log(this.fileInfo);
       formData.append('file', this.fileInfo);
-      axios.post('/api/profileImgUpload', formData).then(function (response) {
+      axios.post('/api/editImgUpload', formData).then(function (response) {
         console.log(response);
       })["catch"](function (error) {
         console.log(error);
@@ -6360,7 +6504,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.fav[data-v-a7d47a5e]{\n    color:#FFBEDA;\n    margin:5% auto;\n}\n.c-button[data-v-a7d47a5e]{\n    margin:5% auto;\n}\n\n", ""]);
+exports.push([module.i, "\n.fav[data-v-a7d47a5e]{\n    color:#FFBEDA;\n    margin:5% auto;\n}\n.c-button[data-v-a7d47a5e]{\n    margin:5% auto;\n}\n.ic[data-v-a7d47a5e] ul{\n    display:-webkit-box;\n    display:flex;\n    width:100%;\n    margin:5% auto;\n    flex-wrap:wrap;\n}\n.pagination[data-v-a7d47a5e] ul{\n    display: -webkit-box;\n    display: flex;\n    font-size:24px;\n    -webkit-box-pack:center;\n            justify-content:center;\n    list-style:none;\n}\n.pagination[data-v-a7d47a5e] li{\n    margin: 0 2%;\n}\n.pagination-container[data-v-a7d47a5e] a{\n    color:black;\n}\n\n", ""]);
 
 // exports
 
@@ -12404,153 +12548,357 @@ var render = function() {
       _c(
         "div",
         { staticClass: "review review-container" },
-        _vm._l(this.ideaReviews, function(review) {
-          return _c("div", { staticClass: "review-posted" }, [
-            _c(
-              "div",
-              { staticClass: "review-posted-name" },
-              [
+        [
+          _c(
+            "paginate",
+            { attrs: { name: "paginate-log", list: this.ideaReviews, per: 3 } },
+            _vm._l(_vm.paginated("paginate-log"), function(review) {
+              return _c("div", { staticClass: "review-posted" }, [
                 _c(
-                  "router-link",
-                  {
-                    attrs: {
-                      to: {
-                        name: "profileDetail",
-                        params: {
-                          userId: review.user_id
-                        }
-                      }
-                    }
-                  },
+                  "div",
+                  { staticClass: "review-posted-name" },
                   [
-                    _c("div", { staticClass: "review-img" }, [
-                      review.img !== null
-                        ? _c("img", {
-                            attrs: {
-                              src: "./img" + review.img,
-                              alt: "reviewUserImg"
+                    _c(
+                      "router-link",
+                      {
+                        attrs: {
+                          to: {
+                            name: "profileDetail",
+                            params: {
+                              userId: review.user_id
                             }
-                          })
-                        : _c("img", {
-                            attrs: {
-                              src: "./img/images/account.jpeg",
-                              alt: "reviewUserImg"
-                            }
-                          }),
-                      _vm._v(" "),
-                      _c(
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "review-img" }, [
+                          review.img !== null
+                            ? _c("img", {
+                                attrs: {
+                                  src: "./img" + review.img,
+                                  alt: "reviewUserImg"
+                                }
+                              })
+                            : _c("img", {
+                                attrs: {
+                                  src: "./img/images/account.jpeg",
+                                  alt: "reviewUserImg"
+                                }
+                              }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "review-img-name",
+                              attrs: { id: "userName" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(review.name) +
+                                  "\n                            "
+                              ),
+                              _c("p", [_vm._v("さん")])
+                            ]
+                          )
+                        ])
+                      ]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "review-posted-star" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "review-posted-comment-label",
+                      attrs: { for: "reviewComment" }
+                    },
+                    [_vm._v("評価")]
+                  ),
+                  _vm._v(" "),
+                  review.star === 1
+                    ? _c(
                         "div",
                         {
-                          staticClass: "review-img-name",
-                          attrs: { id: "userName" }
+                          staticClass: "review-posted-comment-star",
+                          attrs: { id: "reviewComment" }
                         },
                         [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(review.name) +
-                              "\n                            "
+                          _c(
+                            "div",
+                            { staticClass: "review-posted-comment-star-top" },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              })
+                            ]
                           ),
-                          _c("p", [_vm._v("さん")])
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "review-posted-comment-star-bottom"
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              })
+                            ]
+                          )
                         ]
                       )
-                    ])
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "review-posted-star" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "review-posted-comment-label",
-                  attrs: { for: "reviewComment" }
-                },
-                [_vm._v("評価")]
-              ),
-              _vm._v(" "),
-              review.star === 1
-                ? _c(
+                    : review.star === 2
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "review-posted-comment-star",
+                          attrs: { id: "reviewComment" }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "review-posted-comment-star-top" },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "review-posted-comment-star-bottom"
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    : review.star === 3
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "review-posted-comment-star",
+                          attrs: { id: "reviewComment" }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "review-posted-comment-star-top" },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "review-posted-comment-star-bottom"
+                            },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    : review.star === 4
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "review-posted-comment-star",
+                          attrs: { id: "reviewComment" }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "review-posted-comment-star-top" },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "review-posted-comment-star-bottom"
+                            },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    : review.star === 5
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "review-posted-comment-star",
+                          attrs: { id: "reviewComment" }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "review-posted-comment-star-top" },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "review-posted-comment-star-bottom"
+                            },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "review-posted-comment" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "review-posted-comment-label",
+                      attrs: { for: "voiceComment" }
+                    },
+                    [_vm._v("レビュー")]
+                  ),
+                  _vm._v(" "),
+                  _c(
                     "div",
                     {
-                      staticClass: "review-posted-comment-star",
-                      attrs: { id: "reviewComment" }
+                      staticClass: "review-posted-comment-content",
+                      attrs: { id: "voiceComment" }
                     },
-                    [_vm._m(2, true), _vm._v(" "), _vm._m(3, true)]
+                    [
+                      _vm._v(
+                        "\n                         " +
+                          _vm._s(review.comment) +
+                          "\n                    "
+                      )
+                    ]
                   )
-                : review.star === 2
-                ? _c(
-                    "div",
-                    {
-                      staticClass: "review-posted-comment-star",
-                      attrs: { id: "reviewComment" }
-                    },
-                    [_vm._m(4, true), _vm._v(" "), _vm._m(5, true)]
-                  )
-                : review.star === 3
-                ? _c(
-                    "div",
-                    {
-                      staticClass: "review-posted-comment-star",
-                      attrs: { id: "reviewComment" }
-                    },
-                    [_vm._m(6, true), _vm._v(" "), _vm._m(7, true)]
-                  )
-                : review.star === 4
-                ? _c(
-                    "div",
-                    {
-                      staticClass: "review-posted-comment-star",
-                      attrs: { id: "reviewComment" }
-                    },
-                    [_vm._m(8, true), _vm._v(" "), _vm._m(9, true)]
-                  )
-                : review.star === 5
-                ? _c(
-                    "div",
-                    {
-                      staticClass: "review-posted-comment-star",
-                      attrs: { id: "reviewComment" }
-                    },
-                    [_vm._m(10, true), _vm._v(" "), _vm._m(11, true)]
-                  )
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "review-posted-comment" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "review-posted-comment-label",
-                  attrs: { for: "voiceComment" }
-                },
-                [_vm._v("レビュー")]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "review-posted-comment-content",
-                  attrs: { id: "voiceComment" }
-                },
-                [
-                  _vm._v(
-                    "\n                         " +
-                      _vm._s(review.comment) +
-                      "\n                    "
-                  )
-                ]
-              )
-            ])
-          ])
-        }),
-        0
+                ])
+              ])
+            }),
+            0
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "pagination" },
+        [
+          _c("paginate-links", {
+            staticClass: "pagination-container",
+            attrs: { for: "paginate-log", "show-step-links": true }
+          })
+        ],
+        1
       ),
       _vm._v(" "),
       !_vm.reviewed && _vm.buying
         ? _c("div", { staticClass: "review-container" }, [
-            _vm._m(12),
+            _vm._m(2),
             _vm._v(" "),
             _c("div", { staticClass: "review-comment" }, [
               _c(
@@ -12630,7 +12978,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(13), _vm._v(" "), _vm._m(14)]
+                        [_vm._m(3), _vm._v(" "), _vm._m(4)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -12645,7 +12993,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(15), _vm._v(" "), _vm._m(16)]
+                        [_vm._m(5), _vm._v(" "), _vm._m(6)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -12660,7 +13008,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(17), _vm._v(" "), _vm._m(18)]
+                        [_vm._m(7), _vm._v(" "), _vm._m(8)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -12675,7 +13023,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(19), _vm._v(" "), _vm._m(20)]
+                        [_vm._m(9), _vm._v(" "), _vm._m(10)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -12690,7 +13038,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(21), _vm._v(" "), _vm._m(22)]
+                        [_vm._m(11), _vm._v(" "), _vm._m(12)]
                       )
                     ])
                   ]),
@@ -12748,7 +13096,7 @@ var render = function() {
             ])
           ])
         : _c("div", { staticClass: "review-container-restriction" }, [
-            _vm._m(23),
+            _vm._m(13),
             _vm._v(" "),
             _c("div", { staticClass: "review-comment" }, [
               _c("form", { attrs: { action: "" } }, [
@@ -12757,7 +13105,7 @@ var render = function() {
                     _vm._v("評価")
                   ]),
                   _vm._v(" "),
-                  _vm._m(24),
+                  _vm._m(14),
                   _vm._v(" "),
                   _c("div", { staticClass: "review-comment-container" }, [
                     _c("label", { attrs: { for: "review-comment" } }, [
@@ -12828,161 +13176,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "c-heading" }, [
       _c("h3", { staticClass: "f-h3" }, [_vm._v("皆さんの声")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-top" }, [
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-bottom" }, [
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-top" }, [
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-bottom" }, [
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-top" }, [
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-bottom" }, [
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-top" }, [
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-bottom" }, [
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-top" }, [
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-bottom" }, [
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      })
     ])
   },
   function() {
@@ -13939,6 +14132,69 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PostIdeaDeleteComponent.vue?vue&type=template&id=6246e8c0&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PostIdeaDeleteComponent.vue?vue&type=template&id=6246e8c0&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("main", [
+    _c("div", { staticClass: "c-container" }, [
+      _c("h2", { staticClass: "f-h2" }, [_vm._v("アイデア削除")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "c-form" }, [
+        _c("div", { staticClass: "c-form-container" }, [
+          _c("div", { staticClass: "c-form-text-attention" }, [
+            _c("p", [_vm._v("一度削除すると")]),
+            _vm._v(" "),
+            _c("ul", { staticClass: "withdraw-ul" }, [
+              _c("li", { staticClass: "withdraw-li" }, [
+                _vm._v("投稿したアイデア名")
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "withdraw-li" }, [
+                _vm._v(_vm._s(_vm.ideaTitle))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("p", [_vm._v("は残りません")]),
+            _vm._v(" "),
+            _c("p", [_vm._v("それでもよろしいですか？？")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "c-button withdraw-submit-button",
+            on: {
+              click: function($event) {
+                return _vm.ideaDelete(_vm.ideaId, _vm.userId)
+              }
+            }
+          },
+          [_vm._v("削除する")]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ProfileComponent.vue?vue&type=template&id=a8276c82&scoped=true&":
 /*!*******************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ProfileComponent.vue?vue&type=template&id=a8276c82&scoped=true& ***!
@@ -14028,8 +14284,7 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass: "c-button profile-withdraw",
-                attrs: { id: "withdraw" },
+                staticClass: "profile-withdraw profile-button-img",
                 on: {
                   click: function($event) {
                     return _vm.saveImage()
@@ -14260,7 +14515,7 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "c-button profile-withdraw",
+                  staticClass: "profile-button",
                   attrs: { id: "profileDetail" }
                 },
                 [
@@ -14290,10 +14545,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "div",
-                {
-                  staticClass: "c-button profile-withdraw",
-                  attrs: { id: "pass" }
-                },
+                { staticClass: "profile-button", attrs: { id: "pass" } },
                 [
                   _c("router-link", { attrs: { to: "/passEdit" } }, [
                     _vm._v("編集する")
@@ -14312,10 +14564,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "div",
-                {
-                  staticClass: "c-button profile-withdraw",
-                  attrs: { id: "withdraw" }
-                },
+                { staticClass: "profile-button", attrs: { id: "withdraw" } },
                 [
                   _c("router-link", { attrs: { to: "/withdraw" } }, [
                     _vm._v("退会する")
@@ -14920,13 +15169,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", [
-    _c("div", { staticClass: "profile" }, [
+    _c("div", { staticClass: "edit" }, [
       _c("h2", { staticClass: "f-h2" }, [_vm._v("アイデア編集")]),
       _vm._v(" "),
       _c(
         "form",
         {
-          staticClass: "profile-container",
+          staticClass: "edit-container",
           attrs: { method: "post" },
           on: {
             submit: function($event) {
@@ -14936,82 +15185,448 @@ var render = function() {
           }
         },
         [
-          _c("div", { staticClass: "profile-container-input" }, [
-            _c("div", { staticClass: "profile-container-img" }, [
-              _vm._m(0),
+          _c("div", { staticClass: "edit-container-input" }, [
+            _c("div", { staticClass: "edit-container-input" }, [
+              _c(
+                "label",
+                { staticClass: "c-label edit-label", attrs: { for: "delete" } },
+                [_vm._v("アイデア編集")]
+              ),
               _vm._v(" "),
-              _c("div", { staticClass: "profile-container-img-right" }, [
-                _c("label", [
-                  _c("input", {
-                    staticClass: "c-input profile-container-img-none",
-                    attrs: { id: "img", type: "file" },
-                    on: { change: _vm.onFileChange }
-                  }),
-                  _vm._v(" "),
-                  _c("img", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: !_vm.newImage,
-                        expression: "!newImage"
-                      }
-                    ],
-                    attrs: { src: "./img" + _vm.img, alt: "editImage" }
-                  }),
-                  _vm._v(" "),
-                  _c("img", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.newImage,
-                        expression: "newImage"
-                      }
-                    ],
-                    attrs: { src: _vm.newImage, alt: "ideaImg" }
-                  })
+              _c("div", { staticClass: "edit-container-img" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "edit-container-img-right" }, [
+                  _c("label", [
+                    _c("input", {
+                      staticClass: "c-input edit-container-img-none",
+                      attrs: { id: "img", type: "file" },
+                      on: { change: _vm.onFileChange }
+                    }),
+                    _vm._v(" "),
+                    _c("img", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.newImage,
+                          expression: "!newImage"
+                        }
+                      ],
+                      attrs: { src: "./img" + _vm.img, alt: "editImage" }
+                    }),
+                    _vm._v(" "),
+                    _c("img", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.newImage,
+                          expression: "newImage"
+                        }
+                      ],
+                      attrs: { src: _vm.newImage, alt: "ideaImg" }
+                    })
+                  ])
                 ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "edit-container-input" }, [
+                _c(
+                  "label",
+                  { staticClass: "c-label", attrs: { for: "title" } },
+                  [_vm._v("アイデア名")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.title,
+                      expression: "title"
+                    }
+                  ],
+                  staticClass: "c-input",
+                  attrs: {
+                    id: "title",
+                    type: "text",
+                    placeholder: "（例）だーいし"
+                  },
+                  domProps: { value: _vm.title },
+                  on: {
+                    blur: function($event) {
+                      return _vm.titleValidation()
+                    },
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.title = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errorMessages.titleErrorMessage
+                  ? _c("div", { staticClass: "error" }, [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.errorMessages.titleErrorMessage) +
+                          "\n                        "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("p", [
+                  _c(
+                    "span",
+                    {
+                      class: {
+                        "edit-container-validation": this.titleChangeColor
+                      }
+                    },
+                    [_vm._v(_vm._s(_vm.titleLength))]
+                  ),
+                  _vm._v("/24文字\n                        ")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "edit-container-input" }, [
+                _c(
+                  "label",
+                  { staticClass: "c-label", attrs: { for: "category" } },
+                  [_vm._v("カテゴリー")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "c-radio-container",
+                    attrs: { id: "category" }
+                  },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.category_id,
+                          expression: "category_id"
+                        }
+                      ],
+                      attrs: { id: "matching", type: "radio", value: "1" },
+                      domProps: {
+                        checked: _vm.category.matching,
+                        checked: _vm._q(_vm.category_id, "1")
+                      },
+                      on: {
+                        change: [
+                          function($event) {
+                            _vm.category_id = "1"
+                          },
+                          _vm.categoryValidation
+                        ]
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "c-radio", attrs: { for: "matching" } },
+                      [_vm._v("マッチング")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.category_id,
+                          expression: "category_id"
+                        }
+                      ],
+                      attrs: { id: "board", type: "radio", value: "2" },
+                      domProps: {
+                        checked: _vm.category.board,
+                        checked: _vm._q(_vm.category_id, "2")
+                      },
+                      on: {
+                        change: [
+                          function($event) {
+                            _vm.category_id = "2"
+                          },
+                          _vm.categoryValidation
+                        ]
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "c-radio", attrs: { for: "board" } },
+                      [_vm._v("掲示板")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.category_id,
+                          expression: "category_id"
+                        }
+                      ],
+                      attrs: { id: "sns", type: "radio", value: "3" },
+                      domProps: {
+                        checked: _vm.category.sns,
+                        checked: _vm._q(_vm.category_id, "3")
+                      },
+                      on: {
+                        change: [
+                          function($event) {
+                            _vm.category_id = "3"
+                          },
+                          _vm.categoryValidation
+                        ]
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "c-radio", attrs: { for: "sns" } },
+                      [_vm._v("SNS")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.category_id,
+                          expression: "category_id"
+                        }
+                      ],
+                      attrs: { id: "EC", type: "radio", value: "4" },
+                      domProps: {
+                        checked: _vm.category.ecSite,
+                        checked: _vm._q(_vm.category_id, "4")
+                      },
+                      on: {
+                        change: [
+                          function($event) {
+                            _vm.category_id = "4"
+                          },
+                          _vm.categoryValidation
+                        ]
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "c-radio", attrs: { for: "EC" } },
+                      [_vm._v("ECサイト")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.category_id,
+                          expression: "category_id"
+                        }
+                      ],
+                      attrs: { id: "infoplaner", type: "radio", value: "5" },
+                      domProps: {
+                        checked: _vm.category.infoPlaner,
+                        checked: _vm._q(_vm.category_id, "5")
+                      },
+                      on: {
+                        change: [
+                          function($event) {
+                            _vm.category_id = "5"
+                          },
+                          _vm.categoryValidation
+                        ]
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "c-radio", attrs: { for: "infoplaner" } },
+                      [_vm._v("情報発信")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.category_id,
+                          expression: "category_id"
+                        }
+                      ],
+                      attrs: { id: "sharing", type: "radio", value: "6" },
+                      domProps: {
+                        checked: _vm.category.sharing,
+                        checked: _vm._q(_vm.category_id, "6")
+                      },
+                      on: {
+                        change: [
+                          function($event) {
+                            _vm.category_id = "6"
+                          },
+                          _vm.categoryValidation
+                        ]
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "c-radio", attrs: { for: "infoplaner" } },
+                      [_vm._v("シェアリング")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.category_id,
+                          expression: "category_id"
+                        }
+                      ],
+                      attrs: { id: "other", type: "radio", value: "7" },
+                      domProps: {
+                        checked: _vm.category.other,
+                        checked: _vm._q(_vm.category_id, "7")
+                      },
+                      on: {
+                        change: [
+                          function($event) {
+                            _vm.category_id = "7"
+                          },
+                          _vm.categoryValidation
+                        ]
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "c-radio", attrs: { for: "other" } },
+                      [_vm._v("その他")]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _vm.errorMessages.categoryErrorMessage
+                  ? _c("div", { staticClass: "error" }, [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.errorMessages.categoryErrorMessage) +
+                          "\n                        "
+                      )
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "edit-container-input" }, [
+                _c(
+                  "label",
+                  { staticClass: "c-label", attrs: { for: "price" } },
+                  [_vm._v("価格")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.number",
+                      value: _vm.price,
+                      expression: "price",
+                      modifiers: { number: true }
+                    }
+                  ],
+                  staticClass: "c-input",
+                  attrs: {
+                    id: "price",
+                    type: "number",
+                    placeholder: "1000000円以内で設定して下さい"
+                  },
+                  domProps: { value: _vm.price },
+                  on: {
+                    blur: [
+                      function($event) {
+                        return _vm.priceValidation()
+                      },
+                      function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    ],
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.price = _vm._n($event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errorMessages.priceErrorMessage
+                  ? _c("div", { staticClass: "error" }, [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.errorMessages.priceErrorMessage) +
+                          "\n                        "
+                      )
+                    ])
+                  : _vm._e()
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "profile-container-input" }, [
-              _c("label", { staticClass: "c-label", attrs: { for: "title" } }, [
-                _vm._v("アイデア名")
-              ]),
+            _c("div", { staticClass: "edit-container-input" }, [
+              _c("label", { staticClass: "c-label" }, [_vm._v("概要")]),
               _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.title,
-                    expression: "title"
-                  }
-                ],
-                staticClass: "c-input",
-                attrs: {
-                  id: "title",
-                  type: "text",
-                  placeholder: "（例）だーいし"
-                },
-                domProps: { value: _vm.title },
-                on: {
-                  blur: function($event) {
-                    return _vm.titleValidation()
-                  },
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _c(
+                "textarea",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.overflow,
+                      expression: "overflow"
                     }
-                    _vm.title = $event.target.value
+                  ],
+                  staticClass: "c-textarea",
+                  attrs: {
+                    name: "",
+                    id: "edit",
+                    cols: "30",
+                    rows: "10",
+                    placeholder: "自己紹介を記入してください"
+                  },
+                  domProps: { value: _vm.overflow },
+                  on: {
+                    blur: function($event) {
+                      return _vm.overflowValidation()
+                    },
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.overflow = $event.target.value
+                    }
                   }
-                }
-              }),
+                },
+                [_vm._v(_vm._s(_vm.overflow))]
+              ),
               _vm._v(" "),
-              _vm.errorMessages.titleErrorMessage
+              _vm.errorMessages.overflowErrorMessage
                 ? _c("div", { staticClass: "error" }, [
-                    _vm._v(_vm._s(_vm.errorMessages.titleErrorMessage))
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.errorMessages.overflowErrorMessage) +
+                        "\n                    "
+                    )
                   ])
                 : _vm._e(),
               _vm._v(" "),
@@ -15020,428 +15635,132 @@ var render = function() {
                   "span",
                   {
                     class: {
-                      "profile-container-validation": this.titleChangeColor
+                      "edit-container-validation": this.overflowChangeColor
                     }
                   },
-                  [_vm._v(_vm._s(_vm.titleLength))]
+                  [_vm._v(_vm._s(_vm.overflowLength))]
                 ),
-                _vm._v("/24文字")
+                _vm._v("/100文字\n                    ")
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "profile-container-input" }, [
+            _c("div", { staticClass: "edit-container-input" }, [
               _c(
                 "label",
-                { staticClass: "c-label", attrs: { for: "category" } },
-                [_vm._v("カテゴリー")]
+                { staticClass: "c-label", attrs: { for: "contents" } },
+                [_vm._v("内容")]
               ),
               _vm._v(" "),
               _c(
-                "div",
-                { staticClass: "c-radio-container", attrs: { id: "category" } },
-                [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.category_id,
-                        expression: "category_id"
-                      }
-                    ],
-                    attrs: { id: "matching", type: "radio", value: "1" },
-                    domProps: {
-                      checked: _vm.category.matching,
-                      checked: _vm._q(_vm.category_id, "1")
-                    },
-                    on: {
-                      change: [
-                        function($event) {
-                          _vm.category_id = "1"
-                        },
-                        _vm.categoryValidation
-                      ]
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    { staticClass: "c-radio", attrs: { for: "matching" } },
-                    [_vm._v("マッチング")]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.category_id,
-                        expression: "category_id"
-                      }
-                    ],
-                    attrs: { id: "board", type: "radio", value: "2" },
-                    domProps: {
-                      checked: _vm.category.board,
-                      checked: _vm._q(_vm.category_id, "2")
-                    },
-                    on: {
-                      change: [
-                        function($event) {
-                          _vm.category_id = "2"
-                        },
-                        _vm.categoryValidation
-                      ]
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    { staticClass: "c-radio", attrs: { for: "board" } },
-                    [_vm._v("掲示板")]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.category_id,
-                        expression: "category_id"
-                      }
-                    ],
-                    attrs: { id: "sns", type: "radio", value: "3" },
-                    domProps: {
-                      checked: _vm.category.sns,
-                      checked: _vm._q(_vm.category_id, "3")
-                    },
-                    on: {
-                      change: [
-                        function($event) {
-                          _vm.category_id = "3"
-                        },
-                        _vm.categoryValidation
-                      ]
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    { staticClass: "c-radio", attrs: { for: "sns" } },
-                    [_vm._v("SNS")]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.category_id,
-                        expression: "category_id"
-                      }
-                    ],
-                    attrs: { id: "EC", type: "radio", value: "4" },
-                    domProps: {
-                      checked: _vm.category.ecSite,
-                      checked: _vm._q(_vm.category_id, "4")
-                    },
-                    on: {
-                      change: [
-                        function($event) {
-                          _vm.category_id = "4"
-                        },
-                        _vm.categoryValidation
-                      ]
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    { staticClass: "c-radio", attrs: { for: "EC" } },
-                    [_vm._v("ECサイト")]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.category_id,
-                        expression: "category_id"
-                      }
-                    ],
-                    attrs: { id: "infoplaner", type: "radio", value: "5" },
-                    domProps: {
-                      checked: _vm.category.infoPlaner,
-                      checked: _vm._q(_vm.category_id, "5")
-                    },
-                    on: {
-                      change: [
-                        function($event) {
-                          _vm.category_id = "5"
-                        },
-                        _vm.categoryValidation
-                      ]
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    { staticClass: "c-radio", attrs: { for: "infoplaner" } },
-                    [_vm._v("情報発信")]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.category_id,
-                        expression: "category_id"
-                      }
-                    ],
-                    attrs: { id: "sharing", type: "radio", value: "6" },
-                    domProps: {
-                      checked: _vm.category.sharing,
-                      checked: _vm._q(_vm.category_id, "6")
-                    },
-                    on: {
-                      change: [
-                        function($event) {
-                          _vm.category_id = "6"
-                        },
-                        _vm.categoryValidation
-                      ]
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    { staticClass: "c-radio", attrs: { for: "infoplaner" } },
-                    [_vm._v("シェアリング")]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.category_id,
-                        expression: "category_id"
-                      }
-                    ],
-                    attrs: { id: "other", type: "radio", value: "7" },
-                    domProps: {
-                      checked: _vm.category.other,
-                      checked: _vm._q(_vm.category_id, "7")
-                    },
-                    on: {
-                      change: [
-                        function($event) {
-                          _vm.category_id = "7"
-                        },
-                        _vm.categoryValidation
-                      ]
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    { staticClass: "c-radio", attrs: { for: "other" } },
-                    [_vm._v("その他")]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _vm.errorMessages.categoryErrorMessage
-                ? _c("div", { staticClass: "error" }, [
-                    _vm._v(_vm._s(_vm.errorMessages.categoryErrorMessage))
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "profile-container-input" }, [
-              _c("label", { staticClass: "c-label", attrs: { for: "price" } }, [
-                _vm._v("価格")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.price,
-                    expression: "price",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "c-input",
-                attrs: {
-                  id: "price",
-                  type: "number",
-                  placeholder: "1000000円以内で設定して下さい"
-                },
-                domProps: { value: _vm.price },
-                on: {
-                  blur: [
-                    function($event) {
-                      return _vm.priceValidation()
-                    },
-                    function($event) {
-                      return _vm.$forceUpdate()
+                "textarea",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.content,
+                      expression: "content"
                     }
                   ],
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                  staticClass: "c-textarea",
+                  attrs: {
+                    id: "contents",
+                    cols: "30",
+                    rows: "10",
+                    placeholder: "あなたのアイデアをお待ちしてます"
+                  },
+                  domProps: { value: _vm.content },
+                  on: {
+                    blur: function($event) {
+                      return _vm.contentValidation()
+                    },
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.content = $event.target.value
                     }
-                    _vm.price = _vm._n($event.target.value)
                   }
-                }
-              }),
+                },
+                [_vm._v(_vm._s(_vm.content))]
+              ),
               _vm._v(" "),
-              _vm.errorMessages.priceErrorMessage
+              _vm.errorMessages.contentErrorMessage
                 ? _c("div", { staticClass: "error" }, [
-                    _vm._v(_vm._s(_vm.errorMessages.priceErrorMessage))
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.errorMessages.contentErrorMessage) +
+                        "\n                    "
+                    )
                   ])
-                : _vm._e()
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "profile-container-input" }, [
-            _c("label", { staticClass: "c-label" }, [_vm._v("概要")]),
-            _vm._v(" "),
-            _c(
-              "textarea",
-              {
-                directives: [
+                : _vm._e(),
+              _vm._v(" "),
+              _c("p", [
+                _c(
+                  "span",
                   {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.overflow,
-                    expression: "overflow"
-                  }
-                ],
-                staticClass: "c-textarea",
-                attrs: {
-                  name: "",
-                  id: "profile",
-                  cols: "30",
-                  rows: "10",
-                  placeholder: "自己紹介を記入してください"
-                },
-                domProps: { value: _vm.overflow },
-                on: {
-                  blur: function($event) {
-                    return _vm.overflowValidation()
-                  },
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                    class: {
+                      "edit-container-validation": this.contentChangeColor
                     }
-                    _vm.overflow = $event.target.value
-                  }
-                }
-              },
-              [_vm._v(_vm._s(_vm.overflow))]
-            ),
+                  },
+                  [_vm._v(_vm._s(_vm.contentLength))]
+                ),
+                _vm._v("/10000文字\n                    ")
+              ])
+            ]),
             _vm._v(" "),
-            _vm.errorMessages.overflowErrorMessage
+            _vm.errorMessages.submitErrorMessage
               ? _c("div", { staticClass: "error" }, [
-                  _vm._v(_vm._s(_vm.errorMessages.overflowErrorMessage))
+                  _vm._v(
+                    _vm._s(_vm.errorMessages.submitErrorMessage) +
+                      "\n                "
+                  )
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _c("p", [
-              _c(
-                "span",
-                {
-                  class: {
-                    "profile-container-validation": this.overflowChangeColor
-                  }
-                },
-                [_vm._v(_vm._s(_vm.overflowLength))]
-              ),
-              _vm._v("/100文字")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "profile-container-input" }, [
-            _c(
-              "label",
-              { staticClass: "c-label", attrs: { for: "contents" } },
-              [_vm._v("内容")]
-            ),
-            _vm._v(" "),
-            _c(
-              "textarea",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.content,
-                    expression: "content"
-                  }
-                ],
-                staticClass: "c-textarea",
-                attrs: {
-                  id: "contents",
-                  cols: "30",
-                  rows: "10",
-                  placeholder: "あなたのアイデアをお待ちしてます"
-                },
-                domProps: { value: _vm.content },
-                on: {
-                  blur: function($event) {
-                    return _vm.contentValidation()
-                  },
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.content = $event.target.value
-                  }
-                }
-              },
-              [_vm._v(_vm._s(_vm.content))]
-            ),
-            _vm._v(" "),
-            _vm.errorMessages.contentErrorMessage
-              ? _c("div", { staticClass: "error" }, [
-                  _vm._v(_vm._s(_vm.errorMessages.contentErrorMessage))
+            _vm.EditResultMessage
+              ? _c("div", { staticClass: "edit-container-img-message" }, [
+                  _vm._v(_vm._s(_vm.EditResultMessage))
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _c("p", [
+            _c("input", {
+              staticClass: "edit-button",
+              attrs: { type: "submit", value: "編集する" }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "edit-container-input" }, [
               _c(
-                "span",
-                {
-                  class: {
-                    "profile-container-validation": this.contentChangeColor
-                  }
-                },
-                [_vm._v(_vm._s(_vm.contentLength))]
+                "label",
+                { staticClass: "c-label edit-label", attrs: { for: "delete" } },
+                [_vm._v("アイデア削除")]
               ),
-              _vm._v("/10000文字")
+              _vm._v(" "),
+              _c(
+                "button",
+                { staticClass: "edit-button-delete", attrs: { id: "delete" } },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      attrs: {
+                        to: {
+                          name: "postIdeaDelete",
+                          params: {
+                            userId: this.user_id,
+                            ideaId: this.id,
+                            ideaTitle: this.title
+                          }
+                        }
+                      }
+                    },
+                    [_vm._v("削除する\n                        ")]
+                  )
+                ],
+                1
+              )
             ])
-          ]),
-          _vm._v(" "),
-          _vm.errorMessages.submitErrorMessage
-            ? _c("div", { staticClass: "error" }, [
-                _vm._v(_vm._s(_vm.errorMessages.submitErrorMessage))
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.EditResultMessage
-            ? _c("div", { staticClass: "profile-container-img-message" }, [
-                _vm._v(_vm._s(_vm.EditResultMessage))
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "c-button",
-            attrs: { type: "submit", value: "編集する" }
-          })
+          ])
         ]
       )
     ])
@@ -15452,7 +15771,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "profile-container-img-left" }, [
+    return _c("div", { staticClass: "edit-container-img-left" }, [
       _c("label", { staticClass: "c-label", attrs: { for: "img" } }, [
         _vm._v("アイデアイメージ画像")
       ])
@@ -15488,7 +15807,7 @@ var render = function() {
         _c("div", { staticClass: "c-form-container" }, [
           _c("div", { staticClass: "completed" }, [
             _c("p", { staticClass: "completed-header" }, [
-              _vm._v("〜投稿完了〜")
+              _vm._v("〜レビュー完了〜")
             ]),
             _vm._v(" "),
             _c("p", { staticClass: "completed-paragraph" }, [
@@ -33749,6 +34068,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/PostIdeaDeleteComponent.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/PostIdeaDeleteComponent.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PostIdeaDeleteComponent_vue_vue_type_template_id_6246e8c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PostIdeaDeleteComponent.vue?vue&type=template&id=6246e8c0&scoped=true& */ "./resources/js/components/PostIdeaDeleteComponent.vue?vue&type=template&id=6246e8c0&scoped=true&");
+/* harmony import */ var _PostIdeaDeleteComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PostIdeaDeleteComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/PostIdeaDeleteComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PostIdeaDeleteComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PostIdeaDeleteComponent_vue_vue_type_template_id_6246e8c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PostIdeaDeleteComponent_vue_vue_type_template_id_6246e8c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "6246e8c0",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/PostIdeaDeleteComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/PostIdeaDeleteComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/PostIdeaDeleteComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIdeaDeleteComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PostIdeaDeleteComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PostIdeaDeleteComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIdeaDeleteComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/PostIdeaDeleteComponent.vue?vue&type=template&id=6246e8c0&scoped=true&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/PostIdeaDeleteComponent.vue?vue&type=template&id=6246e8c0&scoped=true& ***!
+  \********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIdeaDeleteComponent_vue_vue_type_template_id_6246e8c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PostIdeaDeleteComponent.vue?vue&type=template&id=6246e8c0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PostIdeaDeleteComponent.vue?vue&type=template&id=6246e8c0&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIdeaDeleteComponent_vue_vue_type_template_id_6246e8c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIdeaDeleteComponent_vue_vue_type_template_id_6246e8c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/ProfileComponent.vue":
 /*!******************************************************!*\
   !*** ./resources/js/components/ProfileComponent.vue ***!
@@ -34416,6 +34804,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_withdrawComponent__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/withdrawComponent */ "./resources/js/components/withdrawComponent.vue");
 /* harmony import */ var _components_PasswordEdit__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/PasswordEdit */ "./resources/js/components/PasswordEdit.vue");
 /* harmony import */ var _components_ContactComponent__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/ContactComponent */ "./resources/js/components/ContactComponent.vue");
+/* harmony import */ var _components_PostIdeaDeleteComponent__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/PostIdeaDeleteComponent */ "./resources/js/components/PostIdeaDeleteComponent.vue");
  // コンポーネントをインポート
 
 
@@ -34435,9 +34824,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // bladeで行う
-// import withdraw from './components/withdrawComponent';
-// import passReminder from './components/passReminderComponent';
+
 
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   // モードの設定
@@ -34534,6 +34921,10 @@ __webpack_require__.r(__webpack_exports__);
     path: '/contact',
     name: 'contact',
     component: _components_ContactComponent__WEBPACK_IMPORTED_MODULE_18__["default"]
+  }, {
+    path: '/postIdeaDelete',
+    name: 'postIdeaDelete',
+    component: _components_PostIdeaDeleteComponent__WEBPACK_IMPORTED_MODULE_19__["default"]
   }]
 }));
 

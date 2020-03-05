@@ -14,7 +14,7 @@
 
                 <div class="completed">
 
-                    <p class ="completed-header">〜投稿完了〜</p>
+                    <p class ="completed-header">〜レビュー完了〜</p>
 
                     <p class="completed-paragraph">
                         新規レビュー投稿しました
