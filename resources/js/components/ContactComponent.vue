@@ -128,6 +128,7 @@
             },
 
             contactSubmit:function() {
+                this.$emit('open-loading');
                 this.subjectValidation();
                 this.textValidation();
 
@@ -142,10 +143,12 @@
                         subject: this.contactSubject,
                         contents: this.contactText
                     }).then((response) => {
+                        this.$emit('close-loading');
                         console.log(response);
                         this.resultMessage = 'お問い合わせ完了しました'
                         this.processing = false;
                     }).catch((error) => {
+                        this.$emit('close-loading');
                         this.resultMessage = "時間を置いてお試し下さい"
                         console.log(error);
                     })
