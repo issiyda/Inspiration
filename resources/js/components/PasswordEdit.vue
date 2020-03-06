@@ -137,7 +137,7 @@
 
         computed:{
             stateMessage:function(){
-                return 'Pass変更完了しました'
+                return 'パスワード変更完了'
             },
 
         },

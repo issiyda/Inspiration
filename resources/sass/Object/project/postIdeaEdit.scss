@@ -1,8 +1,8 @@
 //====================================
-//contact部分
+//PostIdeaEdit部分
 //====================================
 
-.contact {
+.edit {
 
     margin: 0 auto 12%;
     width: 50%;
@@ -10,7 +10,6 @@
     @include mq {
         width: 80%;
     }
-
 
     &-container {
         background: $color_sub;
@@ -27,12 +26,6 @@
                 font-size: $font-size_xl;
                 margin: 3%;
             }
-
-
-        }
-
-        &-input:first-child {
-            margin-top: 5%;
         }
 
         &-textarea {
@@ -92,19 +85,28 @@
             }
 
         }
+
+        &-validation {
+            color: $color_attention;
+            font-weight: bolder;
+        }
     }
 
     &-withdraw {
         margin: 0 auto;
     }
 
-    &-textarea {
-        height: 200px;
+    &-button {
+        @extend .c-button;
+        margin:0 auto;
+
+        &-delete{
+            @extend .edit-button;
+            padding:4%;
+        }
     }
 
-    &-resultMessage {
-        color: $color_accent;
-        font-size: $font-size_l;
-        font-weight: bold;
-    }
+    &-label{
+        margin:10% auto;
+}
 }

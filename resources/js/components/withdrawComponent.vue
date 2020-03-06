@@ -25,7 +25,7 @@
 
             </div>
 
-            <form method="get" action="/home" class ="c-form-submit withdraw-submit" @click="userWithdraw($store.state.users.id)">
+            <form method="get" action="/home" class="c-form-submit withdraw-submit" @click="userWithdraw($store.state.users.id)">
                 <input type="submit" class="c-button withdraw-submit-button" value="退会する">
             </form>
         </div>

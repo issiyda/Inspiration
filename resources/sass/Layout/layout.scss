@@ -1,9 +1,7 @@
 
-
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-//ヘッダー ver2
+//ヘッダー
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-
 .nav {
   align-items: center;
   background-color: rgba(255, 190, 218, 0.4);
@@ -25,12 +23,9 @@
     text-shadow: 1px 1px 1px $color_default;
   }
 
-
-
   &-heading{
     display: none;
   }
-
 
   &-trigger{
     display: none;
@@ -86,9 +81,7 @@
     @include mq(){
       display: none;
     }
-
   }
-
 
   &-container {
         align-items: center;
@@ -115,8 +108,6 @@
   &-height{
     height:100px;
   }
-
-
 }
 
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
@@ -174,9 +165,6 @@
           @include mq{
           width:100%;
       }
-
-
-
       }
 
       &-contact {
@@ -309,16 +297,17 @@
     display:none;
 
     @include mq {
+        animation-name:fade-out;
+        animation-duration: .7s;
         background: rgba(255, 190, 218, 0.4);
-        display: flex;
         left: 0;
-        opacity:0;
         position: fixed;
         top: 100px;
-        transition: all 0.6s;
         width: 100%;
         z-index: 5;
     }
+
+
 
     @include mq {
         &-h2 {
@@ -329,8 +318,30 @@
     //SPサイドメニュー用
     &-active{
         @include mq {
+            animation-name:fade-in;
+            animation-duration: .7s;
+            display: inline;
+        }
+    }
+
+    @keyframes fade-in {
+        0% {
+            opacity: 0;
+        }
+        100% {
             opacity: 1;
-            transition: all 0.6s;
+        }
+    }
+    @keyframes fade-out {
+        0% {
+            opacity: 1;
+            height:200px;
+        }
+        95%{
+            height:200px;
+        }
+        100% {
+            opacity: 0;
         }
     }
 
@@ -339,8 +350,9 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+        margin:0 auto;
         padding: 0 5%;
-        width: 100%;
+        width: 80%;
 
         a {
             color: $color_default;
@@ -401,5 +413,38 @@
             text-align: center;
             width: 60%;
         }
+    }
+}
+
+
+//========================
+//FlashMessage
+//========================
+
+.flash_message{
+    background:rgba(161,110,255,0.5);
+    right: 0%;
+    top: 150px;
+    position: fixed;
+    color: white;
+    font-weight: bolder;
+    text-align: center;
+    height: 10%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3%;
+
+    &_word{
+        width:70%;
+    }
+
+    @include mq{
+
+        padding:3%;
+        top: 110px;
+        width: 30%;
+
     }
 }

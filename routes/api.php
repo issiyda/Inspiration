@@ -148,35 +148,23 @@ Route::delete('/ideaDelete','InspirationController@ideaDelete');
 /**
  * プロフィールデータの編集用
  */
-Route::patch('/setting/{id}',function($id,Request $request){
+Route::patch('/setting/{id}','ProfileController@profileSetting');
 
-    $user = \App\User::find($id);
-
-    $user->fill($request->all())->update();
-
-    return response()->json([
-        'success' => 'user updated successfully!'
-    ],200);
-
-});
+//,function($id,Request $request){
+//
+//    $user = \App\User::find($id);
+//
+//    $user->fill($request->all())->update();
+//
+//    return response()->json([
+//        'success' => 'user updated successfully!'
+//    ],200);
+//
+//});
 /**
  * プロフィール画像アップロード
  */
-Route::post('/profileImgUpload',function(Request $request){
-
-
-    $userId = $request->input('user_id');
-
-    $file_name = request()->file->getClientOriginalName();
-
-    request()->file->storeAs('public/images',$file_name);
-
-    $user = App\User::find($userId);
-
-    $user->update(['img' =>'/images/'.$file_name]);
-
-    return $user;
-});
+Route::post('/profileImgUpload','ProfileController@profileImgUpload');
 
 /**
  * プロフィール詳細画面表示

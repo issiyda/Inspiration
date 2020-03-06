@@ -1,0 +1,35 @@
+//====================================
+//ログインしていない時のための表示CSS
+//====================================
+.guest {
+    text-align: center;
+    margin: 5% auto;
+    height: 300px;
+    font-size: 24px;
+    font-weight: bold;
+    color: $color_accent;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    @include mq {
+        height: 250px;
+    }
+
+    &-form {
+        display: flex;
+        margin: 0 auto;
+        width: 70%;
+    }
+
+    &-button {
+        margin: 5% auto;
+        padding:3%;
+        width: 20%;
+
+        @include mq {
+            padding: 7%;
+            width: 30%;
+        }
+    }
+}

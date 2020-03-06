@@ -53,8 +53,7 @@
                 Inspiration
             </a>
 
-
-            <div class="nav-trigger js-toggle-sp-menu">
+            <div class="nav-trigger js-home-sp-menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -66,23 +65,22 @@
                     <h2 class ="f-h2">Menu</h2>
                 </div>
 
-                {{--                    <ul class ="nav-container">--}}
-                {{--                        <li class ="nav-item"><a href="#">Top</a></li>--}}
-                {{--                        <li class ="nav-item"><a href="#">Mypage</a></li>--}}
-                {{--                        <li class ="nav-item"><a href="#">Post</a></li>--}}
-                {{--                        <li class ="nav-item"><a href="#">Profile</a></li>--}}
-                {{--                        <li class ="nav-item"><a href="#">Logout</a></li>--}}
-                {{--                    </ul>--}}
-
                 <ul class ="nav-container">
-                    <li class ="nav-item"><a href="/">Home</a></li>
-                    <li class ="nav-item"><a href="{{route('register')}}">Register</a></li>
-                    <li class ="nav-item"><a href="{{route('login')}}">Login</a></li>
+                    <li class ="nav-item"><a href="/home">Home</a></li>
+
+                    {{--                        ログインしてる時--}}
+                    @auth
+                        <li class ="nav-item"><a href="{{route('login')}}">Mypage</a></li>
+                        <li class ="nav-item"><a href="{{route('logout')}}">Logout</a></li>
+                    @endauth
+                    {{--                        ログインしていない時--}}
+                    @guest
+                        <li class ="nav-item"><a href="{{route('register')}}">Register</a></li>
+                        <li class ="nav-item"><a href="{{route('login')}}">Login</a></li>
+                    @endguest
                 </ul>
 
             </div>
-
-
 
             {{--                ここはログインログアウトの部分やからLaravelに任せましょう--}}
 
@@ -97,13 +95,12 @@
             @yield('content')
         </main>
 
+        @extends('layouts/spSidebar')
         @extends('layouts/footer')
     </div>
 
 
 </body>
-
-
-
-
+<script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{asset('js/layout.js')}}"></script>
 </html>

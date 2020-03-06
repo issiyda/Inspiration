@@ -16,7 +16,6 @@ $(document).ready(function(){
 
 
         $(window).scroll(function () {
-            console.log('aaa');
 
 
             $('.js-rise-target').each(function () {
@@ -53,6 +52,11 @@ $(document).ready(function(){
 
 
         })
+
+    // フラッシュメッセージの表示
+    $('.flash_message').fadeIn("slow", function () {
+        $(this).delay(10000).fadeOut("slow");
+    });
 
 
 

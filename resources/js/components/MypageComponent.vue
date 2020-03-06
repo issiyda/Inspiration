@@ -120,9 +120,9 @@
                                     <div class="ic-img">
                                         <img :src="`./img${review.img}`" alt="idea" class="ic-img-item">
                                     </div>
-                                    <div class="ic-review"  v-bind:class="{'ic-review-reviewed':reviewed(review.averageReview)}">
+                                    <div class="ic-review" v-bind:class="{'ic-review-reviewed':reviewed(review.averageReview)}">
                                         <span class="ic-span">評価</span>
-                                        <span class="ic-star-review"></span>
+                                        <span class="ic-star-review" v-bind:class="star(review.star)"></span>
                                     </div>
                                     <div class="ic-desc-mypage">
                                         <div class ="ic-desc-overflow">コメント</div>
@@ -176,7 +176,6 @@
 
         mounted(){
             this.ideas = this.$store.dispatch('getUserIdeas')
-
         },
 
         beforeUpdate() {

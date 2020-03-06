@@ -1,18 +1,16 @@
-
-
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 //ヒーローバナー
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 .hero {
-    background-image: url("../images/home1.jpg");
+    background-image: url("../../resources/js/assets/images/home1.jpg");
     background-position: bottom;
     background-size: cover;
     display: inline-block;
     height: 700px;
     width: 100%;
 
-    @include mq{
-        height:650px;
+    @include mq {
+        height: 650px;
     }
 
     &-item {
@@ -21,7 +19,6 @@
         height: 90%;
         justify-content: center;
         text-align: center;
-
 
 
         &-title {
@@ -46,29 +43,28 @@
         text-align: center;
         margin: 10% auto;
         position: relative;
-        text-shadow:2px 3px 2px #DDDDDD;
-        @include mq{
-            font-size:$font-size_l;
-            width:80%;
+        text-shadow: 2px 3px 2px #DDDDDD;
+        @include mq {
+            font-size: $font-size_l;
+            width: 80%;
         }
 
 
-
-        &:after{
+        &:after {
             content: "";
             position: absolute;
             left: 0;
-            right:0;
+            right: 0;
             bottom: 0;
             width: 75%;
-            margin:-3% auto;
+            margin: -3% auto;
             height: 7px;
             background: -webkit-repeating-linear-gradient(-45deg, $color_accent, $color_accent 2px, #fff 2px, #fff 4px);
             background: repeating-linear-gradient(-45deg, $color_accent, $color_accent 2px, #fff 2px, #fff 4px);
 
-            @include mq{
-                margin:-5% auto;
-                width:95%;
+            @include mq {
+                margin: -5% auto;
+                width: 95%;
             }
         }
 
@@ -85,29 +81,29 @@
             justify-content: center;
             margin: 0 auto;
 
-            &:first-child{
+            &:first-child {
                 margin-bottom: 5%;
             }
 
-            @include mq{
+            @include mq {
                 flex-direction: column;
             }
         }
 
-        &-shadow{
-            background:$color_sub;
-            position:absolute;
+        &-shadow {
+            background: $color_sub;
+            position: absolute;
             width: 260px;
-            height:240px;
+            height: 240px;
 
-            @include mq{
-                width:230px;
-                height:210px;
+            @include mq {
+                width: 230px;
+                height: 210px;
             }
 
         }
 
-        &-items-top{
+        &-items-top {
             width: 30%;
 
             @include mq {
@@ -124,14 +120,12 @@
             }
 
 
-
-
-            p{
-                color:$color_base;
-                font-weight:bolder;
-                margin:15% auto 0;
-                text-align:right;
-                width:80%;
+            p {
+                color: $color_base;
+                font-weight: bolder;
+                margin: 15% auto 0;
+                text-align: right;
+                width: 80%;
             }
         }
 
@@ -152,45 +146,45 @@
                 margin-top: 7.5%;
             }
 
-            p{
-                color:$color_base;
-                font-weight:bolder;
-                margin:15% auto 0;
-                text-align:right;
-                width:80%;
+            p {
+                color: $color_base;
+                font-weight: bolder;
+                margin: 15% auto 0;
+                text-align: right;
+                width: 80%;
             }
 
         }
 
         &-item {
             width: 100%;
-            height:250px;
+            height: 250px;
             margin: 0 3%;
-            position:relative;
+            position: relative;
 
-            @include mq{
-                margin:0;
-                width:90%;
+            @include mq {
+                margin: 0;
+                width: 90%;
 
             }
 
-            &-description{
-                margin:0 auto;
-                width:70%;
+            &-description {
+                margin: 0 auto;
+                width: 70%;
             }
 
 
             img {
                 border-radius: 2%;
                 width: 260px;
-                height:240px;
-                position:absolute;
-                z-index:2;
+                height: 240px;
+                position: absolute;
+                z-index: 2;
                 top: 50px;
                 left: 50px;
 
-                @include mq{
-                    left:80px;
+                @include mq {
+                    left: 80px;
                 }
             }
 
@@ -207,24 +201,24 @@
             margin: 10%;
             text-align: center;
 
-            &-item{
+            &-item {
                 border-radius: 2% 2% 0 0;
-                margin:0 auto 2%;
+                margin: 0 auto 2%;
 
 
-                    &:first-child {
-                        margin: 20% auto;
+                &:first-child {
+                    margin: 20% auto;
 
                 }
 
-                @include mq{
-                    width:90%
+                @include mq {
+                    width: 90%
                 }
             }
 
-            &-transparent{
+            &-transparent {
                 opacity: 0.3;
-                margin:20% auto;
+                margin: 20% auto;
 
             }
 
@@ -234,12 +228,10 @@
                 font-size: 50px;
                 padding: 5%;
 
-                @include mq{
-                    padding:30%;
+                @include mq {
+                    padding: 30%;
                 }
             }
-
-
 
 
         }
@@ -251,23 +243,23 @@
         }
 
         &-item {
-            border:solid 0.5px $color_bg;
-            border-radius:2% 2% 0 0;
+            border: solid 0.5px $color_bg;
+            border-radius: 2% 2% 0 0;
             margin: 5% auto;
             text-align: center;
             top: 5%;
-            width:30%;
+            width: 30%;
 
-            @include mq{
-                width:80%;
+            @include mq {
+                width: 80%;
             }
 
-            h3{
-                margin:3%;
+            h3 {
+                margin: 3%;
             }
 
             img {
-                border-radius:2% 2% 0 0;
+                border-radius: 2% 2% 0 0;
                 width: 100%;
             }
 
@@ -280,8 +272,8 @@
                 padding: 3%;
                 width: 100%;
 
-                @include mq{
-                    width:100%;
+                @include mq {
+                    width: 100%;
                 }
             }
 
@@ -304,86 +296,85 @@
     &-recommend {
         text-align: center;
 
-        &-word{
-            color:$color_w;
-            text-shadow:2px 3px 5px gray;
+        &-word {
+            color: $color_w;
+            text-shadow: 2px 3px 5px gray;
             font-size: 50px;
             width: 60%;
             margin: 0 auto;
 
-           @include mq{
-               font-size: 30px;
-               width:80%;
-           }
+            @include mq {
+                font-size: 30px;
+                width: 80%;
+            }
         }
 
         &-button {
-            border:none;
+            border: none;
             text-align: center;
             margin: 5% auto;
             width: 20%;
 
-            @include mq{
-                width:40%;
-                padding:3%;
+            @include mq {
+                width: 40%;
+                padding: 3%;
             }
         }
     }
 
     //Footer
-    &-footer{
-        background:$color_base;
-        color:#fff;
+    &-footer {
+        background: $color_base;
+        color: #fff;
         flex-direction: row;
-        height:350px;
+        height: 350px;
         justify-content: space-around;
         opacity: 0.6;
-        position:relative;
+        position: relative;
 
-        @include mq{
+        @include mq {
             height: 350px;
         }
 
-        &-subject{
+        &-subject {
             align-items: center;
-            display:flex;
+            display: flex;
             justify-content: center;
-            color:$color_accent;
-            font-size:$font-size_xxl;
-            height:25%;
-            padding:2.5%;
-            text-align:center;
+            color: $color_accent;
+            font-size: $font-size_xxl;
+            height: 25%;
+            padding: 2.5%;
+            text-align: center;
 
 
-            @include mq{
+            @include mq {
 
 
             }
         }
 
-        &-container{
-            display:flex;
-            height:30%;
+        &-container {
+            display: flex;
+            height: 30%;
             justify-content: space-around;
-            width:100%;
-            flex-direction:row;
+            width: 100%;
+            flex-direction: row;
 
-            @include mq{
+            @include mq {
                 flex-direction: column;
                 height: 40%;
             }
 
-            &-menu{
+            &-menu {
                 display: flex;
                 flex-direction: row;
-                justify-content:space-around;
+                justify-content: space-around;
                 margin-bottom: 5%;
-                width:50%;
+                width: 50%;
 
-                @include mq{
-                    width:100%;
+                @include mq {
+                    width: 100%;
                 }
-
 
 
             }
@@ -392,19 +383,19 @@
                 align-items: center;
                 display: flex;
                 flex-direction: row;
-                margin-right:5%;
+                margin-right: 5%;
                 width: 30%;
 
-                @include mq{
-                    width:100%;
+                @include mq {
+                    width: 100%;
                 }
 
                 &-message {
                     font-size: $font-size_xxl;
                     text-align: center;
-                    width:100%;
+                    width: 100%;
 
-                    @include mq{
+                    @include mq {
                         font-size: $font-size_xl;
                     }
                 }
@@ -414,6 +405,7 @@
                     display: inline-block;
                     text-decoration: none;
                 }
+
                 a::after {
                     position: absolute;
                     bottom: -8px;
@@ -425,30 +417,31 @@
                     opacity: 0;
                     visibility: hidden;
                     transition: .3s;
-                    background:$color_w;
+                    background: $color_w;
                 }
+
                 a:hover::after {
                     bottom: -4px;
-                    background:$color_w;
+                    background: $color_w;
                     opacity: 1;
                     visibility: visible;
                 }
             }
         }
 
-        &-content{
+        &-content {
 
-            display:flex;
+            display: flex;
             flex-direction: column;
             margin: 0 2%;
             width: 40%;
 
-            @include mq{
+            @include mq {
                 justify-content: center;
-                margin:0 1%;
+                margin: 0 1%;
             }
 
-            &-items{
+            &-items {
                 display: flex;
                 flex-direction: column;
                 -webkit-box-orient: vertical;
@@ -457,61 +450,58 @@
                 width: 50%;
                 margin: 0 auto;
 
-                @include mq{
-                    width:100%;
+                @include mq {
+                    width: 100%;
                     margin: 0;
                 }
             }
 
-            h3{
-                color:$color_accent;
+            h3 {
+                color: $color_accent;
                 font-weight: bolder;
                 font-size: $font-size_xl;
 
-                @include mq{
+                @include mq {
                     font-size: $font-size_l;
-
                 }
             }
 
-            p{
+            p {
                 font-size: $font-size_l;
                 margin-left: $space_l;
 
-                @include mq{
+                @include mq {
                     font-size: $font-size_m;
                 }
             }
 
-            a{
-                color:#fff;
+            a {
+                color: #fff;
                 text-decoration: none;
-
             }
         }
 
-        &-bottom{
+        &-bottom {
             text-align: center;
         }
 
-        &-copyRight{
-            bottom:1%;
+        &-copyRight {
+            bottom: 1%;
             display: flex;
             justify-content: center;
             margin: 0 auto;
             position: absolute;
             text-align: center;
-            width:70%;
+            width: 70%;
             left: 0;
-            right:0;
+            right: 0;
 
-            @include mq{
-                width:75%;
+            @include mq {
+                width: 75%;
             }
 
         }
     }
-
 }
 
 
@@ -525,7 +515,7 @@
     transition: all 1s;
 }
 
-.js-slide-target{
+.js-slide-target {
     opacity: 0;
     transform: translateX(-200px);
     transition: all 1s;
