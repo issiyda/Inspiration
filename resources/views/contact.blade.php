@@ -17,7 +17,7 @@
                         <div class="contact-container-input">
 
                             <div class="contact-container-input">
-                                <label class="c-label" for="subject">お名前</label>
+                                <label class="c-label" for="subject">name</label>
                                 <input id="subject" name="userName" class="c-input" type="text" placeholder="お名前">
                             </div>
 
@@ -26,7 +26,7 @@
                             @endif
 
                             <div class="contact-container-input">
-                                <label class="c-label" for="subject">メールアドレス</label>
+                                <label class="c-label" for="subject">email</label>
                                 <input id="subject" name="userEmail" class="c-input" type="email" placeholder="メールアドレス">
                             </div>
 

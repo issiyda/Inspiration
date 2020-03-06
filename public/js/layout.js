@@ -53,9 +53,9 @@ $(document).ready(function(){
 
         })
 
-    フラッシュメッセージの表示
+    // フラッシュメッセージの表示
     $('.flash_message').fadeIn("slow", function () {
-        $(this).delay(3000).fadeOut("slow");
+        $(this).delay(10000).fadeOut("slow");
     });
 
 
