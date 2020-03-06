@@ -4105,12 +4105,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 <<<<<<< HEAD
+<<<<<<< HEAD
 //
 //
 //
 //
 =======
 >>>>>>> feature/202002_05/guestUserButton
+=======
+>>>>>>> feature/202002_05/reviewStarNumbers
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostDetailComponent",
   data: function data() {
@@ -11837,7 +11840,10 @@ var render = function() {
                           _vm._v("評価")
                         ]),
                         _vm._v(" "),
-                        _c("span", { staticClass: "ic-star-review" })
+                        _c("span", {
+                          staticClass: "ic-star-review",
+                          class: _vm.star(review.star)
+                        })
                       ]
                     ),
                     _vm._v(" "),
