@@ -6,36 +6,44 @@
 
 
             <h2 class="f-h2">お問い合わせ</h2>
-            <form class="contact-container">
+            <form class="contact-container" @submit.prevent="contactSubmit">
 
                 <div class="contact-container-input">
 
 
                     <div class="contact-container-input">
                         <label class="c-label" for="subject">件名</label>
-                        <input v-model="contactSubject" @blur="subjectValidation()" id="subject" class="c-input" type="text" placeholder="（例）アカウントに関して">
+                        <input v-model="contactSubject" @blur="subjectValidation()" id="subject" class="c-input"
+                               type="text" placeholder="（例）アカウントに関して">
                     </div>
-                    <p><span :class="{'profile-container-validation':this.contactSubjectChangeColor}">{{contactSubject.length}}</span>/30文字</p>
+                    <p><span :class="{'profile-container-validation':this.contactSubjectChangeColor}">{{contactSubject.length}}</span>/30文字
+                    </p>
 
-                    <div class="error" v-if="errorMessages.contactSubjectErrorMessage">{{errorMessages.contactSubjectErrorMessage}}</div>
+                    <div class="error" v-if="errorMessages.contactSubjectErrorMessage">
+                        {{errorMessages.contactSubjectErrorMessage}}
+                    </div>
 
 
                     <div class="contact-container-input">
                         <label class="c-label" for="contactTexts">内容</label>
-                        <textarea v-model="contactText" @blur="textValidation()" id="contactTexts" class="c-input contact-textarea" type="text" placeholder="お問い合わせ内容記入"></textarea>
+                        <textarea v-model="contactText" @blur="textValidation()" id="contactTexts"
+                                  class="c-input contact-textarea" type="text" placeholder="お問い合わせ内容記入"></textarea>
                     </div>
-                    <p><span :class="{'profile-container-validation':this.contactTextChangeColor}">{{contactText.length}}</span>/500文字</p>
+                    <p><span :class="{'profile-container-validation':this.contactTextChangeColor}">{{contactText.length}}</span>/500文字
+                    </p>
 
-                    <div class="error" v-if="errorMessages.contactTextErrorMessage">{{errorMessages.contactTextErrorMessage}}</div>
+                    <div class="error" v-if="errorMessages.contactTextErrorMessage">
+                        {{errorMessages.contactTextErrorMessage}}
+                    </div>
 
 
                     <div class="contact-resultMessage" v-if="resultMessage">
                         {{resultMessage}}
                     </div>
 
-                        <button id="submit" class="c-button" @click="contactSubmit" :disabled="processing">
-                            送信する
-                        </button>
+                    <button id="submit" class="c-button" :disabled="processing">
+                        送信する
+                    </button>
                 </div>
 
 
@@ -50,27 +58,26 @@
 
         name: "ContactComponent",
 
-        data:function()
-        {
-            return{
-                contactSubject:"",
-                contactText:"",
-                resultMessage:false,
-                processing:false,
+        data: function () {
+            return {
+                contactSubject: "",
+                contactText: "",
+                resultMessage: false,
+                processing: false,
 
-                validations:{
-                    contactSubjectValidation:"",
-                    contactTextValidation:"",
-
-                },
-
-                errorMessages:{
-                    contactSubjectErrorMessage:false,
-                    contactTextErrorMessage:false,
+                validations: {
+                    contactSubjectValidation: "",
+                    contactTextValidation: "",
 
                 },
-                contactSubjectChangeColor:false,
-                contactTextChangeColor:false,
+
+                errorMessages: {
+                    contactSubjectErrorMessage: false,
+                    contactTextErrorMessage: false,
+
+                },
+                contactSubjectChangeColor: false,
+                contactTextChangeColor: false,
             }
         },
 
@@ -79,56 +86,47 @@
             this.$emit('close-loading');
         },
 
-        methods:{
+        methods: {
 
-            subjectValidation:function()
-            {
-                if(this.contactSubject === "")
-                {
+            subjectValidation: function () {
+                if (this.contactSubject === "") {
 
                     this.validations.contactSubjectValidation = false;
-                    this.errorMessages.contactSubjectErrorMessage ="入力必須です"
+                    this.errorMessages.contactSubjectErrorMessage = "入力必須です"
                     this.contactSubjectChangeColor = true;
 
-                }else if(this.contactSubject.length > 30)
-                {
+                } else if (this.contactSubject.length > 30) {
                     this.validations.contactsubjectValidation = false;
-                    this.errorMessages.contactSubjectErrorMessage ="30文字以内で入力して下さい"
+                    this.errorMessages.contactSubjectErrorMessage = "30文字以内で入力して下さい"
                     this.contactSubjectChangeColor = true;
-                }
-                else if(this.contactSubject !== "" && this.contactSubject.length <= 30){
+                } else if (this.contactSubject !== "" && this.contactSubject.length <= 30) {
                     this.validations.contactSubjectValidation = true;
-                    this.errorMessages.contactSubjectErrorMessage =false
+                    this.errorMessages.contactSubjectErrorMessage = false
                     this.contactSubjectChangeColor = false;
 
                 }
             },
 
-            textValidation:function()
-            {
-                if(this.contactText === "")
-                {
+            textValidation: function () {
+                if (this.contactText === "") {
 
                     this.validations.contactTextValidation = false;
-                    this.errorMessages.contactTextErrorMessage ="入力必須です"
+                    this.errorMessages.contactTextErrorMessage = "入力必須です"
                     this.contactTextChangeColor = true;
 
-                }else if(this.contactText.length > 500)
-                {
+                } else if (this.contactText.length > 500) {
                     this.validations.contactTextValidation = false;
-                    this.errorMessages.contactTextErrorMessage ="500文字以内で入力して下さい"
+                    this.errorMessages.contactTextErrorMessage = "500文字以内で入力して下さい"
                     this.contactTextChangeColor = true;
-                }
-                else if(this.contactText !== "" && this.contactText.length <= 500){
+                } else if (this.contactText !== "" && this.contactText.length <= 500) {
                     this.validations.contactTextValidation = true;
-                    this.errorMessages.contactTextErrorMessage =false
+                    this.errorMessages.contactTextErrorMessage = false
                     this.contactTextChangeColor = false;
 
                 }
             },
 
-            contactSubmit:function() {
-                this.$emit('open-loading');
+            contactSubmit: function () {
                 this.subjectValidation();
                 this.textValidation();
 
@@ -136,6 +134,8 @@
                     &&
                     this.validations.contactTextValidation === true) {
                     this.processing = true;
+                    this.$emit('open-loading');
+
                     //送信
                     axios.post('api/contactPost', {
                         userEmail: this.$store.state.users.email,
@@ -152,8 +152,16 @@
                         this.resultMessage = "時間を置いてお試し下さい"
                         console.log(error);
                     })
+
+
+                    setTimeout(() => {
+                            this.$emit('close-loading');
+                        }
+                        , 5000
+                    )
                 }
-            }
+
+            },
         }
 
     }

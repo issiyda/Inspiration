@@ -21,7 +21,7 @@
                 <div id="category" class="confirm-text">{{categoryName}}</div>
 
                 <label for="category" class="c-label">お値段</label>
-                <div id="prica" class="confirm-text">{{$route.params.price}} </div>
+                <div id="prica" class="confirm-text">{{$route.params.price}}円</div>
 
                 <label for="description" class="c-label">概要</label>
                 <div id="description" class="confirm-text">

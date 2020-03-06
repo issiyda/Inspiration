@@ -380,6 +380,7 @@
 
             //確認用バリデーション
             checkValidation: function () {
+                this.$emit('open-loading')
                 this.imgValidation();
                 this.titleValidation();
                 this.priceValidation();
@@ -414,10 +415,12 @@
                     },
                 }).then((response) => {
                     console.log(response);
-                    this.ideas = this.$store.dispatch('getUserIdeas')
+                    this.ideas = this.$store.dispatch('getUserIdeas');
+                    this.$emit('close-loading');
                     this.EditResultMessage = "編集に成功しました"
                 }).catch((error) => {
                     console.log(error)
+                    this.$emit('close-loading');
                     this.EditResultMessage = "編集に失敗しました。\n" +
                         "時間を置いてお試し下さい"
                 })
