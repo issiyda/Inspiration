@@ -3141,6 +3141,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ContactComponent",
   data: function data() {
@@ -3199,12 +3207,12 @@ __webpack_require__.r(__webpack_exports__);
     contactSubmit: function contactSubmit() {
       var _this = this;
 
-      this.$emit('open-loading');
       this.subjectValidation();
       this.textValidation();
 
       if (this.validations.contactSubjectValidation === true && this.validations.contactTextValidation === true) {
-        this.processing = true; //送信
+        this.processing = true;
+        this.$emit('open-loading'); //送信
 
         axios.post('api/contactPost', {
           userEmail: this.$store.state.users.email,
@@ -3223,6 +3231,9 @@ __webpack_require__.r(__webpack_exports__);
           _this.resultMessage = "時間を置いてお試し下さい";
           console.log(error);
         });
+        setTimeout(function () {
+          _this.$emit('close-loading');
+        }, 5000);
       }
     }
   }
@@ -3614,7 +3625,7 @@ var _window$validators = window.validators,
   },
   computed: {
     stateMessage: function stateMessage() {
-      return 'Pass変更完了しました';
+      return 'パスワード変更完了';
     }
   },
   // watch:{
@@ -6161,6 +6172,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     //確認用バリデーション
     checkValidation: function checkValidation() {
+      this.$emit('open-loading');
       this.imgValidation();
       this.titleValidation();
       this.priceValidation();
@@ -6192,9 +6204,15 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         console.log(response);
         _this2.ideas = _this2.$store.dispatch('getUserIdeas');
+
+        _this2.$emit('close-loading');
+
         _this2.EditResultMessage = "編集に成功しました";
       })["catch"](function (error) {
         console.log(error);
+
+        _this2.$emit('close-loading');
+
         _this2.EditResultMessage = "編集に失敗しました。\n" + "時間を置いてお試し下さい";
       });
     }
@@ -10042,7 +10060,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "main" }, [
     _c("div", { staticClass: "p-mypage" }, [
-      _c("h2", { staticClass: "f-h2" }, [_vm._v("自分の購入アイデア")]),
+      _c("h2", { staticClass: "f-h2" }, [_vm._v("購入したアイデア")]),
       _vm._v(" "),
       _c("h3", { staticClass: "f-h3" }, [_vm._v("購入したアイデア")]),
       _vm._v(" "),
@@ -10197,7 +10215,7 @@ var render = function() {
     _c("div", { staticClass: "p-mypage" }, [
       _c("h2", { staticClass: "f-h2" }, [_vm._v("お気に入りアイデア")]),
       _vm._v(" "),
-      _c("h3", { staticClass: "f-h3" }, [_vm._v("お気に入りしたアイデア")]),
+      _c("h3", { staticClass: "f-h3" }, [_vm._v("お気に入りにしたアイデア")]),
       _vm._v(" "),
       _c(
         "div",
@@ -11346,139 +11364,161 @@ var render = function() {
     _c("div", { staticClass: "contact" }, [
       _c("h2", { staticClass: "f-h2" }, [_vm._v("お問い合わせ")]),
       _vm._v(" "),
-      _c("form", { staticClass: "contact-container" }, [
-        _c("div", { staticClass: "contact-container-input" }, [
+      _c(
+        "form",
+        {
+          staticClass: "contact-container",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.contactSubmit($event)
+            }
+          }
+        },
+        [
           _c("div", { staticClass: "contact-container-input" }, [
-            _c("label", { staticClass: "c-label", attrs: { for: "subject" } }, [
-              _vm._v("件名")
+            _c("div", { staticClass: "contact-container-input" }, [
+              _c(
+                "label",
+                { staticClass: "c-label", attrs: { for: "subject" } },
+                [_vm._v("件名")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.contactSubject,
+                    expression: "contactSubject"
+                  }
+                ],
+                staticClass: "c-input",
+                attrs: {
+                  id: "subject",
+                  type: "text",
+                  placeholder: "（例）アカウントに関して"
+                },
+                domProps: { value: _vm.contactSubject },
+                on: {
+                  blur: function($event) {
+                    return _vm.subjectValidation()
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.contactSubject = $event.target.value
+                  }
+                }
+              })
             ]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
+            _c("p", [
+              _c(
+                "span",
                 {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.contactSubject,
-                  expression: "contactSubject"
-                }
-              ],
-              staticClass: "c-input",
-              attrs: {
-                id: "subject",
-                type: "text",
-                placeholder: "（例）アカウントに関して"
-              },
-              domProps: { value: _vm.contactSubject },
-              on: {
-                blur: function($event) {
-                  return _vm.subjectValidation()
-                },
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+                  class: {
+                    "profile-container-validation": this
+                      .contactSubjectChangeColor
                   }
-                  _vm.contactSubject = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _c(
-              "span",
-              {
-                class: {
-                  "profile-container-validation": this.contactSubjectChangeColor
-                }
-              },
-              [_vm._v(_vm._s(_vm.contactSubject.length))]
-            ),
-            _vm._v("/30文字")
-          ]),
-          _vm._v(" "),
-          _vm.errorMessages.contactSubjectErrorMessage
-            ? _c("div", { staticClass: "error" }, [
-                _vm._v(_vm._s(_vm.errorMessages.contactSubjectErrorMessage))
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _c("div", { staticClass: "contact-container-input" }, [
-            _c(
-              "label",
-              { staticClass: "c-label", attrs: { for: "contactTexts" } },
-              [_vm._v("内容")]
-            ),
+                },
+                [_vm._v(_vm._s(_vm.contactSubject.length))]
+              ),
+              _vm._v("/30文字\n                ")
+            ]),
             _vm._v(" "),
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.contactText,
-                  expression: "contactText"
-                }
-              ],
-              staticClass: "c-input contact-textarea",
-              attrs: {
-                id: "contactTexts",
-                type: "text",
-                placeholder: "お問い合わせ内容記入"
-              },
-              domProps: { value: _vm.contactText },
-              on: {
-                blur: function($event) {
-                  return _vm.textValidation()
-                },
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+            _vm.errorMessages.contactSubjectErrorMessage
+              ? _c("div", { staticClass: "error" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.errorMessages.contactSubjectErrorMessage) +
+                      "\n                "
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "contact-container-input" }, [
+              _c(
+                "label",
+                { staticClass: "c-label", attrs: { for: "contactTexts" } },
+                [_vm._v("内容")]
+              ),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.contactText,
+                    expression: "contactText"
                   }
-                  _vm.contactText = $event.target.value
+                ],
+                staticClass: "c-input contact-textarea",
+                attrs: {
+                  id: "contactTexts",
+                  type: "text",
+                  placeholder: "お問い合わせ内容記入"
+                },
+                domProps: { value: _vm.contactText },
+                on: {
+                  blur: function($event) {
+                    return _vm.textValidation()
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.contactText = $event.target.value
+                  }
                 }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("p", [
+              })
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c(
+                "span",
+                {
+                  class: {
+                    "profile-container-validation": this.contactTextChangeColor
+                  }
+                },
+                [_vm._v(_vm._s(_vm.contactText.length))]
+              ),
+              _vm._v("/500文字\n                ")
+            ]),
+            _vm._v(" "),
+            _vm.errorMessages.contactTextErrorMessage
+              ? _c("div", { staticClass: "error" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.errorMessages.contactTextErrorMessage) +
+                      "\n                "
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.resultMessage
+              ? _c("div", { staticClass: "contact-resultMessage" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.resultMessage) +
+                      "\n                "
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
             _c(
-              "span",
+              "button",
               {
-                class: {
-                  "profile-container-validation": this.contactTextChangeColor
-                }
+                staticClass: "c-button",
+                attrs: { id: "submit", disabled: _vm.processing }
               },
-              [_vm._v(_vm._s(_vm.contactText.length))]
-            ),
-            _vm._v("/500文字")
-          ]),
-          _vm._v(" "),
-          _vm.errorMessages.contactTextErrorMessage
-            ? _c("div", { staticClass: "error" }, [
-                _vm._v(_vm._s(_vm.errorMessages.contactTextErrorMessage))
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.resultMessage
-            ? _c("div", { staticClass: "contact-resultMessage" }, [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(_vm.resultMessage) +
-                    "\n                "
-                )
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "c-button",
-              attrs: { id: "submit", disabled: _vm.processing },
-              on: { click: _vm.contactSubmit }
-            },
-            [_vm._v("\n                        送信する\n                    ")]
-          )
-        ])
-      ])
+              [_vm._v("\n                    送信する\n                ")]
+            )
+          ])
+        ]
+      )
     ])
   ])
 }
@@ -14011,7 +14051,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "confirm-text", attrs: { id: "prica" } }, [
-            _vm._v(_vm._s(_vm.$route.params.price) + " ")
+            _vm._v(_vm._s(_vm.$route.params.price) + "円")
           ]),
           _vm._v(" "),
           _c(

@@ -4,7 +4,7 @@
 
         <div class="p-mypage">
 
-            <h2 class ="f-h2">自分の購入アイデア</h2>
+            <h2 class ="f-h2">購入したアイデア</h2>
 
 
             <h3 class ="f-h3">購入したアイデア</h3>
