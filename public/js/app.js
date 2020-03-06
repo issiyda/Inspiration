@@ -4104,16 +4104,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-<<<<<<< HEAD
-<<<<<<< HEAD
 //
 //
 //
 //
-=======
->>>>>>> feature/202002_05/guestUserButton
-=======
->>>>>>> feature/202002_05/reviewStarNumbers
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostDetailComponent",
   data: function data() {
@@ -4145,7 +4139,8 @@ __webpack_require__.r(__webpack_exports__);
       reviewNumber: "",
       reviewErrorMessage: false,
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-      processing: false
+      processing: false,
+      paginate: ['paginate-log']
     };
   },
   created: function created() {
@@ -6510,7 +6505,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.fav[data-v-a7d47a5e]{\n    color:#FFBEDA;\n    margin:5% auto;\n}\n.c-button[data-v-a7d47a5e]{\n    margin:5% auto;\n}\n\n", ""]);
+exports.push([module.i, "\n.fav[data-v-a7d47a5e]{\n    color:#FFBEDA;\n    margin:5% auto;\n}\n.c-button[data-v-a7d47a5e]{\n    margin:5% auto;\n}\n.ic[data-v-a7d47a5e] ul{\n    display:-webkit-box;\n    display:flex;\n    width:100%;\n    margin:5% auto;\n    flex-wrap:wrap;\n}\n.pagination[data-v-a7d47a5e] ul{\n    display: -webkit-box;\n    display: flex;\n    font-size:24px;\n    -webkit-box-pack:center;\n            justify-content:center;\n    list-style:none;\n}\n.pagination[data-v-a7d47a5e] li{\n    margin: 0 2%;\n}\n.pagination-container[data-v-a7d47a5e] a{\n    color:black;\n}\n\n", ""]);
 
 // exports
 
@@ -12557,153 +12552,357 @@ var render = function() {
       _c(
         "div",
         { staticClass: "review review-container" },
-        _vm._l(this.ideaReviews, function(review) {
-          return _c("div", { staticClass: "review-posted" }, [
-            _c(
-              "div",
-              { staticClass: "review-posted-name" },
-              [
+        [
+          _c(
+            "paginate",
+            { attrs: { name: "paginate-log", list: this.ideaReviews, per: 3 } },
+            _vm._l(_vm.paginated("paginate-log"), function(review) {
+              return _c("div", { staticClass: "review-posted" }, [
                 _c(
-                  "router-link",
-                  {
-                    attrs: {
-                      to: {
-                        name: "profileDetail",
-                        params: {
-                          userId: review.user_id
-                        }
-                      }
-                    }
-                  },
+                  "div",
+                  { staticClass: "review-posted-name" },
                   [
-                    _c("div", { staticClass: "review-img" }, [
-                      review.img !== null
-                        ? _c("img", {
-                            attrs: {
-                              src: "./img" + review.img,
-                              alt: "reviewUserImg"
+                    _c(
+                      "router-link",
+                      {
+                        attrs: {
+                          to: {
+                            name: "profileDetail",
+                            params: {
+                              userId: review.user_id
                             }
-                          })
-                        : _c("img", {
-                            attrs: {
-                              src: "./img/images/account.jpeg",
-                              alt: "reviewUserImg"
-                            }
-                          }),
-                      _vm._v(" "),
-                      _c(
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "review-img" }, [
+                          review.img !== null
+                            ? _c("img", {
+                                attrs: {
+                                  src: "./img" + review.img,
+                                  alt: "reviewUserImg"
+                                }
+                              })
+                            : _c("img", {
+                                attrs: {
+                                  src: "./img/images/account.jpeg",
+                                  alt: "reviewUserImg"
+                                }
+                              }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "review-img-name",
+                              attrs: { id: "userName" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(review.name) +
+                                  "\n                            "
+                              ),
+                              _c("p", [_vm._v("さん")])
+                            ]
+                          )
+                        ])
+                      ]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "review-posted-star" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "review-posted-comment-label",
+                      attrs: { for: "reviewComment" }
+                    },
+                    [_vm._v("評価")]
+                  ),
+                  _vm._v(" "),
+                  review.star === 1
+                    ? _c(
                         "div",
                         {
-                          staticClass: "review-img-name",
-                          attrs: { id: "userName" }
+                          staticClass: "review-posted-comment-star",
+                          attrs: { id: "reviewComment" }
                         },
                         [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(review.name) +
-                              "\n                            "
+                          _c(
+                            "div",
+                            { staticClass: "review-posted-comment-star-top" },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              })
+                            ]
                           ),
-                          _c("p", [_vm._v("さん")])
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "review-posted-comment-star-bottom"
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              })
+                            ]
+                          )
                         ]
                       )
-                    ])
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "review-posted-star" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "review-posted-comment-label",
-                  attrs: { for: "reviewComment" }
-                },
-                [_vm._v("評価")]
-              ),
-              _vm._v(" "),
-              review.star === 1
-                ? _c(
+                    : review.star === 2
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "review-posted-comment-star",
+                          attrs: { id: "reviewComment" }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "review-posted-comment-star-top" },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "review-posted-comment-star-bottom"
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    : review.star === 3
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "review-posted-comment-star",
+                          attrs: { id: "reviewComment" }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "review-posted-comment-star-top" },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "review-posted-comment-star-bottom"
+                            },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    : review.star === 4
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "review-posted-comment-star",
+                          attrs: { id: "reviewComment" }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "review-posted-comment-star-top" },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "review-posted-comment-star-bottom"
+                            },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass: "fas fa-star ic-star fa-2x"
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    : review.star === 5
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "review-posted-comment-star",
+                          attrs: { id: "reviewComment" }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "review-posted-comment-star-top" },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "review-posted-comment-star-bottom"
+                            },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              }),
+                              _vm._v(" "),
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "review-posted-comment" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "review-posted-comment-label",
+                      attrs: { for: "voiceComment" }
+                    },
+                    [_vm._v("レビュー")]
+                  ),
+                  _vm._v(" "),
+                  _c(
                     "div",
                     {
-                      staticClass: "review-posted-comment-star",
-                      attrs: { id: "reviewComment" }
+                      staticClass: "review-posted-comment-content",
+                      attrs: { id: "voiceComment" }
                     },
-                    [_vm._m(2, true), _vm._v(" "), _vm._m(3, true)]
+                    [
+                      _vm._v(
+                        "\n                         " +
+                          _vm._s(review.comment) +
+                          "\n                    "
+                      )
+                    ]
                   )
-                : review.star === 2
-                ? _c(
-                    "div",
-                    {
-                      staticClass: "review-posted-comment-star",
-                      attrs: { id: "reviewComment" }
-                    },
-                    [_vm._m(4, true), _vm._v(" "), _vm._m(5, true)]
-                  )
-                : review.star === 3
-                ? _c(
-                    "div",
-                    {
-                      staticClass: "review-posted-comment-star",
-                      attrs: { id: "reviewComment" }
-                    },
-                    [_vm._m(6, true), _vm._v(" "), _vm._m(7, true)]
-                  )
-                : review.star === 4
-                ? _c(
-                    "div",
-                    {
-                      staticClass: "review-posted-comment-star",
-                      attrs: { id: "reviewComment" }
-                    },
-                    [_vm._m(8, true), _vm._v(" "), _vm._m(9, true)]
-                  )
-                : review.star === 5
-                ? _c(
-                    "div",
-                    {
-                      staticClass: "review-posted-comment-star",
-                      attrs: { id: "reviewComment" }
-                    },
-                    [_vm._m(10, true), _vm._v(" "), _vm._m(11, true)]
-                  )
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "review-posted-comment" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "review-posted-comment-label",
-                  attrs: { for: "voiceComment" }
-                },
-                [_vm._v("レビュー")]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "review-posted-comment-content",
-                  attrs: { id: "voiceComment" }
-                },
-                [
-                  _vm._v(
-                    "\n                         " +
-                      _vm._s(review.comment) +
-                      "\n                    "
-                  )
-                ]
-              )
-            ])
-          ])
-        }),
-        0
+                ])
+              ])
+            }),
+            0
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "pagination" },
+        [
+          _c("paginate-links", {
+            staticClass: "pagination-container",
+            attrs: { for: "paginate-log", "show-step-links": true }
+          })
+        ],
+        1
       ),
       _vm._v(" "),
       !_vm.reviewed && _vm.buying
         ? _c("div", { staticClass: "review-container" }, [
-            _vm._m(12),
+            _vm._m(2),
             _vm._v(" "),
             _c("div", { staticClass: "review-comment" }, [
               _c(
@@ -12783,7 +12982,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(13), _vm._v(" "), _vm._m(14)]
+                        [_vm._m(3), _vm._v(" "), _vm._m(4)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -12798,7 +12997,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(15), _vm._v(" "), _vm._m(16)]
+                        [_vm._m(5), _vm._v(" "), _vm._m(6)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -12813,7 +13012,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(17), _vm._v(" "), _vm._m(18)]
+                        [_vm._m(7), _vm._v(" "), _vm._m(8)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -12828,7 +13027,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(19), _vm._v(" "), _vm._m(20)]
+                        [_vm._m(9), _vm._v(" "), _vm._m(10)]
                       ),
                       _vm._v(" "),
                       _c(
@@ -12843,7 +13042,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._m(21), _vm._v(" "), _vm._m(22)]
+                        [_vm._m(11), _vm._v(" "), _vm._m(12)]
                       )
                     ])
                   ]),
@@ -12901,7 +13100,7 @@ var render = function() {
             ])
           ])
         : _c("div", { staticClass: "review-container-restriction" }, [
-            _vm._m(23),
+            _vm._m(13),
             _vm._v(" "),
             _c("div", { staticClass: "review-comment" }, [
               _c("form", { attrs: { action: "" } }, [
@@ -12910,7 +13109,7 @@ var render = function() {
                     _vm._v("評価")
                   ]),
                   _vm._v(" "),
-                  _vm._m(24),
+                  _vm._m(14),
                   _vm._v(" "),
                   _c("div", { staticClass: "review-comment-container" }, [
                     _c("label", { attrs: { for: "review-comment" } }, [
@@ -12981,161 +13180,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "c-heading" }, [
       _c("h3", { staticClass: "f-h3" }, [_vm._v("皆さんの声")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-top" }, [
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-bottom" }, [
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-top" }, [
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-bottom" }, [
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-top" }, [
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-bottom" }, [
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-top" }, [
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-bottom" }, [
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star ic-star fa-2x" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-top" }, [
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-posted-comment-star-bottom" }, [
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      }),
-      _vm._v(" "),
-      _c("i", {
-        staticClass:
-          "fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"
-      })
     ])
   },
   function() {
