@@ -109,6 +109,12 @@
                         </div>
                     </div>
 
+                    <label for="contents" class="c-label">シェア</label>
+                    <div for="share" class="confirm-text">
+                        アイコンClickでシェア
+                        <i id="share" class="fab fa-twitter completed-share-twitter u-twitter" @click="twitterShare($store.state.users.id,detail.id)"></i>
+                    </div>
+
                 </div>
                 </div>
 
@@ -143,7 +149,7 @@
                     <div class="review-posted-star">
 
                         <label for="reviewComment" class ="review-posted-comment-label">評価</label>
-                        <div id="reviewComment" v-if="review.star === 1" class ="review-posted-comment-star">
+                        <div v-if="review.star === 1" class ="review-posted-comment-star">
                             <div class="review-posted-comment-star-top">
                                 <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
                                 <i class="fas fa-star ic-star fa-2x"></i>
@@ -169,7 +175,7 @@
 
                         </div>
 
-                        <div id="reviewComment" v-else-if="review.star === 3" class ="review-posted-comment-star">
+                        <div v-else-if="review.star === 3" class ="review-posted-comment-star">
                             <div class="review-posted-comment-star-top">
                                 <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
                                 <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
@@ -182,7 +188,7 @@
 
                         </div>
 
-                        <div id="reviewComment" v-else-if="review.star === 4" class ="review-posted-comment-star">
+                        <div v-else-if="review.star === 4" class ="review-posted-comment-star">
                             <div class="review-posted-comment-star-top">
                                 <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
                                 <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
@@ -659,8 +665,13 @@
                 else {
                     this.reviewErrorMessage = '全てのレビュー入力がされていません';
                 }
-            }
+            },
 
+            twitterShare(){
+                const $url = `https://twitter.com/intent/tweet?text=アイデア名\n「${this.title}」\r\n他にも沢山の魅力的なアイデアがあるよ!\r\n%20%23Inspiration&url=http://ec2-13-231-128-196.ap-northeast-1.compute.amazonaws.com`;
+                window.open($url, null, 'top=100,left=100,width=300,height=400');
+
+            }
         },
 
         computed:{

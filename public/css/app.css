@@ -2776,7 +2776,7 @@ input[type=radio]:checked + .c-radio {
 }
 
 .completed-share-twitter {
-  text-shadow: 2px 2px 0px #4287d6;
+  text-shadow: 2px 2px 0px #1da1f3;
   font-size: 30px;
 }
 
@@ -3200,5 +3200,9 @@ input[type=radio]:checked + .c-radio {
 
 .edit-label {
   margin: 10% auto;
+}
+
+.u-twitter {
+  color: #1da1f3;
 }
 
