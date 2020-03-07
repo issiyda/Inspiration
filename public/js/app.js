@@ -3733,7 +3733,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     twitterShare: function twitterShare() {
-      var $url = "https://twitter.com/intent/tweet?text=\u65B0\u898F\u30A2\u30A4\u30C7\u30A2\u540D\n\u300C".concat(this.title, "\u300D\n%20%23Inspiration&url=https://code.ameneko.com/twitter-share");
+      var $url = "https://twitter.com/intent/tweet?text=\u65B0\u898F\u30A2\u30A4\u30C7\u30A2\u540D\n\u300C".concat(this.title, "\u300D\n%20%23Inspiration&url=http://ec2-13-231-128-196.ap-northeast-1.compute.amazonaws.com/");
       window.open($url, null, 'top=100,left=100,width=300,height=400');
     }
   }
@@ -6338,7 +6338,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     //Twittershare用のリンクへ飛ばす
     twitterShare: function twitterShare() {
-      var $url = "https://twitter.com/intent/tweet?text=\u65B0\u898F\u30EC\u30D3\u30E5\u30FC\n\u300C".concat(this.title, "\u300D\n%20%23Inspiration&url=https://code.ameneko.com/twitter-share");
+      var $url = "https://twitter.com/intent/tweet?text=\u65B0\u898F\u30EC\u30D3\u30E5\u30FC\n\u300C".concat(this.title, "\u300D\n%20%23Inspiration&url=http://ec2-13-231-128-196.ap-northeast-1.compute.amazonaws.com/");
       window.open($url, null, 'top=100,left=100,width=300,height=400');
     }
   }
