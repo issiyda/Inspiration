@@ -907,6 +907,7 @@ a {
 .edit-button,
 .edit-button-delete,
 .allIdea-button-search,
+.confirm-button,
 .profile-button,
 .profile-button-img,
 .c-mini-button,
@@ -936,6 +937,7 @@ a {
   .edit-button,
   .edit-button-delete,
   .allIdea-button-search,
+  .confirm-button,
   .profile-button,
   .profile-button-img,
   .c-mini-button,
@@ -949,6 +951,7 @@ a {
 .edit-button a,
 .edit-button-delete a,
 .allIdea-button-search a,
+.confirm-button a,
 .profile-button a,
 .profile-button-img a,
 .c-mini-button a,
@@ -971,6 +974,7 @@ a {
 .edit-button:active,
 .edit-button-delete:active,
 .allIdea-button-search:active,
+.confirm-button:active,
 .profile-button:active,
 .profile-button-img:active,
 .c-mini-button:active,
@@ -989,6 +993,7 @@ a {
 .edit-button:focus,
 .edit-button-delete:focus,
 .allIdea-button-search:focus,
+.confirm-button:focus,
 .profile-button:focus,
 .profile-button-img:focus,
 .c-mini-button:focus,
@@ -1048,6 +1053,7 @@ a {
   box-sizing: border-box;
   display: -webkit-box;
   display: flex;
+  position: relative;
   width: 100%;
 }
 
@@ -1136,6 +1142,7 @@ input[type=radio]:checked + .c-radio {
   .c-form .edit-button,
   .c-form .edit-button-delete,
   .c-form .allIdea-button-search,
+  .c-form .confirm-button,
   .c-form .profile-button,
   .c-form .profile-button-img,
   .c-form .c-button-allShow,
@@ -1721,16 +1728,6 @@ input[type=radio]:checked + .c-radio {
   display: none;
 }
 
-.confirm-post {
-  margin: 5% auto;
-}
-
-@media screen and (max-width: 414px) {
-  .confirm-post {
-    margin: 5% auto 10%;
-  }
-}
-
 .confirm-attention {
   color: #A16EFF;
   font-size: 24px;
@@ -1743,6 +1740,22 @@ input[type=radio]:checked + .c-radio {
     font-size: 18px;
     width: 70%;
   }
+}
+
+.confirm-button {
+  padding: 5%;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 414px) {
+  .confirm-button {
+    margin: 5% auto 10%;
+    padding: 8%;
+  }
+}
+
+.confirm-button-last {
+  margin-bottom: 10%;
 }
 
 .postDetail {

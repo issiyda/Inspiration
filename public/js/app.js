@@ -14093,7 +14093,7 @@ var render = function() {
           _c(
             "div",
             {
-              staticClass: "c-button confirm-post",
+              staticClass: "confirm-button",
               on: {
                 click: function($event) {
                   return _vm.editIdea()
@@ -14130,14 +14130,14 @@ var render = function() {
           _c(
             "div",
             {
-              staticClass: "c-button confirm-post",
+              staticClass: "confirm-button confirm-button-last",
               on: {
                 click: function($event) {
                   return _vm.saveIdea(_vm.userId)
                 }
               }
             },
-            [_c("div", [_vm._v("投稿する")])]
+            [_c("a", [_vm._v("投稿する")])]
           )
         ]
       )
