@@ -107,7 +107,6 @@ Route::get('priceSearch/lower','IdeaSearchController@priceSearchLower');
  */
 Route::get('priceSearch/middle','IdeaSearchController@priceSearchMiddle');
 
-Route::get('termSearch/before','IdeaSearchController@termSearchBefore');
 
 /**
  * 期間検索（年別）

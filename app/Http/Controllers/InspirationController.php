@@ -82,7 +82,7 @@ class InspirationController extends Controller
 
         $userId = $request->Input('userId');
 
-        $allIdea = Idea::get();
+        $allIdea = Idea::latest()->get();
 
         /**
          * ログイン中のユーザが購入したアイデアデータ取得

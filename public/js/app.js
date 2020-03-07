@@ -2318,8 +2318,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllIdeaComponent",
   data: function data() {
@@ -2350,8 +2348,8 @@ __webpack_require__.r(__webpack_exports__);
       year: "",
       month: "",
       day: "",
-      before: "",
-      after: "",
+      before: null,
+      after: null,
       //paginate用
       paginate: ['paginate-log'],
       categorySelected: false,
@@ -2531,6 +2529,9 @@ __webpack_require__.r(__webpack_exports__);
             })["catch"](function (error) {
               console.log(error);
             });
+          } else {
+            this.ideas = this.$store.state.ideas.allIdea;
+            this.$emit('close-loading');
           }
     },
     termYearSearch: function termYearSearch() {
@@ -2678,7 +2679,7 @@ __webpack_require__.r(__webpack_exports__);
            * 以降のデータ検索
            * afterにのみ入力値存在する
            */
-          else if (this.before === "" && this.after !== "") {
+          else if (this.before === null && this.after !== null) {
               axios.get('/api/termSearch/after', {
                 params: {
                   after: this.after
@@ -2694,8 +2695,6 @@ __webpack_require__.r(__webpack_exports__);
                   _this6.ideas = response.data.afterIdea;
                   _this6.errorMessage = false;
                 }
-
-                _this6.ideas = response.data.afterIdea;
               })["catch"](function (error) {
                 console.log(error);
 
@@ -2713,9 +2712,9 @@ __webpack_require__.r(__webpack_exports__);
                     before: this.before
                   }
                 }).then(function (response) {
-                  console.log(response);
-
                   _this6.$emit('close-loading');
+
+                  console.log(response);
 
                   if (response.data.beforeIdea.length === 0) {
                     _this6.errorMessage = true;
@@ -2730,10 +2729,10 @@ __webpack_require__.r(__webpack_exports__);
                 });
               }
               /**
-                   * 両方に入力値存在する
-                   * 入力値の間の値段のアイデアを取得
-                   */
-              else if (this.before !== "" && this.after !== "") {
+               * 両方に入力値存在する
+               * 入力値の間の値段のアイデアを取得
+               */
+              else if (this.before !== null && this.after !== null) {
                   axios.get('/api/termSearch/middle', {
                     params: {
                       before: this.before,
@@ -2745,7 +2744,7 @@ __webpack_require__.r(__webpack_exports__);
                     console.log(response);
 
                     if (response.data.middleIdea.length === 0) {
-                      _this6.searchedNoItems();
+                      _this6.errorMessage = true;
                     } else if (response.data.middleIdea.length !== 0) {
                       _this6.ideas = response.data.middleIdea;
                       _this6.errorMessage = false;
@@ -2755,6 +2754,9 @@ __webpack_require__.r(__webpack_exports__);
 
                     _this6.$emit('close-loading');
                   });
+                } else if (this.before === null && this.after === null) {
+                  this.ideas = this.$store.state.ideas.allIdea;
+                  this.$emit('close-loading');
                 }
     }
   },
@@ -6466,7 +6468,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.ic[data-v-722e3f90] ul{\n    display:-webkit-box;\n    display:flex;\n    width:100%;\n    margin:5% auto;\n    flex-wrap:wrap;\n}\n.pagination[data-v-722e3f90] ul{\n    display: -webkit-box;\n    display: flex;\n    font-size:24px;\n    -webkit-box-pack:center;\n            justify-content:center;\n    list-style:none;\n}\n.pagination[data-v-722e3f90] li{\n    margin: 0 2%;\n}\n.pagination-container[data-v-722e3f90] a{\n    color:black;\n}\nmain[data-v-722e3f90] input[type=\"input\"]{\n    border: pink solid;\n    box-shadow: 3px 3px 3px rgba(0,0,0,0.2);\n    font-size:18px;\n}\n\n\n\n", ""]);
+exports.push([module.i, "\n.ic[data-v-722e3f90] ul {\n    display: -webkit-box;\n    display: flex;\n    width: 100%;\n    margin: 5% auto;\n    flex-wrap: wrap;\n}\n.pagination[data-v-722e3f90] ul {\n    display: -webkit-box;\n    display: flex;\n    font-size: 24px;\n    -webkit-box-pack: center;\n            justify-content: center;\n    list-style: none;\n}\n.pagination[data-v-722e3f90] li {\n    margin: 0 2%;\n}\n.pagination-container[data-v-722e3f90] a {\n    color: black;\n}\nmain[data-v-722e3f90] input[type=\"input\"] {\n    border: pink solid;\n    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);\n    font-size: 18px;\n}\n\n\n", ""]);
 
 // exports
 
@@ -10441,7 +10443,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v(_vm._s(_vm.openingMessage))]
+        [_vm._v(_vm._s(_vm.openingMessage) + "\n        ")]
       ),
       _vm._v(" "),
       _c(
@@ -10971,9 +10973,9 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("div", { staticClass: "ic-desc-text" }, [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                                " +
                                       _vm._s(allIdea.overflow.slice(0, 48)) +
-                                      "\n                        "
+                                      "\n                            "
                                   )
                                 ])
                               ]),

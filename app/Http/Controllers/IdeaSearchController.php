@@ -17,12 +17,12 @@ class   IdeaSearchController extends Controller
     {
         $category_id = $request->input('categoryId');
 
-        $categoryIdea = Idea::where('category_id',$category_id)
+        $categoryIdea = Idea::where('category_id', $category_id)
             ->latest()->get();
 
 
         return response()->json([
-            'categoryIdea' =>$categoryIdea
+            'categoryIdea' => $categoryIdea
         ]);
     }
 
@@ -36,10 +36,11 @@ class   IdeaSearchController extends Controller
 
         $higherPrice = $request->input('higherPrice');
 
-        $priceIdea = Idea::where('price', '>=', $higherPrice)->get();
+        $priceIdea = Idea::where('price', '>=', $higherPrice)
+            ->latest()->get();
 
         return response()->json([
-            'higherIdea' =>$priceIdea
+            'higherIdea' => $priceIdea
         ]);
     }
 
@@ -52,10 +53,11 @@ class   IdeaSearchController extends Controller
     {
         $lowerPrice = $request->input('lowerPrice');
 
-        $priceIdea = Idea::where('price', '<=' , $lowerPrice)->get();
+        $priceIdea = Idea::where('price', '<=', $lowerPrice)
+            ->latest()->get();
 
         return response()->json([
-            'lowerIdea' =>$priceIdea
+            'lowerIdea' => $priceIdea
         ]);
     }
 
@@ -70,10 +72,11 @@ class   IdeaSearchController extends Controller
         $higherPrice = $request->input('higherPrice');
 
         $priceIdea = Idea::where('price', '>=', $higherPrice)
-            ->where('price', '<=' , $lowerPrice)->get();
+            ->where('price', '<=', $lowerPrice)
+            ->latest()->get();
 
         return response()->json([
-            'middleIdea' =>$priceIdea
+            'middleIdea' => $priceIdea
         ]);
     }
 
@@ -84,10 +87,10 @@ class   IdeaSearchController extends Controller
             $yearTerm = new Carbon($request->input('year'));
 
             $yearIdea = Idea::whereYear('created_at', $yearTerm)
-                ->get();
+                ->latest()->get();
 
             return response()->json([
-                'yearIdea' =>$yearIdea
+                'yearIdea' => $yearIdea
             ]);
         }
     }
@@ -104,11 +107,12 @@ class   IdeaSearchController extends Controller
 
             $monthTerm = new Carbon($request->input('month'));
 
-            $monthIdea = Idea::whereMonth('created_at', $monthTerm)
-                ->get();
+            $monthIdea = Idea::whereYear('created_at', $monthTerm)
+                ->whereMonth('created_at', $monthTerm)
+                ->latest()->get();
 
             return response()->json([
-                'monthIdea' =>$monthIdea
+                'monthIdea' => $monthIdea
             ]);
         }
     }
@@ -124,34 +128,13 @@ class   IdeaSearchController extends Controller
         {
 
             $dayTerm = new Carbon($request->input('day'));
-            $trueDayTerm = $dayTerm->addDays(1);
+            $trueDayTerm = $dayTerm->addHours(9);
 
-            $dayIdea = Idea::whereDay('created_at','=', $trueDayTerm)
-                ->get();
-
-            return response()->json([
-                'dayIdea' =>$dayIdea
-            ]);
-        }
-    }
-
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
-     * 入力した日付以前に作られたデータ
-     */
-    public function termSearchBefore(Request $request)
-    {
-        {
-
-            $beforeTerm = new Carbon($request->input('before'));
-            $trueBeforeTerm = $beforeTerm->addDays(1);
-
-            $beforeIdea = Idea::where('created_at', '<=', $trueBeforeTerm)->get();
+            $dayIdea = Idea::whereDate('created_at', '=', $trueDayTerm)
+                ->latest()->get();
 
             return response()->json([
-                'beforeIdea' => $beforeIdea
+                'dayIdea' => $dayIdea
             ]);
         }
     }
@@ -167,15 +150,39 @@ class   IdeaSearchController extends Controller
         {
 
             $afterTerm = new Carbon($request->input('after'));
-            $trueAfterTerm = $afterTerm->addDays(1);
+            $trueAfterTerm = $afterTerm->addHours(9);
 
-            $afterIdea = Idea::where('created_at', '>=', $trueAfterTerm)->get();
+            $afterIdea = Idea::where('created_at', '>=', $trueAfterTerm)
+                ->latest()->get();
 
             return response()->json([
                 'afterIdea' => $afterIdea
             ]);
         }
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     * 入力した日付以前に作られたデータ
+     */
+    public function termSearchBefore(Request $request)
+    {
+        {
+
+            $beforeTerm = new Carbon($request->input('before'));
+            $trueBeforeTerm = $beforeTerm->addHours(32)->addMinutes(59)->addSeconds(59);
+
+            $beforeIdea = Idea::where('created_at', '<=', $trueBeforeTerm)
+                ->latest()->get();
+
+            return response()->json([
+                'beforeIdea' => $beforeIdea
+            ]);
+        }
+    }
+
 
     /**
      * @param Request $request
@@ -190,11 +197,12 @@ class   IdeaSearchController extends Controller
             $beforeTerm = new Carbon($request->input('before'));
             $afterTerm = new Carbon($request->input('after'));
 
-            $trueBeforeTerm = $beforeTerm->addDays(1);
-            $trueAfterTerm = $afterTerm->addDays(1);
+            $trueAfterTerm = $afterTerm->addHours(9);
+            $trueBeforeTerm = $beforeTerm->addHours(32)->addMinutes(59)->addSeconds(59);
 
             $middleIdea = Idea::where('created_at', '<=', $trueBeforeTerm)
-                ->where('created_at','>=',$trueAfterTerm)->get();
+                ->where('created_at', '>=', $trueAfterTerm)
+                ->latest()->get();
 
             return response()->json([
                 'middleIdea' => $middleIdea
