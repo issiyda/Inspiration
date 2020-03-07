@@ -21,11 +21,10 @@
                             </label>
                         </div>
 
-                        <div class="error" v-if="errorMessages.imgErrorMessage">{{errorMessages.imgErrorMessage}}</div>
-
-
-
                     </div>
+
+                    <div class="error" v-if="errorMessages.imgErrorMessage">{{errorMessages.imgErrorMessage}}</div>
+
 
                     <div v-if="ImgChangeState" class="profile-container-img-message">
                         {{profImgChangeMessage}}
@@ -215,10 +214,26 @@
                 }
             },
 
-            onFileChange(event) {
-                this.fileInfo = event.target.files[0];
-                this.previewImage();
-                console.log('onFileChangeFinished')
+            onFileChange(event){
+                const SIZE_LIMIT = 3000000 //3Mバイトまで
+                this.fileInfo = event.target.files[0]
+                console.log(this.fileInfo.size);
+                if(this.fileInfo.size > SIZE_LIMIT) {
+
+                    this.errorMessages.imgErrorMessage = "3M以下の画像を選択してください"
+
+                }else if(this.fileInfo.type !== "image/png" && this.fileInfo.type !== "image/jpeg"　&& this.fileInfo.type !== "image/jpg")
+                {
+
+                    this.errorMessages.imgErrorMessage = "画像の形式は(jpg,jpeg,png)のみ投稿可能です"
+
+                }
+                else {
+                    this.$emit('open-loading');
+                    this.errorMessages.imgErrorMessage = false;
+                    this.previewImage();
+
+                }
             },
 
 
