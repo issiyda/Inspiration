@@ -40,7 +40,7 @@
                     <p>下記の編集ボタンを押してください</p>
                 </div>
 
-                <div class ="c-button confirm-post" @click="editIdea()">
+                <div class="confirm-button" @click="editIdea()">
                 <router-link :to="{name:'post',params:{
                      fileInfo: this.fileInfo,
                      img: this.img,
@@ -62,8 +62,8 @@
 
 
 
-                <div class ="c-button confirm-post" @click="saveIdea(userId)">
-                    <div>投稿する</div>
+                <div class="confirm-button confirm-button-last" @click="saveIdea(userId)">
+                    <a>投稿する</a>
                 </div>
 
             </form>
