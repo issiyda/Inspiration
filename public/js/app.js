@@ -2318,6 +2318,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllIdeaComponent",
   data: function data() {
@@ -2456,13 +2458,18 @@ __webpack_require__.r(__webpack_exports__);
     priceSearch: function priceSearch() {
       var _this2 = this;
 
-      this.$emit('open-loading');
+      this.errorMessage = false;
+      this.priceErrorMessage = false;
       /**
        * 以上の方にのみ入力値存在する
        * 入力値以上の値段のアイデアを取得
        */
 
       if (this.higher !== null && this.lower === "") {
+        if (Number.isFinite(this.higher) === false) {
+          this.priceErrorMessage = "半角数字で入力してください";
+        } else this.$emit('open-loading');
+
         axios.get('/api/priceSearch/higher', {
           params: {
             higherPrice: this.higher
@@ -2480,6 +2487,8 @@ __webpack_require__.r(__webpack_exports__);
           }
         })["catch"](function (error) {
           console.log(error);
+
+          _this2.$emit('close-loading');
         });
       }
       /**
@@ -2487,51 +2496,62 @@ __webpack_require__.r(__webpack_exports__);
        * 入力値以下値段のアイデアを取得
        */
       else if (this.higher === "" && this.lower !== null) {
-          axios.get('/api/priceSearch/lower', {
-            params: {
-              lowerPrice: this.lower
-            }
-          }).then(function (response) {
-            console.log(response);
+          if (Number.isFinite(this.lower) === false) {
+            this.priceErrorMessage = "半角数字で入力してください";
+          } else {
+            this.$emit('open-loading');
+            axios.get('/api/priceSearch/lower', {
+              params: {
+                lowerPrice: this.lower
+              }
+            }).then(function (response) {
+              console.log(response);
 
-            if (response.data.lowerIdea.length === 0) {
-              _this2.searchedNoItems();
-            } else if (response.data.lowerIdea.length !== 0) _this2.ideas = response.data.lowerIdea;
+              if (response.data.lowerIdea.length === 0) {
+                _this2.searchedNoItems();
+              } else if (response.data.lowerIdea.length !== 0) _this2.ideas = response.data.lowerIdea;
 
-            _this2.errorMessage = false;
+              _this2.errorMessage = false;
 
-            _this2.$emit('close-loading');
-          })["catch"](function (error) {
-            console.log(error);
-          });
+              _this2.$emit('close-loading');
+            })["catch"](function (error) {
+              console.log(error);
+
+              _this2.$emit('close-loading');
+            });
+          }
         }
         /**
          * 両方の入力値存在する
          * 入力値以上と以下の間の値段のアイデアを取得
          */
         else if (this.higher !== null && this.lower !== null) {
-            axios.get('/api/priceSearch/middle', {
-              params: {
-                lowerPrice: this.lower,
-                higherPrice: this.higher
-              }
-            }).then(function (response) {
-              console.log(response.data.middleIdea);
+            if (Number.isFinite(this.lower) === false || Number.isFinite(this.higher) === false) {
+              this.priceErrorMessage = "半角数字で入力してください";
+            } else {
+              this.$emit('open-loading');
+              axios.get('/api/priceSearch/middle', {
+                params: {
+                  lowerPrice: this.lower,
+                  higherPrice: this.higher
+                }
+              }).then(function (response) {
+                console.log(response.data.middleIdea);
 
-              if (response.data.middleIdea.length === 0) {
-                _this2.searchedNoItems();
-              } else if (response.data.middleIdea.length !== 0) {
+                if (response.data.middleIdea.length === 0) {
+                  _this2.searchedNoItems();
+                } else if (response.data.middleIdea.length !== 0) {
+                  _this2.$emit('close-loading');
+
+                  _this2.errorMessage = false;
+                  _this2.ideas = response.data.middleIdea;
+                }
+              })["catch"](function (error) {
+                console.log(error);
+
                 _this2.$emit('close-loading');
-
-                _this2.errorMessage = false;
-                _this2.ideas = response.data.middleIdea;
-              }
-            })["catch"](function (error) {
-              console.log(error);
-            });
-          } else {
-            this.ideas = this.$store.state.ideas.allIdea;
-            this.$emit('close-loading');
+              });
+            }
           }
     },
     termYearSearch: function termYearSearch() {
@@ -10654,7 +10674,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "search-price-input",
-                  attrs: { id: "down", type: "number" },
+                  attrs: { id: "down", type: "text" },
                   domProps: { value: _vm.higher },
                   on: {
                     blur: [
@@ -10687,7 +10707,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "search-price-input",
-                  attrs: { id: "top", type: "number" },
+                  attrs: { id: "top", type: "text" },
                   domProps: { value: _vm.lower },
                   on: {
                     blur: [
@@ -10707,11 +10727,7 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "top" } }, [_vm._v("円以下")]),
-                _vm._v(" "),
-                _c("input", {
-                  attrs: { id: "price", name: "category", type: "radio" }
-                })
+                _c("label", { attrs: { for: "top" } }, [_vm._v("円以下")])
               ])
             : _vm._e(),
           _vm._v(" "),
@@ -10876,6 +10892,12 @@ var render = function() {
     _vm.errorMessage
       ? _c("div", { staticClass: "error" }, [
           _vm._v(_vm._s(_vm.noMatchMessage))
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.priceErrorMessage
+      ? _c("div", { staticClass: "error" }, [
+          _vm._v(_vm._s(_vm.priceErrorMessage))
         ])
       : _vm._e(),
     _vm._v(" "),

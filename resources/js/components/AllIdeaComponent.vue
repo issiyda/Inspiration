@@ -50,14 +50,14 @@
 
                 <div v-if="priceSelected" class="search-price">
                     <div class="search-subject">価格検索</div>
-                    <input class="search-price-input" @blur="priceSearch()" id="down" type="number"
+                    <input class="search-price-input" @blur="priceSearch()" id="down" type="text"
                            v-model.number="higher">
                     <label for="down">円以上</label>
-                    <input class="search-price-input" @blur="priceSearch()" id="top" type="number"
+                    <input class="search-price-input" @blur="priceSearch()" id="top" type="text"
                            v-model.number="lower">
                     <label for="top">円以下</label>
 
-                    <input id="price" name="category" class="" type="radio">
+
                 </div>
 
                 <div v-if="dateSelected" class="search-date">
@@ -127,6 +127,8 @@
         <h3 class="f-h3">全アイデア</h3>
 
         <div class="error" v-if="errorMessage">{{noMatchMessage}}</div>
+        <div class="error" v-if="priceErrorMessage">{{priceErrorMessage}}</div>
+
 
 
         <div v-if="!errorMessage">
@@ -346,12 +348,19 @@
 
 
             priceSearch: function () {
-                this.$emit('open-loading');
+                this.errorMessage = false;
+                this.priceErrorMessage = false;
+
                 /**
                  * 以上の方にのみ入力値存在する
                  * 入力値以上の値段のアイデアを取得
                  */
                 if (this.higher !== null && this.lower === "") {
+
+                    if (Number.isFinite(this.higher) === false) {
+                        this.priceErrorMessage = "半角数字で入力してください"
+                    } else
+                        this.$emit('open-loading');
                     axios.get('/api/priceSearch/higher', {
                         params: {
                             higherPrice: this.higher
@@ -371,62 +380,74 @@
                             }
                         }).catch((error) => {
                         console.log(error)
+                        this.$emit('close-loading');
+
                     })
                 }
+
                 /**
                  * 円以下の方にだけ入力値存在する
                  * 入力値以下値段のアイデアを取得
                  */
                 else if (this.higher === "" && this.lower !== null) {
-                    axios.get('/api/priceSearch/lower', {
-                        params: {
-                            lowerPrice: this.lower
-                        }
-                    })
-                        .then(response => {
-                            console.log(response)
-                            if (response.data.lowerIdea.length === 0) {
+                    if (Number.isFinite(this.lower) === false) {
+                        this.priceErrorMessage = "半角数字で入力してください"
+                    } else {
+                        this.$emit('open-loading');
+                        axios.get('/api/priceSearch/lower', {
+                            params: {
+                                lowerPrice: this.lower
+                            }
+                        })
+                            .then(response => {
+                                console.log(response)
+                                if (response.data.lowerIdea.length === 0) {
 
-                                this.searchedNoItems()
+                                    this.searchedNoItems()
 
-                            } else if (response.data.lowerIdea.length !== 0)
-                                this.ideas = response.data.lowerIdea
-                            this.errorMessage = false
+                                } else if (response.data.lowerIdea.length !== 0)
+                                    this.ideas = response.data.lowerIdea
+                                this.errorMessage = false
+                                this.$emit('close-loading');
+                            }).catch((error) => {
+                            console.log(error)
                             this.$emit('close-loading');
-                        }).catch((error) => {
-                        console.log(error)
-                    })
+
+                        })
+                    }
                 }
                 /**
                  * 両方の入力値存在する
                  * 入力値以上と以下の間の値段のアイデアを取得
                  */
                 else if (this.higher !== null && this.lower !== null) {
-                    axios.get('/api/priceSearch/middle', {
-                        params: {
-                            lowerPrice: this.lower,
-                            higherPrice: this.higher
-                        }
-                    })
-                        .then(response => {
-                            console.log(response.data.middleIdea)
-                            if (response.data.middleIdea.length === 0) {
-                                this.searchedNoItems()
-                            } else if (response.data.middleIdea.length !== 0) {
-                                this.$emit('close-loading');
-                                this.errorMessage = false;
-                                this.ideas = response.data.middleIdea;
+                    if (Number.isFinite(this.lower) === false || Number.isFinite(this.higher) === false) {
+                        this.priceErrorMessage = "半角数字で入力してください"
+                    } else {
+                        this.$emit('open-loading');
+                        axios.get('/api/priceSearch/middle', {
+                            params: {
+                                lowerPrice: this.lower,
+                                higherPrice: this.higher
                             }
-                        }).catch((error) => {
-                        console.log(error)
-                    })
-                }else{
-                    this.ideas = this.$store.state.ideas.allIdea;
-                    this.$emit('close-loading');
+                        })
+                            .then(response => {
+                                console.log(response.data.middleIdea)
+                                if (response.data.middleIdea.length === 0) {
+                                    this.searchedNoItems()
+                                } else if (response.data.middleIdea.length !== 0) {
+                                    this.$emit('close-loading');
+                                    this.errorMessage = false;
+                                    this.ideas = response.data.middleIdea;
+                                }
+                            }).catch((error) => {
+                            console.log(error)
+                            this.$emit('close-loading');
+                        })
+                    }
                 }
 
-            },
-
+        },
             termYearSearch: function () {
                 this.$emit('open-loading');
                 this.month = "";
