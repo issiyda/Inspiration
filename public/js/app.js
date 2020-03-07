@@ -4656,9 +4656,20 @@ __webpack_require__.r(__webpack_exports__);
   beforeUpdate: function beforeUpdate() {},
   methods: {
     onFileChange: function onFileChange(event) {
-      this.$emit('open-loading');
+      var SIZE_LIMIT = 3000000; //3Mバイトまで
+
       this.fileInfo = event.target.files[0];
-      this.createImage();
+      console.log(this.fileInfo.size);
+
+      if (this.fileInfo.size > SIZE_LIMIT) {
+        this.errorMessages.imgErrorMessage = "3M以下の画像を選択してください";
+      } else if (this.fileInfo.type !== "image/png" && this.fileInfo.type !== "image/jpeg" && this.fileInfo.type !== "image/jpg") {
+        this.errorMessages.imgErrorMessage = "画像の形式は(jpg,jpeg,png)のみ投稿可能です";
+      } else {
+        this.errorMessages.imgErrorMessage = false;
+        this.$emit('open-loading');
+        this.createImage();
+      }
     },
     createImage: function createImage() {
       var _this = this;
@@ -5208,7 +5219,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ProfileComponent",
   data: function data() {
@@ -5300,9 +5310,20 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     onFileChange: function onFileChange(event) {
+      var SIZE_LIMIT = 3000000; //3Mバイトまで
+
       this.fileInfo = event.target.files[0];
-      this.previewImage();
-      console.log('onFileChangeFinished');
+      console.log(this.fileInfo.size);
+
+      if (this.fileInfo.size > SIZE_LIMIT) {
+        this.errorMessages.imgErrorMessage = "3M以下の画像を選択してください";
+      } else if (this.fileInfo.type !== "image/png" && this.fileInfo.type !== "image/jpeg" && this.fileInfo.type !== "image/jpg") {
+        this.errorMessages.imgErrorMessage = "画像の形式は(jpg,jpeg,png)のみ投稿可能です";
+      } else {
+        this.$emit('open-loading');
+        this.errorMessages.imgErrorMessage = false;
+        this.previewImage();
+      }
     },
     previewImage: function previewImage() {
       var _this4 = this;
@@ -5986,6 +6007,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostIdeaEditComponent",
   data: function data() {
@@ -6076,8 +6100,19 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     onFileChange: function onFileChange(event) {
+      var SIZE_LIMIT = 3000000; //3Mバイトまで
+
       this.fileInfo = event.target.files[0];
-      this.createImage();
+
+      if (this.fileInfo.size > SIZE_LIMIT) {
+        this.errorMessages.imgErrorMessage = "3M以下の画像を選択してください";
+      } else if (this.fileInfo.type !== "image/png" && this.fileInfo.type !== "image/jpeg" && this.fileInfo.type !== "image/jpg") {
+        this.errorMessages.imgErrorMessage = "画像の形式は(jpg,jpeg,png)のみ投稿可能です";
+      } else {
+        this.errorMessages.imgErrorMessage = false;
+        this.$emit('open-loading');
+        this.createImage();
+      }
     },
     createImage: function createImage() {
       var _this = this;
@@ -6090,6 +6125,7 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       reader.readAsDataURL(this.fileInfo);
+      this.$emit('close-loading');
     },
     saveImage: function saveImage() {
       var formData = new FormData();
@@ -14320,14 +14356,14 @@ var render = function() {
                     attrs: { src: _vm.profileImg, alt: "profileImg" }
                   })
                 ])
-              ]),
-              _vm._v(" "),
-              _vm.errorMessages.imgErrorMessage
-                ? _c("div", { staticClass: "error" }, [
-                    _vm._v(_vm._s(_vm.errorMessages.imgErrorMessage))
-                  ])
-                : _vm._e()
+              ])
             ]),
+            _vm._v(" "),
+            _vm.errorMessages.imgErrorMessage
+              ? _c("div", { staticClass: "error" }, [
+                  _vm._v(_vm._s(_vm.errorMessages.imgErrorMessage))
+                ])
+              : _vm._e(),
             _vm._v(" "),
             _vm.ImgChangeState
               ? _c("div", { staticClass: "profile-container-img-message" }, [
@@ -15288,6 +15324,12 @@ var render = function() {
                   ])
                 ])
               ]),
+              _vm._v(" "),
+              _vm.errorMessages.imgErrorMessage
+                ? _c("div", { staticClass: "error" }, [
+                    _vm._v(_vm._s(_vm.errorMessages.imgErrorMessage))
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "edit-container-input" }, [
                 _c(
