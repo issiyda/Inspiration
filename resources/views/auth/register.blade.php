@@ -49,7 +49,7 @@
                     @enderror
                 </div>
 
-                <input type="submit" class="c-button" >
+                <input type="submit" class="c-button">
             </form>
         </div>
         </div>
