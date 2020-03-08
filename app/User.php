@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Notifications\CustomResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -44,4 +45,11 @@ class User extends Authenticatable
     {
         return $this->hasMany('Review','user_id','id');
     }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new CustomResetPassword($token));
+    }
+
+
 }
