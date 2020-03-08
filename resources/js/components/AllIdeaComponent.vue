@@ -177,7 +177,7 @@
                 </paginate>
             </div>
 
-            <div class="pagination">
+            <div class="pagination" @click="moveToTop()">
                 <paginate-links for="paginate-log" class="pagination-container"
                                 :show-step-links="true"></paginate-links>
             </div>
@@ -259,6 +259,11 @@
         // },
 
         methods: {
+
+            moveToTop() {
+                this.$store.dispatch('moveToTop');
+            },
+
 
             reset: function () {
                 this.year = "".thie.month = ""

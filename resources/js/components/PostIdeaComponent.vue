@@ -186,12 +186,12 @@
                 console.log(this.fileInfo.size);
                 if(this.fileInfo.size > SIZE_LIMIT) {
 
-                    this.errorMessages.imgErrorMessage = "3M以下の画像を選択してください"
+                    this.errorMessages.imgErrorMessage = "3M以下の画像を選択してください。"
 
                 }else if(this.fileInfo.type !== "image/png" && this.fileInfo.type !== "image/jpeg"　&& this.fileInfo.type !== "image/jpg")
                 {
 
-                    this.errorMessages.imgErrorMessage = "画像の形式は(jpg,jpeg,png)のみ投稿可能です"
+                    this.errorMessages.imgErrorMessage = "画像の形式は(jpg,jpeg,png)のみ投稿可能です。"
 
                 }
                 else {
@@ -218,7 +218,7 @@
                 this.errorMessages.imgErrorMessage = false
                 if(this.ideaImage === undefined || this.ideaImage ==="" ) {
                     this.validations.imgValidation = false;
-                    this.errorMessages.imgErrorMessage ="＋をクリックして画像を選択して下さい"
+                    this.errorMessages.imgErrorMessage ="＋をクリックして画像を選択して下さい。"
                 }else {
                     this.validations.imgValidation = true;
                     this.errorMessages.imgErrorMessage = false
@@ -230,13 +230,13 @@
                 this.errorMessages.titleErrorMessage = false;
                 if(this.title === undefined || this.title ===""){
                     this.validations.titleValidation = false;
-                    this.errorMessages.titleErrorMessage ="入力必須です"
+                    this.errorMessages.titleErrorMessage ="入力必須です。";
                     this.titleChangeColor = true;
 
                 }else if(this.titleLength > 24){
 
                     this.validations.titleValidation = false;
-                    this.errorMessages.titleErrorMessage ="24文字以下で記入して下さい";
+                    this.errorMessages.titleErrorMessage ="24文字以下で記入して下さい。";
                     this.titleChangeColor = true
                 }
 
@@ -254,7 +254,7 @@
 
                 if (this.category_id === undefined || this.category_id ==="") {
                     this.validations.categoryValidation = false;
-                    this.errorMessages.categoryErrorMessage ="入力必須です"
+                    this.errorMessages.categoryErrorMessage ="入力必須です。"
                 } else {
                     this.validations.categoryValidation = true;
                     this.errorMessages.categoryErrorMessage = false;
@@ -267,12 +267,12 @@
 
                 if(this.price === undefined || this.price ==="") {
                     this.validations.priceValidation = false;
-                    this.errorMessages.priceErrorMessage ="数値を入力して下さい"
-                }else if(this.price > 1000000){
+                    this.errorMessages.priceErrorMessage ="数値を入力して下さい。"
+                }else if(this.price > 1000000 || this.price < 100){
                     this.validations.priceValidation = false;
-                    this.errorMessages.priceErrorMessage ="100万円以下で設定して下さい"
+                    this.errorMessages.priceErrorMessage ="100円以上100万円以下で設定して下さい。"
                 }
-                else if(this.price <=  1000000 && this.price !== "") {
+                else if(this.price <=  1000000 &&　this.price >= 100 && this.price !== "") {
                     this.validations.priceValidation = true;
                     this.errorMessages.priceErrorMessage = false;
 
@@ -283,12 +283,12 @@
 
                 if(this.overflow === undefined || this.overflow ==="") {
                     this.validations.overflowValidation =false;
-                    this.errorMessages.overflowErrorMessage ="入力必須です"
+                    this.errorMessages.overflowErrorMessage ="入力必須です。"
                     this.overflowChangeColor = true;
 
                 }else if(this.overflowLength > 100){
                     this.validations.overflowValidation = false;
-                    this.errorMessages.overflowErrorMessage ="100文字以下で入力して下さい"
+                    this.errorMessages.overflowErrorMessage ="100文字以下で入力して下さい。"
                     this.overflowChangeColor = true;
 
                 }
@@ -304,12 +304,12 @@
             contentValidation:function(){
                 if(this.content === undefined || this.content ==="") {
                     this.validations.contentValidation =false;
-                    this.errorMessages.contentErrorMessage ="入力必須です"
+                    this.errorMessages.contentErrorMessage ="入力必須です。"
                     this.contentChangeColor = true;
 
                 }else if(this.contentLength > 10000){
                     this.validations.contentValidation = false;
-                    this.errorMessages.contentErrorMessage ="10000文字以下で入力して下さい"
+                    this.errorMessages.contentErrorMessage ="10000文字以下で入力して下さい。"
                     this.contentChangeColor = true;
                 }
 
@@ -340,7 +340,7 @@
 
                 //エラーがあればメッセージ
                 }else if(this.submitOk === false){
-                    this.errorMessages.submitErrorMessage = "エラーがあります"
+                    this.errorMessages.submitErrorMessage = "エラーがあります。"
                 }
 
             },

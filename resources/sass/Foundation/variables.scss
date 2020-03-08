@@ -137,12 +137,12 @@ a{
 // h4
 // ==============================
 .f-h4{
-    height: 15%;
+    height: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
   color:$color_base;
-  font-size: $font-size_l;
+  font-size: $font-size_default;
   font-weight:bold;
   padding:8%;
 
@@ -160,5 +160,16 @@ a{
         font-size:$font-size_l;
         padding:5%;
         text-align:center;
+
+    @include mq{
+        width:60%;
+        margin:0 auto;
+    }
 }
 
+// ==============================
+// スマホのinputフォーム変更
+// ==============================
+input{
+    -webkit-appearance: none;
+}

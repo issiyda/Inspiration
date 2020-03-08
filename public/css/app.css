@@ -241,7 +241,7 @@ a {
 }
 
 .f-h4 {
-  height: 15%;
+  height: 20%;
   display: -webkit-box;
   display: flex;
   -webkit-box-pack: center;
@@ -249,7 +249,7 @@ a {
   -webkit-box-align: center;
           align-items: center;
   color: #FFBEDA;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   padding: 8%;
 }
@@ -266,6 +266,17 @@ a {
   font-size: 18px;
   padding: 5%;
   text-align: center;
+}
+
+@media screen and (max-width: 414px) {
+  .error {
+    width: 60%;
+    margin: 0 auto;
+  }
+}
+
+input {
+  -webkit-appearance: none;
 }
 
 .nav {
@@ -791,9 +802,9 @@ a {
 
 @media screen and (max-width: 414px) {
   .flash_message {
-    padding: 3%;
-    top: 110px;
-    width: 30%;
+    height: auto;
+    top: 100px;
+    width: 100%;
   }
 }
 
@@ -1077,6 +1088,7 @@ a {
 @media screen and (max-width: 414px) {
   .c-radio {
     box-sizing: border-box;
+    font-size: 12px;
     padding: 1%;
     width: 40%;
     margin: 7% auto;
@@ -1275,23 +1287,23 @@ input[type=radio]:checked + .c-radio {
 }
 
 .ic-mypage {
-  height: 650px;
+  height: 500px;
 }
 
 .ic-filter {
-  height: 700px;
+  height: 500px;
 }
 
 .ic-all {
-  height: 950px;
+  height: 500px;
 }
 
 .ic-card {
   background: #f6f5f4;
+  box-sizing: border-box;
   border-radius: 2%;
   margin: 0 auto 10%;
-  position: relative;
-  padding-bottom: 1%;
+  overflow: scroll;
   text-align: center;
   width: 17%;
   z-index: 1;
@@ -1329,7 +1341,7 @@ input[type=radio]:checked + .c-radio {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
           flex-direction: column;
-  height: 10%;
+  height: 25%;
   justify-content: space-around;
   margin: 2% 0;
   padding: 10%;
@@ -1344,7 +1356,7 @@ input[type=radio]:checked + .c-radio {
 }
 
 .ic-img {
-  height: 20%;
+  height: 30%;
   margin: 0 auto;
   width: 100%;
   overflow: hidden;
@@ -1402,10 +1414,6 @@ input[type=radio]:checked + .c-radio {
 
 .ic-desc-filter {
   height: 30%;
-}
-
-.ic-desc-all {
-  height: 25%;
 }
 
 .ic-desc-overflow {
@@ -1673,6 +1681,7 @@ input[type=radio]:checked + .c-radio {
 
 .profile-button-img {
   padding: 3%;
+  width: 40%;
 }
 
 .confirm {
@@ -1729,7 +1738,8 @@ input[type=radio]:checked + .c-radio {
 }
 
 .confirm-container-img img {
-  width: 100%;
+  max-width: 100%;
+  height: auto;
 }
 
 .confirm-container-none {
@@ -2797,7 +2807,7 @@ input[type=radio]:checked + .c-radio {
 
 @media screen and (max-width: 414px) {
   .completed-share {
-    width: 75%;
+    width: 85%;
   }
 }
 
@@ -2871,6 +2881,12 @@ input[type=radio]:checked + .c-radio {
 }
 
 .allIdea-button-search {
+  -webkit-box-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
   margin: 5%;
 }
 
@@ -3221,7 +3237,7 @@ input[type=radio]:checked + .c-radio {
 }
 
 .edit-button-delete {
-  padding: 4%;
+  padding: 6%;
 }
 
 .edit-label {
@@ -3230,5 +3246,9 @@ input[type=radio]:checked + .c-radio {
 
 .u-twitter {
   color: #1da1f3;
+}
+
+.u-comment {
+  font-size: 12px;
 }
 

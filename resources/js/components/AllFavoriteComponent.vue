@@ -1,13 +1,13 @@
 <template>
 
-    <main class ="main">
+    <main class="main">
 
         <div class="p-mypage">
 
-            <h2 class ="f-h2">お気に入りアイデア</h2>
+            <h2 class="f-h2">お気に入りアイデア</h2>
 
 
-            <h3 class ="f-h3">お気に入りにしたアイデア</h3>
+            <h3 class="f-h3">お気に入りにしたアイデア</h3>
 
             <div class="ic">
 
@@ -17,20 +17,21 @@
                         <router-link :to="{name:'postDetail', params:{
                         ideaId:favoriteIdea.idea_id,
                         userId:favoriteIdea.user_id
-                        }}" class ="ic-a" href="#">
-                            <h4 class ="f-h4">{{favoriteIdea.title}}</h4>
+                        }}" class="ic-a" href="#">
+                            <h4 class="f-h4">{{favoriteIdea.title}}</h4>
                             <div class="ic-img">
                                 <img :src="`./img${favoriteIdea.img}`" alt="favoriteIdeaimg" class="ic-img-item">
                             </div>
                             <div class="ic-review">
-                                <span class ="ic-span">評価</span>
+                                <span class="ic-span">評価</span>
                                 <div>
-                                    <span class ="ic-star-review" v-bind:class="star(favoriteIdea.averageReview)"></span>
-                                    <span class v-if="star(favoriteIdea.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
+                                    <span class="ic-star-review" v-bind:class="star(favoriteIdea.averageReview)"></span>
+                                    <span class
+                                          v-if="star(favoriteIdea.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
                                 </div>
                             </div>
                             <div class="ic-desc-filter">
-                                <div class ="ic-desc-overflow">概要</div>
+                                <div class="ic-desc-overflow">概要</div>
                                 <div class="ic-desc-text">
                                     {{favoriteIdea.overflow.slice(0,48)}}
                                 </div>
@@ -42,27 +43,29 @@
                                 ideaId: favoriteIdea.idea_id,
                                 userId: favoriteIdea.user_id
                                 }}">
-                                        詳細</router-link>
+                                        詳細
+                                    </router-link>
                                 </div>
 
                                 <div class="c-mini-button">
-                                    <a href="#" @click.prevent="favDelete(favoriteIdea.user_id,favoriteIdea.idea_id)">解除</a>
+                                    <a href="#"
+                                       @click.prevent="favDelete(favoriteIdea.user_id,favoriteIdea.idea_id)">解除</a>
                                 </div>
                             </div>
                         </router-link>
                     </div>
 
-                    <div class ="errorMessage">
-                    {{errorMessage}}
+                    <div class="errorMessage">
+                        {{errorMessage}}
                     </div>
                 </paginate>
 
 
-
             </div>
 
-            <div class="pagination">
-                <paginate-links for="paginate-log" class="pagination-container" :show-step-links="true"></paginate-links>
+            <div class="pagination" @click="moveToTop()">
+                <paginate-links for="paginate-log" class="pagination-container"
+                                :show-step-links="true"></paginate-links>
             </div>
 
 
@@ -76,17 +79,16 @@
     export default {
         name: "AllFavoriteComponent",
 
-        data:function()
-        {
-            return{
-                ideas:{},
-                errorMessage:"",
+        data: function () {
+            return {
+                ideas: {},
+                errorMessage: "",
                 paginate: ['paginate-log']
 
             }
         },
 
-        created:function(){
+        created: function () {
             this.$emit('open-loading');
         },
 
@@ -94,22 +96,28 @@
             this.$emit('close-loading');
         },
 
-        methods:{
+        methods: {
 
-            favDelete:function(userId,ideaId){
+
+            moveToTop() {
+                this.$store.dispatch('moveToTop');
+            },
+
+
+            favDelete: function (userId, ideaId) {
 
                 this.$emit('open-loading');
 
-                this.errorMessage ="";
-                axios.post('/api/favDelete',{
-                    userId:userId,
-                    ideaId:ideaId
-                }).then((response) =>{
+                this.errorMessage = "";
+                axios.post('/api/favDelete', {
+                    userId: userId,
+                    ideaId: ideaId
+                }).then((response) => {
                     console.log(response)
                     this.ideas = this.$store.dispatch('getUserIdeas')
                         .then(this.$emit('close-loading'));
 
-                }).catch((error) =>{
+                }).catch((error) => {
                     console.log(error)
                     this.errorMessage = "お気に入り解除できませんでした" +
                         "時間を置いてお試し下さい"
@@ -165,35 +173,34 @@
 
 <style scoped>
 
-    .ic >>> ul{
-        display:flex;
-        width:100%;
-        margin:5% auto;
-        flex-wrap:wrap;
-    }
-
-    .pagination >>> ul{
+    .ic >>> ul {
         display: flex;
-        font-size:24px;
-        justify-content:center;
-        list-style:none;
+        width: 100%;
+        margin: 5% auto;
+        flex-wrap: wrap;
     }
 
-    .pagination >>> li{
+    .pagination >>> ul {
+        display: flex;
+        font-size: 24px;
+        justify-content: center;
+        list-style: none;
+    }
+
+    .pagination >>> li {
         margin: 0 2%;
     }
 
-    .pagination-container >>> a{
-        color:black;
+    .pagination-container >>> a {
+        color: black;
     }
 
-    .errorMessage
-    {
-        color:#FFBEDA;
+    .errorMessage {
+        color: #FFBEDA;
     }
 
     .ic-card >>> a {
-        position:relative;
-        z-index:1;
+        position: relative;
+        z-index: 1;
     }
 </style>

@@ -12,6 +12,7 @@
 */
 
 
+use App\Http\Controllers\DetailController;
 
 Route::get('/',function(){
     return view('home');
@@ -34,6 +35,8 @@ Route::post('/contactPost','contactController@contactHome')->name('contactPost')
 Route::get('/users','UserController@getUserData');
 
 Route::post('/mypage','StripeController@charge');
+
+Route::get('/ideaDetail/{id}','DetailController@informalDetail');
 
 Auth::routes();
 

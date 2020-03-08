@@ -440,15 +440,20 @@
     align-items: center;
     border-radius: 3%;
 
+    @include mq{
+
+    }
+
     &_word{
         width:70%;
     }
 
     @include mq{
 
-        padding:3%;
-        top: 110px;
-        width: 30%;
+        height:auto;
+        top:100px;
+        width:100%;
+
 
     }
 }

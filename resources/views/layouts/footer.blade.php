@@ -20,7 +20,7 @@
 
                                 <li class="nav-item home-footer-li">
                                     <a href="{{route('logout')}}">
-                                        <div class="sidebar-item">
+                                        <div class="home-footer-item">
                                             <i class="fas fa-sign-out-alt fa-2x"></i>
                                             <div class="sidebar-item-text">Logout</div>
                                         </div>

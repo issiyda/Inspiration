@@ -16,7 +16,9 @@
 
                         <div class="edit-container-img">
                             <div class="edit-container-img-left">
-                                <label class="c-label" for="img">アイデアイメージ画像</label>
+                                <label class="c-label" for="img">アイデアイメージ画像
+                                    <br><p class="u-comment">枠内クリックで画像変更</p>
+                                </label>
                             </div>
                             <div class="edit-container-img-right">
                                 <label>

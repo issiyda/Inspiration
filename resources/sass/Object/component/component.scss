@@ -1,27 +1,27 @@
 //==========================
 //heading部分の共通パーツ
 //==========================
-.c-heading{
-  margin:5% auto;
+.c-heading {
+    margin: 5% auto;
 }
 
 //==========================
 //Loading画面
 //==========================
-.loading-overlay{
-    background-color:rgba(255,255,255,0.8);
-    height:120%;
-    left:0;
-    position:fixed;
-    top:0;
-    width:100%;
-    z-index:4;
+.loading-overlay {
+    background-color: rgba(255, 255, 255, 0.8);
+    height: 120%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 4;
 }
 
 .loader {
     color: $color_base;
     font-size: 20px;
-    margin:0 auto;
+    margin: 0 auto;
     width: 1em;
     height: 1em;
     border-radius: 50%;
@@ -34,7 +34,7 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%,0);
+    transform: translate(-50%, -50%, 0);
 
     &-container {
         height: 120%;
@@ -100,38 +100,39 @@
         }
     }
 }
-.loading-img{
+
+.loading-img {
     width: 20%;
 }
 
 //==========================
 //投稿ボタン
 //==========================
-.c-button{
-  align-items: center;
-  background: $color_base;
-  border-color: $color_base;
-  border-radius:5px;
-  box-shadow: 2px 2px 4px gray;
-  color:$color_sub;
-  display: block;
-  font-size: $font-size_l;
-  font-weight:bolder;
-  margin:5% 0 5% 60%;
-  padding:2%;
-    position:relative;
+.c-button {
+    align-items: center;
+    background: $color_base;
+    border-color: $color_base;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px gray;
+    color: $color_sub;
+    display: block;
+    font-size: $font-size_l;
+    font-weight: bolder;
+    margin: 5% 0 5% 60%;
+    padding: 2%;
+    position: relative;
     transition: 0.6s;
     text-align: center;
-  width:30%;
+    width: 30%;
 
-    @include mq{
-        padding:1%;
+    @include mq {
+        padding: 1%;
     }
 
-    a{
-        height:100%;
-        position:absolute;
-        width:100%;
+    a {
+        height: 100%;
+        position: absolute;
+        width: 100%;
         display: flex;
         justify-content: center;
         top: 0;
@@ -139,39 +140,39 @@
         left: 0;
     }
 
-  &:active{
-      box-shadow:none;
-      border:none;
-    color:$color_accent;
-    opacity:0.7;
-    outline:none;
-    transition: 0.4s;
-  }
-
-
-    &:focus{
-        outline:0;
+    &:active {
+        box-shadow: none;
+        border: none;
+        color: $color_accent;
+        opacity: 0.7;
+        outline: none;
+        transition: 0.4s;
     }
 
 
-    &-allShow{
-        @extend .c-button;
-        margin:5% 0 5% 70%;
-        position:relative;
-        padding:3%;
-        width:20%;
+    &:focus {
+        outline: 0;
+    }
 
-        @include mq{
+
+    &-allShow {
+        @extend .c-button;
+        margin: 5% 0 5% 70%;
+        position: relative;
+        padding: 3%;
+        width: 20%;
+
+        @include mq {
             height: 40px;
             margin: 5% 0 5% 60%;
             position: relative;
             width: 30%;
         }
 
-        a{
-            height:100%;
-            position:absolute;
-            width:100%;
+        a {
+            height: 100%;
+            position: absolute;
+            width: 100%;
             display: flex;
             justify-content: center;
             top: 0;
@@ -186,22 +187,22 @@
 //==========================
 //詳細ボタン　お気に入りボタン
 //==========================
-.c-mini-button{
-  @extend .c-button;
-  font-size: $font-size_m;
-  text-align:center;
-  margin:0 2%;
-  padding:4%;
-  width:40%;
+.c-mini-button {
+    @extend .c-button;
+    font-size: $font-size_m;
+    text-align: center;
+    margin: 0 2%;
+    padding: 4%;
+    width: 40%;
 
-  &:hover{
-    color:$color_accent;
-    transition: 0.4s;
-  }
+    &:hover {
+        color: $color_accent;
+        transition: 0.4s;
+    }
 
-    a{
-        box-sizing:border-box;
-        display:flex;
+    a {
+        box-sizing: border-box;
+        display: flex;
         position: relative;
         width: 100%;
     }
@@ -211,62 +212,63 @@
 //ラジオボタン
 //==========================
 
-.c-radio{
-  @extend .c-mini-button;
-  background: lightgray;
-  border-radius: 4px;
-  cursor: pointer;
-  margin:3% auto;
-  padding: 3%;
-  width:20%;
+.c-radio {
+    @extend .c-mini-button;
+    background: lightgray;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3% auto;
+    padding: 3%;
+    width: 20%;
 
-  @include mq{
-    box-sizing: border-box;
-    padding:1%;
-    width:40%;
-    margin:7% auto;
-  }
+    @include mq {
+        box-sizing: border-box;
+        font-size: 12px;
+        padding: 1%;
+        width: 40%;
+        margin: 7% auto;
+    }
 
-  &:hover{
-    color: $color_accent;
-    opacity: .7;
-  }
+    &:hover {
+        color: $color_accent;
+        opacity: .7;
+    }
 }
 
-.c-radio-container{
-  background: $color_w;
-  border-radius:2%;
-  display : flex;
-  flex-direction: row;
-  flex-wrap:wrap;
-  justify-content: space-around;
-  margin:0 auto;
-  padding:1%;
-  text-align: center;
-  width:80%;
+.c-radio-container {
+    background: $color_w;
+    border-radius: 2%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0 auto;
+    padding: 1%;
+    text-align: center;
+    width: 80%;
 }
 
 input[type="radio"] {
-  display:none;
+    display: none;
 
-  &:checked + .c-radio {
-      background: $color_base;
-  }
+    &:checked + .c-radio {
+        background: $color_base;
+    }
 
-  &:disabled + .c-radio{
-  }
+    &:disabled + .c-radio {
+    }
 }
 
 //==========================
 //説明用ラベル部品
 //==========================
 
-.c-label{
-  display:block;
-  font-size: $font-size_xl;
-  margin:3%;
+.c-label {
+    display: block;
+    font-size: $font-size_xl;
+    margin: 3%;
 
-    @include mq{
+    @include mq {
         font-size: $font-size_l;
     }
 }
@@ -275,83 +277,84 @@ input[type="radio"] {
 //インプットフォーム
 //==========================
 
-.c-container{
-    width:50%;
-    margin:0 auto 5%;
+.c-container {
+    width: 50%;
+    margin: 0 auto 5%;
 
-    @include mq{
-        width:80%;
+    @include mq {
+        width: 80%;
 
     }
 
 }
 
-.c-form{
-  background: $color_bg;
-  text-align: center;
+.c-form {
+    background: $color_bg;
+    text-align: center;
 
-  @include mq{
+    @include mq {
 
-    .c-button{
-      display: flex;
-      justify-content: center;
+        .c-button {
+            display: flex;
+            justify-content: center;
+        }
+        width: 100%;
+        margin: 0 auto;
     }
-    width: 100%;
-      margin:0 auto;
-  }
 
-  &-container {
+    &-container {
 
-      box-sizing: border-box;
-      font-weight: bold;
-      padding: 5%;
+        box-sizing: border-box;
+        font-weight: bold;
+        padding: 5%;
 
-      a {
-          margin: 0 auto 3%;
+        a {
+            margin: 0 auto 3%;
 
-          @include mq {
-              margin: 0 auto 10%;
-          }
-      }
+            @include mq {
+                margin: 0 auto 10%;
+            }
+        }
 
-      &-input {
-            margin-bottom:10%;
-      }
-  }
-
-  //==========================
-  //チェックボックス
-  //==========================
-  &-check {
-    margin: 3% auto 10%;
-
-    @include mq{
-      margin: 5% auto
+        &-input {
+            margin-bottom: 10%;
+        }
     }
-    &-box{
-      transform:scale(1.3);
+
+    //==========================
+    //チェックボックス
+    //==========================
+    &-check {
+        margin: 3% auto 10%;
+
+        @include mq {
+            margin: 5% auto
+        }
+
+        &-box {
+            transform: scale(1.3);
+        }
     }
-  }
 
-  &-reminder{
-    display: flex;
-      text-align: center;
-    text-decoration: none;
-    font-weight: bolder;
-    margin-bottom: 3%;
-    transition:0.6s;
-    word-wrap: break-word;
+    &-reminder {
+        display: flex;
+        text-align: center;
+        text-decoration: none;
+        font-weight: bolder;
+        margin-bottom: 3%;
+        transition: 0.6s;
+        word-wrap: break-word;
 
-      a{
-          color:$color_accent;
-      }
-  }
+        a {
+            color: $color_accent;
+        }
+    }
 
-  &-text-attention{
-    color:mediumvioletred;
-    margin:5%;
+    &-text-attention {
+        color: mediumvioletred;
+        margin: 5%;
 
-  }
+    }
 
 
 }
@@ -361,290 +364,302 @@ input[type="radio"] {
 //インプット部品
 //==========================
 
-.c-input{
-  background:#fff;
-  box-shadow: 2px 3px 5px gray;
-  display:block;
-  font-size: $font-size_l;
-  margin:5% auto;
-  padding:1%;
-    resize:vertical;
-    width:55%;
+.c-input {
+    background: #fff;
+    box-shadow: 2px 3px 5px gray;
+    display: block;
+    font-size: $font-size_l;
+    margin: 5% auto;
+    padding: 1%;
+    resize: vertical;
+    width: 55%;
 
 
-  @include mq{
-    font-size:$font-size_m;
-  }
+    @include mq {
+        font-size: $font-size_m;
+    }
 
 
-  @include mq{
-    width:70%;
-  }
+    @include mq {
+        width: 70%;
+    }
 }
 
 //==========================
 //テキストエリア部品
 //==========================
 
-.c-textarea{
-  @extend .c-input;
-  height:20%;
+.c-textarea {
+    @extend .c-input;
+    height: 20%;
 
-  @include mq {
-    width:70%;
-  }
+    @include mq {
+        width: 70%;
+    }
 }
 
 //==========================
 //投稿一列の部品
 //==========================
 
-.ic{
-  display: flex;
-  flex-wrap: wrap;
-  width:100%;
-  margin:5% auto 0;
-
-  &-a{
-    color:black;
-    text-decoration: none;
-  }
-
-    &-mypage{
-        height:650px
-    }
-    &-filter{
-        height:700px
-    }
-
-    &-all{
-        height:950px
-    }
-
-/**
-カード全体のcss
- */
-  &-card{
-    background:$color_bg;
-    border-radius:2%;
-    margin:0 auto 10%;
-    position: relative;
-      padding-bottom:1%;
-    text-align: center;
-    width:17%;
-    z-index: 1;
-
-    @include mq {
-        width:42%
-    }
-
-  &-a{
-    display: block;
+.ic {
+    display: flex;
+    flex-wrap: wrap;
     width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-  }
+    margin: 5% auto 0;
+
+    &-a {
+        color: black;
+        text-decoration: none;
+    }
+
+    &-mypage {
+        height:500px
+    }
+
+    &-filter {
+        height:500px
+    }
+
+    &-all {
+        height:500px
+    }
 
     /**
-    hoverさせた際の挙動
+    カード全体のcss
      */
-        &:hover{
-          opacity:0.75;
+    &-card {
+        background: $color_bg;
+        box-sizing: border-box;
+        border-radius: 2%;
+        margin: 0 auto 10%;
+        overflow: scroll;
+        text-align: center;
+        width: 17%;
+        z-index: 1;
+
+        @include mq {
+            width: 42%
         }
-      }
 
-  &-review{
-    align-items: center;
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-    height:10%;
-    justify-content: space-around;
-    margin: 2% 0;
-    padding:10%;
+        &-a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
 
-    @include mq{
+        /**
+        hoverさせた際の挙動
+         */
+        &:hover {
+            opacity: 0.75;
+        }
+    }
+
+    &-review {
+        align-items: center;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        height: 25%;
+        justify-content: space-around;
+        margin: 2% 0;
+        padding: 10%;
+
+        @include mq {
+
+        }
 
     }
 
-  }
-
-  &-star{
-    display: flex;
-    flex-direction: column;
-  }
-
-/**
-カードの画像
- */
-  &-img {
-    height:20%;
-    margin:0 auto;
-    width:100%;
-    overflow: hidden;
-
-    &-item {
-      box-sizing: border-box;
-      height:100%;
-      transition: 0.5s;
-      transform: scale(1.0);
-      width: 100%;
-
-
-      &:hover {
-        transition: 0.5s;
-        transform: scale(1.3) skewX(4deg);
-      }
+    &-star {
+        display: flex;
+        flex-direction: column;
     }
-  }
 
-    &-desc{
+    /**
+    カードの画像
+     */
+    &-img {
+        height: 30%;
+        margin: 0 auto;
+        width: 100%;
+        overflow: hidden;
+
+        &-item {
+            box-sizing: border-box;
+            height: 100%;
+            transition: 0.5s;
+            transform: scale(1.0);
+            width: 100%;
+
+
+            &:hover {
+                transition: 0.5s;
+                transform: scale(1.3) skewX(4deg);
+            }
+        }
+    }
+
+    &-desc {
         background: #fff;
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
         justify-content: left;
         margin: 15% auto 5%;
-        overflow:hidden;
-        padding:5%;
-        width:90%;
-        word-break:break-word;
+        overflow: hidden;
+        padding: 5%;
+        width: 90%;
+        word-break: break-word;
 
         /**
         幅を揃えるためにmypageでは40% それ以外では30%
          */
-        &-mypage{
+        &-mypage {
             @extend .ic-desc;
-            height:35%;
+            height: 35%;
 
-            @include mq{
+            @include mq {
                 height: 40%;
             }
         }
 
-        &-filter{
+        &-filter {
             @extend .ic-desc;
-            height:30%;
+            height: 30%;
         }
 
-        &-all{
+        &-all {
             @extend .ic-desc;
-            height:25%;
         }
 
 
-
-
-        &-overflow{
+        &-overflow {
             align-items: center;
-            height:15%;
+            height: 15%;
         }
 
-        &-text{
+        &-text {
             align-items: center;
             display: flex;
             overflow: hidden;
-            height:90%;
+            height: 90%;
             justify-content: center;
         }
     }
 
-  //==========================
-  //ボタンが一つの際のcss
-  //==========================
-  &-button-one-container{
-    display: flex;
-    justify-content: space-around;
-    margin: auto;
-    padding: 3%;
-    z-index:3;
-  }
+    //==========================
+    //ボタンが一つの際のcss
+    //==========================
+    &-button-one-container {
+        display: flex;
+        justify-content: space-around;
+        margin: auto;
+        padding: 3%;
+        z-index: 3;
+    }
 
-  //==========================
-  //ボタンが二つの際のcss
-  //==========================
-  &-button-two-container{
-    display: flex;
-    justify-content: space-around;
-    margin:auto;
-    padding: 3%;
-    width:90%;
-    z-index:3;
-  }
+    //==========================
+    //ボタンが二つの際のcss
+    //==========================
+    &-button-two-container {
+        display: flex;
+        justify-content: space-around;
+        margin: auto;
+        padding: 3%;
+        width: 90%;
+        z-index: 3;
+    }
 
-        &-star-review{
-            position: relative;
+    &-star-review {
+        position: relative;
+        display: inline-block;
+        width: $starFull * 5 + 8;
+        height: $starFull;
+        font-size: $starFull;
+
+        &:before, &:after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: '★★★★★';
             display: inline-block;
-            width: $starFull * 5 + 8;
             height: $starFull;
-            font-size: $starFull;
-            &:before,&:after{
-                position: absolute;
-                top: 0;
-                left: 0;
-                content: '★★★★★';
-                display: inline-block;
-                height: $starFull;
-                line-height: $starFull;
-            }
-            &:before{
-                color: #ddd;
-            }
-            &:after{
-                color: $color_base;
-                overflow: hidden;
-                white-space: nowrap;//これがないと改行されて星の半分（0.5）が表現できなくなる
-            }
-        }
-        .rate0:after{//星0
-            width: 0;
-        }
-        .rate0-5:after{//星0.5
-            width: 10%;
-        }
-        .rate1:after{//星1
-            width: 20%;
-        }
-        .rate1-5:after{//星1.5
-            width: 30%;
-        }
-        .rate2:after{//星2
-            width: 40%;
-        }
-        .rate2-5:after{//星2.5
-            width: 50%;
-        }
-        .rate3:after{//星3
-            width: 60%;
-        }
-        .rate3-5:after{//星3.5
-            width: 70%;
-        }
-        .rate4:after{//星4
-            width: 80%;
-        }
-        .rate4-5:after{//星4.5
-            width: 90%;
-        }
-        .rate5:after{//星5
-            width: 100%;
+            line-height: $starFull;
         }
 
-        &-review{
-            width: 88px;
-            margin: 10% auto;
-
-            &-reviewed{
-                border:solid 0.5px $color_accent;
-                border-radius:5%;
-            }
+        &:before {
+            color: #ddd;
         }
 
-        &-not-reviewed{
-            display:none;
+        &:after {
+            color: $color_base;
+            overflow: hidden;
+            white-space: nowrap; //これがないと改行されて星の半分（0.5）が表現できなくなる
         }
+    }
+
+    .rate0:after { //星0
+        width: 0;
+    }
+
+    .rate0-5:after { //星0.5
+        width: 10%;
+    }
+
+    .rate1:after { //星1
+        width: 20%;
+    }
+
+    .rate1-5:after { //星1.5
+        width: 30%;
+    }
+
+    .rate2:after { //星2
+        width: 40%;
+    }
+
+    .rate2-5:after { //星2.5
+        width: 50%;
+    }
+
+    .rate3:after { //星3
+        width: 60%;
+    }
+
+    .rate3-5:after { //星3.5
+        width: 70%;
+    }
+
+    .rate4:after { //星4
+        width: 80%;
+    }
+
+    .rate4-5:after { //星4.5
+        width: 90%;
+    }
+
+    .rate5:after { //星5
+        width: 100%;
+    }
+
+    &-review {
+        width: 88px;
+        margin: 10% auto;
+
+        &-reviewed {
+            border: solid 0.5px $color_accent;
+            border-radius: 5%;
+        }
+    }
+
+    &-not-reviewed {
+        display: none;
+    }
 
 }

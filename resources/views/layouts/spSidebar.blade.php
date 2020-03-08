@@ -6,7 +6,7 @@
 
                 @auth
                     <li class ="nav-item">
-                        <a href="mypage">
+                        <a href="{{route('mypage')}}">
                             <div class="sidebar-item">
                                 <i class="far fa-smile fa-2x sidebar-item-logo"></i>
                                 <div class="sidebar-item-text">Mypage</div>
