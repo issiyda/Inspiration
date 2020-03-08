@@ -135,6 +135,7 @@
                     .then((response) => {
                         console.log(response);
                         this.$router.push({name:'postComplete',params: {
+                                ideaId: response.data.ideaId,
                                 title: this.title,
                             }})
                     }).catch((error) => {

@@ -542,6 +542,7 @@ input {
   -webkit-box-pack: center;
           justify-content: center;
   text-align: center;
+  text-shadow: black 0 0 5px;
   width: 50%;
   margin: 0 auto;
 }
@@ -597,6 +598,7 @@ input {
   margin: 0 auto;
   position: absolute;
   text-align: center;
+  text-shadow: black 0 0 5px;
   width: 70%;
   left: 0;
   right: 0;

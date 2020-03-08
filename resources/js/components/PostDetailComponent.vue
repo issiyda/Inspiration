@@ -679,8 +679,8 @@
                 }
             },
 
-            twitterShare() {
-                const $url = `https://twitter.com/intent/tweet?text=アイデア名\n「${this.title}」\r\n他にも沢山の魅力的なアイデアがあるよ!\r\n%20%23Inspiration&url=http://ec2-13-231-128-196.ap-northeast-1.compute.amazonaws.com`;
+            twitterShare(userId,ideaId) {
+                const $url = `https://twitter.com/intent/tweet?text=アイデア名\n「${this.title}」\r\n他にも沢山の魅力的なアイデアがあるよ!\r\n%20%23Inspiration&url=http://ec2-13-231-128-196.ap-northeast-1.compute.amazonaws.com/ideaDetail/${ideaId}`;
                 window.open($url, null, 'top=100,left=100,width=300,height=400');
 
             }

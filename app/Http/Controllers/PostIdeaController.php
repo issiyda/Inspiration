@@ -42,9 +42,11 @@ class PostIdeaController extends Controller
                 'price' => $price
             ]);
 
+        $ideaId = Idea::max('id');
 
         return response()->json([
-            'data' => $request->all()
+            'data' => $request->all(),
+            'ideaId' => $ideaId
         ]);
     }
 

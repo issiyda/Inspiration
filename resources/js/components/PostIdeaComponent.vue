@@ -181,12 +181,11 @@
 
 
             onFileChange(event){
-                const SIZE_LIMIT = 3000000 //3Mバイトまで
+                const SIZE_LIMIT = 2000000 //2Mバイトまで
                 this.fileInfo = event.target.files[0]
-                console.log(this.fileInfo.size);
                 if(this.fileInfo.size > SIZE_LIMIT) {
 
-                    this.errorMessages.imgErrorMessage = "3M以下の画像を選択してください。"
+                    this.errorMessages.imgErrorMessage = "2M以下の画像を選択してください。"
 
                 }else if(this.fileInfo.type !== "image/png" && this.fileInfo.type !== "image/jpeg"　&& this.fileInfo.type !== "image/jpg")
                 {

@@ -3373,12 +3373,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostDetailComponent",
   props: {
@@ -4213,12 +4207,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "postCompletedComponent",
   data: function data() {
     return {
-      title: ""
+      title: "",
+      ideaId: ""
     };
   },
   created: function created() {
@@ -4226,12 +4220,11 @@ __webpack_require__.r(__webpack_exports__);
     this.ideas = this.$store.dispatch('getUserIdeas');
   },
   mounted: function mounted() {
-    this.title = this.$route.params.title;
-    this.$emit('close-loading');
+    this.title = this.$route.params.title, this.ideaId = this.$route.params.ideaId, this.$emit('close-loading');
   },
   methods: {
     twitterShare: function twitterShare() {
-      var $url = "https://twitter.com/intent/tweet?text=\u65B0\u898F\u30A2\u30A4\u30C7\u30A2\u540D\n\u300C".concat(this.title, "\u300D\n%20%23Inspiration&url=http://ec2-13-231-128-196.ap-northeast-1.compute.amazonaws.com/");
+      var $url = "https://twitter.com/intent/tweet?text=\u65B0\u898F\u30A2\u30A4\u30C7\u30A2\u540D\n\u300C".concat(this.title, "\u300D\n%20%23Inspiration&url=http://ec2-13-231-128-196.ap-northeast-1.compute.amazonaws.com/ideaDetail/").concat(this.ideaId);
       window.open($url, null, 'top=100,left=100,width=300,height=400');
     }
   }
@@ -4904,8 +4897,8 @@ __webpack_require__.r(__webpack_exports__);
           this.reviewErrorMessage = '全てのレビュー入力がされていません';
         }
     },
-    twitterShare: function twitterShare() {
-      var $url = "https://twitter.com/intent/tweet?text=\u30A2\u30A4\u30C7\u30A2\u540D\n\u300C".concat(this.title, "\u300D\r\n\u4ED6\u306B\u3082\u6CA2\u5C71\u306E\u9B45\u529B\u7684\u306A\u30A2\u30A4\u30C7\u30A2\u304C\u3042\u308B\u3088!\r\n%20%23Inspiration&url=http://ec2-13-231-128-196.ap-northeast-1.compute.amazonaws.com");
+    twitterShare: function twitterShare(userId, ideaId) {
+      var $url = "https://twitter.com/intent/tweet?text=\u30A2\u30A4\u30C7\u30A2\u540D\n\u300C".concat(this.title, "\u300D\r\n\u4ED6\u306B\u3082\u6CA2\u5C71\u306E\u9B45\u529B\u7684\u306A\u30A2\u30A4\u30C7\u30A2\u304C\u3042\u308B\u3088!\r\n%20%23Inspiration&url=http://ec2-13-231-128-196.ap-northeast-1.compute.amazonaws.com/ideaDetail/").concat(ideaId);
       window.open($url, null, 'top=100,left=100,width=300,height=400');
     }
   },
@@ -5168,13 +5161,12 @@ __webpack_require__.r(__webpack_exports__);
   beforeUpdate: function beforeUpdate() {},
   methods: {
     onFileChange: function onFileChange(event) {
-      var SIZE_LIMIT = 3000000; //3Mバイトまで
+      var SIZE_LIMIT = 2000000; //2Mバイトまで
 
       this.fileInfo = event.target.files[0];
-      console.log(this.fileInfo.size);
 
       if (this.fileInfo.size > SIZE_LIMIT) {
-        this.errorMessages.imgErrorMessage = "3M以下の画像を選択してください。";
+        this.errorMessages.imgErrorMessage = "2M以下の画像を選択してください。";
       } else if (this.fileInfo.type !== "image/png" && this.fileInfo.type !== "image/jpeg" && this.fileInfo.type !== "image/jpg") {
         this.errorMessages.imgErrorMessage = "画像の形式は(jpg,jpeg,png)のみ投稿可能です。";
       } else {
@@ -5488,6 +5480,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.$router.push({
           name: 'postComplete',
           params: {
+            ideaId: response.data.ideaId,
             title: _this.title
           }
         });
@@ -6914,7 +6907,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     //Twittershare用のリンクへ飛ばす
     twitterShare: function twitterShare() {
-      var $url = "https://twitter.com/intent/tweet?text=\u65B0\u898F\u30EC\u30D3\u30E5\u30FC\n\u300C".concat(this.title, "\u300D\n%20%23Inspiration&url=http://ec2-13-231-128-196.ap-northeast-1.compute.amazonaws.com/");
+      var $url = "https://twitter.com/intent/tweet?text=\u65B0\u898F\u30EC\u30D3\u30E5\u30FC\n\u300C".concat(this.title, "\u300D\n%20%23Inspiration&url=http://ec2-13-231-128-196.ap-northeast-1.compute.amazonaws.com/ideaDetail/").concat(this.ideaId);
       window.open($url, null, 'top=100,left=100,width=300,height=400');
     }
   }
@@ -7099,7 +7092,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.fav[data-v-4acb59c6] {\n    color: #FFBEDA;\n    margin: 5% auto;\n}\n.c-button[data-v-4acb59c6] {\n    margin: 5% auto;\n}\n.ic[data-v-4acb59c6] ul {\n    display: -webkit-box;\n    display: flex;\n    width: 100%;\n    margin: 5% auto;\n    flex-wrap: wrap;\n}\n.pagination[data-v-4acb59c6] ul {\n    display: -webkit-box;\n    display: flex;\n    font-size: 24px;\n    -webkit-box-pack: center;\n            justify-content: center;\n    list-style: none;\n}\n.pagination[data-v-4acb59c6] li {\n    margin: 0 2%;\n}\n.pagination-container[data-v-4acb59c6] a {\n    color: black;\n}\n.center[data-v-4acb59c6]{\n    text-align:center;\n}\n\n", ""]);
+exports.push([module.i, "\n.fav[data-v-4acb59c6] {\n    color: #FFBEDA;\n    margin: 5% auto;\n}\n.c-button[data-v-4acb59c6] {\n    margin: 5% auto;\n}\n.ic[data-v-4acb59c6] ul {\n    display: -webkit-box;\n    display: flex;\n    width: 100%;\n    margin: 5% auto;\n    flex-wrap: wrap;\n}\n.pagination[data-v-4acb59c6] ul {\n    display: -webkit-box;\n    display: flex;\n    font-size: 24px;\n    -webkit-box-pack: center;\n            justify-content: center;\n    list-style: none;\n}\n.pagination[data-v-4acb59c6] li {\n    margin: 0 2%;\n}\n.pagination-container[data-v-4acb59c6] a {\n    color: black;\n}\n.center[data-v-4acb59c6] {\n    text-align: center;\n}\n\n", ""]);
 
 // exports
 
@@ -12308,7 +12301,7 @@ var render = function() {
       _vm._v(" "),
       _vm._m(2),
       _vm._v(" "),
-      _c("p", { staticClass: "center" }, [_vm._v("ログイン後ご確認ください")])
+      _c("p", { staticClass: "center" }, [_vm._v("Mypageからご確認ください。")])
     ])
   ])
 }
@@ -12331,7 +12324,7 @@ var staticRenderFns = [
       [
         _c("div", [
           _vm._v(
-            "\n                            ご購入後にご確認ください\n                        "
+            "\n                            ご購入後にご確認ください。\n                        "
           )
         ])
       ]
@@ -13031,7 +13024,9 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("p", { staticClass: "completed-paragraph" }, [
-              _vm._v("\n                    新規投稿しました\n                ")
+              _vm._v(
+                "\n                        新規投稿しました\n                    "
+              )
             ]),
             _vm._v(" "),
             _vm._m(0),
@@ -13086,11 +13081,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("p", { staticClass: "completed-paragraph" }, [
       _vm._v(
-        "\n                    新しいアイデアでより一層世界を盛り上げましょう"
+        "\n                        新しいアイデアでより一層世界を盛り上げましょう"
       ),
       _c("br"),
       _vm._v(
-        "\n                    あなたの新しいアイデアお待ちしてます。\n                "
+        "\n                        あなたの新しいアイデアお待ちしてます。\n                    "
       )
     ])
   }
