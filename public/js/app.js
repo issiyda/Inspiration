@@ -6526,11 +6526,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostIdeaEditComponent",
   data: function data() {
@@ -6621,19 +6616,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     onFileChange: function onFileChange(event) {
-      var SIZE_LIMIT = 3000000; //3Mバイトまで
-
       this.fileInfo = event.target.files[0];
-
-      if (this.fileInfo.size > SIZE_LIMIT) {
-        this.errorMessages.imgErrorMessage = "3M以下の画像を選択してください";
-      } else if (this.fileInfo.type !== "image/png" && this.fileInfo.type !== "image/jpeg" && this.fileInfo.type !== "image/jpg") {
-        this.errorMessages.imgErrorMessage = "画像の形式は(jpg,jpeg,png)のみ投稿可能です";
-      } else {
-        this.errorMessages.imgErrorMessage = false;
-        this.$emit('open-loading');
-        this.createImage();
-      }
+      this.createImage();
     },
     createImage: function createImage() {
       var _this = this;
@@ -6646,7 +6630,6 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       reader.readAsDataURL(this.fileInfo);
-      this.$emit('close-loading');
     },
     saveImage: function saveImage() {
       var formData = new FormData();
@@ -16144,12 +16127,6 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm.errorMessages.imgErrorMessage
-                ? _c("div", { staticClass: "error" }, [
-                    _vm._v(_vm._s(_vm.errorMessages.imgErrorMessage))
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
               _c("div", { staticClass: "edit-container-input" }, [
                 _c(
                   "label",
@@ -16692,11 +16669,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "edit-container-img-left" }, [
       _c("label", { staticClass: "c-label", attrs: { for: "img" } }, [
-        _vm._v("アイデアイメージ画像\n                                "),
-        _c("br"),
-        _c("p", { staticClass: "u-comment" }, [
-          _vm._v("枠内クリックで画像変更")
-        ])
+        _vm._v("アイデアイメージ画像")
       ])
     ])
   }
