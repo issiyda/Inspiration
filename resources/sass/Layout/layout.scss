@@ -230,6 +230,7 @@
           -webkit-box-orient: vertical;
           -webkit-box-direction: normal;
           justify-content: center;
+          text-align: center;
           width: 50%;
           margin: 0 auto;
 
@@ -253,6 +254,8 @@
     p{
         font-size: $font-size_l;
         margin-left: $space_l;
+        padding:5%;
+
 
         @include mq{
             font-size: $font-size_m;
@@ -260,8 +263,9 @@
     }
 
     a{
-      color:#fff;
-      text-decoration: none;
+        color:#fff;
+        display:flex;
+        text-decoration: none;
 
     }
   }
