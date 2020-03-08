@@ -205,8 +205,10 @@
             </div>
 
             <div class="home-recommend">
-                <p class="home-recommend-word">あなたのアイデアを価値へ
-                    <br>交換していきましょう</p>
+                <p class="home-recommend-word">あなたの価値ある
+                    <br>アイデアを</p>
+                <p class="home-recommend-word">提供して
+                    <br>いきませんか？？</p>
 
                 <form action="{{route('register')}}">
                     <input type="submit" class="c-button home-recommend-button" value="新規登録">

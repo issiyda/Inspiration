@@ -5615,6 +5615,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "FooterComponent",
   mounted: function mounted() {
@@ -14754,18 +14762,19 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("footer", [
     _c("div", { staticClass: "l-footer" }, [
-      _c("h3", { staticClass: "l-footer-subject" }, [_vm._v("Inspiration")]),
+      _c("h3", { staticClass: "l-footer-subject" }, [_vm._v("Menu")]),
       _vm._v(" "),
       _c("div", { staticClass: "l-footer-container" }, [
         _c("div", { staticClass: "l-footer-content" }, [
           _c("div", { staticClass: "l-footer-content-items" }, [
-            _c("h3", [_vm._v("機能Menu")]),
-            _vm._v(" "),
             _c(
               "p",
               [
                 _c("router-link", { attrs: { to: "/mypage" } }, [
-                  _vm._v("Mypage")
+                  _c("i", {
+                    staticClass: "far fa-smile fa-2x sidebar-item-logo"
+                  }),
+                  _vm._v("\n                        Mypage")
                 ])
               ],
               1
@@ -14775,7 +14784,10 @@ var render = function() {
               "p",
               [
                 _c("router-link", { attrs: { to: "/allIdea" } }, [
-                  _vm._v("Idea一覧")
+                  _c("i", {
+                    staticClass: "far fa-address-card fa-2x sidebar-item-logo"
+                  }),
+                  _vm._v("\n                        Idea一覧")
                 ])
               ],
               1
@@ -14785,7 +14797,10 @@ var render = function() {
               "p",
               [
                 _c("router-link", { attrs: { to: "/profile" } }, [
-                  _vm._v("プロフィール編集")
+                  _c("i", {
+                    staticClass: "far fa-address-card fa-2x sidebar-item-logo"
+                  }),
+                  _vm._v("\n                        Profile")
                 ])
               ],
               1
@@ -14807,12 +14822,20 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "l-footer-content" }, [
       _c("div", { staticClass: "l-footer-content-items" }, [
-        _c("h3", [_vm._v("ページMenu")]),
-        _vm._v(" "),
-        _c("p", [_c("a", { attrs: { href: "/" } }, [_vm._v("Topへ戻る")])]),
+        _c("p", [
+          _c("a", { attrs: { href: "/" } }, [
+            _c("i", { staticClass: "fas fa-home fa-2x sidebar-item-logo" }),
+            _vm._v("\n                        Home")
+          ])
+        ]),
         _vm._v(" "),
         _c("p", [
-          _c("a", { attrs: { href: "logout" } }, [_vm._v("ログアウトする")])
+          _c("a", { attrs: { href: "logout" } }, [
+            _c("i", {
+              staticClass: "fas fa-sign-out-alt fa-2x sidebar-item-logo"
+            }),
+            _vm._v("\n                        Logout")
+          ])
         ])
       ])
     ])

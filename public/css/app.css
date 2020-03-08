@@ -530,6 +530,7 @@ a {
   -webkit-box-direction: normal;
   -webkit-box-pack: center;
           justify-content: center;
+  text-align: center;
   width: 50%;
   margin: 0 auto;
 }
@@ -556,6 +557,7 @@ a {
 .l-footer-content p {
   font-size: 18px;
   margin-left: 15px;
+  padding: 5%;
 }
 
 @media screen and (max-width: 414px) {
@@ -566,6 +568,8 @@ a {
 
 .l-footer-content a {
   color: #fff;
+  display: -webkit-box;
+  display: flex;
   text-decoration: none;
 }
 
@@ -728,7 +732,9 @@ a {
   text-shadow: black 0 0 5px;
 }
 
-.sidebar-item {
+.sidebar-item,
+.home-footer-item-contact,
+.home-footer-item {
   color: #fff;
   display: -webkit-box;
   display: flex;
@@ -739,7 +745,9 @@ a {
   width: 100%;
 }
 
-.sidebar-item:hover {
+.sidebar-item:hover,
+.home-footer-item-contact:hover,
+.home-footer-item:hover {
   opacity: 0.8;
   -webkit-transition: 0.8s;
   transition: 0.8s;
@@ -2515,6 +2523,8 @@ input[type=radio]:checked + .c-radio {
 }
 
 .home-footer-container {
+  -webkit-box-align: center;
+          align-items: center;
   display: -webkit-box;
   display: flex;
   height: 30%;
@@ -2540,8 +2550,8 @@ input[type=radio]:checked + .c-radio {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
           flex-direction: row;
-  justify-content: space-around;
-  margin-bottom: 5%;
+  -webkit-box-pack: space-evenly;
+          justify-content: space-evenly;
   width: 50%;
 }
 
@@ -2615,8 +2625,9 @@ input[type=radio]:checked + .c-radio {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
           flex-direction: column;
+  text-align: center;
   margin: 0 2%;
-  width: 40%;
+  width: 100%;
 }
 
 @media screen and (max-width: 414px) {
@@ -2672,6 +2683,21 @@ input[type=radio]:checked + .c-radio {
 .home-footer-content a {
   color: #fff;
   text-decoration: none;
+}
+
+@media screen and (max-width: 414px) {
+  .home-footer-li {
+    font-size: 12px;
+  }
+}
+
+.home-footer-item {
+  -webkit-box-align: center;
+          align-items: center;
+}
+
+.home-footer-item-contact {
+  margin: 0 5% 0 0;
 }
 
 .home-footer-bottom {
