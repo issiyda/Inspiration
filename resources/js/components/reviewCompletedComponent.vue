@@ -87,7 +87,7 @@
 
             //Twittershare用のリンクへ飛ばす
             twitterShare(){
-                const $url = `https://twitter.com/intent/tweet?text=新規レビュー\n「${this.title}」\n%20%23Inspiration&url=https://code.ameneko.com/twitter-share`;
+                const $url = `https://twitter.com/intent/tweet?text=新規レビュー\n「${this.title}」\n%20%23Inspiration&url=http://ec2-13-231-128-196.ap-northeast-1.compute.amazonaws.com/ideaDetail/${this.ideaId}`;
                 window.open($url, null, 'top=100,left=100,width=300,height=400');
 
             }

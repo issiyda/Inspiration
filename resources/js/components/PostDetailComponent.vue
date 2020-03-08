@@ -7,113 +7,118 @@
             <h2 class="f-h2">アイデア詳細</h2>
 
             <div class="c-heading">
-                <h3 class ="f-h3">アイデア</h3>
+                <h3 class="f-h3">アイデア</h3>
             </div>
 
             <form class="postDetail-container">
 
                 <div v-for="detail in this.detail.idea">
 
-                <label for="ideaName" class="c-label">アイデア名</label>
-                <div id="ideaName"  class="confirm-text">{{detail.title}}</div>
+                    <label for="ideaName" class="c-label">アイデア名</label>
+                    <div id="ideaName" class="confirm-text">{{detail.title}}</div>
 
-                <label for="ideaPrice" class="c-label">金額</label>
-                <div id="ideaPrice" class="confirm-text">{{detail.price}}</div>
+                    <label for="ideaPrice" class="c-label">金額</label>
+                    <div id="ideaPrice" class="confirm-text">{{detail.price}}</div>
 
-                <div class="postDetail-container-input">
-
-
-
-                    <div class="postDetail-container-img">
-                        <div class="postDetail-container-img-right">
-                            <label>
-                                <img :src="`./img${detail.img}`" alt="detailIdeaImg">
-                                <input id="img" class ="c-input postDetail-container-img-none" type="file" />
-                                <!-- hoverしたら画像をアップロードの文字が浮き上がって画像が薄暗く -->
-                            </label>
-                        </div>
-                        <div class="ic postDetail-container-img-left">
-                            <label class ="c-label" for="img">平均評価</label>
-                            <span class="ic-star-review" v-bind:class="star(detail.averageReview)"></span>
-                            <span class v-if="star(detail.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
-                        </div>
-                    </div>
+                    <div class="postDetail-container-input">
 
 
-
-
-                    <label for="category" class="c-label">カテゴリー</label>
-                    <div id="category" class="confirm-text">{{checkCategory(detail.category_id)}}</div>
-
-                    <label for="description" class="c-label">概要</label>
-                    <div id="description" class="confirm-text">
-                        {{detail.overflow}}
-                    </div>
-
-                    <label for="contents" class="c-label">内容</label>
-                    <div id="contents" class="confirm-text">
-                        <div v-if="contributorFlag === true || buying === true">
-                            {{detail.content}}
-                        </div>
-                        <div v-else>
-                            購入者にのみ開放されます
-                        </div>
-                    </div>
-
-
-                    <label for="contents" class="c-label">お気に入り</label>
-                    <div for="fav" class="confirm-text">
-                        ハートClickでお気に入り切り替え
-                        <i id ="fav" :class="{'fas': true, 'fa-heart':true ,'fa-2x':true,'fav': favActive}" @click="favSwitch($store.state.users.id,detail.id)"></i>
-                    </div>
-
-                    <label for="purchase" class="c-label">購入</label>
-
-                    <div v-if="contributorFlag === true" class="confirm-text">
-                        アイデアご提供ありがとうございます
-                    </div>
-                    <div v-else-if="contributorFlag === false && buying === false">
-                        <form action="/mypage" method="post">
-                            <input type="hidden" name="postId" :value="detail.id">
-                            <input type="hidden" name="userId" :value="userId">
-                            <input type="hidden" name="price" :value="detail.price">
-                            <input type="hidden" name="_token" :value="csrf">
-                            <div is="script"
-                                 src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                 data-key="pk_test_GBrEKoadZp9xMAbizR6ggayP00kNbOQOVO"
-                                 :data-amount="detail.price"
-                                 data-name="アイデア購入"
-                                 data-label="決済をする"
-                                 data-description="Online course about integrating Stripe"
-                                 data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                                 data-locale="auto"
-                                 data-currency="JPY">
+                        <div class="postDetail-container-img">
+                            <div class="postDetail-container-img-right">
+                                <label>
+                                    <img :src="`./img${detail.img}`" alt="detailIdeaImg">
+                                    <input id="img" class="c-input postDetail-container-img-none" type="file"/>
+                                    <!-- hoverしたら画像をアップロードの文字が浮き上がって画像が薄暗く -->
+                                </label>
                             </div>
-                        </form>
-                    </div>
-                    <div v-else-if="buying === true" class="confirm-text">
-                        ご購入ありがとうございます
-                    </div>
-
-                    <div v-if="!detail.bought_flag && ideaUserId === userId">
-                    <label for="delete" class="c-label">削除</label>
-                    <div id="delete" class="c-button" v-show="deleteState" @click="appearForm()" :disabled="detail.bought_flag">
-                        アイデア削除
-                    </div>
-                    </div>
-
-                    <div v-show="!deleteState">
-                        <p>本当に削除しますか？？</p>
-                        <div class="c-button" @click="postDelete" >
-                            <router-link to="mypage">削除</router-link>
+                            <div class="ic postDetail-container-img-left">
+                                <label class="c-label" for="img">平均評価</label>
+                                <span class="ic-star-review" v-bind:class="star(detail.averageReview)"></span>
+                                <span class v-if="star(detail.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
+                            </div>
                         </div>
-                    </div>
 
-                </div>
+
+                        <label for="category" class="c-label">カテゴリー</label>
+                        <div id="category" class="confirm-text">{{checkCategory(detail.category_id)}}</div>
+
+                        <label for="description" class="c-label">概要</label>
+                        <div id="description" class="confirm-text">
+                            {{detail.overflow}}
+                        </div>
+
+                        <label for="contents" class="c-label">内容</label>
+                        <div id="contents" class="confirm-text">
+                            <div v-if="contributorFlag === true || buying === true">
+                                {{detail.content}}
+                            </div>
+                            <div v-else>
+                                購入者にのみ開放されます
+                            </div>
+                        </div>
+
+
+                        <label for="contents" class="c-label">お気に入り</label>
+                        <div for="fav" class="confirm-text">
+                            ハートClickでお気に入り切り替え
+                            <i id="fav" :class="{'fas': true, 'fa-heart':true ,'fa-2x':true,'fav': favActive}"
+                               @click="favSwitch($store.state.users.id,detail.id)"></i>
+                        </div>
+
+                        <label for="purchase" class="c-label">購入</label>
+
+                        <div v-if="contributorFlag === true" class="confirm-text">
+                            アイデアご提供ありがとうございます
+                        </div>
+                        <div v-else-if="contributorFlag === false && buying === false">
+                            <form action="/mypage" method="post">
+                                <input type="hidden" name="postId" :value="detail.id">
+                                <input type="hidden" name="userId" :value="userId">
+                                <input type="hidden" name="price" :value="detail.price">
+                                <input type="hidden" name="_token" :value="csrf">
+                                <div is="script"
+                                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                     data-key="pk_test_GBrEKoadZp9xMAbizR6ggayP00kNbOQOVO"
+                                     :data-amount="detail.price"
+                                     data-name="アイデア購入"
+                                     data-label="決済をする"
+                                     data-description="Online course about integrating Stripe"
+                                     data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                     data-locale="auto"
+                                     data-currency="JPY">
+                                </div>
+                            </form>
+                        </div>
+                        <div v-else-if="buying === true" class="confirm-text">
+                            ご購入ありがとうございます
+                        </div>
+
+                        <div v-if="!detail.bought_flag && ideaUserId === userId">
+                            <label for="delete" class="c-label">削除</label>
+                            <div id="delete" class="c-button" v-show="deleteState" @click="appearForm()"
+                                 :disabled="detail.bought_flag">
+                                アイデア削除
+                            </div>
+                        </div>
+
+                        <div v-show="!deleteState">
+                            <p>本当に削除しますか？？</p>
+                            <div class="c-button" @click="postDelete">
+                                <router-link to="mypage">削除</router-link>
+                            </div>
+                        </div>
+
+                        <label for="contents" class="c-label">シェア</label>
+                        <div for="share" class="confirm-text">
+                            アイコンClickでシェア
+                            <i id="share" class="fab fa-twitter completed-share-twitter u-twitter"
+                               @click="twitterShare($store.state.users.id,detail.id)"></i>
+                        </div>
+
+                    </div>
                 </div>
 
             </form>
-
 
 
             <div class="c-heading">
@@ -123,217 +128,219 @@
 
             <div class="review review-container">
                 <paginate name="paginate-log" :list="this.ideaReviews" :per="3">
-                <div v-for="review in paginated('paginate-log')" class="review-posted">
+                    <div v-for="review in paginated('paginate-log')" class="review-posted">
 
-                    <div class="review-posted-name">
-                        <router-link :to="{name:'profileDetail',params:{
+                        <div class="review-posted-name">
+                            <router-link :to="{name:'profileDetail',params:{
                                         userId:review.user_id
                     }}">
-                        <div class="review-img">
-                            <img v-if="review.img !== null" :src="`./img${review.img}`" alt="reviewUserImg">
-                            <img v-else :src="`./img/images/account.jpeg`" alt="reviewUserImg">
-                            <div id="userName" class="review-img-name">
-                                {{review.name}}
-                                <p>さん</p>
+                                <div class="review-img">
+                                    <img v-if="review.img !== null" :src="`./img${review.img}`" alt="reviewUserImg">
+                                    <img v-else :src="`./img/images/account.jpeg`" alt="reviewUserImg">
+                                    <div id="userName" class="review-img-name">
+                                        {{review.name}}
+                                        <p>さん</p>
+                                    </div>
+                                </div>
+                            </router-link>
+                        </div>
+
+                        <div class="review-posted-star">
+
+                            <label for="reviewComment" class="review-posted-comment-label">評価</label>
+                            <div v-if="review.star === 1" class="review-posted-comment-star">
+                                <div class="review-posted-comment-star-top">
+                                    <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                    <i class="fas fa-star ic-star fa-2x"></i>
+                                </div>
+                                <div class="review-posted-comment-star-bottom">
+                                    <i class="fas fa-star ic-star fa-2x"></i>
+                                    <i class="fas fa-star ic-star fa-2x"></i>
+                                    <i class="fas fa-star ic-star fa-2x"></i>
+                                </div>
+
+                            </div>
+
+                            <div id="reviewComment" v-else-if="review.star === 2" class="review-posted-comment-star">
+                                <div class="review-posted-comment-star-top">
+                                    <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                    <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                </div>
+                                <div class="review-posted-comment-star-bottom">
+                                    <i class="fas fa-star ic-star fa-2x"></i>
+                                    <i class="fas fa-star ic-star fa-2x"></i>
+                                    <i class="fas fa-star ic-star fa-2x"></i>
+                                </div>
+
+                            </div>
+
+                            <div v-else-if="review.star === 3" class="review-posted-comment-star">
+                                <div class="review-posted-comment-star-top">
+                                    <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                    <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                </div>
+                                <div class="review-posted-comment-star-bottom">
+                                    <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                    <i class="fas fa-star ic-star fa-2x"></i>
+                                    <i class="fas fa-star ic-star fa-2x"></i>
+                                </div>
+
+                            </div>
+
+                            <div v-else-if="review.star === 4" class="review-posted-comment-star">
+                                <div class="review-posted-comment-star-top">
+                                    <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                    <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                </div>
+                                <div class="review-posted-comment-star-bottom">
+                                    <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                    <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                    <i class="fas fa-star ic-star fa-2x"></i>
+                                </div>
+
+                            </div>
+
+                            <div id="reviewComment" v-else-if="review.star === 5" class="review-posted-comment-star">
+                                <div class="review-posted-comment-star-top">
+                                    <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                    <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                </div>
+                                <div class="review-posted-comment-star-bottom">
+                                    <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                    <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                    <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+
+                                </div>
+
                             </div>
                         </div>
-                        </router-link>
+
+                        <div class="review-posted-comment">
+
+                            <label for="voiceComment" class="review-posted-comment-label">レビュー</label>
+                            <div id="voiceComment" class="review-posted-comment-content">
+                                {{review.comment}}
+                            </div>
+                        </div>
+
                     </div>
-
-                    <div class="review-posted-star">
-
-                        <label for="reviewComment" class ="review-posted-comment-label">評価</label>
-                        <div id="reviewComment" v-if="review.star === 1" class ="review-posted-comment-star">
-                            <div class="review-posted-comment-star-top">
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                            </div>
-                            <div class="review-posted-comment-star-bottom">
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                            </div>
-
-                        </div>
-
-                        <div id="reviewComment" v-else-if="review.star === 2" class ="review-posted-comment-star">
-                            <div class="review-posted-comment-star-top">
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                            </div>
-                            <div class="review-posted-comment-star-bottom">
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                            </div>
-
-                        </div>
-
-                        <div id="reviewComment" v-else-if="review.star === 3" class ="review-posted-comment-star">
-                            <div class="review-posted-comment-star-top">
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                            </div>
-                            <div class="review-posted-comment-star-bottom">
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                            </div>
-
-                        </div>
-
-                        <div id="reviewComment" v-else-if="review.star === 4" class ="review-posted-comment-star">
-                            <div class="review-posted-comment-star-top">
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                            </div>
-                            <div class="review-posted-comment-star-bottom">
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                            </div>
-
-                        </div>
-
-                        <div id="reviewComment" v-else-if="review.star === 5" class ="review-posted-comment-star">
-                            <div class="review-posted-comment-star-top">
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                            </div>
-                            <div class="review-posted-comment-star-bottom">
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class ="review-posted-comment">
-
-                        <label for="voiceComment" class ="review-posted-comment-label">レビュー</label>
-                        <div id="voiceComment" class ="review-posted-comment-content">
-                             {{review.comment}}
-                        </div>
-                    </div>
-
-                </div>
                 </paginate>
             </div>
 
-            <div class="pagination">
-                <paginate-links for="paginate-log" class="pagination-container" :show-step-links="true"></paginate-links>
+            <div class="pagination" @click="moveToTop()">
+                <paginate-links for="paginate-log" class="pagination-container"
+                                :show-step-links="true"></paginate-links>
             </div>
 
 
             <div v-if="!reviewed && buying" class="review-container">
 
-            <div class="c-heading">
-                <h3 class ="f-h3">レビュー</h3>
-            </div>
+                <div class="c-heading">
+                    <h3 class="f-h3">レビュー</h3>
+                </div>
 
 
-            <div class="review-comment">
-                <form action="" @submit.prevent="reviewPost()">
+                <div class="review-comment">
+                    <form action="" @submit.prevent="reviewPost()">
 
-                    <div class ="review-comment-container">
+                        <div class="review-comment-container">
 
-                        <label for="review-comment">評価</label>
+                            <label for="review-comment">評価</label>
 
-                        <div class="review-comment-check">
-                        <i class="fas fa-star ic-star fa-2x" @click="starJudge(1)"></i>
-                        <i class="fas fa-star ic-star fa-2x" @click="starJudge(2)"></i>
-                        <i class="fas fa-star ic-star fa-2x" @click="starJudge(3)"></i>
-                        <i class="fas fa-star ic-star fa-2x" @click="starJudge(4)"></i>
-                        <i class="fas fa-star ic-star fa-2x" @click="starJudge(5)"></i>
+                            <div class="review-comment-check">
+                                <i class="fas fa-star ic-star fa-2x" @click="starJudge(1)"></i>
+                                <i class="fas fa-star ic-star fa-2x" @click="starJudge(2)"></i>
+                                <i class="fas fa-star ic-star fa-2x" @click="starJudge(3)"></i>
+                                <i class="fas fa-star ic-star fa-2x" @click="starJudge(4)"></i>
+                                <i class="fas fa-star ic-star fa-2x" @click="starJudge(5)"></i>
+                            </div>
+
+                            <div class="review-comment-result">
+
+                                <div v-show="stars.oneStar">
+                                    <div class="review-comment-stars">
+                                        <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                        <i class="fas fa-star ic-star fa-2x"></i>
+                                    </div>
+                                    <div class="review-comment-stars">
+                                        <i class="fas fa-star ic-star fa-2x"></i>
+                                        <i class="fas fa-star ic-star fa-2x"></i>
+                                        <i class="fas fa-star ic-star fa-2x"></i>
+                                    </div>
+                                </div>
+
+                                <div v-show="stars.twoStars">
+                                    <div class="review-comment-stars">
+                                        <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                        <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                    </div>
+                                    <div class="review-comment-stars">
+                                        <i class="fas fa-star ic-star fa-2x"></i>
+                                        <i class="fas fa-star ic-star fa-2x"></i>
+                                        <i class="fas fa-star ic-star fa-2x"></i>
+                                    </div>
+                                </div>
+
+                                <div v-show="stars.threeStars">
+                                    <div class="review-comment-stars">
+                                        <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                        <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                    </div>
+                                    <div class="review-comment-stars">
+                                        <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                        <i class="fas fa-star ic-star fa-2x"></i>
+                                        <i class="fas fa-star ic-star fa-2x"></i>
+                                    </div>
+                                </div>
+
+                                <div v-show="stars.fourStars">
+                                    <div class="review-comment-stars">
+                                        <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                        <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                    </div>
+                                    <div class="review-comment-stars">
+                                        <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                        <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                        <i class="fas fa-star ic-star fa-2x"></i>
+                                    </div>
+                                </div>
+
+                                <div v-show="stars.fiveStars">
+                                    <div class="review-comment-stars">
+                                        <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                        <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                    </div>
+                                    <div class="review-comment-stars">
+                                        <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                        <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                        <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
-                        <div class="review-comment-result">
-
-                        <div v-show="stars.oneStar">
-                            <div class="review-comment-stars">
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                            </div>
-                            <div class="review-comment-stars">
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                            </div>
+                        <div class="review-comment-container">
+                            <label for="review-comment">レビュー</label>
+                            <textarea v-model="reviewComment" class="c-input review-comment-input" name="review"
+                                      id="review-comment" cols="30" rows="10" placeholder="レビューを記入"></textarea>
                         </div>
-
-                        <div v-show="stars.twoStars">
-                            <div class="review-comment-stars">
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                            </div>
-                            <div class="review-comment-stars">
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                            </div>
-                        </div>
-
-                        <div v-show="stars.threeStars">
-                            <div class="review-comment-stars">
-                             <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                             <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                            </div>
-                            <div class="review-comment-stars">
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                            </div>
-                        </div>
-
-                        <div v-show="stars.fourStars">
-                            <div class="review-comment-stars">
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                            </div>
-                            <div class="review-comment-stars">
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                                <i class="fas fa-star ic-star fa-2x"></i>
-                            </div>
-                        </div>
-
-                        <div v-show="stars.fiveStars">
-                            <div class="review-comment-stars">
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                            </div>
-                            <div class="review-comment-stars">
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                                <i class="fas fa-star ic-star fa-2x faa-bounce animated review-comment-stars-select"></i>
-                            </div>
-                        </div>
-                        </div>
-
-                    </div>
-
-                    <div class ="review-comment-container" >
-                        <label for="review-comment">レビュー</label>
-                        <textarea v-model="reviewComment" class ="c-input review-comment-input" name="review" id="review-comment" cols="30" rows="10" placeholder="レビューを記入"></textarea>
-                    </div>
-                    <div v-if="reviewErrorMessage" class="review-comment-error">{{reviewErrorMessage}}</div>
-                    <input type="submit" class="c-button review-button" :disabled="processing" value="送信">
-                </form>
-            </div>
+                        <div v-if="reviewErrorMessage" class="review-comment-error">{{reviewErrorMessage}}</div>
+                        <input type="submit" class="c-button review-button" :disabled="processing" value="送信">
+                    </form>
+                </div>
             </div>
 
             <div v-else class="review-container-restriction">
 
                 <div class="c-heading">
-                    <h3 class ="f-h3">レビュー</h3>
+                    <h3 class="f-h3">レビュー</h3>
                 </div>
 
 
                 <div class="review-comment">
                     <form action="">
-                        <div class ="review-comment-container">
+                        <div class="review-comment-container">
 
                             <label for="review-comment">評価</label>
 
@@ -345,9 +352,10 @@
                                 <i class="fas fa-star ic-star fa-2x"></i>
                             </div>
 
-                            <div class ="review-comment-container">
-                            <label for="review-comment">レビュー</label>
-                            <textarea disabled class ="c-input review-comment-input" v-model="reviewComment" name="" id="review-comment" cols="30" rows="10" placeholder="レビューを記入"></textarea>
+                            <div class="review-comment-container">
+                                <label for="review-comment">レビュー</label>
+                                <textarea disabled class="c-input review-comment-input" v-model="reviewComment" name=""
+                                          id="review-comment" cols="30" rows="10" placeholder="レビューを記入"></textarea>
                             </div>
                         </div>
                         <input type="text" class="c-button review-button-restriction" :disabled="processing" value="送信">
@@ -361,7 +369,6 @@
         </div>
 
 
-
     </main>
 
 
@@ -371,40 +378,40 @@
     export default {
         name: "PostDetailComponent",
 
-        data:function(){
+        data: function () {
             return {
-                ideaId:'',
-                detail:{},
-                title:"",
-                favActive:"",
-                user:{},
-                favState:"",
-                contributorFlag:false,
-                reviewed:false,
-                ideaReviews:{},
-                ideaUserId:"",
-                userId:"",
-                deleteState:true,
+                ideaId: '',
+                detail: {},
+                title: "",
+                favActive: "",
+                user: {},
+                favState: "",
+                contributorFlag: false,
+                reviewed: false,
+                ideaReviews: {},
+                ideaUserId: "",
+                userId: "",
+                deleteState: true,
                 //他者の投稿を購入しているか
-                buying:false,
+                buying: false,
                 //自分の投稿が購入されているか
-                bought_flag:false,
-                stars:{
-                    oneStar:false,
-                    twoStars:false,
-                    threeStars:false,
-                    fourStars:false,
-                    fiveStars:false,
+                bought_flag: false,
+                stars: {
+                    oneStar: false,
+                    twoStars: false,
+                    threeStars: false,
+                    fourStars: false,
+                    fiveStars: false,
                 },
-                reviewComment:"",
-                reviewNumber:"",
-                reviewErrorMessage:false,
+                reviewComment: "",
+                reviewNumber: "",
+                reviewErrorMessage: false,
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 
-                processing:false,
+                processing: false,
                 paginate: ['paginate-log']
 
-        }
+            }
         },
 
 
@@ -417,8 +424,7 @@
             /**
              * 投稿情報取得
              */
-            axios.get('/api/detail/'+this.ideaId, {
-            })
+            axios.get('/api/detail/' + this.ideaId, {})
                 .then((response) => {
                     console.log(response.data);
                     this.detail = response.data;
@@ -429,15 +435,15 @@
 
         },
 
-        mounted(){
-            this.$nextTick(function(){
-            this.getState();
-            this.checkCategory();
-            // this.contributorJudge();
-            this.checkBuying;
-            this.reviewedJudge();
-            this.getReviews();
-            console.log('PostDetailComponent mounted')
+        mounted() {
+            this.$nextTick(function () {
+                this.getState();
+                this.checkCategory();
+                // this.contributorJudge();
+                this.checkBuying;
+                this.reviewedJudge();
+                this.getReviews();
+                console.log('PostDetailComponent mounted')
             })
         },
 
@@ -448,6 +454,24 @@
         methods: {
 
 
+            moveToTop() {
+
+                const duration = 500;  // 移動速度（1秒で終了）
+                const interval = 25;    // 0.025秒ごとに移動
+                const step = -window.scrollY / Math.ceil(duration / interval); // 1回に移動する距離
+                const timer = setInterval(() => {
+
+                    window.scrollBy(0, step);   // スクロール位置を移動
+
+                    if(window.scrollY <= 1800) {
+
+                        clearInterval(timer);
+
+                    }
+
+                }, interval);
+
+            },
 
 
             favSwitch: function (userId, ideaId) {
@@ -520,13 +544,13 @@
             },
 
             //既にレビューしているか確認
-            reviewedJudge: function(){
-                axios.get('/api/reviewedJudge',{
-                    params:{
+            reviewedJudge: function () {
+                axios.get('/api/reviewedJudge', {
+                    params: {
                         userId: this.$store.state.users.id,
                         ideaId: this.ideaId
-                }
-                }).then((response) =>{
+                    }
+                }).then((response) => {
                     console.log(response);
                     //投稿がある場合はtrue ない場合はデフォルト値false
                     this.reviewed = response.data.judge;
@@ -537,17 +561,16 @@
             },
 
 
-
             //レビュー取得
-            getReviews:function(){
-                axios.get('/api/getReviews',{
-                    params:{
-                        ideaId:this.ideaId
+            getReviews: function () {
+                axios.get('/api/getReviews', {
+                    params: {
+                        ideaId: this.ideaId
                     }
-                }).then((response) =>{
+                }).then((response) => {
                     console.log(response);
                     this.ideaReviews = response.data.reviews;
-                }).catch((error) =>{
+                }).catch((error) => {
                     console.log(error)
                 })
             },
@@ -570,59 +593,52 @@
                 })
             },
 
-            appearForm:function(){
+            appearForm: function () {
 
                 this.deleteState = false
             },
 
 
-
-            starJudge:function($starNumber)
-            {
+            starJudge: function ($starNumber) {
                 this.stars.oneStar = false,
-                this.stars.twoStars = false,
-                this.stars.threeStars = false,
-                this.stars.fourStars = false,
-                this.stars.fiveStars = false
+                    this.stars.twoStars = false,
+                    this.stars.threeStars = false,
+                    this.stars.fourStars = false,
+                    this.stars.fiveStars = false
 
-                if($starNumber === 1)
-                {
+                if ($starNumber === 1) {
                     this.stars.oneStar = true;
-                    this.reviewNumber =1
+                    this.reviewNumber = 1
                 }
 
-                if($starNumber === 2)
-                {
+                if ($starNumber === 2) {
                     this.stars.twoStars = true;
-                    this.reviewNumber =2
+                    this.reviewNumber = 2
                 }
 
-                if($starNumber === 3)
-                {
+                if ($starNumber === 3) {
                     this.stars.threeStars = true;
-                    this.reviewNumber =3
+                    this.reviewNumber = 3
 
                 }
 
-                if($starNumber === 4)
-                {
+                if ($starNumber === 4) {
                     this.stars.fourStars = true;
-                    this.reviewNumber =4
+                    this.reviewNumber = 4
                 }
 
-                if($starNumber === 5)
-                {
+                if ($starNumber === 5) {
                     this.stars.fiveStars = true;
-                    this.reviewNumber =5
+                    this.reviewNumber = 5
                 }
             },
 
-            reviewPost: function() {
+            reviewPost: function () {
                 //すでに投稿しているか確認
                 if (this.reviewed === true) {
                     this.reviewErrorMessage = '既にレビューが投稿されています'
 
-                }else if(this.reviewComment.length > 500){
+                } else if (this.reviewComment.length > 500) {
                     this.reviewErrorMessage = '500文字以下で入力して下さい'
                     //レビュー投稿処理
                 } else if (this.reviewNumber !== "" && this.reviewComment !== "") {
@@ -630,51 +646,58 @@
                     this.$emit('open-loading');
                     this.processing = true;
                     //投稿処理
-                    setTimeout(()=>{
-                    axios.post('/api/reviewPost', {
-                                    userId: this.$store.state.users.id,
-                                    ideaId: this.ideaId,
-                                    ideaUserId: this.ideaUserId,
-                                    star: this.reviewNumber,
-                                    comment: this.reviewComment
-                        }).then((response)=>{
+                    setTimeout(() => {
+                        axios.post('/api/reviewPost', {
+                            userId: this.$store.state.users.id,
+                            ideaId: this.ideaId,
+                            ideaUserId: this.ideaUserId,
+                            star: this.reviewNumber,
+                            comment: this.reviewComment
+                        }).then((response) => {
                             console.log(response);
-                        this.processing = false;
-                        this.$emit('close-loading');
-                        this.$router.push({ name: 'reviewCompleted',params:
+                            this.processing = false;
+                            this.$emit('close-loading');
+                            this.$router.push({
+                                name: 'reviewCompleted', params:
                                     {
-                                        ideaId:this.ideaId,
-                                        userId:this.ideaUserId,
-                                        title:this.title
-                                    }})
-                            }).catch((error) =>{
-                        this.$emit('close-loading');
-                        console.log(error);
+                                        ideaId: this.ideaId,
+                                        userId: this.ideaUserId,
+                                        title: this.title
+                                    }
+                            })
+                        }).catch((error) => {
+                            this.$emit('close-loading');
+                            console.log(error);
                             this.reviewErrorMessage = '時間を置いてお試し下さい'
                             this.processing = false;
-                    });
-                    },2000)
+                        });
+                    }, 2000)
                 }
                 //入力がされていない
                 else {
                     this.reviewErrorMessage = '全てのレビュー入力がされていません';
                 }
-            }
+            },
 
+            twitterShare(userId,ideaId) {
+                const $url = `https://twitter.com/intent/tweet?text=アイデア名\n「${this.title}」\r\n他にも沢山の魅力的なアイデアがあるよ!\r\n%20%23Inspiration&url=http://ec2-13-231-128-196.ap-northeast-1.compute.amazonaws.com/ideaDetail/${ideaId}`;
+                window.open($url, null, 'top=100,left=100,width=300,height=400');
+
+            }
         },
 
-        computed:{
+        computed: {
 
             //投稿の内容見れるか確認
             // 購入者もしくは起草者
             //購入しているか確認
-            checkBuying:function(){
-                axios.get('/api/buyingJudge',{
+            checkBuying: function () {
+                axios.get('/api/buyingJudge', {
                     params: {
                         userId: this.$store.state.users.id,
                         postId: this.ideaId
                     }
-                }).then((response) =>{
+                }).then((response) => {
                     console.log(response);
                     this.buying = response.data.judge;
                 }).catch((error) => {
@@ -682,27 +705,21 @@
                 });
             },
 
-            canSeeContents: function()
-            {
+            canSeeContents: function () {
                 //投稿者の投稿,購入者なら内容見れる
-                if(this.contributorFlag === true && this.buying === true) {
+                if (this.contributorFlag === true && this.buying === true) {
                     return true
-                }else if(this.contributorFlag === false && this.buying === false)
-                {
+                } else if (this.contributorFlag === false && this.buying === false) {
                     return false
                 }
             },
 
 
-            reviewRegurationMessage:function()
-            {
-                if(this.buying === false && this.reviewed === false)
-                {
+            reviewRegurationMessage: function () {
+                if (this.buying === false && this.reviewed === false) {
                     return 'レビューは購入者のみ可能です'
 
-                }
-                else if(this.buying === true && this.reviewed === true)
-                {
+                } else if (this.buying === true && this.reviewed === true) {
                     return 'レビューは一度のみ可能です'
 
                 }
@@ -710,18 +727,16 @@
 
             },
 
-            star:function(){
+            star: function () {
 
 
-                return function(stars) {
+                return function (stars) {
 
                     var starReview = stars;
 
-                    if(starReview === 0)
-                    {
+                    if (starReview === 0) {
                         return "ic-not-reviewed";
-                    }
-                    else if (starReview <= 0.5) {
+                    } else if (starReview <= 0.5) {
                         return "rate0-5"
                     } else if (starReview > 0.5 && starReview <= 1) {
                         return "rate1"
@@ -745,21 +760,19 @@
                 }
             },
 
-            },
+        },
 
 
-        watch:{
+        watch: {
 
-            favState: function()
-            {
-                if(this.favState.favState === 1)
+            favState: function () {
+                if (this.favState.favState === 1)
                     this.favActive = true;
-                else if(this.favState.favState === 0)
+                else if (this.favState.favState === 0)
                     this.favActive = false;
             },
 
-            detail: function()
-            {
+            detail: function () {
                 this.title = this.detail.idea[0].title;
                 this.ideaUserId = this.detail.idea[0].user_id;
                 this.contributorJudge();
@@ -767,51 +780,42 @@
             }
 
 
-
         },
-
-
-
-
-
-
-
-
 
 
     }
 </script>
 
 <style scoped>
-    .fav{
-        color:#FFBEDA;
-        margin:5% auto;
+    .fav {
+        color: #FFBEDA;
+        margin: 5% auto;
     }
 
-    .c-button{
-        margin:5% auto;
+    .c-button {
+        margin: 5% auto;
     }
 
-    .ic >>> ul{
-        display:flex;
-        width:100%;
-        margin:5% auto;
-        flex-wrap:wrap;
-    }
-
-    .pagination >>> ul{
+    .ic >>> ul {
         display: flex;
-        font-size:24px;
-        justify-content:center;
-        list-style:none;
+        width: 100%;
+        margin: 5% auto;
+        flex-wrap: wrap;
     }
 
-    .pagination >>> li{
+    .pagination >>> ul {
+        display: flex;
+        font-size: 24px;
+        justify-content: center;
+        list-style: none;
+    }
+
+    .pagination >>> li {
         margin: 0 2%;
     }
 
-    .pagination-container >>> a{
-        color:black;
+    .pagination-container >>> a {
+        color: black;
     }
 
 </style>

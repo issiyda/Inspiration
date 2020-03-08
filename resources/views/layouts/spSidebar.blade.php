@@ -6,7 +6,7 @@
 
                 @auth
                     <li class ="nav-item">
-                        <a href="mypage">
+                        <a href="{{route('mypage')}}">
                             <div class="sidebar-item">
                                 <i class="far fa-smile fa-2x sidebar-item-logo"></i>
                                 <div class="sidebar-item-text">Mypage</div>
@@ -37,7 +37,7 @@
                     <li class ="nav-item">
                         <a href="{{route('register')}}">
                             <div class="sidebar-item">
-                                <i class="fas fa-sign-in-alt fa-2x sidebar-item-logo"></i>
+                                <i class="fas fa-door-open fa-2x sidebar-item-logo"></i>
                                 <div class="sidebar-item-text">Register</div>
                             </div>
                         </a>

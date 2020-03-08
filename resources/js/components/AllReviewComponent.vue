@@ -7,7 +7,7 @@
             <h2 class ="f-h2">レビューアイデア</h2>
 
 
-            <h3 class ="f-h3">自分の投稿に対してのレビュー</h3>
+            <h3 class ="f-h3">自分の投稿へのレビュー</h3>
 
             <div class="ic">
 
@@ -50,7 +50,7 @@
 
             </div>
 
-            <div class="pagination">
+            <div class="pagination" @click="moveToTop()">
                 <paginate-links for="paginate-log" class="pagination-container" :show-step-links="true"></paginate-links>
             </div>
 
@@ -82,8 +82,15 @@
             this.$emit('close-loading');
         },
 
+        methods: {
 
-        computed: {
+            moveToTop() {
+                this.$store.dispatch('moveToTop');
+            }
+        },
+
+
+            computed: {
 
             reviewedIdeas() {
                 return this.$store.state.ideas.review;

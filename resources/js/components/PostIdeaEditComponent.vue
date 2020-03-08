@@ -16,7 +16,9 @@
 
                         <div class="edit-container-img">
                             <div class="edit-container-img-left">
-                                <label class="c-label" for="img">アイデアイメージ画像</label>
+                                <label class="c-label" for="img">アイデアイメージ画像
+                                    <br><p class="u-comment">枠内クリックで画像変更</p>
+                                </label>
                             </div>
                             <div class="edit-container-img-right">
                                 <label>
@@ -27,6 +29,9 @@
                                 </label>
                             </div>
                         </div>
+
+                        <div class="error" v-if="errorMessages.imgErrorMessage">{{errorMessages.imgErrorMessage}}</div>
+
 
                         <div class="edit-container-input">
                             <label class="c-label" for="title">アイデア名</label>
@@ -254,9 +259,24 @@
             },
 
             onFileChange(event) {
+                const SIZE_LIMIT = 3000000 //3Mバイトまで
                 this.fileInfo = event.target.files[0]
-                this.createImage();
+                if (this.fileInfo.size > SIZE_LIMIT) {
+
+                    this.errorMessages.imgErrorMessage = "3M以下の画像を選択してください"
+
+                } else if (this.fileInfo.type !== "image/png" && this.fileInfo.type !== "image/jpeg" && this.fileInfo.type !== "image/jpg") {
+
+                    this.errorMessages.imgErrorMessage = "画像の形式は(jpg,jpeg,png)のみ投稿可能です"
+
+                } else {
+                    this.errorMessages.imgErrorMessage = false
+                    this.$emit('open-loading');
+                    this.createImage();
+
+                }
             },
+
 
             createImage() {
                 //画像をプレビュー表示するロジック
@@ -265,6 +285,8 @@
                     this.newImage = e.target.result
                 };
                 reader.readAsDataURL(this.fileInfo);
+                this.$emit('close-loading');
+
             },
 
             saveImage() {

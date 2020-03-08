@@ -11,7 +11,10 @@
                 <div class="profile-container-input">
                     <div class="profile-container-img">
                         <div class="profile-container-img-left">
-                            <label class="c-label" for="img">プロフィール<br>画像</label>
+                            <label class="c-label" for="img">プロフィール
+                                <br><p>画像</p>
+                                <br><p class="u-comment">画像クリックで変更</p>
+                            </label>
                         </div>
                         <div v-cloak class="profile-container-img-right">
                             <label>
@@ -21,11 +24,10 @@
                             </label>
                         </div>
 
-                        <div class="error" v-if="errorMessages.imgErrorMessage">{{errorMessages.imgErrorMessage}}</div>
-
-
-
                     </div>
+
+                    <div class="error" v-if="errorMessages.imgErrorMessage">{{errorMessages.imgErrorMessage}}</div>
+
 
                     <div v-if="ImgChangeState" class="profile-container-img-message">
                         {{profImgChangeMessage}}
@@ -40,7 +42,9 @@
 
 
                     <div class="profile-container-input">
-                        <label class ="c-label profile-container-input-label" for="name">名前</label>
+                        <label class ="c-label profile-container-input-label" for="name">名前
+                            <br><p class="u-comment">名前をダブルクリックで編集</p>
+                        </label>
                         <div v-if="!isNameEdit" @dblclick="isNameEdit = true" class="c-input">{{$store.state.users.name}}</div>
                         <input v-else id="name" @blur="updateName($store.state.users.id,$store.state.users.name)" v-model="$store.state.users.name" class="c-input" type="text" placeholder="（例）だーいし">
                     </div>
@@ -49,7 +53,9 @@
 
 
                     <div class="profile-container-input">
-                        <label class="c-label" for="mail">e-mail</label>
+                        <label class="c-label" for="mail">e-mail
+                            <br><p class="u-comment">emailをダブルクリックで編集</p>
+                        </label>
                         <div v-if="!isEmailEdit" @dblclick="isEmailEdit = true" class="c-input">{{$store.state.users.email}}</div>
                         <input v-else id="mail" @blur="updateEmail($store.state.users.id, $store.state.users.email)" v-model="$store.state.users.email" class="c-input" type="text" placeholder="（例）info@.com" value="{$store.state.users.email}">
                     </div>
@@ -61,8 +67,7 @@
 
                     <div class="profile-container-input">
                         <label class="c-label" for="introduction">プロフィール文</label>
-                        下枠をクリックして編集して下さい
-<!--                        <textarea name="" id="profile" class ="c-textarea" cols="30" rows="10" placeholder="自己紹介を記入してください"></textarea>-->
+                        <br><p class="u-comment">枠内クリックで編集</p>
                         <div v-if="!isIntroductionEdit" @dblclick="isIntroductionEdit = true" class="c-input profile-container-textarea">{{$store.state.users.introduction}}</div>
                         <textarea v-else id="introduction" @blur="updateIntroduction($store.state.users.id, $store.state.users.introduction)" v-model="$store.state.users.introduction" class="c-input" type="text" placeholder="（例）お取引よろしくお願いいたします"></textarea>
                     </div>
@@ -73,7 +78,8 @@
 
 
                     <div class="profile-container-input">
-                        <label class="c-label" for="profileDetail">プロフィール詳細</label>
+                        <label class="c-label" for="profileDetail">プロフィール詳細
+                        </label>
                         <div id="profileDetail" class="profile-button">
                             <router-link :to="{name:'profileDetail',params:{
                             userId:this.$store.state.users.id
@@ -215,10 +221,26 @@
                 }
             },
 
-            onFileChange(event) {
-                this.fileInfo = event.target.files[0];
-                this.previewImage();
-                console.log('onFileChangeFinished')
+            onFileChange(event){
+                const SIZE_LIMIT = 3000000 //3Mバイトまで
+                this.fileInfo = event.target.files[0]
+                console.log(this.fileInfo.size);
+                if(this.fileInfo.size > SIZE_LIMIT) {
+
+                    this.errorMessages.imgErrorMessage = "3M以下の画像を選択してください"
+
+                }else if(this.fileInfo.type !== "image/png" && this.fileInfo.type !== "image/jpeg"　&& this.fileInfo.type !== "image/jpg")
+                {
+
+                    this.errorMessages.imgErrorMessage = "画像の形式は(jpg,jpeg,png)のみ投稿可能です"
+
+                }
+                else {
+                    this.$emit('open-loading');
+                    this.errorMessages.imgErrorMessage = false;
+                    this.previewImage();
+
+                }
             },
 
 

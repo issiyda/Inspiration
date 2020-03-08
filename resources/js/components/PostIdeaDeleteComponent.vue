@@ -14,7 +14,7 @@
 
                         <p>一度削除すると</p>
                         <ul class="withdraw-ul">
-                            <li class="withdraw-li">投稿したアイデア名</li>
+                            <li class="withdraw-li">投稿したアイデア</li>
                             <li class="withdraw-li">{{ideaTitle}}</li>
                         </ul>
                         <p>は残りません</p>
@@ -23,11 +23,10 @@
 
                     </div>
 
+                    <button class="c-button withdraw-submit-button" @click="ideaDelete(ideaId,userId)">削除する</button>
+
                 </div>
 
-<!--                <form method="get" class="c-form-submit withdraw-submit">-->
-                    <button class="c-button withdraw-submit-button" @click="ideaDelete(ideaId,userId)">削除する</button>
-<!--                </form>-->
             </div>
 
         </div>

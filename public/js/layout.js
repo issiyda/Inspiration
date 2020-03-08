@@ -59,6 +59,17 @@ $(document).ready(function(){
     });
 
 
+        //クリックでページトップに
+        var pagetop = $('#page_top').find("li");
+        // ボタン非表示
+        console.log($('#page_top').find("li"));
+
+        pagetop.click(function () {
+            $('body, html').animate({ scrollTop: 0 }, 500);
+            return false;
+        });
+
+
 
 
 });

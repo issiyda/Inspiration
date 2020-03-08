@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 class DetailController extends Controller
 {
 
+    public function informalDetail($id)
+    {
+        $idea = Idea::where('id',$id)->get()->first();
+
+        $ideaInfo = json_encode($idea);
+        return view('layouts.informalDetail',compact('ideaInfo'));
+
+    }
+
     /**
      * @param $id
      * @return \Illuminate\Http\JsonResponse

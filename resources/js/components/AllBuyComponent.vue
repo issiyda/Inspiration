@@ -51,7 +51,7 @@
 
             </div>
 
-            <div class="pagination">
+            <div class="pagination" @click="moveToTop()">
                 <paginate-links for="paginate-log" class="pagination-container" :show-step-links="true"></paginate-links>
             </div>
 
@@ -73,8 +73,14 @@
             }
         },
 
+        methods: {
 
-        created() {
+            moveToTop() {
+                this.$store.dispatch('moveToTop');
+            },
+        },
+
+            created() {
             this.$emit('open-loading');
             this.ideas = this.$store.dispatch('getUserIdeas');
             console.log('AllBuyComponent mounted.');

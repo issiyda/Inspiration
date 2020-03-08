@@ -5,3 +5,4 @@ Vue.component('side-bar-component',require('./components/common/SideBarComponent
 Vue.component('footer-component',require('./components/common/FooterComponent').default);
 Vue.component('guest-footer-component',require('./components/common/GuestFooterComponent').default);
 
+Vue.component('informal-detail-component',require('./components/InformalDetailComponent').default);

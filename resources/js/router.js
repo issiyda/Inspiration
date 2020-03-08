@@ -33,7 +33,11 @@ export default new Router({
      * @returns {{x: number, y: number}}
      */
     scrollBehavior (to, from, savedPosition) {
-        return { x: 0, y: 0 }; // トップに移動
+        if (savedPosition) {
+            return savedPosition
+        } else {
+            return {x: 0, y: 0}
+        }
     },
     routes: [
 
