@@ -4,7 +4,7 @@
 
         <div class="p-mypage">
 
-            <h2 class="f-h2">お気に入り<br class="sp">アイデア</h2>
+            <h2 class="f-h2">お気に入り<br class="u-sp">アイデア</h2>
 
 
             <h3 class="f-h3">お気に入りアイデア</h3>

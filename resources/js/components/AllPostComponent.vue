@@ -4,7 +4,7 @@
 
         <div class="p-mypage">
 
-            <h2 class="f-h2">自分の投稿<br class="sp">アイデア</h2>
+            <h2 class="f-h2">自分の投稿<br class="u-sp">アイデア</h2>
 
 
             <h3 class="f-h3">投稿したアイデア</h3>

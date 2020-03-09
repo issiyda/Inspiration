@@ -10,7 +10,9 @@
 
                 <label for="ideaImg" class="c-label">アイデア画像</label>
                 <div id="ideaImg" class="confirm-container-img">
-                    <img :src="this.img"  alt="">
+                    <label>
+                        <img :src="this.img" alt="">
+                    </label>
                 </div>
 
 

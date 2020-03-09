@@ -110,7 +110,7 @@
 
                         <label for="contents" class="c-label">シェア</label>
                         <div for="share" class="confirm-text">
-                            アイコンClickでシェア
+                            アイコンClickで<br class="u-sp">シェア
                             <i id="share" class="fab fa-twitter completed-share-twitter u-twitter"
                                @click="twitterShare($store.state.users.id,detail.id)"></i>
                         </div>
