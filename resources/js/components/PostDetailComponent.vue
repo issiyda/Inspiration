@@ -476,7 +476,7 @@
 
             favSwitch: function (userId, ideaId) {
                 this.$emit('open-loading');
-                axios.post('/api/favorite/',
+                axios.post('/api/favorite',
                     {
                         userId: userId,
                         ideaId: ideaId
