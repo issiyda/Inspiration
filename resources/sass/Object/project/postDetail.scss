@@ -283,6 +283,7 @@
 
         textarea {
             @extend .review-posted-comment;
+            height:20%;
             margin: auto 3%;
             width: 74%;
 
@@ -323,10 +324,17 @@
     }
 
     &-button {
+        @extend .c-button;
         border: none;
         margin: 3% 0 3% 75%;
         padding: 1.5%;
         width: 10%;
+
+        @include mq {
+            margin: 8% 0 3% 62%;
+            width: 20%;
+
+        }
 
         &-restriction {
             @extend .review-button;
@@ -334,11 +342,7 @@
 
         }
 
-        @include mq {
-            margin: 8% 0 3% 62%;
-            width: 20%;
 
-        }
     }
 }
 

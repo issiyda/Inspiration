@@ -122,7 +122,7 @@
 
 
             <div class="c-heading">
-                <h3 class="f-h3">皆さんの声</h3>
+                <h3 id="js_scroll_target" class="f-h3">皆さんの声</h3>
             </div>
 
 
@@ -326,7 +326,7 @@
                                       id="review-comment" cols="30" rows="10" placeholder="レビューを記入"></textarea>
                         </div>
                         <div v-if="reviewErrorMessage" class="review-comment-error">{{reviewErrorMessage}}</div>
-                        <input type="submit" class="c-button review-button" :disabled="processing" value="送信">
+                        <input type="submit" class="review-button" :disabled="processing" value="送信">
                     </form>
                 </div>
             </div>
@@ -358,7 +358,7 @@
                                           id="review-comment" cols="30" rows="10" placeholder="レビューを記入"></textarea>
                             </div>
                         </div>
-                        <input type="text" class="c-button review-button-restriction" :disabled="processing" value="送信">
+                        <input type="text" class="review-button-restriction" :disabled="processing" value="送信">
                     </form>
 
                     <div class="review-comment-restriction">{{reviewRegurationMessage}}</div>
@@ -458,6 +458,8 @@
 
             moveToTop() {
 
+                const targetHeight = $('#js_scroll_target').offset();
+
                 const duration = 500;  // 移動速度（1秒で終了）
                 const interval = 25;    // 0.025秒ごとに移動
                 const step = -window.scrollY / Math.ceil(duration / interval); // 1回に移動する距離
@@ -465,7 +467,7 @@
 
                     window.scrollBy(0, step);   // スクロール位置を移動
 
-                    if(window.scrollY <= 1800) {
+                    if(window.scrollY <= targetHeight.top) {
 
                         clearInterval(timer);
 
@@ -638,10 +640,10 @@
             reviewPost: function () {
                 //すでに投稿しているか確認
                 if (this.reviewed === true) {
-                    this.reviewErrorMessage = '既にレビューが投稿されています'
+                    this.reviewErrorMessage = '既にレビューが投稿されています。'
 
                 } else if (this.reviewComment.length > 500) {
-                    this.reviewErrorMessage = '500文字以下で入力して下さい'
+                    this.reviewErrorMessage = '500文字以下で入力して下さい。'
                     //レビュー投稿処理
                 } else if (this.reviewNumber !== "" && this.reviewComment !== "") {
                     //二度送信できないようにする処理
@@ -670,14 +672,14 @@
                         }).catch((error) => {
                             this.$emit('close-loading');
                             console.log(error);
-                            this.reviewErrorMessage = '時間を置いてお試し下さい'
+                            this.reviewErrorMessage = '時間を置いてお試し下さい。'
                             this.processing = false;
                         });
                     }, 2000)
                 }
                 //入力がされていない
                 else {
-                    this.reviewErrorMessage = '全てのレビュー入力がされていません';
+                    this.reviewErrorMessage = '全てのレビュー入力がされていません。';
                 }
             },
 
@@ -719,10 +721,10 @@
 
             reviewRegurationMessage: function () {
                 if (this.buying === false && this.reviewed === false) {
-                    return 'レビューは購入者のみ可能です'
+                    return 'レビューは購入者のみ可能です。'
 
                 } else if (this.buying === true && this.reviewed === true) {
-                    return 'レビューは一度のみ可能です'
+                    return 'レビューは一度のみ可能です。'
 
                 }
                 this.$emit('close-loading');

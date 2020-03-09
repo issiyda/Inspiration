@@ -18,6 +18,8 @@ class PostIdeaController extends Controller
     public function saveIdea(Request $request)
     {
 
+
+
         $user_id = $request->input('user_id');
         $title = $request->input('title');
         $category_id = $request->input('category_id');

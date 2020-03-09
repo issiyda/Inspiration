@@ -10,9 +10,7 @@
 
                 <label for="ideaImg" class="c-label">アイデア画像</label>
                 <div id="ideaImg" class="confirm-container-img">
-                    <label>
                         <img :src="this.img" alt="">
-                    </label>
                 </div>
 
 
@@ -68,6 +66,11 @@
                     <a>投稿する</a>
                 </div>
 
+                <div v-if="postErrorMessage" class="confirm-attention">
+                    エラーが<br class="u-sp">発生しました。<br>
+                    時間を置いて<br class="u-sp">お試しください。
+                </div>
+
             </form>
         </div>
 
@@ -88,6 +91,8 @@
                 price:"",
                 overflow:'',
                 content:'',
+
+                postErrorMessage:false
             }
         },
 
@@ -119,6 +124,7 @@
 
             //投稿保存
             saveIdea: function(userId) {
+                this.$emit('open-loading');
                 //画像を保存の形式に
                 const formData = new FormData();
                 formData.append('file',this.fileInfo);
@@ -142,6 +148,10 @@
                             }})
                     }).catch((error) => {
                     console.log(error);
+                    this.postErrorMessage = true;
+                    this.$emit('close-loading');
+
+
                 });
             },
         },

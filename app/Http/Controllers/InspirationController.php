@@ -89,7 +89,7 @@ class InspirationController extends Controller
          */
         $buyingIdea = Idea::join('buying_histories','buying_histories.post_id','ideas.id')
             ->where('buying_histories.user_id',$userId)
-           ->get();
+            ->latest('buying_histories.created_at')->get();
 
         /**
          * ログイン中のユーザがお気に入りにしたアイデアデータ取得

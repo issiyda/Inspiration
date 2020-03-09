@@ -430,6 +430,8 @@
 //========================
 
 .flash_message {
+    align-items: center;
+    border-radius: 3%;
     background: rgba(161, 110, 255, 0.5);
     right: 0%;
     top: 150px;
@@ -441,8 +443,8 @@
     width: 20%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    border-radius: 3%;
+    z-index: 10;
+
 
     @include mq {
 
