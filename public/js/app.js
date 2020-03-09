@@ -13478,9 +13478,9 @@ var render = function() {
                 "div",
                 { staticClass: "confirm-text", attrs: { for: "share" } },
                 [
-                  _vm._v(
-                    "\n                        アイコンClickでシェア\n                        "
-                  ),
+                  _vm._v("\n                        アイコンClickで"),
+                  _c("br", { staticClass: "u-sp" }),
+                  _vm._v("シェア\n                        "),
                   _c("i", {
                     staticClass:
                       "fab fa-twitter completed-share-twitter u-twitter",
