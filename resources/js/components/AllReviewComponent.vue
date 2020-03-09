@@ -4,7 +4,7 @@
 
         <div class="p-mypage">
 
-            <h2 class ="f-h2">投稿への<br class="sp">レビュー</h2>
+            <h2 class ="f-h2">投稿への<br class="u-sp">レビュー</h2>
 
 
             <h3 class ="f-h3">自分の投稿へのレビュー</h3>

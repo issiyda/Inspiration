@@ -5154,12 +5154,12 @@ __webpack_require__.r(__webpack_exports__);
   beforeUpdate: function beforeUpdate() {},
   methods: {
     onFileChange: function onFileChange(event) {
-      var SIZE_LIMIT = 2000000; //2Mバイトまで
+      var SIZE_LIMIT = 3000000; //2Mバイトまで
 
       this.fileInfo = event.target.files[0];
 
       if (this.fileInfo.size > SIZE_LIMIT) {
-        this.errorMessages.imgErrorMessage = "2M以下の画像を選択してください。";
+        this.errorMessages.imgErrorMessage = "3M以下の画像を選択してください。";
       } else if (this.fileInfo.type !== "image/png" && this.fileInfo.type !== "image/jpeg" && this.fileInfo.type !== "image/jpg") {
         this.errorMessages.imgErrorMessage = "画像の形式は(jpg,jpeg,png)のみ投稿可能です。";
       } else {
@@ -5345,6 +5345,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -11074,7 +11076,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h2", { staticClass: "f-h2" }, [
       _vm._v("お気に入り"),
-      _c("br", { staticClass: "sp" }),
+      _c("br", { staticClass: "u-sp" }),
       _vm._v("アイデア")
     ])
   }
@@ -11914,7 +11916,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h2", { staticClass: "f-h2" }, [
       _vm._v("自分の投稿"),
-      _c("br", { staticClass: "sp" }),
+      _c("br", { staticClass: "u-sp" }),
       _vm._v("アイデア")
     ])
   }
@@ -12083,7 +12085,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h2", { staticClass: "f-h2" }, [
       _vm._v("投稿への"),
-      _c("br", { staticClass: "sp" }),
+      _c("br", { staticClass: "u-sp" }),
       _vm._v("レビュー")
     ])
   }
@@ -14918,7 +14920,7 @@ var render = function() {
           _c(
             "div",
             { staticClass: "confirm-container-img", attrs: { id: "ideaImg" } },
-            [_c("img", { attrs: { src: this.img, alt: "" } })]
+            [_c("label", [_c("img", { attrs: { src: this.img, alt: "" } })])]
           ),
           _vm._v(" "),
           _c("label", { staticClass: "c-label", attrs: { for: "ideaName" } }, [
@@ -15528,7 +15530,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h2", { staticClass: "f-h2" }, [
       _vm._v("プロフィール"),
-      _c("br", { staticClass: "sp" }),
+      _c("br", { staticClass: "u-sp" }),
       _vm._v("編集")
     ])
   },
