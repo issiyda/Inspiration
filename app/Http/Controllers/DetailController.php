@@ -13,9 +13,13 @@ class DetailController extends Controller
     {
         $idea = Idea::where('id',$id)->get()->first();
 
-        $ideaInfo = json_encode($idea);
-        return view('layouts.informalDetail',compact('ideaInfo'));
 
+       if($idea === null){
+           return redirect('/')->with('flash_message','アイデアが存在しません。');
+       }else{
+           $ideaInfo = json_encode($idea);
+           return view('layouts.informalDetail', compact('ideaInfo'));
+       }
     }
 
     /**

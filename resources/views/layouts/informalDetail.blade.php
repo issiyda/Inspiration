@@ -11,36 +11,16 @@
         </div>
     @endif
 
-    @auth
 
         <informal-detail-component v-bind:idea-info="{{$ideaInfo}}"></informal-detail-component>
 
 
-    @endauth
 
-    @guest
-        <div class="guest">
-            ログインしてください。
-            <form method='get' class="guest-form">
-                <button class="c-button guest-button">
-                    <a href="/home">Home</a>
-                </button>
-                <button class="c-button guest-button">
-                    <a href="/login">Login</a>
-                </button>
-            </form>
-        </div>
-
-        <side-bar-component v-if="sidebarShow" @call-sidebar-switch="sidebarSwitch" v-bind:class="{'sidebar-active':isMenuActive}"></side-bar-component>
-
-
-    @endguest
 
 @endsection
 
 
 
-</div>
 
 
 

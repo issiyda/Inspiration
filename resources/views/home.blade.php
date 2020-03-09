@@ -27,131 +27,137 @@
 <div>
 
 
+    <main>
+
+        <div class="home">
+            <div class="hero">
+
+                <div class="nav">
+
+                    <a class="nav-title" href="/home">
+                        Inspiration
+                    </a>
 
 
-<main>
-
-    <div class="home">
-        <div class="hero">
-
-            <div class ="nav">
-
-                <a class="nav-title" href="/home">
-                    Inspiration
-                </a>
-
-
-
-                <div class="nav-trigger js-home-sp-menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-
-                <div class="nav-sp">
-
-                    <div class ="nav-heading">
-                        <h2 class ="f-h2">Menu</h2>
+                    <div class="nav-trigger js-home-sp-menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
 
-                    <ul class ="nav-container">
-                        <li class ="nav-item"><a href="#">Home</a></li>
+                    <div class="nav-sp">
 
-{{--                        ログインしてる時--}}
-                        @auth
-                            <li class ="nav-item"><a href="{{route('login')}}">Mypage</a></li>
-                            <li class ="nav-item"><a href="{{route('logout')}}">Logout</a></li>
-                        @endauth
-{{--                        ログインしていない時--}}
-                        @guest
-                            <li class ="nav-item"><a href="{{route('register')}}">Register</a></li>
-                            <li class ="nav-item"><a href="{{route('login')}}">Login</a></li>
-                        @endguest
-                    </ul>
+                        <div class="nav-heading">
+                            <h2 class="f-h2">Menu</h2>
+                        </div>
+
+                        <ul class="nav-container">
+                            <li class="nav-item"><a href="#">Home</a></li>
+
+                            {{--                        ログインしてる時--}}
+                            @auth
+                                <li class="nav-item"><a href="{{route('login')}}">Mypage</a></li>
+                                <li class="nav-item"><a href="{{route('logout')}}">Logout</a></li>
+                            @endauth
+                            {{--                        ログインしていない時--}}
+                            @guest
+                                <li class="nav-item"><a href="{{route('register')}}">Register</a></li>
+                                <li class="nav-item"><a href="{{route('login')}}">Login</a></li>
+                            @endguest
+                        </ul>
+
+                    </div>
+
+                    {{--                ここはログインログアウトの部分やからLaravelに任せましょう--}}
+
 
                 </div>
 
-{{--                ここはログインログアウトの部分やからLaravelに任せましょう--}}
+                <!-- フラッシュメッセージ -->
+                @if (session('flash_message'))
+                    <div class="flash_message">
+                        <div class="flash_message_word">
+                            {{ session('flash_message') }}
+                        </div>
+                    </div>
+                @endif
 
 
+                <div class="hero-item">
+                    <h3 class="hero-item-title">Inspiration</h3>
+                    <div class="hero-item-text">
+                        あなたのアイデアが<br>
+                        誰かの価値に
+                    </div>
+                </div>
 
             </div>
 
+            <div class="home-container">
+                <h3 class="home-header">あなたのアイデアから<br class="u-sp">価値を生み出す</h3>
+                <div class="home-what">
 
-            <div class="hero-item">
-                <h3 class="hero-item-title">Inspiration</h3>
-                <div class="hero-item-text">
-                    あなたのアイデアが<br>
-                    誰かの価値に</div>
-            </div>
-
-        </div>
-
-        <div class="home-container">
-            <h3 class="home-header">あなたのアイデアから価値を生み出す</h3>
-            <div class="home-what">
-
-                <div class="home-what-container">
-                    <div class="home-what-items-top js-rise-target">
-                    <div class="home-what-item">
-                        <div class="home-what-shadow"></div>
-                        <img src="{{asset(('/img/ec.jpg'))}}" alt="">
-                    </div>
-                        <p>ECサイト</p>
-                        <div class="home-what-item-description">世の中の商品が集まるECサイトのアイデア</div>
-                    </div>
-
-                    <div class="home-what-items-top js-rise-target">
-                    <div class="home-what-item">
-                        <div class="home-what-shadow"></div>
-                        <img src="{{asset(('/img/sns.jpg'))}}" alt="">
+                    <div class="home-what-container">
+                        <div class="home-what-items-top js-rise-target">
+                            <div class="home-what-item">
+                                <div class="home-what-shadow"></div>
+                                <img src="{{asset(('/img/ec.jpg'))}}" alt="">
+                            </div>
+                            <p>ECサイト</p>
+                            <div class="home-what-item-description">世の中の商品が集まるECサイトのアイデア</div>
                         </div>
-                        <p>SNS</p>
-                        <div class="home-what-item-description">ビジネスや自己発信で用いる流行りのSNSのアイデア</div>
-                    </div>
 
-
-                    <div class="home-what-items-top js-rise-target">
-                    <div class="home-what-item">
-                        <div class="home-what-shadow"></div>
-                        <img src="{{asset(('/img/matching.jpg'))}}" alt="">
+                        <div class="home-what-items-top js-rise-target">
+                            <div class="home-what-item">
+                                <div class="home-what-shadow"></div>
+                                <img src="{{asset(('/img/sns.jpg'))}}" alt="">
+                            </div>
+                            <p>SNS</p>
+                            <div class="home-what-item-description">ビジネスや自己発信で用いる流行りのSNSのアイデア</div>
                         </div>
-                        <p>マッチング</p>
-                        <div class="home-what-item-description">恋愛などに代表されるマッチングに関するアイデア</div>
-                    </div>
-
-                </div>
-
-                <div class="home-what-container">
 
 
-                    <div class="home-what-items-bottom js-rise-target">
-                        <div class="home-what-item">
-                            <div class="home-what-shadow"></div>
-                            <img src="{{asset(('/img/board.jpg'))}}" alt="">
+                        <div class="home-what-items-top js-rise-target">
+                            <div class="home-what-item">
+                                <div class="home-what-shadow"></div>
+                                <img src="{{asset(('/img/matching.jpg'))}}" alt="">
+                            </div>
+                            <p>マッチング</p>
+                            <div class="home-what-item-description">恋愛などに代表されるマッチングに関するアイデア</div>
                         </div>
-                        <p>掲示板</p>
-                        <div class="home-what-item-description">様々な情報が飛び交う掲示板に対してのアイデア</div>
+
                     </div>
 
-                    <div class="home-what-items-bottom js-rise-target">
-                        <div class="home-what-item">
-                            <div class="home-what-shadow"></div>
-                            <img src="{{asset(('/img/infoplaner.jpg'))}}" alt="">
-                        </div>
-                        <p>情報発信</p>
-                        <div class="home-what-item-description">自分の持つ知識を使う情報発信に関するアイデア</div>
-                    </div>
+                    <div class="home-what-container">
 
-                    <div class="home-what-items-bottom js-rise-target">
-                        <div class="home-what-item">
-                            <div class="home-what-shadow"></div>
-                            <img src="{{asset(('/img/sharing.jpg'))}}" alt="">
+
+                        <div class="home-what-items-bottom js-rise-target">
+                            <div class="home-what-item">
+                                <div class="home-what-shadow"></div>
+                                <img src="{{asset(('/img/board.jpg'))}}" alt="">
+                            </div>
+                            <p>掲示板</p>
+                            <div class="home-what-item-description">様々な情報が飛び交う掲示板に対してのアイデア</div>
                         </div>
-                        <p>シェアリング</p>
-                        <div class="home-what-item-description">ITの普及に伴うシェアリングに関するアイデア</div>
+
+                        <div class="home-what-items-bottom js-rise-target">
+                            <div class="home-what-item">
+                                <div class="home-what-shadow"></div>
+                                <img src="{{asset(('/img/infoplaner.jpg'))}}" alt="">
+                            </div>
+                            <p>情報発信</p>
+                            <div class="home-what-item-description">自分の持つ知識を使う情報発信に関するアイデア</div>
+                        </div>
+
+                        <div class="home-what-items-bottom js-rise-target">
+                            <div class="home-what-item">
+                                <div class="home-what-shadow"></div>
+                                <img src="{{asset(('/img/sharing.jpg'))}}" alt="">
+                            </div>
+                            <p>シェアリング</p>
+                            <div class="home-what-item-description">ITの普及に伴うシェアリングに関するアイデア</div>
+                        </div>
                     </div>
-                </div>
 
 
                 </div>
@@ -166,64 +172,60 @@
                     <p class="home-merit-evocation-transparent js-rise-target">自分のアイデアってあまり自信無いんだよな...</p>
                     <p class="home-merit-evocation-item">そんなあなたのアイデアも実はだれかにとっては宝の山だったりします。</p>
                     <p class="home-merit-evocation-item">そんなアイデアを投稿するメリット</p>
-                    <p class ="home-merit-evocation-accent">5点</p>
+                    <p class="home-merit-evocation-accent">5点</p>
                     <p class="home-merit-evocation-item">挙げてみました。</p>
                 </div>
                 <div class="home-merit-container js-slide-target">
                     <div class="home-merit-item">
                         <img src="{{asset(('/img/influencer.jpg'))}}" alt="">
                         <h3>影響力を持てる</h3>
-                        <p>資本主義が成熟し信用こそが本当の価値と言われる時代。アイデア発信で信用力を鍛えることができます。</p>
+                        <p>資本主義が成熟し信用こそが本当の価値と言われる時代。アイデアの発信で信用力を鍛えることができます。</p>
                     </div>
 
                     <div class="home-merit-item">
                         <img src="{{asset(('/img/partner.jpg'))}}" alt="">
                         <h3>仲間が見つかる</h3>
-                        <p>オリジナルのアイデアを投稿していく中で、ともに成長しあえる仲間と巡り合うことができます。</p>
+                        <p>オリジナルのアイデアを投稿していく中で、それいいね！が生まれ、成長しあえる仲間と巡り合うことができます。</p>
                     </div>
 
                     <div class="home-merit-item">
                         <img src="{{asset(('/img/money.jpg'))}}" alt="">
                         <h3>アイデアがお金になる</h3>
-                        <p>頭の中にあるだけであればガラクタ同然。誰かの手に渡ることで価値となりお金になります。</p>
+                        <p>頭の中にあるだけであればガラクタ同然。そんなの勿体ない。誰かの手に渡ることで価値となりお金になります。</p>
                     </div>
                 </div>
                 <div class="home-merit-container js-slide-target">
                     <div class="home-merit-item">
                         <img src="{{asset(('/img/motivation.jpg'))}}" alt="">
                         <h3>モチベーション高められる</h3>
-                        <p>自分のアイデアが誰かに認められる・認知されることでより一層モチベーションが上がります。</p>
+                        <p>自分のアイデアが誰かに認められる・認知されることでモチベーションに拍車をかけることができます。</p>
                     </div>
 
                     <div class="home-merit-item">
                         <img src="{{asset(('/img/logical.jpg'))}}" alt="">
                         <h3>論理的思考力Up</h3>
-                        <p>どういう根拠でそのアイデアが上手くいくかを考え、論拠を提示することで思考力が上がります。</p>
+                        <p>どういう根拠で相手を説得できるか？？論拠を提示することで論理的思考力を上げることができます。</p>
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
 
-            <div class="home-recommend">
-                <p class="home-recommend-word">あなたの価値ある
-                    <br>アイデアを</p>
-                <p class="home-recommend-word">提供して
-                    <br>いきませんか？？</p>
+        <div class="home-recommend">
+            <p class="home-recommend-word">あなたの価値ある
+                <br>アイデアを</p>
+            <p class="home-recommend-word">提供して
+                <br>いきませんか？？</p>
 
-                <form action="{{route('register')}}">
-                    <input type="submit" class="c-button home-recommend-button" value="新規登録">
-                </form>
+            <form action="{{route('register')}}">
+                <input type="submit" class="c-button home-recommend-button" value="新規登録">
+            </form>
 
-            </div>
-</main>
+        </div>
+    </main>
 
     @extends('layouts/spSidebar')
     @extends('layouts/footer')
 </div>
-
-
-
-
 
 
 <!-- script js-->

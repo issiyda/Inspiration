@@ -124,7 +124,7 @@
         </div>
 
 
-        <h3 class="f-h3">全アイデア</h3>
+        <h3 id="js_scroll_target" class="f-h3">全アイデア</h3>
 
         <div class="error" v-if="errorMessage">{{noMatchMessage}}</div>
         <div class="error" v-if="priceErrorMessage">{{priceErrorMessage}}</div>
@@ -264,7 +264,24 @@
         methods: {
 
             moveToTop() {
-                this.$store.dispatch('moveToTop');
+
+                const targetHeight = $('#js_scroll_target').offset();
+
+                const duration = 500;  // 移動速度（1秒で終了）
+                const interval = 25;    // 0.025秒ごとに移動
+                const step = -window.scrollY / Math.ceil(duration / interval); // 1回に移動する距離
+                const timer = setInterval(() => {
+
+                    window.scrollBy(0, step);   // スクロール位置を移動
+
+                    if(window.scrollY <= targetHeight.top) {
+
+                        clearInterval(timer);
+
+                    }
+
+                }, interval);
+
             },
 
 

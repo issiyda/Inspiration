@@ -227,11 +227,12 @@
                 </paginate>
             </div>
 
+            <div v-if="this.reviewedFlag">
             <div class="pagination" @click="moveToTop()">
                 <paginate-links for="paginate-log" class="pagination-container"
                                 :show-step-links="true"></paginate-links>
             </div>
-
+            </div>
 
             <div v-if="!reviewed && buying" class="review-container">
 
@@ -407,6 +408,7 @@
                 },
                 reviewComment: "",
                 reviewNumber: "",
+                reviewedFlag: "",
                 reviewErrorMessage: false,
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 
@@ -574,6 +576,11 @@
                 }).then((response) => {
                     console.log(response);
                     this.ideaReviews = response.data.reviews;
+                    if(this.ideaReviews === []){
+                        this.reviewedFlag = false
+                    }else{
+                        this.reviewedFlag = true
+                    }
                 }).catch((error) => {
                     console.log(error)
                 })

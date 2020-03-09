@@ -310,7 +310,7 @@
             imgValidation: function () {
                 if (this.ideaImage === "") {
                     this.validations.imgValidation = false;
-                    this.errorMessages.imgErrorMessage = "＋をクリックして画像を選択して下さい"
+                    this.errorMessages.imgErrorMessage = "＋をクリックして画像を選択して下さい。"
                 } else {
                     this.validations.imgValidation = true;
                     this.errorMessages.imgErrorMessage = false
@@ -321,13 +321,13 @@
             titleValidation: function () {
                 if (this.title === "") {
                     this.validations.titleValidation = false;
-                    this.errorMessages.titleErrorMessage = "入力必須です"
+                    this.errorMessages.titleErrorMessage = "入力必須です。"
                     this.titleChangeColor = true;
 
                 } else if (this.titleLength > 24) {
 
                     this.validations.titleValidation = false;
-                    this.errorMessages.titleErrorMessage = "24文字以下で記入して下さい";
+                    this.errorMessages.titleErrorMessage = "24文字以下で記入して下さい。";
                     this.titleChangeColor = true
                 } else if (this.titleLength <= 24 && this.title !== "") {
                     this.validations.titleValidation = true;
@@ -341,7 +341,7 @@
                 if (this.category_id === "") {
 
                     this.validations.categoryValidation = false;
-                    this.errorMessages.categoryErrorMessage = "入力必須です"
+                    this.errorMessages.categoryErrorMessage = "入力必須です。"
 
                 } else {
 
@@ -355,10 +355,10 @@
 
                 if (this.price === "") {
                     this.validations.priceValidation = false;
-                    this.errorMessages.priceErrorMessage = "入力必須です"
+                    this.errorMessages.priceErrorMessage = "入力必須です。"
                 } else if (this.price > 1000000) {
                     this.validations.priceValidation = false;
-                    this.errorMessages.priceErrorMessage = "100万円以下で設定して下さい"
+                    this.errorMessages.priceErrorMessage = "100万円以下で設定して下さい。"
                 } else if (this.price <= 1000000 && this.price !== "") {
                     this.validations.priceValidation = true;
                     this.errorMessages.priceErrorMessage = false;
@@ -369,12 +369,12 @@
             overflowValidation: function () {
                 if (this.overflow === "") {
                     this.validations.overflowValidation = false;
-                    this.errorMessages.overflowErrorMessage = "入力必須です"
+                    this.errorMessages.overflowErrorMessage = "入力必須です。"
                     this.overflowChangeColor = true;
 
                 } else if (this.overflowLength > 100) {
                     this.validations.overflowValidation = false;
-                    this.errorMessages.overflowErrorMessage = "100文字以下で入力して下さい"
+                    this.errorMessages.overflowErrorMessage = "100文字以下で入力して下さい。"
                     this.overflowChangeColor = true;
 
                 } else if (this.overflowLength <= 100 && this.overflow !== "") {
@@ -388,12 +388,12 @@
             contentValidation: function () {
                 if (this.content === "") {
                     this.validations.contentValidation = false;
-                    this.errorMessages.contentErrorMessage = "入力必須です"
+                    this.errorMessages.contentErrorMessage = "入力必須です。"
                     this.contentChangeColor = true;
 
                 } else if (this.contentLength > 10000) {
                     this.validations.contentValidation = false;
-                    this.errorMessages.contentErrorMessage = "10000文字以下で入力して下さい"
+                    this.errorMessages.contentErrorMessage = "10000文字以下で入力して下さい。"
                     this.contentChangeColor = true;
                 } else if (this.contentLength <= 10000 && this.content !== "") {
                     this.validations.contentValidation = true;
@@ -419,7 +419,7 @@
 
                     //エラーがあればメッセージ
                 } else {
-                    this.errorMessages.submitErrorMessage = "エラーがあります"
+                    this.errorMessages.submitErrorMessage = "エラーがあります。"
                 }
             },
 
@@ -442,7 +442,7 @@
                     console.log(response);
                     this.ideas = this.$store.dispatch('getUserIdeas');
                     this.$emit('close-loading');
-                    this.EditResultMessage = "編集に成功しました"
+                    this.EditResultMessage = "編集に成功しました。"
                 }).catch((error) => {
                     console.log(error)
                     this.$emit('close-loading');
