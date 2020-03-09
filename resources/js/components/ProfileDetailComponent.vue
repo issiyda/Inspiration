@@ -16,7 +16,7 @@
                         <div v-cloak class="profile-container-img-right">
                             <label>
                                 <img v-if="profileImg !== './imgnull'" :src="profileImg" alt="profileImg">
-                                <img v-cloak v-else :src="`./img/Images/account.jpeg`" alt="profileImgNull">
+                                <img v-cloak v-else :src="`./img/images/account.jpeg`" alt="profileImgNull">
                             </label>
                         </div>
                     </div>
