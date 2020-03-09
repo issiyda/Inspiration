@@ -1,7 +1,6 @@
 import Router from 'vue-router'
 
 // コンポーネントをインポート
-import notfound from './components/NotFoundComponent';
 import mypage from './components/MypageComponent';
 import profile from './components/ProfileComponent';
 import profileDetail from './components/ProfileDetailComponent'

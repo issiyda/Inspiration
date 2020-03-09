@@ -10,7 +10,7 @@
     <!--style css-->
     <link rel="stylesheet" href="{{asset('css/app.css')}}" media="all">
     <!--font-awesome-->
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <!--jquery-->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
     <!--vue使うための記述-->

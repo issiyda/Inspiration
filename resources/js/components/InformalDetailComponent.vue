@@ -79,6 +79,8 @@
     export default {
         name: "PostDetailComponent",
 
+        title: "アイデア詳細",
+
         props: {
             ideaInfo: {
                 type: Object

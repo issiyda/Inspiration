@@ -275,7 +275,11 @@ a {
   }
 }
 
-input {
+input[type=button],
+input[type=text],
+input[type=submit],
+input[type=image],
+textarea {
   -webkit-appearance: none;
 }
 
@@ -3125,6 +3129,21 @@ input[type=radio]:checked + .c-radio {
   }
 }
 
+.guest-footer {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+}
+
+@media screen and (max-width: 414px) {
+  .guest-footer {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+            flex-direction: column;
+  }
+}
+
 .edit {
   margin: 0 auto 12%;
   width: 50%;
@@ -3252,5 +3271,15 @@ input[type=radio]:checked + .c-radio {
 
 .u-comment {
   font-size: 12px;
+}
+
+.u-sp {
+  display: none;
+}
+
+@media screen and (max-width: 414px) {
+  .u-sp {
+    display: block;
+  }
 }
 

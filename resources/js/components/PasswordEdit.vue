@@ -60,6 +60,8 @@
     export default {
         name: "passwordEdit",
 
+        title: "パスワード編集",
+
         data: function()
         {
             return{

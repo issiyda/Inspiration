@@ -48,6 +48,8 @@
     export default {
         name: "ProfileDetailComponent",
 
+        title: "プロフィール詳細",
+
         data: function () {
             return {
 

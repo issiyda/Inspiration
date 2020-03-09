@@ -170,6 +170,6 @@ a{
 // ==============================
 // スマホのinputフォーム変更
 // ==============================
-input{
+input[type="button"],input[type="text"],input[type="submit"],input[type="image"],textarea{
     -webkit-appearance: none;
 }

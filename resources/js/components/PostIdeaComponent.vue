@@ -117,6 +117,8 @@
     export default {
         name: "PostIdeaComponent",
 
+        title: "アイデア投稿",
+
         data:function () {
             return{
                 img:'',

@@ -4,7 +4,7 @@
 
         <div class="p-mypage">
 
-            <h2 class="f-h2">自分の投稿アイデア</h2>
+            <h2 class="f-h2">自分の投稿<br class="sp">アイデア</h2>
 
 
             <h3 class="f-h3">投稿したアイデア</h3>
@@ -79,6 +79,9 @@
 <script>
     export default {
         name: "AllPostComponent",
+
+        title: "全ての投稿アイデア",
+
         data: function () {
             return {
                 myIdeaLists: [],

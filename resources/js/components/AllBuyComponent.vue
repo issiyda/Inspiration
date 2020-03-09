@@ -66,6 +66,8 @@
     export default {
         name: "AllBuyComponent",
 
+        title:"全ての購入アイデア",
+
         data: function () {
             return {
                 paginate: ['paginate-log']

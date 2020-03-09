@@ -38,6 +38,8 @@
     export default {
         name: "PostIdeaDeleteComponent",
 
+        title: "アイデア削除",
+
         data: function () {
             return {
 

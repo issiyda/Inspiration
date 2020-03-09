@@ -152,14 +152,14 @@
                             <div>{{categoryName(allIdea.category_id)}}</div>
 
                             <label>価格</label>
-                            <div>{{allIdea.price}}</div>
+                            <div>{{allIdea.price}}円</div>
 
                             <div class="ic-review">
                                 <label>平均評価</label>
                                 <span class="ic-star-review" v-bind:class="star(allIdea.averageReview)"></span>
-                                <span class v-if="star(allIdea.averageReview) === 'ic-not-reviewed'">未評価のアイデアです</span>
+                                <span class v-if="star(allIdea.averageReview) === 'ic-not-reviewed'">未評価の<br>アイデア</span>
                                 <label>レビュー数</label>
-                                <div>{{allIdea.review_counts}}件です</div>
+                                <div>{{allIdea.review_counts}}件</div>
                             </div>
 
 
@@ -192,6 +192,9 @@
 
     export default {
         name: "AllIdeaComponent",
+
+        title: "全てのアイデア",
+
 
         data: function () {
             return {

@@ -378,6 +378,8 @@
     export default {
         name: "PostDetailComponent",
 
+        title: "投稿詳細",
+
         data: function () {
             return {
                 ideaId: '',
@@ -476,7 +478,7 @@
 
             favSwitch: function (userId, ideaId) {
                 this.$emit('open-loading');
-                axios.post('/api/favorite/',
+                axios.post('/api/favorite',
                     {
                         userId: userId,
                         ideaId: ideaId

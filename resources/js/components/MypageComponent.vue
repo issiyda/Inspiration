@@ -155,6 +155,8 @@
     export default {
         name: "MyPageComponent",
 
+        title:"マイページ",
+
         data:function(){
             return{
 

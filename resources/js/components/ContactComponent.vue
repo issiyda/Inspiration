@@ -58,6 +58,8 @@
 
         name: "ContactComponent",
 
+        title: "お問い合わせ",
+
         data: function () {
             return {
                 contactSubject: "",

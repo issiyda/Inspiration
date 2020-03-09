@@ -2,7 +2,7 @@
     <main>
 
         <div class="confirm">
-            <h2 class="f-h2">アイデア投稿確認画面</h2>
+            <h2 class="f-h2">アイデア投稿<br class="u-sp">確認画面</h2>
 
             <form class="confirm-container" enctype="multipart/form-data">
 
@@ -185,5 +185,8 @@
 </script>
 
 <style scoped>
-
+    img {
+        max-width: 100%;
+        height: auto;
+    }
 </style>

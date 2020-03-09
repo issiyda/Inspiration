@@ -3,24 +3,34 @@
 
         <div class="l-footer">
             <h3 class="l-footer-subject">Inspiration</h3>
-            <div class="l-footer-container">
+            <div class="l-footer-container guest-footer">
 
-                <div class="l-footer-content">
-                    <div class="l-footer-content-items">
-                        <h3>機能Menu</h3>
-                        <p><router-link to="/mypage">Mypage</router-link></p>
-                        <p><router-link to="/allIdea">Idea一覧</router-link></p>
-                        <p><router-link to="/profile">プロフィール編集</router-link></p>
-                    </div>
-                </div>
 
-                <div class="l-footer-content">
-                    <div class="l-footer-content-items">
-                        <h3>ページMenu</h3>
-                        <p><a href="/">Topへ戻る</a></p>
-                        <p><a href="login">ログインする</a></p>
-                    </div>
-                </div>
+                <li class="nav-item home-footer-li">
+                    <a href="/">
+                        <div class="home-footer-item">
+                            <i class="fas fa-home fa-2x"></i>
+                            <div class="sidebar-item-text">Home</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item home-footer-li">
+                    <a href="/register">
+                        <div class="home-footer-item">
+                            <i class="fas fa-door-open fa-2x"></i>
+                            <div class="sidebar-item-text">Register</div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item home-footer-li">
+                    <a href="/login">
+                        <div class="home-footer-item">
+                            <i class="fas fa-sign-in-alt fa-2x"></i>
+                            <div class="sidebar-item-text">Login</div>
+                        </div>
+                    </a>
+                </li>
 
             </div>
 
