@@ -197,7 +197,7 @@ class InspirationController extends Controller
 
         return response()->json([
             'favState' =>$favState,
-//            'success' => 'getting favState successfully!'
+            'success' => 'getting favState successfully!'
         ],200);
 
     }
@@ -215,6 +215,7 @@ class InspirationController extends Controller
 
         $favState = Favorite::where('user_id', $userId)
             ->where('idea_id', $ideaId)->value('fav_flag');
+
 
 //        データがなければ作る
         if ($favState === null) {

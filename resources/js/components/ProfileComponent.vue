@@ -5,7 +5,7 @@
         <div class="profile">
 
 
-            <h2 class="f-h2">プロフィール編集</h2>
+            <h2 class="f-h2">プロフィール<br class="sp">編集</h2>
             <form class="profile-container" @submit.prevent>
 
                 <div class="profile-container-input">
@@ -112,6 +112,8 @@
 <script>
     export default {
         name: "ProfileComponent",
+
+        title: "プロフィール編集",
 
         data: function () {
             return {

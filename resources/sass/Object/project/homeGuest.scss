@@ -32,4 +32,13 @@
             width: 30%;
         }
     }
+
+    &-footer{
+        display: flex;
+        align-items: center;
+
+        @include mq {
+            flex-direction: column;
+        }
+    }
 }

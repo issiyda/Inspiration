@@ -59,6 +59,8 @@
     export default {
         name: "reviewCompletedComponent",
 
+        title: "レビュー完了画面",
+
         data:function()
         {
             return{

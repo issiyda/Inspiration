@@ -39,6 +39,8 @@
     export default {
         name: "headerBeforeComponent",
 
+        title: "退会",
+
         created:function()
         {
             this.$emit('open-loading');

@@ -11,8 +11,8 @@
                             <i class="far fa-smile fa-2x sidebar-item-logo"></i>
                             Mypage</router-link></p>
                         <p><router-link to="/allIdea">
-                            <i class="far fa-address-card fa-2x sidebar-item-logo"></i>
-                            Idea一覧</router-link></p>
+                            <i class="fas fa-book fa-2x sidebar-item-logo"></i>
+                            AllIdea</router-link></p>
                         <p><router-link to="/profile">
                             <i class="far fa-address-card fa-2x sidebar-item-logo"></i>
                             Profile</router-link></p>

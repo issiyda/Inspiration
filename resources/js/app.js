@@ -15,6 +15,10 @@ import store from './store'
 import VCalendar from 'v-calendar';
 import VuePaginate from 'vue-paginate';
 
+import titleMixin from './title'
+Vue.mixin(titleMixin);
+
+
 Vue.use(PayjpCheckout)
 Vue.use(VueRouter);
 Vue.use(window.vuelidate.default);

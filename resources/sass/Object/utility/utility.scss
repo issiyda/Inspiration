@@ -10,3 +10,10 @@
 {
     font-size: $font-size-s;
 }
+
+.u-sp{
+    display:none;
+    @include mq{
+        display:block
+    }
+}

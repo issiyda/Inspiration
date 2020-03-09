@@ -4,10 +4,10 @@
 
         <div class="p-mypage">
 
-            <h2 class="f-h2">お気に入りアイデア</h2>
+            <h2 class="f-h2">お気に入り<br class="sp">アイデア</h2>
 
 
-            <h3 class="f-h3">お気に入りにしたアイデア</h3>
+            <h3 class="f-h3">お気に入りアイデア</h3>
 
             <div class="ic">
 
@@ -78,6 +78,8 @@
 <script>
     export default {
         name: "AllFavoriteComponent",
+
+        title: "全てのお気に入り",
 
         data: function () {
             return {

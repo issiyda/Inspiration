@@ -54,6 +54,8 @@
     export default {
         name: "postCompletedComponent",
 
+        title: "投稿完了",
+
         data: function () {
             return {
                 title: "",

@@ -17,7 +17,8 @@
                         <div class="edit-container-img">
                             <div class="edit-container-img-left">
                                 <label class="c-label" for="img">アイデアイメージ画像
-                                    <br><p class="u-comment">枠内クリックで画像変更</p>
+                                    <br>
+                                    <p class="u-comment">枠内クリックで画像変更</p>
                                 </label>
                             </div>
                             <div class="edit-container-img-right">
@@ -153,6 +154,8 @@
 <script>
     export default {
         name: "PostIdeaEditComponent",
+
+        title: "アイデア削除",
 
         data: function () {
             return {
